@@ -1,0 +1,42 @@
+{%- comment -%}
+  Telefon, E-Mail (mit Kopieren) und Adresse aus den Theme-Einstellungen.
+  Parameter: phone_label, email_label, address_label, compact
+{%- endcomment -%}
+<dl class="contact-rows{% if compact %} is-compact{% endif %}">
+  {%- if settings.contact_phone != blank -%}
+    <div>
+      <dt>{%- render 'icon', name: 'phone', size: 16 -%}{{ phone_label }}</dt>
+      <dd>
+        <copy-value class="copy-value" data-done="{{ 'copy.copied' | t: label: phone_label | escape }}">
+          <span class="copy-text">{{ settings.contact_phone }}</span>
+          <button type="button" class="icon-btn icon-btn-sm" aria-label="{{ 'copy.copy' | t: label: phone_label | escape }}">
+            <span data-icon="copy">{%- render 'icon', name: 'copy', size: 16 -%}</span>
+            <span data-icon="check" hidden>{%- render 'icon', name: 'check', size: 16 -%}</span>
+          </button>
+          <span class="sr-only" aria-live="polite"></span>
+        </copy-value>
+      </dd>
+    </div>
+  {%- endif -%}
+  {%- if settings.contact_email != blank -%}
+    <div>
+      <dt>{%- render 'icon', name: 'mail', size: 16 -%}{{ email_label }}</dt>
+      <dd>
+        <copy-value class="copy-value" data-done="{{ 'copy.copied' | t: label: email_label | escape }}">
+          <span class="copy-text">{{ settings.contact_email }}</span>
+          <button type="button" class="icon-btn icon-btn-sm" aria-label="{{ 'copy.copy' | t: label: email_label | escape }}">
+            <span data-icon="copy">{%- render 'icon', name: 'copy', size: 16 -%}</span>
+            <span data-icon="check" hidden>{%- render 'icon', name: 'check', size: 16 -%}</span>
+          </button>
+          <span class="sr-only" aria-live="polite"></span>
+        </copy-value>
+      </dd>
+    </div>
+  {%- endif -%}
+  {%- if settings.contact_street != blank -%}
+    <div>
+      <dt>{%- render 'icon', name: 'map-pin', size: 16 -%}{{ address_label }}</dt>
+      <dd>{{ settings.contact_company }}<br>{{ settings.contact_street }}, {{ settings.contact_city }}</dd>
+    </div>
+  {%- endif -%}
+</dl>

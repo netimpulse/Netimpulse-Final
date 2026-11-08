@@ -298,3 +298,55 @@
   }
   NI.define('leistungen-dock', LeistungenDock);
 })();
+
+/* ---------- Werte-Streifen: Linie zeichnet sich beim Scrollen, der Impuls läuft mit ---------- */
+(function () {
+  'use strict';
+  const NI = window.NI;
+  if (!NI) return;
+  const VB_H = 1000;
+  class ValuesPath extends HTMLElement {
+    connectedCallback() {
+      if (this._ready) return;
+      this._ready = true;
+      this.path = this.querySelector('[data-path]');
+      this.dot = this.querySelector('.vt-impulse');
+      this.items = Array.from(this.querySelectorAll('.vt-item'));
+      this.end = this.querySelector('.vt-end');
+      const total = this.path.getTotalLength();
+      const place = (prog) => {
+        const q = this.path.getPointAtLength(total * prog);
+        this.dot.style.setProperty('--x', q.x + 'px');
+        this.dot.style.setProperty('--y', (q.y / VB_H) * 100 + '%');
+        this.items.forEach((it) => it.classList.toggle('is-on', q.y >= Number(it.dataset.node) - 4));
+      };
+      if (NI.reduced()) {
+        place(1);
+        return;
+      }
+      let raf = 0;
+      this.on = () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const r = this.getBoundingClientRect();
+          const p = Math.max(0, Math.min(1, (window.innerHeight * 0.55 - r.top) / r.height));
+          this.style.setProperty('--p', p);
+          this.path.style.strokeDashoffset = String(1 - p);
+          this.end.classList.toggle('is-on', p > 0.98);
+          place(p);
+        });
+      };
+      this.on();
+      window.addEventListener('scroll', this.on, { passive: true });
+      window.addEventListener('resize', this.on);
+    }
+    disconnectedCallback() {
+      this._ready = false;
+      if (this.on) {
+        window.removeEventListener('scroll', this.on);
+        window.removeEventListener('resize', this.on);
+      }
+    }
+  }
+  NI.define('values-path', ValuesPath);
+})();

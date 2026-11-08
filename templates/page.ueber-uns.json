@@ -1,0 +1,198 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "werte": {
+      "type": "about-values",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "outline_label": "Werte",
+        "title": "Werte, die sich durchziehen",
+        "text": "Vier Prinzipien, die in jedem Projekt einen roten Faden bilden.",
+        "padding_top": 72,
+        "padding_bottom": 24
+      },
+      "blocks": {
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "title": "Klarheit",
+            "text": "Bei uns soll niemand nicken müssen, obwohl er eigentlich nicht weiß, worum es gerade geht. Wir sprechen klar, erklären sauber und sorgen dafür, dass alle mitkommen."
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "title": "Substanz",
+            "text": "Wir schauen nicht nur darauf, ob etwas gut aussieht. Wichtiger ist, ob es am Ende etwas bringt. Hilft das wirklich weiter? Macht es die Seite besser? Und kann man später sehen oder messen, dass es funktioniert hat?"
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "title": "Direktheit",
+            "text": "Bei uns wird nichts weitergereicht, bis es irgendwann bei der richtigen Person landet. Du hast direkten Kontakt zu dem Team, das dein Projekt kennt und daran arbeitet. So bekommst du schneller Antworten."
+          }
+        },
+        "value_4": {
+          "type": "value",
+          "settings": {
+            "title": "Tempo",
+            "text": "Niemand möchte wochenlang warten und erst am Ende sehen, ob es in die richtige Richtung geht. Deshalb zeigen wir früh, was entsteht, sprechen darüber und passen Dinge an, solange es noch einfach ist."
+          }
+        }
+      },
+      "block_order": [
+        "value_1",
+        "value_2",
+        "value_3",
+        "value_4"
+      ]
+    },
+    "team": {
+      "type": "about-team",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "outline_label": "Team",
+        "heading": "Wer dahintersteht",
+        "lead": "Bei NetImpulse geht es nicht darum, irgendwas Hübsches ins Internet zu stellen und zu hoffen, dass es schon läuft. Wir schauen uns an, was ein Unternehmen wirklich braucht: eine klare Struktur, ein gutes Design, saubere Technik und Maßnahmen, die Besucher, Anfragen oder Verkäufe bringen.",
+        "text": "Keine anonyme Agenturstruktur: Du sollst wissen, mit wem du arbeitest. Strategie, Design, SEO, SEA und Shopify-Entwicklung denken wir nicht getrennt, sondern als ein Team, das gemeinsam an einer Lösung arbeitet.",
+        "padding_top": 40,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "member_1": {
+          "type": "member",
+          "settings": {
+            "name": "Niklas",
+            "role": "Gründer und Geschäftsführer",
+            "focus": "Online-Marketing und Shopify-Entwicklung",
+            "text": "Sorgt dafür, dass eine Website nicht nur gut aussieht, sondern auch gefunden wird und etwas bringt. Dabei geht es um SEO, Performance-Marketing und Shopify: dass alles sauber aufgebaut ist, funktioniert und später gut weitergeführt werden kann."
+          }
+        },
+        "member_2": {
+          "type": "member",
+          "settings": {
+            "name": "Luca",
+            "role": "Gründer und Geschäftsführer",
+            "focus": "Design, Konzept und digitale Auftritte",
+            "text": "Kümmert sich um Aufbau, visuelle Richtung und Nutzerführung. Struktur und Gestaltung werden so verbunden, dass der Auftritt verständlich bleibt und gut funktioniert. Wichtig ist, dass die Website eigenständig wirkt und nicht aussieht wie etwas, das man schon überall gesehen hat."
+          }
+        },
+        "member_3": {
+          "type": "member",
+          "settings": {
+            "name": "Tom",
+            "role": "Projektunterstützung",
+            "focus": "Content, Organisation und Projektunterstützung",
+            "text": "Hilft dabei, Inhalte, Aufgaben und offene Punkte zusammenzubringen, damit im Projekt nichts liegen bleibt. Er behält den Überblick, bereitet Dinge sauber vor und sorgt dafür, dass alle Bereiche gut ineinandergreifen."
+          }
+        }
+      },
+      "block_order": [
+        "member_1",
+        "member_2",
+        "member_3"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "werte",
+    "team",
+    "kontakt"
+  ]
+}

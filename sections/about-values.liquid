@@ -1,0 +1,66 @@
+{%- comment -%}
+  Über uns: Werte-Streifen. Die geschwungene Linie zeichnet sich beim Scrollen, der Punkt aus dem Logo läuft als Impuls
+  die Linie entlang, jeder erreichte Wert wird hervorgehoben. Bis zu vier Werte.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign nodes = '110,330,550,770' | split: ','
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.about-open', tablet: 72, mobile: 56 -%}
+
+<section class="about-open {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}" id="s-{{ section.id }}" data-outline="{{ s.outline_label | escape }}">
+  <div class="wrap about-open-inner">
+    <h1 class="about-title">{{ s.title | default: page.title }}</h1>
+    {%- if s.text != blank -%}<p class="about-sub">{{ s.text }}</p>{%- endif -%}
+  </div>
+  <div class="wrap">
+    <values-path class="vt" style="--p: 1">
+      <svg class="vt-svg" viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="vt-ghost" d="M 24 0 L 24 110 C 24 220, 96 220, 96 330 C 96 440, 24 440, 24 550 C 24 660, 96 660, 96 770 C 96 860, 60 860, 60 930 L 60 1000" pathLength="1" />
+        <path class="vt-draw" data-path d="M 24 0 L 24 110 C 24 220, 96 220, 96 330 C 96 440, 24 440, 24 550 C 24 660, 96 660, 96 770 C 96 860, 60 860, 60 930 L 60 1000" style="stroke-dasharray: 1; stroke-dashoffset: 0" pathLength="1" />
+      </svg>
+      <span class="vt-impulse" aria-hidden="true" style="--x: 60px; --y: 100%"></span>
+      <span class="vt-line" aria-hidden="true"><i></i></span>
+      {%- for block in section.blocks limit: 4 -%}
+        {%- assign y = nodes[forloop.index0] | times: 1.0 | divided_by: 1000 -%}
+        <article class="vt-item {% cycle 'is-left', 'is-right' %} is-on" style="--y: {{ y }}" data-node="{{ nodes[forloop.index0] }}" {{ block.shopify_attributes }}>
+          <span class="vt-node" aria-hidden="true"></span>
+          <h2 class="vt-title"><span>{{ block.settings.title }}</span></h2>
+          <p class="vt-text">{{ block.settings.text }}</p>
+        </article>
+      {%- endfor -%}
+      <span class="vt-end is-on" aria-hidden="true"></span>
+    </values-path>
+  </div>
+</section>
+
+<script src="{{ 'sections.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Werte-Streifen",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Werte" },
+    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Werte, die sich durchziehen" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Vier Prinzipien, die in jedem Projekt einen roten Faden bilden." },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Wert",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Klarheit" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Wir sprechen klar, erklären sauber und sorgen dafür, dass alle mitkommen." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Werte-Streifen", "blocks": [{ "type": "value" }, { "type": "value" }, { "type": "value" }, { "type": "value" }] }]
+}
+{% endschema %}

@@ -43,3 +43,10 @@ scaled-frame { display: block; }
 .policy-body .shopify-policy__title { text-align: left; margin-bottom: 24px; }
 .policy-body .shopify-policy__title h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 3.8vw, 52px); line-height: 1.06; letter-spacing: -0.025em; text-wrap: balance; color: var(--fg); margin: 0; }
 policy-toc { display: contents; }
+
+/* Kontakt */
+contact-form { display: grid; gap: 20px; }
+.form-card form { display: grid; gap: 20px; }
+.form-errors { display: grid; gap: 4px; }
+.form-errors ul { padding-left: 18px; list-style: disc; }
+.form-foot .t-meta a, .t-meta a.text-link { color: var(--a1-ink); text-decoration: underline; text-underline-offset: 3px; }

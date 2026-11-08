@@ -1,0 +1,136 @@
+{%- comment -%}
+  Kontaktseite: Einleitung mit Kontaktdaten links, Formular rechts. Versand über das Shopify-Kontaktformular.
+  Thema und Nachricht werden aus der URL vorbelegt (?thema=…&nachricht=…), etwa aus dem Paket-Baukasten.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign topics = s.topics | newline_to_br | split: '<br />'
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.page-hero', tablet: 72, mobile: 40 -%}
+
+<section class="page-hero {% render 'scheme-classes', scheme: s.color_scheme %}" id="s-{{ section.id }}" data-outline="{{ s.outline_label | escape }}">
+  <div class="wrap contact-grid">
+    <div class="contact-intro">
+      <h1 class="t-h1">{{ s.title | default: page.title }}</h1>
+      {%- if s.text != blank -%}<p class="t-lead">{{ s.text }}</p>{%- endif -%}
+      {%- render 'contact-rows', phone_label: s.phone_label, email_label: s.email_label, address_label: s.address_label -%}
+    </div>
+
+    <div class="form-card">
+      {%- form 'contact', id: 'contact-form', class: 'contact-form', novalidate: 'novalidate', aria-label: s.form_label -%}
+        {%- if form.posted_successfully? -%}
+          <div class="sent" role="status">
+            <span class="empty-icon" aria-hidden="true">{%- render 'icon', name: 'check', size: 24 -%}</span>
+            <h2 class="t-h3">{{ s.success_title }}</h2>
+            <p class="t-body">{{ s.success_text }}</p>
+          </div>
+        {%- else -%}
+          <contact-form
+            data-msg-name="{{ s.error_name | escape }}"
+            data-msg-email="{{ s.error_email | escape }}"
+            data-msg-email-format="{{ s.error_email_format | escape }}"
+            data-msg-message="{{ s.error_message | escape }}"
+          >
+            {%- if form.errors -%}
+              <div class="field-error form-errors" role="alert">
+                <p><strong>{{ 'contact.error_heading' | t }}</strong></p>
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+            <div class="form-row">
+              <div class="field" data-field="name">
+                <label for="f-name">{{ s.label_name }}<span class="req"> {{ s.required_label }}</span></label>
+                <input id="f-name" name="contact[name]" autocomplete="name" required value="{{ form.name }}" aria-describedby="e-name">
+                <p class="field-error" id="e-name" hidden></p>
+              </div>
+              <div class="field" data-field="email">
+                <label for="f-email">{{ s.label_email }}<span class="req"> {{ s.required_label }}</span></label>
+                <input id="f-email" name="contact[email]" type="email" autocomplete="email" inputmode="email" required value="{{ form.email }}" aria-describedby="e-email">
+                <p class="field-error" id="e-email" hidden></p>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-phone">{{ s.label_phone }}<span class="opt"> {{ s.optional_label }}</span></label>
+                <input id="f-phone" name="contact[phone]" type="tel" autocomplete="tel" inputmode="tel" value="{{ form.phone }}">
+              </div>
+              <div class="field">
+                <label for="f-company">{{ s.label_company }}<span class="opt"> {{ s.optional_label }}</span></label>
+                <input id="f-company" name="contact[{{ s.label_company | escape }}]" autocomplete="organization">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-topic">{{ s.label_topic }}<span class="opt"> {{ s.optional_label }}</span></label>
+              <span class="select-wrap is-block">
+                <select id="f-topic" name="contact[{{ s.label_topic | escape }}]">
+                  <option value="">{{ s.topic_placeholder }}</option>
+                  {%- for t in topics -%}
+                    {%- assign topic = t | strip -%}
+                    {%- if topic != blank -%}<option>{{ topic }}</option>{%- endif -%}
+                  {%- endfor -%}
+                </select>
+                {%- render 'icon', name: 'chevron-down', size: 16 -%}
+              </span>
+            </div>
+            <div class="field" data-field="message">
+              <label for="f-message">{{ s.label_message }}<span class="req"> {{ s.required_label }}</span></label>
+              <textarea id="f-message" name="contact[body]" rows="6" required aria-describedby="e-message">{{ form.body }}</textarea>
+              <p class="field-error" id="e-message" hidden></p>
+            </div>
+            <div class="form-foot">
+              <button type="submit" class="btn btn-primary">
+                <span>{{ s.button_label }}</span>
+                {%- render 'icon', name: 'arrow-right' -%}
+              </button>
+              {%- if s.privacy_text != blank -%}<p class="t-meta">{{ s.privacy_text }}</p>{%- endif -%}
+            </div>
+          </contact-form>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'contact-form.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Kontaktformular",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Kontakt" },
+    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Lass uns reden" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Erzähl uns von deinem Projekt. Wir melden uns innerhalb von 48 Stunden mit klaren nächsten Schritten." },
+    { "type": "header", "content": "Kontaktdaten", "info": "Telefon, E-Mail und Adresse kommen aus den Theme-Einstellungen." },
+    { "type": "text", "id": "phone_label", "label": "Bezeichnung Telefon", "default": "Telefon" },
+    { "type": "text", "id": "email_label", "label": "Bezeichnung E-Mail", "default": "E-Mail" },
+    { "type": "text", "id": "address_label", "label": "Bezeichnung Adresse", "default": "Adresse" },
+    { "type": "header", "content": "Formular" },
+    { "type": "text", "id": "form_label", "label": "Beschreibung für Screenreader", "default": "Kontaktformular" },
+    { "type": "text", "id": "label_name", "label": "Feld Name", "default": "Name" },
+    { "type": "text", "id": "label_email", "label": "Feld E-Mail", "default": "E-Mail" },
+    { "type": "text", "id": "label_phone", "label": "Feld Telefon", "default": "Telefon" },
+    { "type": "text", "id": "label_company", "label": "Feld Unternehmen", "default": "Unternehmen" },
+    { "type": "text", "id": "label_topic", "label": "Feld Thema", "default": "Worum geht es?" },
+    { "type": "text", "id": "topic_placeholder", "label": "Thema: erste Option", "default": "Bitte wählen" },
+    { "type": "textarea", "id": "topics", "label": "Themen", "info": "Eins pro Zeile. Kontakt-Abschluss und Baukasten übergeben eines dieser Themen.", "default": "Strategie und Beratung\nWebdesign und UX\nSEO und Performance\nGoogle Ads (SEA)\nSocial Media\nShopify-Theme\nKI und Automation\nSonstiges" },
+    { "type": "text", "id": "label_message", "label": "Feld Nachricht", "default": "Nachricht" },
+    { "type": "text", "id": "required_label", "label": "Hinweis Pflichtfeld", "default": "(Pflichtfeld)" },
+    { "type": "text", "id": "optional_label", "label": "Hinweis optional", "default": "(optional)" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Nachricht senden" },
+    { "type": "inline_richtext", "id": "privacy_text", "label": "Hinweis neben dem Button", "default": "Kostenlos und unverbindlich. Mehr dazu in der <a href=\"/policies/privacy-policy\">Datenschutzerklärung</a>." },
+    { "type": "header", "content": "Meldungen" },
+    { "type": "text", "id": "error_name", "label": "Name fehlt", "default": "Bitte gib deinen Namen an." },
+    { "type": "text", "id": "error_email", "label": "E-Mail fehlt", "default": "Bitte gib deine E-Mail-Adresse an." },
+    { "type": "text", "id": "error_email_format", "label": "E-Mail unvollständig", "default": "Diese E-Mail-Adresse sieht unvollständig aus, zum Beispiel name@firma.de." },
+    { "type": "text", "id": "error_message", "label": "Nachricht fehlt", "default": "Schreib uns kurz, worum es geht." },
+    { "type": "text", "id": "success_title", "label": "Nach dem Senden: Überschrift", "default": "Danke für deine Nachricht" },
+    { "type": "textarea", "id": "success_text", "label": "Nach dem Senden: Text", "default": "Wir melden uns innerhalb von 48 Stunden mit klaren nächsten Schritten." },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "presets": [{ "name": "Kontaktformular" }]
+}
+{% endschema %}
