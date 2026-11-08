@@ -1,0 +1,477 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "service-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "group": "a2",
+        "outline_label": "KI-Automation",
+        "crumb_parent": "Leistungen",
+        "crumb_parent_link": "shopify://pages/leistungen",
+        "crumb_current": "KI-Automation · KI und Automatisierung",
+        "title": "KI und Automationen, die im Alltag mitarbeiten",
+        "text": "Anfragen sortieren, Produkttexte vorbereiten, Daten zwischen Shop, Website und Tools abgleichen: Wir automatisieren wiederkehrende Aufgaben und setzen KI dort ein, wo sie dir Zeit spart.",
+        "group_label": "Bereich Umsetzung",
+        "button_label": "Automation besprechen",
+        "button_2_label": "Alle Leistungen",
+        "button_2_link": "shopify://pages/leistungen",
+        "visual": "ki",
+        "vis_title": "Automation · Anfrage-Eingang",
+        "vis_tag": "Beispiel",
+        "vis_checks": "Ohne Handgriff erledigt",
+        "padding_top": 48,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Neue Anfrage über das Formular",
+            "text": "Esstisch Eiche, 2,20 m, bitte um Angebot",
+            "value": "",
+            "highlight": false,
+            "icon": "mail"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "KI erkennt das Anliegen",
+            "text": "Angebot · Möbel nach Maß · hohe Priorität",
+            "value": "",
+            "highlight": false,
+            "icon": "bot"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Kontakt im CRM angelegt",
+            "text": "Mit Notiz und Wiedervorlage in 2 Tagen",
+            "value": "",
+            "highlight": false,
+            "icon": "layers"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Antwortentwurf bereit",
+            "text": "Liegt zur Freigabe im Postfach",
+            "value": "",
+            "highlight": false,
+            "icon": "file-text"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "angebote": {
+      "type": "service-catalog",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a2",
+        "anchor": "angebote",
+        "outline_label": "Angebote",
+        "heading": "Unsere Leistungen im Bereich KI-Automation",
+        "text": "Wir fangen nicht beim Tool an, sondern bei deinen Abläufen. Erst schauen wir, wo im Alltag Zeit verloren geht, dann bauen wir Automationen, die zuverlässig laufen und die dein Team versteht.",
+        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "count_text": "[n] von [gesamt] Angeboten ausgewählt",
+        "button_label": "Mit dieser Auswahl anfragen",
+        "topic": "KI und Automation",
+        "message": "Hallo NetImpulse, ich interessiere mich für KI-Automation mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: ",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Automationen"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "title": "Workflows zwischen deinen Tools",
+            "text": "Formulare, Shop, CRM und Mail automatisch verbunden",
+            "icon": "workflow"
+          }
+        },
+        "offer_3": {
+          "type": "offer",
+          "settings": {
+            "title": "Shopify-Automationen",
+            "text": "Bestellungen, Lager und Kundengruppen mit Shopify Flow",
+            "icon": "bag"
+          }
+        },
+        "offer_4": {
+          "type": "offer",
+          "settings": {
+            "title": "Reporting automatisieren",
+            "text": "Zahlen aus Ads, Shop und Analytics regelmäßig gesammelt",
+            "icon": "bar-chart"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "KI im Alltag"
+          }
+        },
+        "offer_6": {
+          "type": "offer",
+          "settings": {
+            "title": "KI-Assistent für Website und Shop",
+            "text": "Beantwortet häufige Fragen und nimmt Anfragen auf",
+            "icon": "bot"
+          }
+        },
+        "offer_7": {
+          "type": "offer",
+          "settings": {
+            "title": "Anfragen sortieren und vorbereiten",
+            "text": "KI erkennt das Anliegen und schreibt einen Antwortentwurf",
+            "icon": "mail"
+          }
+        },
+        "offer_8": {
+          "type": "offer",
+          "settings": {
+            "title": "Produkt- und Seitentexte mit KI",
+            "text": "Entwürfe in deiner Tonalität, von uns geprüft",
+            "icon": "file-text"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "Einführung"
+          }
+        },
+        "offer_10": {
+          "type": "offer",
+          "settings": {
+            "title": "Prozess-Check",
+            "text": "Wo im Alltag Zeit verloren geht und was sich lohnt",
+            "icon": "eye"
+          }
+        },
+        "offer_11": {
+          "type": "offer",
+          "settings": {
+            "title": "Schulung für dein Team",
+            "text": "Damit alle die Abläufe verstehen und nutzen",
+            "icon": "user"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "offer_2",
+        "offer_3",
+        "offer_4",
+        "category_5",
+        "offer_6",
+        "offer_7",
+        "offer_8",
+        "category_9",
+        "offer_10",
+        "offer_11"
+      ]
+    },
+    "ablauf": {
+      "type": "service-steps",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "anchor": "ablauf",
+        "outline_label": "Ablauf",
+        "heading": "Wie ein Automations-Projekt abläuft",
+        "text": "Klein anfangen, sauber testen, dann ausbauen.",
+        "focus_title": "",
+        "focus_list": "",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Abläufe aufnehmen",
+            "text": "Wir schauen gemeinsam, welche Aufgaben sich wiederholen und wo Fehler oder Wartezeit entstehen."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Automation bauen",
+            "text": "Wir verbinden deine Tools, richten die KI-Schritte ein und testen mit echten Fällen."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Betreuen und ausbauen",
+            "text": "Wir behalten die Abläufe im Blick, passen sie an und erweitern sie, wenn sie sich bewährt haben."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "fuer-wen": {
+      "type": "service-pair",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "fuer-wen",
+        "outline_label": "Für wen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Für wen lohnt sich KI-Automation?",
+            "text": "Für Unternehmen, bei denen jeden Tag dieselben Handgriffe anfallen: Anfragen beantworten, Daten übertragen, Texte vorbereiten.\nBesonders für Shops und Dienstleister, die wachsen wollen, ohne für jede Routine mehr Zeit aufzuwenden."
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Warum KI-Automation mit uns?",
+            "text": "Wir kennen Website, Shop und Marketing aus unseren Projekten. Deshalb bauen wir Automationen, die genau dort andocken, wo deine Arbeit ohnehin passiert.\nOhne KI-Hype: Du bekommst Abläufe, die nachvollziehbar sind, sauber dokumentiert und von deinem Team weitergeführt werden können."
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2"
+      ]
+    },
+    "weiter": {
+      "type": "service-directory",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "weiter",
+        "outline_label": "Weitere Leistungen",
+        "heading": "Was wir noch anbieten",
+        "link_label": "Alle Leistungen",
+        "link": "shopify://pages/leistungen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Sichtbarkeit"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "name": "SEO",
+            "text": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "icon": "search",
+            "group": "a1",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "name": "SEA",
+            "text": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "icon": "bar-chart",
+            "group": "a1",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "name": "SMM",
+            "text": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "icon": "megaphone",
+            "group": "a1",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "service_5": {
+          "type": "service",
+          "settings": {
+            "name": "GEO",
+            "text": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "icon": "message-circle",
+            "group": "a1",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "category_6": {
+          "type": "category",
+          "settings": {
+            "title": "Websites und Shops"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "name": "Webdesign",
+            "text": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "icon": "monitor",
+            "group": "a2",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "name": "Shopify",
+            "text": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "icon": "bag",
+            "group": "a2",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_9": {
+          "type": "service",
+          "settings": {
+            "name": "Themes",
+            "text": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "icon": "layers",
+            "group": "a2",
+            "link": "shopify://collections/themes"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "service_5",
+        "category_6",
+        "service_7",
+        "service_8",
+        "service_9"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": true
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "angebote",
+    "ablauf",
+    "fuer-wen",
+    "weiter",
+    "kontakt"
+  ]
+}

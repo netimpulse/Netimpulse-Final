@@ -1,0 +1,488 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "service-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "group": "a1",
+        "outline_label": "SEA",
+        "crumb_parent": "Leistungen",
+        "crumb_parent_link": "shopify://pages/leistungen",
+        "crumb_current": "SEA · Google Ads",
+        "title": "Google Ads für Menschen, die schon nach dir suchen",
+        "text": "Mit Google Ads erreichst du gezielt Menschen, die bereits nach deinen Produkten oder Leistungen suchen. Wir entwickeln und optimieren Kampagnen mit Fokus auf Effizienz und Conversions.",
+        "group_label": "Bereich Sichtbarkeit",
+        "button_label": "Audit anfragen",
+        "button_2_label": "Alle Leistungen",
+        "button_2_link": "shopify://pages/leistungen",
+        "visual": "sea",
+        "vis_title": "Google Ads · Kampagne Esstische",
+        "vis_tag": "Beispielkonto",
+        "vis_meta": "Gesponsert · deine-domain.de",
+        "vis_headline": "Esstisch nach Maß | Schreinerei in Gießen",
+        "vis_note": "Letzte 30 Tage · Ziel: Beratungsanfrage · Tracking aktiv",
+        "vis_checks": "",
+        "padding_top": 48,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Klicks",
+            "text": "",
+            "value": "1.284",
+            "highlight": false,
+            "icon": "bar-chart"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Klickrate",
+            "text": "",
+            "value": "6,1 %",
+            "highlight": false,
+            "icon": "bar-chart"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Kosten pro Anfrage",
+            "text": "",
+            "value": "18,40 €",
+            "highlight": false,
+            "icon": "bar-chart"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Anfragen",
+            "text": "",
+            "value": "42",
+            "highlight": true,
+            "icon": "bar-chart"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "angebote": {
+      "type": "service-catalog",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a1",
+        "anchor": "angebote",
+        "outline_label": "Angebote",
+        "heading": "Unsere Leistungen im Bereich SEA",
+        "text": "Wir betreuen Google Ads nicht nach Bauchgefühl, sondern datenbasiert: Jede unserer Kampagnen wird auf Ziel, Zielgruppe und Wirtschaftlichkeit ausgerichtet.",
+        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "count_text": "[n] von [gesamt] Angeboten ausgewählt",
+        "button_label": "Mit dieser Auswahl anfragen",
+        "topic": "Google Ads (SEA)",
+        "message": "Hallo NetImpulse, ich interessiere mich für SEA mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: ",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Strategie und Aufbau"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "title": "Konto- und Kampagnen-Audit",
+            "text": "Bestehendes Konto prüfen, Lücken und Streuverluste finden",
+            "icon": "eye"
+          }
+        },
+        "offer_3": {
+          "type": "offer",
+          "settings": {
+            "title": "Strategie und Kampagnenstruktur",
+            "text": "Saubere Kampagnen und Anzeigengruppen mit klarem Ziel",
+            "icon": "layers"
+          }
+        },
+        "offer_4": {
+          "type": "offer",
+          "settings": {
+            "title": "Keywords und Suchintention",
+            "text": "Kaufnahe Suchbegriffe finden, unpassende ausschließen",
+            "icon": "search"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Kampagnen und Anzeigen"
+          }
+        },
+        "offer_6": {
+          "type": "offer",
+          "settings": {
+            "title": "Search- und Shopping-Kampagnen",
+            "text": "Anzeigen in der Suche und mit deinen Produkten",
+            "icon": "bar-chart"
+          }
+        },
+        "offer_7": {
+          "type": "offer",
+          "settings": {
+            "title": "Remarketing und Performance Max",
+            "text": "Besucher zurückholen und neue Kanäle mitnehmen",
+            "icon": "corner-down-right"
+          }
+        },
+        "offer_8": {
+          "type": "offer",
+          "settings": {
+            "title": "Anzeigentexte und Creatives",
+            "text": "Texte, Erweiterungen und Assets passend zur Suche",
+            "icon": "file-text"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "Messen und steuern"
+          }
+        },
+        "offer_10": {
+          "type": "offer",
+          "settings": {
+            "title": "Conversion-Tracking und Setup",
+            "text": "Anfragen und Käufe sauber messen, bevor optimiert wird",
+            "icon": "activity"
+          }
+        },
+        "offer_11": {
+          "type": "offer",
+          "settings": {
+            "title": "Budget und Gebotsstrategien",
+            "text": "Budget verteilen und Gebote nach Leistung steuern",
+            "icon": "sliders"
+          }
+        },
+        "offer_12": {
+          "type": "offer",
+          "settings": {
+            "title": "Optimierung und Reporting",
+            "text": "Verständliche Auswertung statt überladener Dashboards",
+            "icon": "arrow-up-right"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "offer_2",
+        "offer_3",
+        "offer_4",
+        "category_5",
+        "offer_6",
+        "offer_7",
+        "offer_8",
+        "category_9",
+        "offer_10",
+        "offer_11",
+        "offer_12"
+      ]
+    },
+    "ablauf": {
+      "type": "service-steps",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "anchor": "ablauf",
+        "outline_label": "Ablauf",
+        "heading": "Die wichtigsten Bausteine eines SEA-Projekts",
+        "text": "Am Anfang steht die Frage, was Google Ads für dich leisten soll: mehr Leads, mehr Umsatz, mehr Anfragen oder mehr Reichweite. Darauf bauen wir eine klare Kampagnenstruktur und saubere KPIs auf.",
+        "focus_title": "",
+        "focus_list": "",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Suchbegriffe und Keywords",
+            "text": "Wir analysieren, wonach deine Zielgruppe aktiv sucht, welche Begriffe kaufnah sind und welche Suchanfragen ausgeschlossen werden sollten."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Anzeigen und Assets",
+            "text": "Wir erstellen Anzeigentexte, Erweiterungen und Assets, die zur Suchintention passen und Nutzer gezielt zur Handlung führen."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Budgets und Gebote",
+            "text": "Wir verteilen das Budget sinnvoll, steuern Gebote nach Leistung und optimieren Kampagnen auf effiziente Conversions."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "fuer-wen": {
+      "type": "service-pair",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "fuer-wen",
+        "outline_label": "Für wen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Warum SEA mit uns?",
+            "text": "SEA funktioniert nur dann gut, wenn Strategie, Tracking und Optimierung zusammenspielen. Genau darauf liegt unser Fokus. Dabei setzen wir auf Transparenz und Performance statt auf Agentur-Gelaber.\nDu bekommst keine unübersichtlichen Dashboards, die überfordern, sondern konkrete Erkenntnisse und nachvollziehbare Aussagen. Das Wichtigste für uns ist dein Erfolg und dass du unser Vorgehen nachvollziehen kannst."
+          }
+        }
+      },
+      "block_order": [
+        "column_1"
+      ]
+    },
+    "weiter": {
+      "type": "service-directory",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "weiter",
+        "outline_label": "Weitere Leistungen",
+        "heading": "Was wir noch anbieten",
+        "link_label": "Alle Leistungen",
+        "link": "shopify://pages/leistungen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Sichtbarkeit"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "name": "SEO",
+            "text": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "icon": "search",
+            "group": "a1",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "name": "SMM",
+            "text": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "icon": "megaphone",
+            "group": "a1",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "name": "GEO",
+            "text": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "icon": "message-circle",
+            "group": "a1",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Websites und Shops"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "name": "Webdesign",
+            "text": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "icon": "monitor",
+            "group": "a2",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "name": "Shopify",
+            "text": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "icon": "bag",
+            "group": "a2",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "name": "Themes",
+            "text": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "icon": "layers",
+            "group": "a2",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "KI und Automation"
+          }
+        },
+        "service_10": {
+          "type": "service",
+          "settings": {
+            "name": "KI-Automation",
+            "text": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "icon": "workflow",
+            "group": "a2",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "category_5",
+        "service_6",
+        "service_7",
+        "service_8",
+        "category_9",
+        "service_10"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": true
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "angebote",
+    "ablauf",
+    "fuer-wen",
+    "weiter",
+    "kontakt"
+  ]
+}

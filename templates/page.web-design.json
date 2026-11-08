@@ -1,0 +1,435 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "service-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "group": "a2",
+        "outline_label": "Webdesign",
+        "crumb_parent": "Leistungen",
+        "crumb_parent_link": "shopify://pages/leistungen",
+        "crumb_current": "Webdesign · Webdesign und Shopify",
+        "title": "Websites, die erklären, führen und verkaufen",
+        "text": "Maßgeschneiderte Shopify-Themes und Websites, vom ersten Wireframe bis zum Launch. Klar aufgebaut, mobil sauber geführt und auf Anfragen und Verkäufe ausgerichtet.",
+        "group_label": "Bereich Umsetzung",
+        "button_label": "Projekt starten",
+        "button_2_label": "Alle Leistungen",
+        "button_2_link": "shopify://pages/leistungen",
+        "visual": "webdesign",
+        "vis_title": "Build · Schritt [n] / 05",
+        "vis_tag": "",
+        "vis_brand": "Holzwerk Ahorn",
+        "vis_headline": "Möbel nach Maß aus Gießen",
+        "vis_hero_text": "Esstische, Schränke und Treppen aus Massivholz",
+        "vis_cta": "Beratung anfragen",
+        "vis_list": "Raster\nStruktur\nInhalte\nGestaltung\nLive",
+        "vis_live": "Live",
+        "vis_checks": "",
+        "padding_top": 48,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Esstische",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "monitor"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Einbauschränke",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "monitor"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Treppen",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "monitor"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "angebote": {
+      "type": "service-catalog",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a2",
+        "anchor": "angebote",
+        "outline_label": "Angebote",
+        "heading": "Unsere Leistungen im Bereich Webdesign",
+        "text": "Eine gute Website ist kein hübsches Schaufenster ohne Funktion. Sie braucht eine klare Struktur, starke Inhalte, gute Nutzerführung und ein Design, das zur Marke passt. Deshalb denken wir Webdesign immer auch strategisch und conversionorientiert.",
+        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "count_text": "[n] von [gesamt] Angeboten ausgewählt",
+        "button_label": "Mit dieser Auswahl anfragen",
+        "topic": "Webdesign und UX",
+        "message": "Hallo NetImpulse, ich interessiere mich für Webdesign mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: ",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Konzept"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "title": "Seitenstruktur und Nutzerführung",
+            "text": "Welche Seiten es braucht und wie Besucher hindurchgehen",
+            "icon": "layers"
+          }
+        },
+        "offer_3": {
+          "type": "offer",
+          "settings": {
+            "title": "UI- und UX-Design",
+            "text": "Gestaltung, die zur Marke passt und leicht zu bedienen ist",
+            "icon": "eye"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "title": "Seiten und Shops"
+          }
+        },
+        "offer_5": {
+          "type": "offer",
+          "settings": {
+            "title": "Landingpages und Unternehmensseiten",
+            "text": "Seiten für Leistungen, Standorte und Kampagnen",
+            "icon": "monitor"
+          }
+        },
+        "offer_6": {
+          "type": "offer",
+          "settings": {
+            "title": "Shopify-Webdesign",
+            "text": "Shop-Design und Anpassungen am bestehenden Theme",
+            "icon": "bag"
+          }
+        },
+        "offer_7": {
+          "type": "offer",
+          "settings": {
+            "title": "Conversion-Sektionen",
+            "text": "Abschnitte, die auf Anfrage und Kauf ausgerichtet sind",
+            "icon": "bar-chart"
+          }
+        },
+        "offer_8": {
+          "type": "offer",
+          "settings": {
+            "title": "Klare Call-to-Actions",
+            "text": "Eindeutige nächste Schritte auf jeder Seite",
+            "icon": "arrow-up-right"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "Weiterentwicklung"
+          }
+        },
+        "offer_10": {
+          "type": "offer",
+          "settings": {
+            "title": "Mobile Optimierung",
+            "text": "Saubere Führung auf dem Handy, nicht nur verkleinert",
+            "icon": "smartphone"
+          }
+        },
+        "offer_11": {
+          "type": "offer",
+          "settings": {
+            "title": "Bestehende Website weiterentwickeln",
+            "text": "Verbessern statt komplett neu bauen",
+            "icon": "wrench"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "offer_2",
+        "offer_3",
+        "category_4",
+        "offer_5",
+        "offer_6",
+        "offer_7",
+        "offer_8",
+        "category_9",
+        "offer_10",
+        "offer_11"
+      ]
+    },
+    "fuer-wen": {
+      "type": "service-pair",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "fuer-wen",
+        "outline_label": "Für wen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Lohnt sich das, auch wenn ich schon eine Website habe?",
+            "text": "Webdesign wird dann wichtig, wenn deine aktuelle Website nicht mehr zu deinem Anspruch passt, zu unübersichtlich wirkt oder nicht genügend Anfragen erzeugt.\nBesonders relevant ist es für Dienstleister, lokale Unternehmen, Online-Shops, Start-ups und Marken, die ihren digitalen Auftritt hochwertiger und klarer präsentieren wollen."
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Warum Webdesign mit uns?",
+            "text": "Wir bauen keine Website, die nur auf den ersten Blick schön aussieht. Uns ist wichtig, dass sie verständlich, hochwertig und sinnvoll aufgebaut ist.\nDu bekommst einen digitalen Auftritt, der zu deinem Unternehmen passt, deine Leistungen klar erklärt und Besucher gezielt zur nächsten Handlung führt."
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2"
+      ]
+    },
+    "weiter": {
+      "type": "service-directory",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "weiter",
+        "outline_label": "Weitere Leistungen",
+        "heading": "Was wir noch anbieten",
+        "link_label": "Alle Leistungen",
+        "link": "shopify://pages/leistungen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Sichtbarkeit"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "name": "SEO",
+            "text": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "icon": "search",
+            "group": "a1",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "name": "SEA",
+            "text": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "icon": "bar-chart",
+            "group": "a1",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "name": "SMM",
+            "text": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "icon": "megaphone",
+            "group": "a1",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "service_5": {
+          "type": "service",
+          "settings": {
+            "name": "GEO",
+            "text": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "icon": "message-circle",
+            "group": "a1",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "category_6": {
+          "type": "category",
+          "settings": {
+            "title": "Websites und Shops"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "name": "Shopify",
+            "text": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "icon": "bag",
+            "group": "a2",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "name": "Themes",
+            "text": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "icon": "layers",
+            "group": "a2",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "KI und Automation"
+          }
+        },
+        "service_10": {
+          "type": "service",
+          "settings": {
+            "name": "KI-Automation",
+            "text": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "icon": "workflow",
+            "group": "a2",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "service_5",
+        "category_6",
+        "service_7",
+        "service_8",
+        "category_9",
+        "service_10"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": true
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "angebote",
+    "fuer-wen",
+    "weiter",
+    "kontakt"
+  ]
+}

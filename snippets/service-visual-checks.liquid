@@ -1,0 +1,13 @@
+{%- comment -%} Haken unter einer Arbeitsfläche. Parameter: checks (Liste von Texten) {%- endcomment -%}
+{%- assign has = false -%}
+{%- for c in checks -%}{%- assign t = c | strip -%}{%- if t != blank -%}{%- assign has = true -%}{%- endif -%}{%- endfor -%}
+{%- if has -%}
+  <div class="vis-checks">
+    {%- for c in checks -%}
+      {%- assign t = c | strip -%}
+      {%- if t != blank -%}
+        <span class="is-on" data-check="{{ forloop.index }}">{%- render 'icon', name: 'check', size: 16 -%}{{ t }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

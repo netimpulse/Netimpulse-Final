@@ -52,11 +52,7 @@
 
       <nav aria-label="{{ section.settings.heading_3 | escape }}" class="footer-col">
         <p class="footer-h">{{ section.settings.heading_3 }}</p>
-          {%- if shop.legal_notice_policy != blank -%}<a href="{{ shop.legal_notice_policy.url }}">{{ shop.legal_notice_policy.title }}</a>{%- endif -%}
-          {%- if shop.privacy_policy != blank -%}<a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>{%- endif -%}
-          {%- if shop.terms_of_service != blank -%}<a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title }}</a>{%- endif -%}
-          {%- if shop.refund_policy != blank -%}<a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title }}</a>{%- endif -%}
-          {%- if section.settings.extra_page != blank -%}<a href="{{ section.settings.extra_page.url }}">{{ section.settings.extra_page.title }}</a>{%- endif -%}
+          {%- render 'policy-links', extra: section.settings.extra_page -%}
       </nav>
 
       {%- for block in section.blocks -%}

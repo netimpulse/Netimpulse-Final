@@ -1,0 +1,489 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "service-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "group": "a1",
+        "outline_label": "SEO",
+        "crumb_parent": "Leistungen",
+        "crumb_parent_link": "shopify://pages/leistungen",
+        "crumb_current": "SEO · Suchmaschinenoptimierung",
+        "title": "Sichtbarkeit beginnt dort, wo deine Zielgruppe sucht",
+        "text": "Wir optimieren deine Website technisch, inhaltlich und strategisch, damit du bei Google besser gefunden wirst und mehr qualifizierte Anfragen erhältst.",
+        "group_label": "Bereich Sichtbarkeit",
+        "button_label": "Audit anfragen",
+        "button_2_label": "Alle Leistungen",
+        "button_2_link": "shopify://pages/leistungen",
+        "visual": "seo",
+        "vis_title": "Google · Suchergebnisse",
+        "vis_tag": "Beispiel",
+        "vis_query": "schreinerei gießen",
+        "vis_own_url": "deine-domain.de › leistungen",
+        "vis_own_title": "Schreinerei in Gießen: Möbel nach Maß",
+        "vis_own_badge": "Dein Ergebnis",
+        "vis_checks": "Technik\nInhalte\nSuchintention",
+        "padding_top": 48,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "branchenbuch-beispiel.de › giessen",
+            "text": "Schreinereien in Gießen und Umgebung",
+            "value": "",
+            "highlight": false,
+            "icon": "search"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "ratgeber-beispiel.de › moebel",
+            "text": "Möbel nach Maß: Worauf du achten solltest",
+            "value": "",
+            "highlight": false,
+            "icon": "search"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "moebelportal-beispiel.de › esstische",
+            "text": "Esstische online konfigurieren",
+            "value": "",
+            "highlight": false,
+            "icon": "search"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "verzeichnis-beispiel.de › handwerk",
+            "text": "Handwerker in Mittelhessen finden",
+            "value": "",
+            "highlight": false,
+            "icon": "search"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "angebote": {
+      "type": "service-catalog",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a1",
+        "anchor": "angebote",
+        "outline_label": "Angebote",
+        "heading": "Unsere Leistungen im Bereich SEO",
+        "text": "Wir entwickeln keine Standardlösungen, sondern nehmen uns die Zeit, dein Geschäftsmodell und deine Zielgruppe zu verstehen. So entsteht eine SEO-Strategie, die auf dich zugeschnitten ist.",
+        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "count_text": "[n] von [gesamt] Angeboten ausgewählt",
+        "button_label": "Mit dieser Auswahl anfragen",
+        "topic": "SEO und Performance",
+        "message": "Hallo NetImpulse, ich interessiere mich für SEO mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: ",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Analyse und Technik"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "title": "SEO-Audit",
+            "text": "Bestandsaufnahme von Technik, Inhalten und Rankings deiner Seite",
+            "icon": "eye"
+          }
+        },
+        "offer_3": {
+          "type": "offer",
+          "settings": {
+            "title": "Keyword-Recherche",
+            "text": "Begriffe, nach denen deine Kunden wirklich suchen",
+            "icon": "search"
+          }
+        },
+        "offer_4": {
+          "type": "offer",
+          "settings": {
+            "title": "Technisches SEO",
+            "text": "Ladezeit, Indexierung und eine saubere Seitenstruktur",
+            "icon": "sliders"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Inhalte und Seiten"
+          }
+        },
+        "offer_6": {
+          "type": "offer",
+          "settings": {
+            "title": "Content-Strategie",
+            "text": "Themenplan für Leistungen, Standorte und häufige Fragen",
+            "icon": "file-text"
+          }
+        },
+        "offer_7": {
+          "type": "offer",
+          "settings": {
+            "title": "Onpage-Optimierung",
+            "text": "Titel, Überschriften und interne Verlinkung",
+            "icon": "layers"
+          }
+        },
+        "offer_8": {
+          "type": "offer",
+          "settings": {
+            "title": "Linkbuilding",
+            "text": "Erwähnungen und Verweise von passenden Seiten",
+            "icon": "arrow-up-right"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "Lokal und laufend"
+          }
+        },
+        "offer_10": {
+          "type": "offer",
+          "settings": {
+            "title": "Lokales SEO",
+            "text": "Sichtbar bei Suchen in deiner Region",
+            "icon": "map-pin"
+          }
+        },
+        "offer_11": {
+          "type": "offer",
+          "settings": {
+            "title": "Google Unternehmensprofil",
+            "text": "Gepflegtes Profil mit Bildern, Zeiten und Bewertungen",
+            "icon": "user"
+          }
+        },
+        "offer_12": {
+          "type": "offer",
+          "settings": {
+            "title": "Datenanalyse und Optimierung",
+            "text": "Rankings und Anfragen auswerten und laufend nachschärfen",
+            "icon": "bar-chart"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "offer_2",
+        "offer_3",
+        "offer_4",
+        "category_5",
+        "offer_6",
+        "offer_7",
+        "offer_8",
+        "category_9",
+        "offer_10",
+        "offer_11",
+        "offer_12"
+      ]
+    },
+    "ablauf": {
+      "type": "service-steps",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "anchor": "ablauf",
+        "outline_label": "Ablauf",
+        "heading": "Wie starten wir bei einem SEO-Auftrag?",
+        "text": "Als Allererstes analysieren wir den aktuellen Stand deiner Website. Darauf baut alles Weitere auf.",
+        "focus_title": "Dabei achten wir vor allem auf",
+        "focus_list": "Saubere technische Grundlagen\nInhalte mit echtem Mehrwert\nSuchintention statt Keyword-Dichte",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Analyse",
+            "text": "Welche Potenziale gibt es? Welche Maßnahmen wären sinnvoll? Macht SEO für dich überhaupt Sinn?"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Priorisierung",
+            "text": "Wir legen fest, welche Maßnahmen zuerst kommen, damit die Arbeit dort ansetzt, wo sie am meisten bewirkt."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Umsetzung",
+            "text": "Wir setzen die Optimierungen um, werten die Daten aus und optimieren laufend weiter."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "fuer-wen": {
+      "type": "service-pair",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "fuer-wen",
+        "outline_label": "Für wen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Für wen ist SEO sinnvoll?",
+            "text": "SEO lohnt sich vor allem für Unternehmen, die nachhaltig wachsen wollen und nicht immer von bezahlter Werbung abhängig sein wollen.\nBesonders relevant ist SEO für E-Commerce-Brands, lokale Unternehmen, Start-ups und Dienstleister mit klaren Zielgruppen."
+          }
+        }
+      },
+      "block_order": [
+        "column_1"
+      ]
+    },
+    "weiter": {
+      "type": "service-directory",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "weiter",
+        "outline_label": "Weitere Leistungen",
+        "heading": "Was wir noch anbieten",
+        "link_label": "Alle Leistungen",
+        "link": "shopify://pages/leistungen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Sichtbarkeit"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "name": "SEA",
+            "text": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "icon": "bar-chart",
+            "group": "a1",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "name": "SMM",
+            "text": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "icon": "megaphone",
+            "group": "a1",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "name": "GEO",
+            "text": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "icon": "message-circle",
+            "group": "a1",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Websites und Shops"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "name": "Webdesign",
+            "text": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "icon": "monitor",
+            "group": "a2",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "name": "Shopify",
+            "text": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "icon": "bag",
+            "group": "a2",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "name": "Themes",
+            "text": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "icon": "layers",
+            "group": "a2",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "KI und Automation"
+          }
+        },
+        "service_10": {
+          "type": "service",
+          "settings": {
+            "name": "KI-Automation",
+            "text": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "icon": "workflow",
+            "group": "a2",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "category_5",
+        "service_6",
+        "service_7",
+        "service_8",
+        "category_9",
+        "service_10"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": true
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "angebote",
+    "ablauf",
+    "fuer-wen",
+    "weiter",
+    "kontakt"
+  ]
+}

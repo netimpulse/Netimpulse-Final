@@ -1,0 +1,16 @@
+{%- comment -%}
+  Links zu den Shopify-Richtlinien in fester Reihenfolge: Impressum, Datenschutz, AGB, Widerruf, weitere.
+  Kontaktinformationen werden ausgelassen (dafür gibt es die Kontaktseite).
+  Parameter: current (true markiert die aktuelle Seite), extra (Seite, die zusätzlich gezeigt wird)
+{%- endcomment -%}
+{%- assign order = 'legal-notice,privacy-policy,terms-of-service,refund-policy,shipping-policy,terms-of-sale,subscription-policy' | split: ',' -%}
+{%- for key in order -%}
+  {%- for policy in shop.policies -%}
+    {%- if policy.url contains key -%}
+      <a href="{{ policy.url }}"{% if current and request.path == policy.url %} aria-current="page"{% endif %}>{{ policy.title }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- if extra != blank -%}
+  <a href="{{ extra.url }}"{% if current and request.path == extra.url %} aria-current="page"{% endif %}>{{ extra.title }}</a>
+{%- endif -%}

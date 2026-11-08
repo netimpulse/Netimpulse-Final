@@ -1,0 +1,123 @@
+{%- comment -%}
+  Katalog einer Leistung, zugleich Paket-Baukasten: Angebote anklicken, mit der Auswahl anfragen.
+  Die Auswahl geht per URL ins Kontaktformular. Blocks: „Gruppe" beginnt eine Spalte, „Angebot" folgt darunter.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign offers = section.blocks | where: 'type', 'offer'
+  capture contact_url
+    render 'contact-url'
+  endcapture
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="{{ s.anchor | default: 'angebote' }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}{% render 'group-class', group: s.group %}"
+  {% if s.heading != blank %}aria-labelledby="parts-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="sec-head parts-head">
+      {%- if s.heading != blank -%}<h2 id="parts-title-{{ section.id }}" class="sec-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<p class="sec-lead">{{ s.text }}</p>{%- endif -%}
+    </div>
+
+    <service-catalog
+      data-contact-url="{{ s.link | default: contact_url | strip | escape }}"
+      data-topic="{{ s.topic | escape }}"
+      data-message="{{ s.message | escape }}"
+      data-count="{{ s.count_text | escape }}"
+      data-empty="{{ s.empty_text | escape }}"
+      data-total="{{ offers.size }}"
+    >
+      <div class="parts">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign starts = false
+            if block.type == 'category'
+              assign starts = true
+            elsif forloop.first
+              assign starts = true
+            endif
+            assign from = forloop.index0
+            if block.type == 'category'
+              assign from = forloop.index
+            endif
+          -%}
+          {%- if starts -%}
+            <div class="parts-col"{% if block.type == 'category' %} {{ block.shopify_attributes }}{% endif %}>
+              {%- if block.type == 'category' -%}<h3 class="parts-cat">{{ block.settings.title }}</h3>{%- endif -%}
+              <ul class="parts-list" role="list">
+                {%- for item in section.blocks offset: from -%}
+                  {%- if item.type == 'category' -%}{%- break -%}{%- endif -%}
+                  <li {{ item.shopify_attributes }}>
+                    <button type="button" class="part" aria-pressed="false" data-title="{{ item.settings.title | escape }}">
+                      <span class="part-ico" aria-hidden="true">
+                        <span data-i="orig">{%- render 'icon', name: item.settings.icon, size: 18 -%}</span>
+                        <span data-i="check" hidden>{%- render 'icon', name: 'check', size: 18 -%}</span>
+                      </span>
+                      <span class="part-txt"><b>{{ item.settings.title }}</b><span>{{ item.settings.text }}</span></span>
+                    </button>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="builder-bar" aria-live="polite">
+        <p data-status>{{ s.empty_text }}</p>
+        <button type="button" class="btn btn-primary" data-send disabled>
+          <span>{{ s.button_label }}</span>
+          {%- render 'icon', name: 'arrow-right' -%}
+        </button>
+      </div>
+    </service-catalog>
+  </div>
+</section>
+
+<script src="{{ 'sections.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Leistung: Baukasten",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1 (Sichtbarkeit)" }, { "value": "a2", "label": "Akzent 2 (Umsetzung)" }] },
+    { "type": "text", "id": "anchor", "label": "Sprungziel", "info": "Ohne Leerzeichen, zum Beispiel angebote", "default": "angebote" },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Angebote" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Unsere Leistungen im Bereich SEO" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Wir entwickeln keine Standardlösungen, sondern nehmen uns die Zeit, dein Geschäftsmodell und deine Zielgruppe zu verstehen." },
+    { "type": "header", "content": "Anfrage mit Auswahl" },
+    { "type": "text", "id": "empty_text", "label": "Hinweis ohne Auswahl", "default": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch." },
+    { "type": "text", "id": "count_text", "label": "Hinweis mit Auswahl", "info": "[n] steht für die Anzahl, [gesamt] für alle Angebote", "default": "[n] von [gesamt] Angeboten ausgewählt" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Mit dieser Auswahl anfragen" },
+    { "type": "url", "id": "link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite" },
+    { "type": "text", "id": "topic", "label": "Thema im Kontaktformular", "default": "SEO und Performance" },
+    { "type": "textarea", "id": "message", "label": "Vorbelegte Nachricht", "info": "[auswahl] steht für die gewählten Angebote, je eins pro Zeile", "default": "Hallo NetImpulse, ich interessiere mich für SEO mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: " },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Gruppe",
+      "settings": [{ "type": "text", "id": "title", "label": "Titel", "default": "Analyse und Technik" }]
+    },
+    {
+      "type": "offer",
+      "name": "Angebot",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "SEO-Audit" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Bestandsaufnahme von Technik, Inhalten und Rankings deiner Seite" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "eye", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Leistung: Baukasten", "blocks": [{ "type": "category" }, { "type": "offer" }, { "type": "offer" }] }]
+}
+{% endschema %}

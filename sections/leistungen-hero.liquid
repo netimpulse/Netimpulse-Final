@@ -1,0 +1,85 @@
+{%- comment -%}
+  Kopf der Leistungsübersicht: Text links, rechts das Rad als Navigation. Sobald das Rad aus dem Bild scrollt,
+  dockt eine Leiste mit allen Leistungen unter dem Header an. Sprungziele: Kennung der Leistung (l-<kennung>).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign items = section.blocks | where: 'type', 'service'
+  capture contact_url
+    render 'contact-url'
+  endcapture
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.l-hero', tablet: 64, mobile: 64 -%}
+
+<section class="l-hero {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}" id="s-{{ section.id }}" data-outline="{{ s.outline_label | escape }}">
+  <div class="wrap l-hero-grid">
+    <div class="l-hero-copy">
+      <h1 class="page-title">{{ s.title | default: page.title }}</h1>
+      {%- if s.text != blank -%}<p class="ch-lead">{{ s.text }}</p>{%- endif -%}
+      <div class="actions">
+        {%- if s.button_label != blank -%}
+          <a href="{{ s.button_link | default: contact_url }}" class="btn btn-primary"><span>{{ s.button_label }}</span>{%- render 'icon', name: 'arrow-right' -%}</a>
+        {%- endif -%}
+        {%- if s.price_label != blank -%}
+          <button type="button" class="btn btn-outline-light" data-scroll-to="{{ s.price_anchor }}">{{ s.price_label }}</button>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="l-orbit">
+      {%- if items.size > 0 -%}
+        {%- render 'orbit',
+          items: items,
+          detail: false,
+          uid: section.id,
+          label: s.orbit_label,
+          group_1_label: s.group_1_label,
+          group_2_label: s.group_2_label,
+          pair_label: s.pair_label
+        -%}
+      {%- endif -%}
+    </div>
+    <leistungen-dock class="l-dock" aria-hidden="true">
+      <div class="wrap">
+        <nav class="l-dock-nav" aria-label="{{ s.dock_label | escape }}">
+          {%- for block in items -%}
+            <button type="button" tabindex="-1" class="l-dock-item{% render 'group-class', group: block.settings.group %}" data-scroll-to="l-{{ block.settings.key | handleize }}">{{ block.settings.name }}</button>
+          {%- endfor -%}
+          {%- if s.price_label != blank -%}
+            <button type="button" tabindex="-1" class="l-dock-price" data-scroll-to="{{ s.price_anchor }}">{{ s.price_label }}</button>
+          {%- endif -%}
+        </nav>
+      </div>
+    </leistungen-dock>
+  </div>
+</section>
+
+<script src="{{ 'sections.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Leistungen: Kopf mit Rad",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Übersicht" },
+    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Ein System aus Sichtbarkeit, Design und Umsetzung" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Acht Leistungen aus einer Hand. Jede funktioniert für sich und wird stärker, wenn sie mit den anderen zusammenarbeitet. Klick im Rad auf eine Leistung, um direkt dorthin zu springen." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Erstgespräch vereinbaren" },
+    { "type": "url", "id": "button_link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite" },
+    { "type": "text", "id": "price_label", "label": "Zweiter Button (springt zu den Preisen)", "default": "Abrechnung und Preise" },
+    { "type": "text", "id": "price_anchor", "label": "Sprungziel des zweiten Buttons", "default": "abrechnung" },
+    { "type": "header", "content": "Rad und Leiste" },
+    { "type": "text", "id": "orbit_label", "label": "Beschreibung des Rads für Screenreader", "default": "Zu einer Leistung springen" },
+    { "type": "text", "id": "dock_label", "label": "Beschreibung der Leiste für Screenreader", "default": "Leistungen auf dieser Seite" },
+    { "type": "text", "id": "group_1_label", "label": "Gruppe Akzent 1", "default": "Sichtbarkeit" },
+    { "type": "text", "id": "group_2_label", "label": "Gruppe Akzent 2", "default": "Umsetzung" },
+    { "type": "text", "id": "pair_label", "label": "Legende gestrichelt", "default": "gestrichelt: arbeitet zusammen mit" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [{ "type": "service", "name": "Leistung", "limit": 12, "settings": [{"type": "text", "id": "key", "label": "Kennung", "info": "Kurz und ohne Leerzeichen, zum Beispiel seo. Verbindet Leistungen und dient als Sprungziel.", "default": "seo"}, {"type": "text", "id": "name", "label": "Name", "default": "SEO"}, {"type": "text", "id": "long", "label": "Langname", "default": "Suchmaschinenoptimierung"}, {"type": "select", "id": "icon", "label": "Icon", "default": "search", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}]}, {"type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{"value": "a1", "label": "Akzent 1 (Sichtbarkeit)"}, {"value": "a2", "label": "Akzent 2 (Umsetzung)"}]}, {"type": "text", "id": "pairs", "label": "Arbeitet zusammen mit", "info": "Kennungen anderer Leistungen, mit Komma getrennt", "default": "geo, webdesign"}, {"type": "text", "id": "promise", "label": "Titel der Karte", "default": "Gefunden werden"}, {"type": "textarea", "id": "teaser", "label": "Text der Karte", "default": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird."}, {"type": "text", "id": "link_label", "label": "Link", "default": "Mehr zu SEO"}, {"type": "url", "id": "link", "label": "Link-Ziel"}] }],
+  "presets": [{ "name": "Leistungen: Kopf mit Rad", "blocks": [{ "type": "service" }, { "type": "service" }, { "type": "service" }] }]
+}
+{% endschema %}

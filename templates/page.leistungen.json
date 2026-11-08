@@ -1,0 +1,519 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "leistungen-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Übersicht",
+        "title": "Ein System aus Sichtbarkeit, Design und Umsetzung",
+        "text": "Acht Leistungen aus einer Hand. Jede funktioniert für sich und wird stärker, wenn sie mit den anderen zusammenarbeitet. Klick im Rad auf eine Leistung, um direkt dorthin zu springen.",
+        "button_label": "Erstgespräch vereinbaren",
+        "price_label": "Abrechnung und Preise",
+        "price_anchor": "abrechnung",
+        "orbit_label": "Zu einer Leistung springen",
+        "dock_label": "Leistungen auf dieser Seite",
+        "group_1_label": "Sichtbarkeit",
+        "group_2_label": "Umsetzung",
+        "pair_label": "gestrichelt: arbeitet zusammen mit",
+        "padding_top": 64,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "service_1": {
+          "type": "service",
+          "settings": {
+            "key": "seo",
+            "name": "SEO",
+            "long": "Suchmaschinenoptimierung",
+            "icon": "search",
+            "group": "a1",
+            "pairs": "geo, webdesign",
+            "promise": "Gefunden werden",
+            "teaser": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "link_label": "Mehr zu SEO",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "key": "sea",
+            "name": "SEA",
+            "long": "Google Ads",
+            "icon": "bar-chart",
+            "group": "a1",
+            "pairs": "seo, webdesign",
+            "promise": "Nachfrage aktivieren",
+            "teaser": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "link_label": "Mehr zu SEA",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "key": "smm",
+            "name": "SMM",
+            "long": "Social Media Marketing",
+            "icon": "megaphone",
+            "group": "a1",
+            "pairs": "sea, webdesign",
+            "promise": "Aufmerksamkeit formen",
+            "teaser": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "link_label": "Mehr zu SMM",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "key": "geo",
+            "name": "GEO",
+            "long": "Generative Engine Optimization",
+            "icon": "message-circle",
+            "group": "a1",
+            "pairs": "seo, webdesign",
+            "promise": "In KI-Antworten auftauchen",
+            "teaser": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "link_label": "Mehr zu GEO",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "service_5": {
+          "type": "service",
+          "settings": {
+            "key": "webdesign",
+            "name": "Webdesign",
+            "long": "Webdesign und Shopify",
+            "icon": "monitor",
+            "group": "a2",
+            "pairs": "seo, shopify",
+            "promise": "Website als Gespräch",
+            "teaser": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "link_label": "Mehr zu Webdesign",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "key": "shopify",
+            "name": "Shopify",
+            "long": "Shopify-Entwicklung",
+            "icon": "bag",
+            "group": "a2",
+            "pairs": "webdesign, themes",
+            "promise": "Shops, die skalieren",
+            "teaser": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "link_label": "Mehr zu Shopify",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "key": "themes",
+            "name": "Themes",
+            "long": "Theme Store",
+            "icon": "layers",
+            "group": "a2",
+            "pairs": "shopify, webdesign",
+            "promise": "Schneller starten",
+            "teaser": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "link_label": "Zum Theme Store",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "key": "ki",
+            "name": "KI-Automation",
+            "long": "KI und Automatisierung",
+            "icon": "workflow",
+            "group": "a2",
+            "pairs": "shopify, webdesign",
+            "promise": "Routine, die sich selbst erledigt",
+            "teaser": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "link_label": "Mehr zu KI-Automation",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "service_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "service_5",
+        "service_6",
+        "service_7",
+        "service_8"
+      ]
+    },
+    "l_seo": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "group": "a1",
+        "key": "seo",
+        "name": "SEO",
+        "subtitle": "Gefunden werden, bevor andere sichtbar sind",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "GEO = geo, Webdesign = webdesign",
+        "text": "Damit deine Website gefunden wird, braucht es mehr als ein paar Keywords. Inhalte, Technik und Struktur müssen sauber zusammenspielen, und genau darauf richten wir die Seite aus.",
+        "points": "Keyword- und Seitenstruktur mit klarer Suchintention\nTechnische SEO-Grundlagen für Performance und Indexierung\nContent-Aufbau für Leistungen, Standorte und Zielgruppen",
+        "button_label": "Mehr zu SEO",
+        "button_link": "shopify://pages/seo",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_sea": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a1",
+        "key": "sea",
+        "name": "SEA",
+        "subtitle": "Kampagnen, die Nachfrage gezielt aktivieren",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "SEO = seo, Webdesign = webdesign",
+        "text": "Anzeigen zu schalten ist der einfache Teil. Entscheidend ist, dass sie die richtigen Menschen erreichen, sauber gemessen werden und am Ende Anfragen bringen, die für dich wirklich relevant sind.",
+        "points": "Saubere Kampagnen- und Anzeigengruppen-Struktur\nConversion-Tracking und klare Auswertung\nOptimierung nach Suchintention, Budget und Zielwerten",
+        "button_label": "Mehr zu SEA",
+        "button_link": "shopify://pages/sea",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_smm": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "group": "a1",
+        "key": "smm",
+        "name": "SMM",
+        "subtitle": "Aufmerksamkeit mit Wiedererkennung und Richtung",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "SEA = sea, Webdesign = webdesign",
+        "text": "Ein guter Social-Media-Auftritt zeigt nicht nur, dass es dich gibt. Er zeigt, wofür du stehst. Mit klaren Themen, wiedererkennbaren Formaten und Inhalten, die zu deiner Marke passen, entsteht ein Auftritt, der im Kopf bleibt.",
+        "points": "Content-Struktur für wiederkehrende Formate\nKampagnenideen passend zu Marke und Zielgruppe\nVisuelle Systeme für mehr Wiedererkennung",
+        "button_label": "Mehr zu SMM",
+        "button_link": "shopify://pages/smm",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_geo": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a1",
+        "key": "geo",
+        "name": "GEO",
+        "subtitle": "Gefunden werden, wenn KI Antworten gibt",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "SEO = seo, Webdesign = webdesign",
+        "text": "Immer mehr Menschen suchen über ChatGPT, Perplexity oder Gemini. Wir bauen Inhalte so auf, dass diese Systeme verstehen, wofür du stehst, und dich in ihren Antworten nennen können.",
+        "points": "Inhalte, die echte Nutzerfragen beantworten\nStrukturierte Daten und technische Grundlagen\nMonitoring in klassischer Suche und KI-Suche",
+        "button_label": "Mehr zu GEO",
+        "button_link": "shopify://pages/geo",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_webdesign": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "group": "a2",
+        "key": "webdesign",
+        "name": "Webdesign",
+        "subtitle": "Websites, die erklären, führen und verkaufen",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "SEO = seo, Shopify = shopify",
+        "text": "Eine Website sollte sofort verständlich machen, wer du bist, was du anbietest und warum es relevant ist. Gutes Design führt Besucher Schritt für Schritt durch die Seite.",
+        "points": "Individuelle Layouts statt Standard-Template-Gefühl\nUX-Struktur für Leistungen, Vertrauen und Kontakt\nResponsive Design mit sauberer mobiler Führung",
+        "button_label": "Mehr zu Webdesign",
+        "button_link": "shopify://pages/web-design",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_shopify": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a2",
+        "key": "shopify",
+        "name": "Shopify",
+        "subtitle": "Shopify-Auftritte, die im Alltag skalieren",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "Webdesign = webdesign, Themes = themes",
+        "text": "Ein guter Shopify-Shop muss nicht nur gut aussehen, sondern im Alltag einfach funktionieren. Inhalte, Produkte und neue Bereiche sollen sich sauber pflegen und erweitern lassen, ohne dass jedes Mal alles kompliziert wird.",
+        "points": "Custom-Sections mit Theme-Editor-Einstellungen\nLiquid, OS 2.0 und Dawn-kompatible Logik\nPerformance, mobile Optimierung und saubere Pflege",
+        "button_label": "",
+        "button_link": "",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_themes": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "group": "a2",
+        "key": "themes",
+        "name": "Themes",
+        "subtitle": "Fertige Bausteine für schnellere Launches",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "Shopify = shopify, Webdesign = webdesign",
+        "text": "Ein guter Start muss nicht bei null beginnen. Mit fertigen Bausteinen entsteht schnell eine solide Grundlage, die professionell wirkt und später weiterentwickelt werden kann, ohne dass der Auftritt beliebig oder unfertig wirkt.",
+        "points": "Theme- und Section-Packs für verschiedene Branchen\nSchneller Start mit professioneller Grundstruktur\nErweiterbare Bausteine für spätere Optimierung",
+        "button_label": "Zum Theme Store",
+        "button_link": "shopify://collections/themes",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "l_ki": {
+      "type": "service-row",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a2",
+        "key": "ki",
+        "name": "KI-Automation",
+        "subtitle": "Routine, die sich selbst erledigt",
+        "partners_label": "Arbeitet zusammen mit",
+        "partners": "Shopify = shopify, Webdesign = webdesign",
+        "text": "Anfragen sortieren, Produkttexte vorbereiten, Daten zwischen Shop, Website und Tools abgleichen. Wir automatisieren wiederkehrende Aufgaben und setzen KI dort ein, wo sie im Alltag wirklich Zeit spart.",
+        "points": "Workflows zwischen Formular, Shop, CRM und Mail\nKI-Assistent und vorbereitete Antworten für Anfragen\nShopify-Automationen und automatisches Reporting",
+        "button_label": "Mehr zu KI-Automation",
+        "button_link": "/pages/ki",
+        "link_label": "Projekt anfragen",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "abrechnung": {
+      "type": "billing-steps",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "abrechnung",
+        "outline_label": "Abrechnung",
+        "heading": "Wie wird abgerechnet?",
+        "text": "Der Aufwand richtet sich nach der Größe deines Unternehmens, dem Umfang der Website und der Anzahl der Produkte. Deshalb gibt es keinen Einheitspreis, sondern ein Angebot, das genau zu deinem Projekt passt.",
+        "button_label": "Erstgespräch vereinbaren",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Kostenloses Erstgespräch",
+            "text": "Wir schauen gemeinsam, wo dein Auftritt steht und was er braucht."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Angebot mit allen Posten",
+            "text": "Jede Leistung steht einzeln drin, mit Preis. Keine Pauschale, keine Überraschung."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Start der Umsetzung",
+            "text": "Erst wenn du zustimmst, legen wir los. Du siehst früh, was entsteht."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "zusatz": {
+      "type": "pricing-cards",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "zusatz",
+        "outline_label": "Zusatzleistungen",
+        "heading": "Zusatzleistungen rund um dein Theme",
+        "text": "Von einem schnellen Setup bis zu einem komplett individuellen Theme.",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "name": "Theme-Setup",
+            "text": "Für einen schnellen, sauberen Start",
+            "price": "ab 200 €",
+            "note": "",
+            "points": "Theme-Installation\nGrundkonfiguration\nLogo und Farben\nSupport per E-Mail",
+            "button_label": "Anfragen"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "name": "Bestehendes Theme anpassen",
+            "text": "Wenn dein Theme steht, aber noch nicht überzeugt",
+            "price": "Preis auf Anfrage",
+            "note": "Häufig gewählt",
+            "points": "Section- und Block-Anpassungen\nPerformance-Optimierung\nMobiler Feinschliff\nBevorzugter Support",
+            "button_label": "Anfragen"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "name": "Komplett individuelles Theme",
+            "text": "Maßgeschneidert für deine Marke",
+            "price": "Preis auf Anfrage",
+            "note": "",
+            "points": "Individuelles Design\nVolle Section-Architektur\nFeste Ansprechperson\nVereinbarte Reaktionszeiten und Onboarding",
+            "button_label": "Anfragen"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "l_seo",
+    "l_sea",
+    "l_smm",
+    "l_geo",
+    "l_webdesign",
+    "l_shopify",
+    "l_themes",
+    "l_ki",
+    "abrechnung",
+    "zusatz",
+    "kontakt"
+  ]
+}

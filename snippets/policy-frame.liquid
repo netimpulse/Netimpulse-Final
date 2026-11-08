@@ -8,12 +8,7 @@
     <aside class="toc" aria-label="{{ settings.legal_title | escape }}">
       <p class="field-label">{{ settings.legal_title }}</p>
       <nav class="toc-pages">
-        {%- for policy in shop.policies -%}
-          <a href="{{ policy.url }}"{% if request.path == policy.url %} aria-current="page"{% endif %}>{{ policy.title }}</a>
-        {%- endfor -%}
-        {%- if settings.legal_extra_page != blank -%}
-          <a href="{{ settings.legal_extra_page.url }}"{% if request.path == settings.legal_extra_page.url %} aria-current="page"{% endif %}>{{ settings.legal_extra_page.title }}</a>
-        {%- endif -%}
+        {%- render 'policy-links', current: true, extra: settings.legal_extra_page -%}
       </nav>
       <policy-toc data-title="{{ settings.legal_toc_title | escape }}"></policy-toc>
     </aside>

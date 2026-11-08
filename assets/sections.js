@@ -200,3 +200,101 @@
 
   NI.scrollProgress = scrollProgress;
 })();
+
+/* ---------- Paket-Baukasten: Auswahl per URL ans Kontaktformular ---------- */
+(function () {
+  'use strict';
+  const NI = window.NI;
+  if (!NI) return;
+  class ServiceCatalog extends HTMLElement {
+    connectedCallback() {
+      if (this._ready) return;
+      this._ready = true;
+      this.parts = Array.from(this.querySelectorAll('.part'));
+      this.status = this.querySelector('[data-status]');
+      this.btn = this.querySelector('[data-send]');
+      this.parts.forEach((p) =>
+        p.addEventListener('click', () => {
+          const on = p.getAttribute('aria-pressed') !== 'true';
+          p.setAttribute('aria-pressed', on ? 'true' : 'false');
+          p.classList.toggle('is-on', on);
+          p.querySelector('[data-i="orig"]').hidden = on;
+          p.querySelector('[data-i="check"]').hidden = !on;
+          this.update();
+        })
+      );
+      this.btn.addEventListener('click', () => {
+        const picked = this.picked();
+        if (!picked.length) return;
+        const msg = (this.dataset.message || '').replace('[auswahl]', picked.map((t) => '· ' + t).join('\n'));
+        window.location.href = NI.contactUrl(this.dataset.contactUrl, this.dataset.topic, msg);
+      });
+    }
+    picked() {
+      return this.parts.filter((p) => p.getAttribute('aria-pressed') === 'true').map((p) => p.dataset.title);
+    }
+    update() {
+      const n = this.picked().length;
+      this.btn.disabled = n === 0;
+      if (!n) {
+        this.status.textContent = this.dataset.empty || '';
+        return;
+      }
+      const tpl = (this.dataset.count || '').replace('[gesamt]', this.dataset.total);
+      const [before, after] = tpl.split('[n]');
+      this.status.textContent = '';
+      if (before) this.status.append(before);
+      const strong = document.createElement('strong');
+      strong.className = 'mono';
+      strong.textContent = n;
+      this.status.append(strong);
+      if (after) this.status.append(after);
+    }
+    disconnectedCallback() {
+      this._ready = false;
+    }
+  }
+  NI.define('service-catalog', ServiceCatalog);
+
+  /* ---------- Leistungsübersicht: Leiste dockt unter dem Header an, sobald das Rad aus dem Bild ist ---------- */
+  class LeistungenDock extends HTMLElement {
+    connectedCallback() {
+      if (this._ready) return;
+      this._ready = true;
+      const orbit = this.closest('section').querySelector('.l-orbit');
+      this.items = Array.from(this.querySelectorAll('[data-scroll-to]'));
+      const setDocked = (on) => {
+        this.classList.toggle('is-docked', on);
+        this.setAttribute('aria-hidden', on ? 'false' : 'true');
+        this.items.forEach((b) => (b.tabIndex = on ? 0 : -1));
+      };
+      setDocked(false);
+      if (orbit) {
+        this.io = new IntersectionObserver(([e]) => setDocked(!e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 });
+        this.io.observe(orbit);
+      }
+      const targets = this.items.map((b) => document.getElementById(b.dataset.scrollTo)).filter(Boolean);
+      this.spy = new IntersectionObserver(
+        (entries) => {
+          const vis = entries.filter((e) => e.isIntersecting);
+          if (!vis[0]) return;
+          const id = vis[0].target.id;
+          this.items.forEach((b) => {
+            const on = b.dataset.scrollTo === id && b.classList.contains('l-dock-item');
+            b.classList.toggle('is-on', on);
+            if (on) b.setAttribute('aria-current', 'true');
+            else b.removeAttribute('aria-current');
+          });
+        },
+        { rootMargin: '-40% 0px -55% 0px' }
+      );
+      targets.forEach((t) => this.spy.observe(t));
+    }
+    disconnectedCallback() {
+      this._ready = false;
+      if (this.io) this.io.disconnect();
+      if (this.spy) this.spy.disconnect();
+    }
+  }
+  NI.define('leistungen-dock', LeistungenDock);
+})();

@@ -1,0 +1,437 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "service-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "group": "a1",
+        "outline_label": "GEO",
+        "crumb_parent": "Leistungen",
+        "crumb_parent_link": "shopify://pages/leistungen",
+        "crumb_current": "GEO · Generative Engine Optimization",
+        "title": "Gefunden werden, wenn KI Antworten gibt",
+        "text": "Menschen suchen nicht mehr nur über klassische Google-Ergebnisse, sondern immer häufiger über KI-Systeme. Mit GEO werden deine Inhalte klarer, strukturierter und relevanter, damit Suchsysteme besser verstehen, wofür du stehst.",
+        "group_label": "Bereich Sichtbarkeit",
+        "button_label": "Sichtbarkeit prüfen",
+        "button_2_label": "Alle Leistungen",
+        "button_2_link": "shopify://pages/leistungen",
+        "visual": "geo",
+        "vis_title": "KI-Sichtbarkeit · Monitoring",
+        "vis_tag": "Beispiel",
+        "vis_query": "Welche Schreinerei in Gießen baut Esstische nach Maß?",
+        "vis_answer": "In Gießen fertigt unter anderem die Schreinerei auf deine-domain.de Esstische aus Eiche und Nussbaum nach Maß an",
+        "vis_answer_after": ". Beraten wird in der eigenen Werkstatt.",
+        "vis_source": "deine-domain.de › esstische-nach-mass",
+        "vis_cited": "Zitiert",
+        "vis_checks": "",
+        "padding_top": 48,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "ChatGPT",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "message-circle"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Perplexity",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "message-circle"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Gemini",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "message-circle"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Claude",
+            "text": "",
+            "value": "",
+            "highlight": false,
+            "icon": "message-circle"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "angebote": {
+      "type": "service-catalog",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a1",
+        "anchor": "angebote",
+        "outline_label": "Angebote",
+        "heading": "Unsere Leistungen im Bereich GEO",
+        "text": "Wir optimieren nicht für einzelne Tricks oder kurzfristige KI-Hacks. Deine Website soll fachlich stärker, verständlicher und besser strukturiert sein: Inhalte, die echte Fragen beantworten, Zusammenhänge erklären und deine Expertise sichtbar machen.",
+        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "count_text": "[n] von [gesamt] Angeboten ausgewählt",
+        "button_label": "Mit dieser Auswahl anfragen",
+        "topic": "SEO und Performance",
+        "message": "Hallo NetImpulse, ich interessiere mich für GEO mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: ",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Analyse"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "title": "Inhalte und Themenabdeckung",
+            "text": "Welche Themen deine Seite abdeckt und wo Lücken sind",
+            "icon": "eye"
+          }
+        },
+        "offer_3": {
+          "type": "offer",
+          "settings": {
+            "title": "Suchintentionen und Nutzerfragen",
+            "text": "Antworten auf die Fragen, die Menschen der KI stellen",
+            "icon": "search"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "title": "Inhalte und Struktur"
+          }
+        },
+        "offer_5": {
+          "type": "offer",
+          "settings": {
+            "title": "Klare Inhaltsstrukturen",
+            "text": "Aufbau, den Mensch und Maschine sofort verstehen",
+            "icon": "layers"
+          }
+        },
+        "offer_6": {
+          "type": "offer",
+          "settings": {
+            "title": "Expertise und Vertrauen",
+            "text": "Fachwissen so zeigen, dass Systeme dir vertrauen",
+            "icon": "user"
+          }
+        },
+        "offer_7": {
+          "type": "offer",
+          "settings": {
+            "title": "Hilfreiche Inhalte",
+            "text": "Neue Inhalte schreiben und bestehende überarbeiten",
+            "icon": "file-text"
+          }
+        },
+        "category_8": {
+          "type": "category",
+          "settings": {
+            "title": "Technik und Monitoring"
+          }
+        },
+        "offer_9": {
+          "type": "offer",
+          "settings": {
+            "title": "Strukturierte Daten",
+            "text": "Schema-Markup und eine saubere technische Basis",
+            "icon": "sliders"
+          }
+        },
+        "offer_10": {
+          "type": "offer",
+          "settings": {
+            "title": "Klassische Suche und KI-Suche",
+            "text": "Optimiert für Google und für ChatGPT, Perplexity oder Gemini",
+            "icon": "message-circle"
+          }
+        },
+        "offer_11": {
+          "type": "offer",
+          "settings": {
+            "title": "Laufende Auswertung",
+            "text": "Sichtbarkeit in KI-Antworten regelmäßig prüfen",
+            "icon": "activity"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "offer_2",
+        "offer_3",
+        "category_4",
+        "offer_5",
+        "offer_6",
+        "offer_7",
+        "category_8",
+        "offer_9",
+        "offer_10",
+        "offer_11"
+      ]
+    },
+    "fuer-wen": {
+      "type": "service-pair",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "fuer-wen",
+        "outline_label": "Für wen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Warum GEO mit uns?",
+            "text": "GEO ist kein Ersatz für SEO, sondern die Weiterentwicklung davon. Wir helfen dir, Inhalte so aufzubauen, dass sie für Menschen hilfreich und für Suchsysteme verständlich sind.\nOhne übertriebene Versprechen und ohne Buzzword-Gelaber, mit einem klaren Blick auf das, was deine Website wirklich besser macht."
+          }
+        }
+      },
+      "block_order": [
+        "column_1"
+      ]
+    },
+    "weiter": {
+      "type": "service-directory",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "weiter",
+        "outline_label": "Weitere Leistungen",
+        "heading": "Was wir noch anbieten",
+        "link_label": "Alle Leistungen",
+        "link": "shopify://pages/leistungen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Sichtbarkeit"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "name": "SEO",
+            "text": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "icon": "search",
+            "group": "a1",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "name": "SEA",
+            "text": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "icon": "bar-chart",
+            "group": "a1",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "name": "SMM",
+            "text": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "icon": "megaphone",
+            "group": "a1",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Websites und Shops"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "name": "Webdesign",
+            "text": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "icon": "monitor",
+            "group": "a2",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "name": "Shopify",
+            "text": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "icon": "bag",
+            "group": "a2",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "name": "Themes",
+            "text": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "icon": "layers",
+            "group": "a2",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "KI und Automation"
+          }
+        },
+        "service_10": {
+          "type": "service",
+          "settings": {
+            "name": "KI-Automation",
+            "text": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "icon": "workflow",
+            "group": "a2",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "category_5",
+        "service_6",
+        "service_7",
+        "service_8",
+        "category_9",
+        "service_10"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": true
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "angebote",
+    "fuer-wen",
+    "weiter",
+    "kontakt"
+  ]
+}

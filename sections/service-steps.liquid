@@ -1,0 +1,71 @@
+{%- comment -%} Ablauf einer Leistung als Zeitleiste, darunter optional „Dabei achten wir vor allem auf". {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign focus = s.focus_list | newline_to_br | split: '<br />'
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="{{ s.anchor | default: 'ablauf' }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="steps-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="ch-head">
+      {%- if s.heading != blank -%}<h2 id="steps-title-{{ section.id }}" class="ch-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<p class="ch-lead">{{ s.text }}</p>{%- endif -%}
+    </div>
+    <ol class="timeline" role="list">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <span class="tl-node mono" aria-hidden="true">{{ forloop.index }}</span>
+          <h3 class="tl-title">{{ block.settings.title }}</h3>
+          <p class="tl-text">{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if s.focus_title != blank and s.focus_list != blank -%}
+      <div class="focus">
+        <p class="focus-title">{{ s.focus_title }}</p>
+        <ul class="focus-list" role="list">
+          {%- for f in focus -%}
+            {%- assign t = f | strip -%}
+            {%- if t != blank -%}<li>{%- render 'icon', name: 'check', size: 16 -%}{{ t }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Leistung: Ablauf",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-3" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "text", "id": "anchor", "label": "Sprungziel", "default": "ablauf" },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Ablauf" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Wie starten wir bei einem SEO-Auftrag?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Als Allererstes analysieren wir den aktuellen Stand deiner Website. Darauf baut alles Weitere auf." },
+    { "type": "text", "id": "focus_title", "label": "Überschrift der Schwerpunkte", "info": "Leer lassen, um den Kasten auszublenden" },
+    { "type": "textarea", "id": "focus_list", "label": "Schwerpunkte", "info": "Einer pro Zeile" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Schritt",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Analyse" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Welche Potenziale gibt es? Welche Maßnahmen wären sinnvoll?" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Leistung: Ablauf", "blocks": [{ "type": "step" }, { "type": "step" }, { "type": "step" }] }]
+}
+{% endschema %}

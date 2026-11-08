@@ -1,0 +1,87 @@
+{%- comment -%} „Was wir noch anbieten": weitere Leistungen, gruppiert. Blocks „Gruppe" beginnen eine Spalte. {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="{{ s.anchor | default: 'weiter' }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="more-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="ch-head is-row">
+      {%- if s.heading != blank -%}<h2 id="more-title-{{ section.id }}" class="ch-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.link_label != blank -%}
+        <a href="{{ s.link | default: '#' }}" class="arrow-link"><span>{{ s.link_label }}</span>{%- render 'icon', name: 'arrow-right', size: 16 -%}</a>
+      {%- endif -%}
+    </div>
+    <div class="dir">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign starts = false
+          if block.type == 'category'
+            assign starts = true
+          elsif forloop.first
+            assign starts = true
+          endif
+          assign from = forloop.index0
+          if block.type == 'category'
+            assign from = forloop.index
+          endif
+        -%}
+        {%- if starts -%}
+          <div class="dir-col"{% if block.type == 'category' %} {{ block.shopify_attributes }}{% endif %}>
+            {%- if block.type == 'category' -%}<h3 class="parts-cat">{{ block.settings.title }}</h3>{%- endif -%}
+            <ul class="dir-list" role="list">
+              {%- for item in section.blocks offset: from -%}
+                {%- if item.type == 'category' -%}{%- break -%}{%- endif -%}
+                <li {{ item.shopify_attributes }}>
+                  <a href="{{ item.settings.link | default: '#' }}" class="dir-item{% render 'group-class', group: item.settings.group %}">
+                    <span class="part-ico" aria-hidden="true">{%- render 'icon', name: item.settings.icon, size: 18 -%}</span>
+                    <span class="part-txt"><b>{{ item.settings.name }}</b><span>{{ item.settings.text }}</span></span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Weitere Leistungen",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "text", "id": "anchor", "label": "Sprungziel", "default": "weiter" },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Weitere Leistungen" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Was wir noch anbieten" },
+    { "type": "text", "id": "link_label", "label": "Link", "default": "Alle Leistungen" },
+    { "type": "url", "id": "link", "label": "Link-Ziel" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    { "type": "category", "name": "Gruppe", "settings": [{ "type": "text", "id": "title", "label": "Titel", "default": "Sichtbarkeit" }] },
+    {
+      "type": "service",
+      "name": "Leistung",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "SEA" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind." },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "bar-chart", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}] },
+        { "type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1 (Sichtbarkeit)" }, { "value": "a2", "label": "Akzent 2 (Umsetzung)" }] },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Weitere Leistungen", "blocks": [{ "type": "category" }, { "type": "service" }] }]
+}
+{% endschema %}

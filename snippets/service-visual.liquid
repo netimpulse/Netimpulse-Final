@@ -1,0 +1,142 @@
+{%- comment -%}
+  Animierte Arbeitsfläche im Kopf einer Leistungsseite (Port von ServiceVisuals). Inhalte aus der Section:
+  - s: section.settings (visual, vis_title, vis_tag, vis_query, vis_own_url, vis_own_title, vis_own_badge, vis_meta,
+       vis_headline, vis_note, vis_note_done, vis_answer, vis_answer_after, vis_source, vis_cited, vis_brand,
+       vis_brand_short, vis_variant_label, vis_hero_text, vis_cta, vis_list, vis_checks, vis_live)
+  - rows: Blocks vom Typ „row" (label, text, value, highlight, icon)
+  Die Bewegung steuert service-visual.js; ohne JavaScript steht das fertige Bild.
+{%- endcomment -%}
+{%- liquid
+  assign v = s.visual
+  assign checks = s.vis_checks | newline_to_br | split: '<br />'
+  assign list = s.vis_list | newline_to_br | split: '<br />'
+  assign n = rows.size
+-%}
+<service-visual class="vis is-{{ v }}" data-visual="{{ v }}" data-rows="{{ n }}">
+  <div class="vis-bar">
+    <span class="vis-title">
+      <i class="vis-dot" aria-hidden="true"></i>
+      <span data-vis-title data-template="{{ s.vis_title | escape }}">{{ s.vis_title | replace: '[n]', '05' }}</span>
+    </span>
+    <span class="vis-tools">
+      <span class="vis-tag" data-vis-tag>{%- if v == 'webdesign' -%}{{ list.last | strip }}{%- else -%}{{ s.vis_tag }}{%- endif -%}</span>
+      <button type="button" class="icon-btn icon-btn-sm" data-label-pause="{{ 'motion.pause' | t }}" data-label-play="{{ 'motion.play' | t }}" aria-label="{{ 'motion.pause' | t }}">
+        <span data-icon="pause">{%- render 'icon', name: 'pause', size: 16 -%}</span>
+        <span data-icon="play" hidden>{%- render 'icon', name: 'play', size: 16 -%}</span>
+      </button>
+    </span>
+  </div>
+  <div class="vis-body">
+    {%- case v -%}
+      {%- when 'seo' -%}
+        <div class="serp-search">{%- render 'icon', name: 'search', size: 16 -%}<span>{{ s.vis_query }}</span></div>
+        {%- assign total = n | plus: 1 -%}
+        <ol class="serp-rank" role="list" style="height: {{ total | times: 64 }}px">
+          <li class="is-own" data-row="own" style="transform: translateY(0px)">
+            <span class="serp-pos mono">1</span>
+            <span class="serp-text"><span class="serp-url">{{ s.vis_own_url }}</span><span class="serp-title">{{ s.vis_own_title }}</span></span>
+            {%- if s.vis_own_badge != blank -%}<span class="serp-own">{{ s.vis_own_badge }}</span>{%- endif -%}
+          </li>
+          {%- for block in rows -%}
+            {%- assign y = forloop.index | times: 64 -%}
+            <li data-row="{{ forloop.index0 }}" style="transform: translateY({{ y }}px)" {{ block.shopify_attributes }}>
+              <span class="serp-pos mono">{{ forloop.index | plus: 1 }}</span>
+              <span class="serp-text"><span class="serp-url">{{ block.settings.label }}</span><span class="serp-title">{{ block.settings.text }}</span></span>
+            </li>
+          {%- endfor -%}
+        </ol>
+        {%- render 'service-visual-checks', checks: checks -%}
+
+      {%- when 'sea' -%}
+        {%- assign paths = 'M0 34 C 12 30, 20 32, 30 26 S 52 22, 62 18 S 84 12, 100 8|M0 30 C 14 28, 22 24, 34 26 S 56 18, 68 16 S 88 14, 100 10|M0 10 C 12 12, 24 14, 36 18 S 58 22, 70 26 S 90 28, 100 30|M0 36 C 10 34, 22 30, 34 28 S 54 20, 66 16 S 86 8, 100 4' | split: '|' -%}
+        <div class="ad"><span class="ad-meta">{{ s.vis_meta }}</span><span class="ad-title">{{ s.vis_headline }}</span></div>
+        <div class="kpis">
+          {%- for block in rows -%}
+            {%- assign k = forloop.index0 | modulo: 4 -%}
+            <div class="kpi is-on{% if block.settings.highlight %} is-key{% endif %}" data-row="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              <span class="kpi-k">{{ block.settings.label }}</span>
+              <span class="kpi-v mono">{{ block.settings.value }}</span>
+              <svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d="{{ paths[k] }}" pathLength="1" /></svg>
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if s.vis_note != blank -%}<p class="vis-note">{{ s.vis_note }}</p>{%- endif -%}
+
+      {%- when 'smm' -%}
+        {%- assign last = rows.last -%}
+        <div class="post">
+          <div class="post-head">
+            <span class="post-av">{{ s.vis_brand_short }}</span>
+            <span class="post-who"><strong>{{ s.vis_brand }}</strong><span>{{ s.vis_meta }}</span></span>
+            <span class="post-var mono" data-variant-label="{{ s.vis_variant_label | escape }}">{{ s.vis_variant_label }} {{ last.settings.label }}</span>
+          </div>
+          <div class="post-img" data-post><p>{{ last.settings.text }}</p></div>
+        </div>
+        <ul class="ab" role="list">
+          {%- for block in rows -%}
+            {%- liquid
+              assign rate = block.settings.value | replace: ',', '.' | times: 1.0
+              assign scale = rate | divided_by: 5.0
+            -%}
+            <li class="is-on{% if block.settings.highlight %} is-win{% endif %}" data-row="{{ forloop.index0 }}" data-text="{{ block.settings.text | escape }}" data-label="{{ block.settings.label | escape }}" data-scale="{{ scale }}" data-rate="{{ block.settings.value | escape }}" data-win="{{ block.settings.highlight }}" {{ block.shopify_attributes }}>
+              <span class="ab-v">{{ block.settings.label }}</span>
+              <span class="ab-bar"><i style="transform: scaleX({{ scale }})"></i></span>
+              <span class="ab-r mono">{{ block.settings.value }} %</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <p class="vis-note" data-note="{{ s.vis_note | escape }}" data-note-done="{{ s.vis_note_done | escape }}">{{ s.vis_note_done }}</p>
+
+      {%- when 'geo' -%}
+        <div class="engines" role="list">
+          {%- for block in rows -%}
+            <span role="listitem" class="engine is-cited{% if forloop.last %} is-active{% endif %}" data-row="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              {{ block.settings.label }}
+              <span data-check>{%- render 'icon', name: 'check', size: 16 -%}</span>
+            </span>
+          {%- endfor -%}
+        </div>
+        <div class="chat">
+          <p class="chat-q">{{ s.vis_query }}</p>
+          <div class="chat-a" data-answer>
+            <p>{{ s.vis_answer }}<sup>1</sup>{{ s.vis_answer_after }}</p>
+            <div class="chat-src is-on">
+              <span class="mono">1</span>
+              <span>{{ s.vis_source }}</span>
+              <span class="chat-cited">{{ s.vis_cited }}</span>
+            </div>
+          </div>
+        </div>
+
+      {%- when 'webdesign' -%}
+        <div class="build-progress" aria-hidden="true"><i style="transform: scaleX(1)"></i></div>
+        <div class="build s{{ list.size | minus: 1 }}" data-build data-steps="{{ list | join: '|' | strip_newlines | escape }}">
+          <div class="build-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="build-page">
+            <div class="b-nav"><span class="b-logo">{{ s.vis_brand }}</span><span class="b-links"><i></i><i></i><i></i></span></div>
+            <div class="b-hero"><strong>{{ s.vis_headline }}</strong><span>{{ s.vis_hero_text }}</span><em>{{ s.vis_cta }}</em></div>
+            <div class="b-cards">
+              {%- for block in rows -%}
+                <span {{ block.shopify_attributes }}><i></i>{{ block.settings.label }}</span>
+              {%- endfor -%}
+            </div>
+          </div>
+          <span class="build-live"><i aria-hidden="true"></i>{{ s.vis_live }}</span>
+        </div>
+
+      {%- when 'ki' -%}
+        <ol class="flow" role="list">
+          {%- for block in rows -%}
+            <li class="is-done" data-row="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              <span class="flow-ico" aria-hidden="true">
+                <span data-i="orig" hidden>{%- render 'icon', name: block.settings.icon, size: 16 -%}</span>
+                <span data-i="check">{%- render 'icon', name: 'check', size: 16 -%}</span>
+              </span>
+              <span class="flow-txt"><b>{{ block.settings.label }}</b><span>{{ block.settings.text }}</span></span>
+            </li>
+          {%- endfor -%}
+        </ol>
+        {%- render 'service-visual-checks', checks: checks -%}
+    {%- endcase -%}
+  </div>
+</service-visual>

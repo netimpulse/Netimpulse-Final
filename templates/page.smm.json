@@ -1,0 +1,482 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "service-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "group": "a1",
+        "outline_label": "SMM",
+        "crumb_parent": "Leistungen",
+        "crumb_parent_link": "shopify://pages/leistungen",
+        "crumb_current": "SMM · Social Media Marketing",
+        "title": "Social Media, das nicht einfach nur postet",
+        "text": "Auf Social Media entscheidet sich früh, ob Menschen einer Marke vertrauen, sie wiedererkennen oder überhaupt im Kopf behalten. Wir entwickeln Inhalte, die zu deiner Marke passen und deine Zielgruppe regelmäßig erreichen.",
+        "group_label": "Bereich Sichtbarkeit",
+        "button_label": "Kampagne planen",
+        "button_2_label": "Alle Leistungen",
+        "button_2_link": "shopify://pages/leistungen",
+        "visual": "smm",
+        "vis_title": "A/B-Test · 4 Varianten",
+        "vis_tag": "Beispiel-Test",
+        "vis_brand": "NetImpulse",
+        "vis_brand_short": "NI",
+        "vis_meta": "Gesponsert",
+        "vis_variant_label": "Variante",
+        "vis_note": "Klickrate je Variante",
+        "vis_note_done": "Variante D gewinnt und bekommt das Budget",
+        "vis_checks": "",
+        "padding_top": 48,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "A",
+            "text": "Hör auf zu raten, was deine Kunden wollen",
+            "value": "1,8",
+            "highlight": false,
+            "icon": "megaphone"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "B",
+            "text": "Content, der nicht einfach nur gepostet wird",
+            "value": "3,4",
+            "highlight": false,
+            "icon": "megaphone"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "C",
+            "text": "Mehr Reichweite bei den richtigen Menschen",
+            "value": "2,9",
+            "highlight": false,
+            "icon": "megaphone"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "D",
+            "text": "Aus Likes werden echte Erkenntnisse",
+            "value": "4,7",
+            "highlight": true,
+            "icon": "megaphone"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "angebote": {
+      "type": "service-catalog",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "group": "a1",
+        "anchor": "angebote",
+        "outline_label": "Angebote",
+        "heading": "Unsere Leistungen im Bereich SMM",
+        "text": "Wir betrachten Social Media nicht als Pflichtprogramm, bei dem einfach drei Posts pro Woche online gehen. Deine Inhalte brauchen eine klare Richtung: Sie sollen erklären, inspirieren, Vertrauen schaffen oder gezielt Nachfrage auslösen.",
+        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "count_text": "[n] von [gesamt] Angeboten ausgewählt",
+        "button_label": "Mit dieser Auswahl anfragen",
+        "topic": "Social Media",
+        "message": "Hallo NetImpulse, ich interessiere mich für SMM mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: ",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Strategie"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "title": "Social-Media-Strategie",
+            "text": "Ziele, Kanäle und Themen, die zu deiner Marke passen",
+            "icon": "layers"
+          }
+        },
+        "offer_3": {
+          "type": "offer",
+          "settings": {
+            "title": "Zielgruppen- und Wettbewerbsanalyse",
+            "text": "Wer dir folgen sollte und was andere schon machen",
+            "icon": "user"
+          }
+        },
+        "offer_4": {
+          "type": "offer",
+          "settings": {
+            "title": "Einheitlicher Markenauftritt",
+            "text": "Eine Optik, die man im Feed wiedererkennt",
+            "icon": "eye"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Inhalte"
+          }
+        },
+        "offer_6": {
+          "type": "offer",
+          "settings": {
+            "title": "Content-Ideen und Redaktionsplan",
+            "text": "Ideen und Plan für wiederkehrende Formate",
+            "icon": "file-text"
+          }
+        },
+        "offer_7": {
+          "type": "offer",
+          "settings": {
+            "title": "Beiträge, Reels und Creatives",
+            "text": "Posts und Videos aus einer Hand",
+            "icon": "smartphone"
+          }
+        },
+        "offer_8": {
+          "type": "offer",
+          "settings": {
+            "title": "Captions und Konzepte",
+            "text": "Texte, die zum Angebot führen",
+            "icon": "message-circle"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "Kampagnen und Auswertung"
+          }
+        },
+        "offer_10": {
+          "type": "offer",
+          "settings": {
+            "title": "Kampagnen und Aktionen",
+            "text": "Aktionen und Paid Social mit klarem Ziel",
+            "icon": "megaphone"
+          }
+        },
+        "offer_11": {
+          "type": "offer",
+          "settings": {
+            "title": "Auswertung und Reporting",
+            "text": "Was funktioniert, wird ausgebaut",
+            "icon": "bar-chart"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "offer_2",
+        "offer_3",
+        "offer_4",
+        "category_5",
+        "offer_6",
+        "offer_7",
+        "offer_8",
+        "category_9",
+        "offer_10",
+        "offer_11"
+      ]
+    },
+    "ablauf": {
+      "type": "service-steps",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "anchor": "ablauf",
+        "outline_label": "Ablauf",
+        "heading": "Was in einem SMM-Projekt steckt",
+        "text": "Von der Analyse bis zum laufenden Reporting, in drei Bausteinen.",
+        "focus_title": "",
+        "focus_list": "",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Strategie",
+            "text": "Ziele, Zielgruppe und passende Kanäle klar definieren."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Content",
+            "text": "Beiträge, Reels und Creatives mit Wiedererkennung entwickeln."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Optimierung",
+            "text": "Performance auswerten und Inhalte kontinuierlich verbessern."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "fuer-wen": {
+      "type": "service-pair",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "anchor": "fuer-wen",
+        "outline_label": "Für wen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Warum SMM mit uns?",
+            "text": "Gutes Social-Media-Marketing entsteht nicht dadurch, dass man Trends kopiert. Es entsteht durch ein klares Verständnis für Marke, Zielgruppe und Plattform.\nWir sorgen dafür, dass dein Auftritt professionell wirkt, wiedererkennbar bleibt und nicht nach zufälligem Content aussieht."
+          }
+        }
+      },
+      "block_order": [
+        "column_1"
+      ]
+    },
+    "weiter": {
+      "type": "service-directory",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "anchor": "weiter",
+        "outline_label": "Weitere Leistungen",
+        "heading": "Was wir noch anbieten",
+        "link_label": "Alle Leistungen",
+        "link": "shopify://pages/leistungen",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Sichtbarkeit"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "name": "SEO",
+            "text": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "icon": "search",
+            "group": "a1",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "name": "SEA",
+            "text": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "icon": "bar-chart",
+            "group": "a1",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "name": "GEO",
+            "text": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "icon": "message-circle",
+            "group": "a1",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "title": "Websites und Shops"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "name": "Webdesign",
+            "text": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "icon": "monitor",
+            "group": "a2",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "name": "Shopify",
+            "text": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "icon": "bag",
+            "group": "a2",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "name": "Themes",
+            "text": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "icon": "layers",
+            "group": "a2",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "category_9": {
+          "type": "category",
+          "settings": {
+            "title": "KI und Automation"
+          }
+        },
+        "service_10": {
+          "type": "service",
+          "settings": {
+            "name": "KI-Automation",
+            "text": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "icon": "workflow",
+            "group": "a2",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "category_5",
+        "service_6",
+        "service_7",
+        "service_8",
+        "category_9",
+        "service_10"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": true
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "angebote",
+    "ablauf",
+    "fuer-wen",
+    "weiter",
+    "kontakt"
+  ]
+}

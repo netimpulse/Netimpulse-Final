@@ -1,0 +1,124 @@
+{%- comment -%}
+  Kopf einer Leistungsseite: Brotkrumen, Titel, Text, Gruppe, Buttons und die animierte Arbeitsfläche.
+  Gemeinsame Vorlage für SEO, SEA, SMM, GEO, Webdesign und KI-Automation.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign rows = section.blocks | where: 'type', 'row'
+  capture contact_url
+    render 'contact-url'
+  endcapture
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.svc-hero', tablet: 80, mobile: 64 -%}
+
+<section class="svc-hero {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}{% render 'group-class', group: s.group %}" id="s-{{ section.id }}" data-outline="{{ s.outline_label | escape }}">
+  <div class="wrap svc-hero-grid">
+    <div class="svc-hero-copy">
+      {%- if s.crumb_parent != blank or s.crumb_current != blank -%}
+        <nav aria-label="{{ 'accessibility.breadcrumbs' | t }}" class="crumbs">
+          <ol role="list">
+            {%- if s.crumb_parent != blank -%}
+              <li><a href="{{ s.crumb_parent_link | default: '#' }}">{{ s.crumb_parent }}</a>{%- render 'icon', name: 'chevron-right', size: 16 -%}</li>
+            {%- endif -%}
+            <li><span aria-current="page">{{ s.crumb_current | default: page.title }}</span></li>
+          </ol>
+        </nav>
+      {%- endif -%}
+      <h1 class="svc-title">{{ s.title | default: page.title }}</h1>
+      {%- if s.text != blank -%}<p class="svc-lead">{{ s.text }}</p>{%- endif -%}
+      {%- if s.group_label != blank -%}<p class="svc-group"><i class="svc-dot" aria-hidden="true"></i>{{ s.group_label }}</p>{%- endif -%}
+      <div class="actions">
+        {%- if s.button_label != blank -%}
+          <a href="{{ s.button_link | default: contact_url }}" class="btn btn-primary"><span>{{ s.button_label }}</span>{%- render 'icon', name: 'arrow-right' -%}</a>
+        {%- endif -%}
+        {%- if s.button_2_label != blank -%}
+          <a href="{{ s.button_2_link | default: '#' }}" class="btn btn-outline-light"><span>{{ s.button_2_label }}</span></a>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if s.visual != 'none' -%}
+      <div class="svc-hero-visual">
+        {%- render 'service-visual', s: s, rows: rows -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'service-visual.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Leistung: Kopf",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
+    { "type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1 (Sichtbarkeit)" }, { "value": "a2", "label": "Akzent 2 (Umsetzung)" }] },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Leistung" },
+    { "type": "text", "id": "crumb_parent", "label": "Brotkrumen: übergeordnete Seite", "default": "Leistungen" },
+    { "type": "url", "id": "crumb_parent_link", "label": "Brotkrumen: Link" },
+    { "type": "text", "id": "crumb_current", "label": "Brotkrumen: diese Seite", "info": "Ohne Text: Seitentitel", "default": "SEO · Suchmaschinenoptimierung" },
+    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Sichtbarkeit beginnt dort, wo deine Zielgruppe sucht" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Wir optimieren deine Website technisch, inhaltlich und strategisch, damit du bei Google besser gefunden wirst und mehr qualifizierte Anfragen erhältst." },
+    { "type": "text", "id": "group_label", "label": "Bereich", "default": "Bereich Sichtbarkeit" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Audit anfragen" },
+    { "type": "url", "id": "button_link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite" },
+    { "type": "text", "id": "button_2_label", "label": "Zweiter Button", "default": "Alle Leistungen" },
+    { "type": "url", "id": "button_2_link", "label": "Zweiter Button: Link" },
+    { "type": "header", "content": "Arbeitsfläche" },
+    {
+      "type": "select", "id": "visual", "label": "Art", "default": "seo",
+      "options": [
+        { "value": "none", "label": "Keine" },
+        { "value": "seo", "label": "SEO: Suchergebnisse" },
+        { "value": "sea", "label": "SEA: Kampagnen-Kennzahlen" },
+        { "value": "smm", "label": "SMM: A/B-Test" },
+        { "value": "geo", "label": "GEO: KI-Antworten" },
+        { "value": "webdesign", "label": "Webdesign: Seite baut sich auf" },
+        { "value": "ki", "label": "KI-Automation: Ablauf" }
+      ]
+    },
+    { "type": "paragraph", "content": "Zeilen sind Blocks: bei SEO die anderen Suchergebnisse (Bezeichnung = Adresse, Text = Titel), bei SEA die Kennzahlen (Wert, Hervorheben = Hauptziel), bei SMM die Varianten (Bezeichnung = Buchstabe, Text = Anzeige, Wert = Klickrate, Hervorheben = Gewinner), bei GEO die KI-Systeme, bei Webdesign die Karten, bei KI-Automation die Schritte." },
+    { "type": "text", "id": "vis_title", "label": "Titel der Fläche", "info": "Bei Webdesign steht [n] für den Schritt", "default": "Google · Suchergebnisse" },
+    { "type": "text", "id": "vis_tag", "label": "Kennzeichnung", "default": "Beispiel" },
+    { "type": "text", "id": "vis_query", "label": "Suchanfrage oder Frage", "visible_if": "{{ section.settings.visual == 'seo' or section.settings.visual == 'geo' }}", "default": "schreinerei gießen" },
+    { "type": "text", "id": "vis_own_url", "label": "Eigenes Ergebnis: Adresse", "visible_if": "{{ section.settings.visual == 'seo' }}", "default": "deine-domain.de › leistungen" },
+    { "type": "text", "id": "vis_own_title", "label": "Eigenes Ergebnis: Titel", "visible_if": "{{ section.settings.visual == 'seo' }}", "default": "Schreinerei in Gießen: Möbel nach Maß" },
+    { "type": "text", "id": "vis_own_badge", "label": "Eigenes Ergebnis: Hinweis", "visible_if": "{{ section.settings.visual == 'seo' }}", "default": "Dein Ergebnis" },
+    { "type": "text", "id": "vis_meta", "label": "Kleine Zeile (Anzeige oder Beitrag)", "visible_if": "{{ section.settings.visual == 'sea' or section.settings.visual == 'smm' }}", "default": "Gesponsert · deine-domain.de" },
+    { "type": "text", "id": "vis_headline", "label": "Anzeigentitel oder Überschrift der Seite", "visible_if": "{{ section.settings.visual == 'sea' or section.settings.visual == 'webdesign' }}", "default": "Esstisch nach Maß | Schreinerei in Gießen" },
+    { "type": "text", "id": "vis_brand", "label": "Marke", "visible_if": "{{ section.settings.visual == 'smm' or section.settings.visual == 'webdesign' }}", "default": "NetImpulse" },
+    { "type": "text", "id": "vis_brand_short", "label": "Kürzel der Marke", "visible_if": "{{ section.settings.visual == 'smm' }}", "default": "NI" },
+    { "type": "text", "id": "vis_variant_label", "label": "Wort für Variante", "visible_if": "{{ section.settings.visual == 'smm' }}", "default": "Variante" },
+    { "type": "text", "id": "vis_note", "label": "Hinweis unten", "visible_if": "{{ section.settings.visual == 'sea' or section.settings.visual == 'smm' }}", "default": "Letzte 30 Tage · Ziel: Beratungsanfrage · Tracking aktiv" },
+    { "type": "text", "id": "vis_note_done", "label": "Hinweis am Ende", "visible_if": "{{ section.settings.visual == 'smm' }}", "default": "Variante D gewinnt und bekommt das Budget" },
+    { "type": "textarea", "id": "vis_answer", "label": "Antwort bis zur Quellenangabe", "visible_if": "{{ section.settings.visual == 'geo' }}", "default": "In Gießen fertigt unter anderem die Schreinerei auf deine-domain.de Esstische aus Eiche und Nussbaum nach Maß an" },
+    { "type": "text", "id": "vis_answer_after", "label": "Antwort nach der Quellenangabe", "visible_if": "{{ section.settings.visual == 'geo' }}", "default": ". Beraten wird in der eigenen Werkstatt." },
+    { "type": "text", "id": "vis_source", "label": "Quelle", "visible_if": "{{ section.settings.visual == 'geo' }}", "default": "deine-domain.de › esstische-nach-mass" },
+    { "type": "text", "id": "vis_cited", "label": "Hinweis Zitiert", "visible_if": "{{ section.settings.visual == 'geo' }}", "default": "Zitiert" },
+    { "type": "text", "id": "vis_hero_text", "label": "Text der Seite", "visible_if": "{{ section.settings.visual == 'webdesign' }}", "default": "Esstische, Schränke und Treppen aus Massivholz" },
+    { "type": "text", "id": "vis_cta", "label": "Button der Seite", "visible_if": "{{ section.settings.visual == 'webdesign' }}", "default": "Beratung anfragen" },
+    { "type": "textarea", "id": "vis_list", "label": "Schritte", "info": "Eine Zeile pro Schritt", "visible_if": "{{ section.settings.visual == 'webdesign' }}", "default": "Raster\nStruktur\nInhalte\nGestaltung\nLive" },
+    { "type": "text", "id": "vis_live", "label": "Live-Hinweis", "visible_if": "{{ section.settings.visual == 'webdesign' }}", "default": "Live" },
+    { "type": "textarea", "id": "vis_checks", "label": "Haken unten", "info": "Eine Zeile pro Haken", "visible_if": "{{ section.settings.visual == 'seo' or section.settings.visual == 'ki' }}", "default": "Technik\nInhalte\nSuchintention" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Zeile der Arbeitsfläche",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Bezeichnung", "default": "branchenbuch-beispiel.de › giessen" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Schreinereien in Gießen und Umgebung" },
+        { "type": "text", "id": "value", "label": "Wert" },
+        { "type": "checkbox", "id": "highlight", "label": "Hervorheben", "default": false },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "mail", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Leistung: Kopf", "blocks": [{ "type": "row" }, { "type": "row" }] }]
+}
+{% endschema %}

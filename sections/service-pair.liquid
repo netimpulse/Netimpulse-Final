@@ -1,0 +1,52 @@
+{%- comment -%} Zwei Spalten nebeneinander, zum Beispiel „Für wen" und „Warum". {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="{{ s.anchor | default: 'fuer-wen' }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+>
+  <div class="wrap pair-cols">
+    {%- for block in section.blocks -%}
+      <div class="pair-col" {{ block.shopify_attributes }}>
+        {%- if block.settings.title != blank -%}<h2 class="ch-title">{{ block.settings.title }}</h2>{%- endif -%}
+        {%- assign paras = block.settings.text | newline_to_br | split: '<br />' -%}
+        {%- for p in paras -%}
+          {%- assign t = p | strip -%}
+          {%- if t != blank -%}<p class="ch-lead">{{ t }}</p>{%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Leistung: Für wen / Warum",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
+    { "type": "text", "id": "anchor", "label": "Sprungziel", "default": "fuer-wen" },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Für wen" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Spalte",
+      "limit": 2,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Überschrift", "default": "Für wen ist das sinnvoll?" },
+        { "type": "textarea", "id": "text", "label": "Text", "info": "Leerzeile oder Zeilenumbruch beginnt einen neuen Absatz", "default": "Für Unternehmen, die nachhaltig wachsen wollen." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Für wen / Warum", "blocks": [{ "type": "column" }, { "type": "column" }] }]
+}
+{% endschema %}
