@@ -9,12 +9,12 @@ Geschlossene Schleife für jede Storefront-Änderung: Code ändern → ins Test-
 
 ## Architektur
 
-| Theme im Dev-Store | Rolle |
+| Theme im Shop NetImpulsemarketing | Rolle |
 |---|---|
-| GitHub-synced Main-Theme | Spiegel von `main`, nicht für Tests |
-| Test-Theme (UNPUBLISHED) | Ziel aller Tests, wird per Shopify CLI aus der aktuellen Arbeits-Branch gepusht |
+| Live-Theme (MAIN, netimpulsemarketing.de) | tabu: nie pushen, nie veröffentlichen |
+| „Netimpulse-Final – Test" (ID `210831737177`, UNPUBLISHED) | Ziel aller Tests, wird per Shopify CLI aus der aktuellen Arbeits-Branch gepusht |
 
-Die Theme-IDs stehen in `shopify.theme.toml` (development) und `tests/fixtures.ts` (`themeId`). So läuft die Schleife unabhängig davon, ob Claude Code Web auf einer PR-Branch arbeitet.
+Die Test-Theme-ID steht in `shopify.theme.toml` (development) und `tests/fixtures.ts` (`themeId`). So läuft die Schleife unabhängig davon, ob Claude Code Web auf einer PR-Branch arbeitet.
 
 Es gibt kein QA-Template und keine QA-Page: Getestet wird auf der Homepage oder auf der Seite, zu der die geänderte Datei gehört (Schritt 1). Keine `qa-*.json`-Templates anlegen und keine QA-Pages im Admin vorschlagen, außer der Nutzer will es ausdrücklich.
 
@@ -157,11 +157,12 @@ test.beforeEach(async ({ context }) => {
 
 ```bash
 shopify theme check
+shopify theme list --store a50c23-ed.myshopify.com --role live
 shopify theme push -e development --nodelete
 npx playwright test
 ```
 
-Errors aus `theme check` blockieren. `--nodelete` verhindert, dass Dateien im Test-Theme gelöscht werden, wenn die Branch unvollständig ist.
+Errors aus `theme check` blockieren. Steht in der Live-Liste die Test-Theme-ID `210831737177` (das Test-Theme wurde veröffentlicht), nicht pushen, sondern den Nutzer informieren. `--nodelete` verhindert, dass Dateien im Test-Theme gelöscht werden, wenn die Branch unvollständig ist.
 
 ### 2.6 Screenshots ansehen und nachbessern
 
@@ -183,12 +184,9 @@ git push
 
 Claude Code Web öffnet daraus einen PR, der Nutzer reviewt und mergt. Das Test-Theme ist schon in 2.5 aktualisiert. Commit-Typen: `feat`, `fix`, `refactor`, `chore`, `style`, `perf`.
 
-## 3 — Production-Push (nur auf ausdrücklichen Wunsch)
+## 3 — Live-Shop: tabu
 
-1. `[environments.production]` in `shopify.theme.toml` hat Store und Theme-ID des Kundenshops; ein eigenes Theme-Access-Token für diesen Shop ist gesetzt.
-2. Die `ignore`-Liste in `shopify.theme.toml` hält Tests und QA-Dateien heraus.
-3. `shopify theme push -e production`
-4. Den Nutzer bitten, die Live-Seite selbst kurz zu prüfen — echte Shopdaten können etwas brechen, das im Dev-Store grün war.
+Aus diesem Repo wird nie ins Live-Theme gepusht und nie ein Theme veröffentlicht, auch nicht auf Anfrage. Es gibt kein Production-Environment und kein Production-Script; der Hook `.claude/hooks/block-live-push.js` blockt Live-Pushes zusätzlich. Will der Nutzer etwas live haben, schaltet er es selbst im Shopify-Admin live.
 
 ## 4 — Sicherheit
 
@@ -208,4 +206,4 @@ Claude Code Web öffnet daraus einen PR, der Nutzer reviewt und mergt. Das Test-
 | Search, 404 | 2.1, 2.3 mit `QA.paths.search` bzw. `QA.paths.notFound`, 2.5–2.7 |
 | Ziel-Page fehlt | Fallback `QA.paths.home`, Nutzer informieren |
 | ENV-Variable fehlt | 0, Nutzer fragen |
-| Production | 3, nur auf Anforderung |
+| Live-Push | nie (3) |

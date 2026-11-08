@@ -1,7 +1,9 @@
-# Shopify Theme Template
+# Netimpulse-Final
 
-Template-Repo fuer neue Shopify-Themes mit integriertem Visual-QA-Workflow
-(Shopify CLI + Playwright). Ein Repo = ein Theme = ein Shop.
+Shopify-Theme fuer den Shop NetImpulsemarketing (`a50c23-ed.myshopify.com`)
+mit integriertem Visual-QA-Workflow (Shopify CLI + Playwright).
+Getestet wird im unveroeffentlichten Theme „Netimpulse-Final – Test"
+(ID 210831737177). Ins Live-Theme wird aus diesem Repo nie gepusht.
 
 ## Was hier drin ist
 
@@ -11,37 +13,27 @@ Template-Repo fuer neue Shopify-Themes mit integriertem Visual-QA-Workflow
 - `playwright.config.ts` – Test-Runner Konfiguration (Desktop + Mobile)
 - `tests/_base.spec.ts` – Generische Checks + Homepage-Screenshots, laufen bei jedem Testlauf
 - `tests/fixtures.ts`, `tests/global-setup.ts` – Test-Theme-ID, Storefront-Login, automatische Ermittlung von Produkt/Collection
-- `shopify.theme.toml` – Shopify CLI Config mit Dev-/Prod-Environments
+- `shopify.theme.toml` – Shopify CLI Config, bewusst nur mit dem Test-Environment
+- `.claude/hooks/block-live-push.js` – blockt jeden Shopify-CLI-Befehl, der ins Live-Theme schreiben oder ein Theme veroeffentlichen koennte
 - `.gitignore`, `.env.example` – Standard-Boilerplate
-- `ignore`-Block in `shopify.theme.toml` – verhindert, dass QA-Dateien beim Production-Push landen
 
 Skeleton-Theme-Dateien (sections, snippets, layout, assets) werden ueber den
 `/neuer-shop` Skill oder per Hand ergaenzt.
 
-## Erstes Setup eines neuen Repos
+## Setup
 
-1. Repo aus diesem Template anlegen (GitHub: "Use this template")
-2. Skeleton-Theme reinkopieren bzw. mergen
-3. Dependencies installieren:
+Store-Domain und Test-Theme sind schon eingetragen. Noetig sind nur:
+
+1. Dependencies installieren:
    ```bash
    npm install
    npx playwright install chromium
    ```
-4. Shopify CLI authentifizieren (Token aus Theme Access App):
+2. Theme Access Token aus der Theme Access App **dieses** Shops setzen:
    ```bash
    export SHOPIFY_CLI_THEME_TOKEN=shptka_xxx
    ```
-5. Store-Domain eintragen: `__STORE_DOMAIN__` in `shopify.theme.toml`,
-   `playwright.config.ts` und `tests/global-setup.ts` ersetzen.
-6. Test-Theme anlegen (erstes Push als unpublished Theme):
-   ```bash
-   npm run theme:push:dev
-   ```
-   Theme-ID aus der CLI-Ausgabe fuer `__THEME_ID__` in `shopify.theme.toml`
-   und `tests/fixtures.ts` einsetzen.
-
-Gibt es im Shop schon ein unveroeffentlichtes Test-Theme, uebernimmt Claude die
-Schritte 5 und 6 beim ersten Auftrag (Skill-Schritt 0.5).
+   `SHOPIFY_STOREFRONT_PASSWORD` nur, falls der Shop passwortgeschuetzt ist.
 
 Eine eigene QA-Page im Shop ist nicht noetig: Getestet wird auf der Homepage
 bzw. der Seite, zu der die geaenderte Datei gehoert.
@@ -60,13 +52,9 @@ npm run qa:full
 `qa:full` laeuft `theme check` + Playwright Tests. Screenshots landen in
 `qa-screenshots/`, der HTML-Report in `playwright-report/`.
 
-## Production-Push
+## Kein Live-Push
 
-In `shopify.theme.toml` den Production-Block ausfuellen, dann:
-
-```bash
-shopify theme push -e production
-```
-
-Der `ignore`-Block sorgt dafuer, dass weder QA-Templates noch Tests ins
-Production-Theme uebertragen werden.
+Aus diesem Repo wird nie ins Live-Theme gepusht: Es gibt kein
+Production-Environment und kein `theme:push:prod`-Script, und der Hook
+`.claude/hooks/block-live-push.js` blockt Live-Pushes durch Claude zusaetzlich.
+Live geschaltet wird von Hand im Shopify-Admin.

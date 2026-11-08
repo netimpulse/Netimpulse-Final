@@ -12,11 +12,10 @@ import * as path from "path";
  *    von wo tests/fixtures.ts sie zur Laufzeit liest
  * 4) Persistiert die Storefront-Session als storageState
  *
- * STORE_DOMAIN muss pro Shop angepasst werden — sonst stoppt Schritt 0.5
- * des shopify-visual-qa Skills.
+ * Shop: NetImpulsemarketing (a50c23-ed.myshopify.com).
  */
 export default async function globalSetup(_config: FullConfig) {
-  const STORE_BASE = "https://__STORE_DOMAIN__.myshopify.com";
+  const STORE_BASE = "https://a50c23-ed.myshopify.com";
   const password = process.env.SHOPIFY_STOREFRONT_PASSWORD;
 
   const authDir = path.resolve("playwright/.auth");

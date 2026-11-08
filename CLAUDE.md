@@ -2,12 +2,13 @@
 
 Shopify-Theme (Online Store 2.0, Liquid) auf Basis von Shopifys Skeleton Theme. Ein Repo = ein Theme = ein Shop.
 
-- **Shop / Zweck:** _(pro Shop ergänzen)_
+- **Shop:** NetImpulsemarketing – `a50c23-ed.myshopify.com`, live unter netimpulsemarketing.de
+- **Test-Theme:** „Netimpulse-Final – Test" (ID `210831737177`, unveröffentlicht) – das einzige Push-Ziel
 
 ## Arbeitsweise
 
 - Jede Änderung an Storefront-Dateien läuft über den Skill `shopify-visual-qa`: ins Test-Theme pushen, Playwright laufen lassen, Screenshots ansehen, nachbessern.
-- Ins Live- bzw. Production-Theme wird nur auf ausdrücklichen Auftrag gepusht.
+- **Nie in den Live-Shop pushen, auch nicht auf Nachfrage.** Gepusht wird nur mit `shopify theme push -e development --nodelete`. Tabu sind `--live`, `--allow-live`, `--publish`, `shopify theme publish`, Pushes mit einer anderen Theme-ID und Admin-API-Schreibzugriffe auf andere Themes als das Test-Theme. Der Hook `.claude/hooks/block-live-push.js` blockt die CLI-Varianten zusätzlich. Live schaltet der Nutzer selbst.
 
 ## Liquid
 
