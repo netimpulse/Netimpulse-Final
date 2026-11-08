@@ -17,8 +17,41 @@ Getestet wird im unveroeffentlichten Theme „Netimpulse-Final – Test"
 - `.claude/hooks/block-live-push.js` – blockt jeden Shopify-CLI-Befehl, der ins Live-Theme schreiben oder ein Theme veroeffentlichen koennte
 - `.gitignore`, `.env.example` – Standard-Boilerplate
 
-Skeleton-Theme-Dateien (sections, snippets, layout, assets) werden ueber den
-`/neuer-shop` Skill oder per Hand ergaenzt.
+## Das Theme
+
+Online-Store-2.0-Theme nach dem Prototyp `netimpulse/netimpulse-redesign`
+(Graphit-Palette G3). Alle Texte sind im Theme-Editor pflegbar, als Section-
+Einstellungen und Blocks. Die Gestaltung kommt aus `assets/base.css` (Styles
+des Prototyps), Shopify-Ergänzungen stehen in `assets/theme.css`.
+
+| Seite | Template |
+| --- | --- |
+| Startseite | `templates/index.json` |
+| Leistungen | `templates/page.leistungen.json` |
+| SEO, SEA, SMM, GEO, Webdesign, KI-Automation | `templates/page.seo.json`, `page.sea.json`, `page.smm.json`, `page.geo.json`, `page.web-design.json`, `page.ki.json` (gleiche Sections) |
+| Über uns, Kontakt | `templates/page.ueber-uns.json`, `page.kontakt.json` |
+| Theme-Shop | `templates/collection.json`, `templates/page.theme-store.json` |
+| Theme-Produkt | `templates/product.json` |
+| Theme-Vorschau | `templates/product.vorschau.json` (Layout `vorschau`), Aufruf `/products/<handle>?view=vorschau` |
+| Warenkorb | `templates/cart.json` |
+| Impressum, Datenschutz, AGB, Widerruf | Shopify-Richtlinien, Rahmen in `snippets/policy-frame.liquid` |
+
+### Einrichtung im Shop
+
+- Header und Footer: im Theme-Editor das Menü „Hauptmenü" wählen. Unterpunkte
+  eines Menüpunkts werden zum Leistungs-Dropdown und zur Leistungsspalte im Footer.
+- Seite `ki` anlegen (Vorlage `page.ki`), falls KI-Automation online gehen soll.
+- Themes sind Produkte in der Kollektion `themes`, jeder Farbstil ist eine Variante.
+  Metafelder (Namespace `theme`):
+  - Produkt: `branche` (einzeiliger Text), `passt_fuer` und `sektionen` (Liste einzeiliger Text),
+    `sprungmarken` (JSON: `[{"name": "Hero-Banner", "desktop": [12, 30], "mobile": [8, 20]}]`,
+    Start und Höhe in Prozent des Screenshots)
+  - Variante: `screenshot_desktop`, `screenshot_mobile` (Datei/Bild), `farbe_grund`, `farbe_akzent` (Farbe)
+  Ohne Screenshot zeigt das Theme einen neutralen Platzhalter-Shop.
+- Zusatzleistungen: Theme-Einstellungen > Zusatzleistungen. Mit Produkt landen sie mit
+  Preis im Warenkorb, sonst als Vermerk am Theme.
+- Sprache: Das Theme ist deutsch (`locales/de.default.json`). Der Shop sollte Deutsch als
+  Hauptsprache haben, sonst stehen Richtlinien-Titel und `lang` auf Englisch.
 
 ## Setup
 

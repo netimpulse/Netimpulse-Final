@@ -165,7 +165,7 @@
       const core = this.querySelector('.orbit-core');
       core.querySelector('.orbit-core-name').textContent = cur.dataset.name;
       core.querySelector('.orbit-core-long').textContent = cur.dataset.long;
-      core.querySelector('[data-core-group]').textContent = a2 ? this.dataset.group2 : this.dataset.group1;
+      core.querySelector('[data-core-group]').textContent = a2 ? this.dataset.groupA2 : this.dataset.groupA1;
       if (this.cards) this.cards.forEach((c, j) => c.classList.toggle('is-on', j === i));
     }
     turnTo(target) {
