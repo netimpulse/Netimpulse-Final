@@ -1,0 +1,8 @@
+{%- comment -%} Porträt: Foto oder ruhige Fläche mit Initial. Parameter: name, image, large {%- endcomment -%}
+<div class="portrait{% if large %} is-large{% endif %}" aria-hidden="true">
+  {%- if image != blank -%}
+    {{ image | image_url: width: 600 | image_tag: class: 'fill-img', loading: 'lazy', alt: '', sizes: '(min-width: 900px) 33vw, 100vw' }}
+  {%- else -%}
+    <span>{{ name | slice: 0 }}</span>
+  {%- endif -%}
+</div>

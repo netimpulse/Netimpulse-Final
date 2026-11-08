@@ -1,0 +1,57 @@
+{%- comment -%}
+  Ansicht eines Themes für ein Gerät: Screenshot aus den Varianten-Metafeldern, sonst der Platzhalter-Shop.
+  Parameter:
+  - variant: Produktvariante (Metafelder theme.screenshot_desktop / theme.screenshot_mobile, theme.farbe_grund, theme.farbe_akzent)
+  - device: 'desktop' | 'mobile'
+  - image: Bild, das den Screenshot ersetzt (optional)
+  - width: Renderbreite des Platzhalters (Standard 1280 bzw. 390)
+  - sizes: sizes-Attribut für das Bild
+  - eager: true lädt das Bild sofort
+  - bg, accent: Farben für den Platzhalter, wenn die Variante keine hat (optional)
+{%- endcomment -%}
+{%- liquid
+  assign d = device | default: 'desktop'
+  assign shot = image
+  if shot == blank and variant != blank
+    if d == 'mobile'
+      assign shot = variant.metafields.theme.screenshot_mobile.value
+    else
+      assign shot = variant.metafields.theme.screenshot_desktop.value
+    endif
+  endif
+  assign w = width
+  if w == blank
+    if d == 'mobile'
+      assign w = 390
+    else
+      assign w = 1280
+    endif
+  endif
+  assign c_bg = bg
+  assign c_accent = accent
+  if variant != blank and variant.metafields.theme.farbe_grund.value != blank
+    assign c_bg = variant.metafields.theme.farbe_grund.value
+    assign c_accent = variant.metafields.theme.farbe_akzent.value
+  endif
+  assign load = 'lazy'
+  if eager
+    assign load = 'eager'
+  endif
+  assign img_sizes = sizes | default: '(min-width: 1000px) 640px, 100vw'
+-%}
+{%- if shot != blank -%}
+  {{ shot | image_url: width: 1600 | image_tag: class: 'sf-shot', loading: load, sizes: img_sizes, alt: '' }}
+{%- else -%}
+  <scaled-frame width="{{ w }}">
+    <div class="scaled-inner">
+      {%- if c_bg != blank -%}
+        {%- assign c_fg = '#16191C' -%}
+        {%- assign bright = c_bg | color_brightness -%}
+        {%- if bright < 128 -%}{%- assign c_fg = '#F3F3F4' -%}{%- endif -%}
+        {%- render 'storefront-skeleton', device: d, bg: c_bg, fg: c_fg, accent: c_accent -%}
+      {%- else -%}
+        {%- render 'storefront-skeleton', device: d -%}
+      {%- endif -%}
+    </div>
+  </scaled-frame>
+{%- endif -%}

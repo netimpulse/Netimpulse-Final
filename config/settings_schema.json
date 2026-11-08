@@ -1,82 +1,439 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
-    "theme_version": "0.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_name": "NetImpulse",
+    "theme_version": "1.0.0",
+    "theme_author": "NetImpulse GbR",
+    "theme_documentation_url": "https://netimpulsemarketing.de",
+    "theme_support_url": "https://netimpulsemarketing.de/pages/kontakt"
   },
   {
-    "name": "t:general.typography",
+    "name": "Farben",
     "settings": [
       {
-        "type": "header",
-        "content": "t:general.fonts"
-      },
-      {
-        "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
-      }
-    ]
-  },
-  {
-    "name": "t:general.layout",
-    "settings": [
-      {
-        "type": "select",
-        "id": "max_page_width",
-        "label": "t:labels.page_width",
-        "options": [
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
           {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
+            "type": "color",
+            "id": "background",
+            "label": "Hintergrund",
+            "default": "#F7F8F8"
           },
           {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "Hintergrund-Verlauf",
+            "info": "Ersetzt den Hintergrund, wenn gesetzt. Laut Design gibt es keine Verläufe."
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "Text",
+            "default": "#16191C"
+          },
+          {
+            "type": "color",
+            "id": "button",
+            "label": "Button",
+            "default": "#62A7FD"
+          },
+          {
+            "type": "color",
+            "id": "button_label",
+            "label": "Button-Text",
+            "default": "#111418"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_label",
+            "label": "Zweiter Button und Links",
+            "default": "#3464A0"
+          },
+          {
+            "type": "color",
+            "id": "shadow",
+            "label": "Schatten",
+            "default": "#111418"
           }
         ],
-        "default": "90rem"
+        "role": {
+          "background": {
+            "solid": "background",
+            "gradient": "background_gradient"
+          },
+          "text": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button",
+          "secondary_button": "background",
+          "on_secondary_button": "secondary_button_label",
+          "secondary_button_border": "secondary_button_label",
+          "icons": "text",
+          "links": "secondary_button_label"
+        }
       },
       {
-        "type": "range",
-        "id": "min_page_margin",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.page_margin",
-        "default": 20
+        "type": "header",
+        "content": "Akzente"
+      },
+      {
+        "type": "paragraph",
+        "content": "Akzent 1 steht für gefunden werden (SEO, SEA, Social Media, GEO), Akzent 2 für bauen (Webdesign, Shopify, Themes, KI-Automation)."
+      },
+      {
+        "type": "color",
+        "id": "accent_1",
+        "label": "Akzent 1 kräftig",
+        "default": "#62A7FD"
+      },
+      {
+        "type": "color",
+        "id": "accent_1_deep",
+        "label": "Akzent 1 tief (Links auf hellem Grund)",
+        "default": "#3464A0"
+      },
+      {
+        "type": "color",
+        "id": "accent_1_light",
+        "label": "Akzent 1 hell (Flächen)",
+        "default": "#EDF5FF"
+      },
+      {
+        "type": "color",
+        "id": "accent_2",
+        "label": "Akzent 2 kräftig",
+        "default": "#DD9225"
+      },
+      {
+        "type": "color",
+        "id": "accent_2_deep",
+        "label": "Akzent 2 tief",
+        "default": "#895707"
+      },
+      {
+        "type": "text",
+        "id": "accent_2_services",
+        "label": "Leistungen mit Akzent 2",
+        "info": "Namen von Leistungen und Menüpunkten, die den Punkt in Akzent 2 bekommen, mit Komma getrennt. Alle anderen bekommen Akzent 1.",
+        "default": "Webdesign, Web design, Shopify, Themes, Theme Store, KI-Automation"
+      },
+      {
+        "type": "checkbox",
+        "id": "dark_mode",
+        "label": "Dunkle Darstellung, wenn das Gerät auf dunkel steht",
+        "default": true
       }
     ]
   },
   {
-    "name": "t:general.colors",
+    "name": "Kontaktdaten",
     "settings": [
       {
-        "type": "color",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "label": "t:labels.background"
+        "type": "text",
+        "id": "contact_company",
+        "label": "Firma",
+        "default": "NetImpulse GbR"
       },
       {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
+        "type": "text",
+        "id": "contact_street",
+        "label": "Straße",
+        "default": "Liebigstraße 96"
       },
       {
-        "type": "range",
-        "id": "input_corner_radius",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
+        "type": "text",
+        "id": "contact_city",
+        "label": "PLZ und Ort",
+        "default": "35392 Gießen"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Telefon",
+        "default": "+49 175 8950320"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "E-Mail",
+        "default": "netimpulsemarketing@gmail.com"
+      },
+      {
+        "type": "page",
+        "id": "contact_page",
+        "label": "Kontaktseite",
+        "info": "Dorthin führen der Kontakt-Abschluss und der Baukasten. Ohne Auswahl: /pages/kontakt"
+      }
+    ]
+  },
+  {
+    "name": "Zusatzleistungen",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Diese Leistungen lassen sich auf der Produktseite und im Warenkorb zu einem Theme dazubuchen. Ist ein Produkt ausgewählt, landet es mit Preis im Warenkorb. Sonst wird die Auswahl als Vermerk am Theme gespeichert."
+      },
+      {
+        "type": "text",
+        "id": "addons_label",
+        "label": "Überschrift",
+        "default": "Dazubuchen"
+      },
+      {
+        "type": "header",
+        "content": "Zusatzleistung 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "addon_1_enabled",
+        "label": "Anzeigen",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "addon_1_name",
+        "label": "Name",
+        "default": "Theme-Setup"
+      },
+      {
+        "type": "text",
+        "id": "addon_1_price",
+        "label": "Preisangabe",
+        "default": "ab 200 €"
+      },
+      {
+        "type": "textarea",
+        "id": "addon_1_text",
+        "label": "Beschreibung",
+        "default": "Installation, Grundkonfiguration, Logo und Farben. Danach ist dein Shop startklar."
+      },
+      {
+        "type": "select",
+        "id": "addon_1_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "rocket",
+            "label": "Rakete"
+          },
+          {
+            "value": "github",
+            "label": "GitHub"
+          },
+          {
+            "value": "wrench",
+            "label": "Werkzeug"
+          },
+          {
+            "value": "layers",
+            "label": "Ebenen"
+          },
+          {
+            "value": "sliders",
+            "label": "Regler"
+          }
+        ],
+        "default": "rocket"
+      },
+      {
+        "type": "product",
+        "id": "addon_1_product",
+        "label": "Produkt mit Preis (optional)"
+      },
+      {
+        "type": "header",
+        "content": "Zusatzleistung 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "addon_2_enabled",
+        "label": "Anzeigen",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "addon_2_name",
+        "label": "Name",
+        "default": "GitHub-Repository aufsetzen"
+      },
+      {
+        "type": "text",
+        "id": "addon_2_price",
+        "label": "Preisangabe",
+        "default": "Preis auf Anfrage"
+      },
+      {
+        "type": "textarea",
+        "id": "addon_2_text",
+        "label": "Beschreibung",
+        "default": "Der Theme-Code liegt in einem eigenen Repository und ist mit deinem Shop verbunden. Jede Änderung bleibt nachvollziehbar."
+      },
+      {
+        "type": "select",
+        "id": "addon_2_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "rocket",
+            "label": "Rakete"
+          },
+          {
+            "value": "github",
+            "label": "GitHub"
+          },
+          {
+            "value": "wrench",
+            "label": "Werkzeug"
+          },
+          {
+            "value": "layers",
+            "label": "Ebenen"
+          },
+          {
+            "value": "sliders",
+            "label": "Regler"
+          }
+        ],
+        "default": "github"
+      },
+      {
+        "type": "product",
+        "id": "addon_2_product",
+        "label": "Produkt mit Preis (optional)"
+      },
+      {
+        "type": "header",
+        "content": "Zusatzleistung 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "addon_3_enabled",
+        "label": "Anzeigen",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "addon_3_name",
+        "label": "Name",
+        "default": "Theme customizen"
+      },
+      {
+        "type": "text",
+        "id": "addon_3_price",
+        "label": "Preisangabe",
+        "default": "Preis auf Anfrage"
+      },
+      {
+        "type": "textarea",
+        "id": "addon_3_text",
+        "label": "Beschreibung",
+        "default": "Sections, Farben und Layout an deine Marke anpassen, inklusive Performance und mobilem Feinschliff."
+      },
+      {
+        "type": "select",
+        "id": "addon_3_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "rocket",
+            "label": "Rakete"
+          },
+          {
+            "value": "github",
+            "label": "GitHub"
+          },
+          {
+            "value": "wrench",
+            "label": "Werkzeug"
+          },
+          {
+            "value": "layers",
+            "label": "Ebenen"
+          },
+          {
+            "value": "sliders",
+            "label": "Regler"
+          }
+        ],
+        "default": "wrench"
+      },
+      {
+        "type": "product",
+        "id": "addon_3_product",
+        "label": "Produkt mit Preis (optional)"
+      }
+    ]
+  },
+  {
+    "name": "Theme-Vorschau",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Die Vorschau liest pro Variante die Metafelder theme.screenshot_desktop und theme.screenshot_mobile (Bilder) sowie theme.farbe_grund und theme.farbe_akzent (Farben). Pro Produkt: theme.branche, theme.passt_fuer, theme.sektionen und theme.sprungmarken."
+      },
+      {
+        "type": "textarea",
+        "id": "preview_outline",
+        "label": "Sektionen im Platzhalter",
+        "info": "Eine Zeile pro Sektion. Wird gezeigt, solange ein Theme keine Sprungmarken hat.",
+        "default": "Ankündigungsleiste\nHeader\nHero-Banner\nKollektion\nBild mit Text\nNewsletter\nFooter"
+      },
+      {
+        "type": "text",
+        "id": "preview_placeholder",
+        "label": "Hinweis ohne Screenshot",
+        "default": "Screenshot folgt"
+      }
+    ]
+  },
+  {
+    "name": "Rechtliches",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Impressum, Datenschutz, AGB und Widerruf kommen aus Einstellungen > Richtlinien. Das Theme legt die Navigation und das Inhaltsverzeichnis darum."
+      },
+      {
+        "type": "text",
+        "id": "legal_title",
+        "label": "Überschrift der Navigation",
+        "default": "Rechtliches"
+      },
+      {
+        "type": "text",
+        "id": "legal_toc_title",
+        "label": "Überschrift des Inhaltsverzeichnisses",
+        "default": "Auf dieser Seite"
+      },
+      {
+        "type": "page",
+        "id": "legal_extra_page",
+        "label": "Zusätzliche Seite in der Navigation",
+        "info": "Zum Beispiel Widerruf, solange keine Rückgaberichtlinie gepflegt ist"
+      }
+    ]
+  },
+  {
+    "name": "Seitenaufbau",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_outline",
+        "label": "Sektions-Gliederung links zeigen",
+        "info": "Ab 1500 px Breite. Zeigt alle Sektionen mit einem Namen für die Gliederung.",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "outline_title",
+        "label": "Titel der Gliederung",
+        "default": "Sektionen"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
       }
     ]
   }

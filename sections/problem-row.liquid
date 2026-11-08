@@ -1,0 +1,121 @@
+{%- comment -%}
+  Problem-Karten: verstreute Dienstleister als Karten, die sich beim Scrollen zu einer Linie fügen.
+  Ihre Fäden laufen unten in einem Punkt zusammen.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign cards = section.blocks | where: 'type', 'problem'
+  assign n = cards.size
+  assign tx_list = '-14,10,-8,12,-10,8' | split: ','
+  assign ty_list = '30,-24,36,-28,26,-18' | split: ','
+  assign r_list = '-5,4,-3,5,-4,3' | split: ','
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="s-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="pb-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="sec-head">
+      {%- if s.heading != blank -%}<h2 id="pb-title-{{ section.id }}" class="sec-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<p class="sec-lead">{{ s.text }}</p>{%- endif -%}
+    </div>
+
+    <problem-row class="pb-wrap" style="--p: 1; --m: 1">
+      <div class="pb-row">
+        <svg class="pb-lines" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+          <path class="pb-l1" d="M-20 96 C 120 20, 240 20, 360 80 S 600 140, 720 70 S 960 10, 1220 64" />
+          <path class="pb-l2" d="M-20 56 C 150 120, 260 130, 400 70 S 640 20, 800 90 S 1050 140, 1220 86" />
+        </svg>
+        {%- for block in cards -%}
+          {%- liquid
+            assign k = forloop.index0 | modulo: 6
+            assign g = 'g1'
+            if block.settings.group == 'a2'
+              assign g = 'g2'
+            endif
+          -%}
+          <div class="pb-card {{ g }}" style="--tx: {{ tx_list[k] }}px; --ty: {{ ty_list[k] }}px; --r: {{ r_list[k] }}deg" {{ block.shopify_attributes }}>
+            <span class="pb-ico" aria-hidden="true">{%- render 'icon', name: block.settings.icon, size: 18 -%}</span>
+            <p class="pb-name">{{ block.settings.title }}</p>
+            <p class="pb-sub">{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if n > 0 -%}
+        <svg class="pb-merge" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+          {%- assign step = 1200 | divided_by: n -%}
+          {%- for block in cards -%}
+            {%- liquid
+              assign x = forloop.index0 | times: step | plus: step | minus: 0
+              assign half = step | divided_by: 2
+              assign x = x | minus: half
+              assign g = 'g1'
+              if block.settings.group == 'a2'
+                assign g = 'g2'
+              endif
+            -%}
+            <path class="{{ g }}" pathLength="1" d="M{{ x }} 0 C {{ x }} 64, 600 46, 600 118" />
+          {%- endfor -%}
+        </svg>
+      {%- endif -%}
+      <div class="pb-goal">
+        <span class="pb-goal-dot" aria-hidden="true"></span>
+        {%- if s.goal_text != blank -%}<p>{{ s.goal_text }}</p>{%- endif -%}
+        {%- if s.goal_strong != blank -%}<p><strong>{{ s.goal_strong }}</strong></p>{%- endif -%}
+      </div>
+    </problem-row>
+  </div>
+</section>
+
+<script src="{{ 'sections.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Problem-Karten",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Problem" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht." },
+    { "type": "textarea", "id": "goal_text", "label": "Satz unter den Karten", "default": "Keiner ist für das Ganze zuständig, also bleibt das Ganze unter seinen Möglichkeiten." },
+    { "type": "text", "id": "goal_strong", "label": "Satz unter den Karten, hervorgehoben", "default": "Bei uns laufen die Fäden zusammen." },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "problem",
+      "name": "Karte",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Webdesigner" },
+        { "type": "text", "id": "text", "label": "Text", "default": "baut die Seite und ist weg" },
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "monitor",
+          "options": [
+            { "value": "monitor", "label": "Bildschirm" }, { "value": "bar-chart", "label": "Diagramm" }, { "value": "search", "label": "Lupe" },
+            { "value": "bag", "label": "Tasche" }, { "value": "megaphone", "label": "Megafon" }, { "value": "activity", "label": "Kurve" },
+            { "value": "message-circle", "label": "Sprechblase" }, { "value": "workflow", "label": "Ablauf" }, { "value": "layers", "label": "Ebenen" }
+          ]
+        },
+        { "type": "select", "id": "group", "label": "Farbe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1" }, { "value": "a2", "label": "Akzent 2" }] }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem-Karten",
+      "blocks": [
+        { "type": "problem" }, { "type": "problem" }, { "type": "problem" }
+      ]
+    }
+  ]
+}
+{% endschema %}

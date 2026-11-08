@@ -1,0 +1,127 @@
+{%- comment -%}
+  Projekte: Desktop- und Handy-Ansicht nebeneinander, darunter der Umfang.
+  Bis echte Kundenprojekte da sind, als „Beispiel" gekennzeichnet.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="s-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="cases-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="sec-head">
+      {%- if s.heading != blank -%}<h2 id="cases-title-{{ section.id }}" class="sec-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<p class="sec-lead">{{ s.text }}</p>{%- endif -%}
+    </div>
+    <ul class="case-grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign b = block.settings
+          assign p = b.product
+          assign variant = nil
+          if p != blank
+            assign variant = p.selected_or_first_available_variant
+          endif
+          assign title = b.title
+          if title == blank and p != blank
+            assign title = p.title
+          endif
+          assign meta = b.meta
+          if meta == blank and p != blank
+            assign meta = p.metafields.theme.branche.value | default: p.type
+          endif
+          assign url = b.link
+          if url == blank and p != blank
+            assign url = p.url | append: '?view=vorschau'
+          endif
+          assign fav = title | slice: 0
+          assign fav_bg = b.fav_color
+          if p != blank and variant.metafields.theme.farbe_akzent.value != blank
+            assign fav_bg = variant.metafields.theme.farbe_akzent.value
+          endif
+          assign fav_fg = '#ffffff'
+          assign fav_b = fav_bg | color_brightness
+          if fav_b > 150
+            assign fav_fg = '#111418'
+          endif
+          assign scope = b.scope | split: ','
+        -%}
+        <li {{ block.shopify_attributes }}>
+          <a href="{{ url | default: '#' }}" class="case" aria-label="{{ title | append: ': ' | append: b.link_label | escape }}">
+            <span class="case-shot" aria-hidden="true">
+              <span class="case-desk">{%- render 'theme-shot', variant: variant, device: 'desktop', image: b.image_desktop, sizes: '(min-width: 1000px) 420px, 100vw' -%}</span>
+              <span class="case-phone">{%- render 'theme-shot', variant: variant, device: 'mobile', image: b.image_mobile, sizes: '120px' -%}</span>
+              {%- if b.badge != blank -%}<span class="case-ex">{{ b.badge }}</span>{%- endif -%}
+            </span>
+            <span class="case-body">
+              <span class="case-head">
+                <span class="case-fav" aria-hidden="true" style="background: {{ fav_bg }}; color: {{ fav_fg }}">{{ fav }}</span>
+                <span>
+                  <h3 class="case-title">{{ title }}</h3>
+                  {%- if meta != blank -%}<span class="case-meta">{{ meta }}</span>{%- endif -%}
+                </span>
+              </span>
+              {%- if b.text != blank -%}<span class="case-text">{{ b.text }}</span>{%- endif -%}
+              {%- if scope.size > 0 -%}
+                <span class="case-scope">
+                  {%- if s.scope_label != blank -%}<span class="case-scope-t">{{ s.scope_label }}</span>{%- endif -%}
+                  {%- for item in scope -%}
+                    {%- assign label = item | strip -%}
+                    <span class="case-chip{% render 'group-class', name: label %}"><i class="svc-dot" aria-hidden="true"></i>{{ label }}</span>
+                  {%- endfor -%}
+                </span>
+              {%- endif -%}
+              {%- if b.link_label != blank -%}
+                <span class="case-link">{{ b.link_label }}{%- render 'icon', name: 'arrow-right', size: 16 -%}</span>
+              {%- endif -%}
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Projekte",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-3" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Projekte" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Shops, die wir bauen" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Drei Beispiele aus unserem Theme Store, jeweils als komplette Storefront. Klick rein und probier sie auf dem Desktop und auf dem Handy aus." },
+    { "type": "text", "id": "scope_label", "label": "Bezeichnung Umfang", "default": "Umfang" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "case",
+      "name": "Projekt",
+      "limit": 6,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Theme-Produkt", "info": "Optional. Liefert Screenshots, Branche und Link zur Vorschau." },
+        { "type": "text", "id": "title", "label": "Name", "default": "Holzwerk Ahorn" },
+        { "type": "text", "id": "meta", "label": "Zeile unter dem Namen", "default": "Handwerk und Betriebe · Theme Werkbank" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Für Betriebe, die Leistungen zeigen und Anfragen bekommen wollen. Esstische, Einbauschränke und Treppen aus Massivholz." },
+        { "type": "text", "id": "scope", "label": "Umfang", "info": "Leistungen mit Komma getrennt", "default": "Shopify, Webdesign, SEO" },
+        { "type": "text", "id": "badge", "label": "Kennzeichnung", "info": "Für Beispielprojekte. Leer lassen bei echten Kundenprojekten.", "default": "Beispiel" },
+        { "type": "text", "id": "link_label", "label": "Link", "default": "Shop-Vorschau ansehen" },
+        { "type": "url", "id": "link", "label": "Link-Ziel", "info": "Ohne Link: Vorschau des Theme-Produkts" },
+        { "type": "image_picker", "id": "image_desktop", "label": "Screenshot Desktop", "info": "Ersetzt den Screenshot des Produkts" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Screenshot Handy" },
+        { "type": "color", "id": "fav_color", "label": "Farbe des Kürzels", "default": "#C2552A" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Projekte", "blocks": [{ "type": "case" }, { "type": "case" }, { "type": "case" }] }]
+}
+{% endschema %}

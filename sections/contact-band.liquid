@@ -1,0 +1,103 @@
+{%- comment -%}
+  Kontakt-Abschluss: Frage und Text links, Themen-Chips, Button und direkter Draht rechts.
+  Die Auswahl geht per URL an das Kontaktformular (Parameter thema und nachricht).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  capture contact_url
+    render 'contact-url'
+  endcapture
+  if s.link != blank
+    assign contact_url = s.link
+  endif
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, tablet: 72, mobile: 72 -%}
+
+<section
+  id="kontakt-band-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="cta section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="cta-title-{{ section.id }}"{% endif %}
+>
+  <contact-band class="wrap cta-grid" data-contact-url="{{ contact_url | strip | escape }}" data-message="{{ s.message | escape }}">
+    <div class="cta-copy">
+      {%- if s.heading != blank -%}<h2 id="cta-title-{{ section.id }}" class="cta-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<p class="cta-text">{{ s.text }}</p>{%- endif -%}
+    </div>
+    <div class="cta-act">
+      {%- if section.blocks.size > 0 -%}
+        <div class="cta-pick">
+          {%- if s.question != blank -%}<p class="cta-q" id="cta-q-{{ section.id }}">{{ s.question }}</p>{%- endif -%}
+          <div class="cta-chips" role="group"{% if s.question != blank %} aria-labelledby="cta-q-{{ section.id }}"{% endif %}>
+            {%- for block in section.blocks -%}
+              {%- assign on = block.settings.preselect -%}
+              <button
+                type="button"
+                aria-pressed="{% if on %}true{% else %}false{% endif %}"
+                class="cta-chip{% if on %} is-on{% endif %}"
+                data-label="{{ block.settings.label | escape }}"
+                data-topic="{{ block.settings.topic | escape }}"
+                {{ block.shopify_attributes }}
+              >
+                <span data-icon="check"{% unless on %} hidden{% endunless %}>{%- render 'icon', name: 'check', size: 16 -%}</span>
+                <span data-icon="plus"{% if on %} hidden{% endif %}>{%- render 'icon', name: 'plus', size: 16 -%}</span>
+                {{ block.settings.label }}
+              </button>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+      <div class="actions">
+        <button type="button" class="btn btn-primary" data-send>
+          <span>{{ s.button_label }}</span>
+          {%- render 'icon', name: 'arrow-right' -%}
+        </button>
+        {%- if s.note != blank -%}<span class="cta-note">{{ s.note }}</span>{%- endif -%}
+      </div>
+      {%- if s.show_direct -%}
+        <p class="cta-direct">
+          {%- if s.direct_label != blank -%}<span>{{ s.direct_label }}</span>{%- endif -%}
+          {%- if settings.contact_phone != blank -%}<span class="mono">{{ settings.contact_phone }}</span>{%- endif -%}
+          {%- if settings.contact_phone != blank and settings.contact_email != blank -%}<span aria-hidden="true">·</span>{%- endif -%}
+          {%- if settings.contact_email != blank -%}<span class="mono">{{ settings.contact_email }}</span>{%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </contact-band>
+</section>
+
+{% schema %}
+{
+  "name": "Kontakt-Abschluss",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Kontakt" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Bereit für planbares Wachstum?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch." },
+    { "type": "text", "id": "question", "label": "Frage über den Themen", "default": "Worum geht es dir?" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Kostenloses Erstgespräch anfragen" },
+    { "type": "url", "id": "link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite aus den Theme-Einstellungen" },
+    { "type": "textarea", "id": "message", "label": "Vorbelegte Nachricht", "info": "[auswahl] steht für die gewählten Themen", "default": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: " },
+    { "type": "text", "id": "note", "label": "Hinweis neben dem Button", "default": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden" },
+    { "type": "checkbox", "id": "show_direct", "label": "Telefon und E-Mail zeigen", "info": "Aus den Theme-Einstellungen unter Kontaktdaten", "default": true },
+    { "type": "text", "id": "direct_label", "label": "Text vor Telefon und E-Mail", "default": "Oder direkt:" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "topic",
+      "name": "Thema",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Bezeichnung", "default": "Website" },
+        { "type": "text", "id": "topic", "label": "Thema im Kontaktformular", "info": "Muss einem Thema im Kontaktformular entsprechen", "default": "Webdesign und UX" },
+        { "type": "checkbox", "id": "preselect", "label": "Vorausgewählt", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Kontakt-Abschluss", "blocks": [{ "type": "topic" }] }]
+}
+{% endschema %}

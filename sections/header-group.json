@@ -9,14 +9,12 @@
  */
 {
   "type": "header",
-  "name": "t:general.header",
+  "name": "Header",
   "sections": {
     "header": {
       "type": "header",
       "settings": {}
     }
   },
-  "order": [
-    "header"
-  ],
+  "order": ["header"]
 }

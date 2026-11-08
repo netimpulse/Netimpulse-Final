@@ -1,0 +1,8 @@
+<div class="toast-region" aria-live="polite"></div>
+<template id="toast-template">
+  <div class="toast">
+    {%- render 'icon', name: 'check', size: 16 -%}
+    <span>{{ 'cart.toast' | t: title: '[titel]' }}</span>
+    <a href="{{ routes.cart_url }}" class="toast-link">{{ 'cart.toast_link' | t }}</a>
+  </div>
+</template>

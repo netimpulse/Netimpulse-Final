@@ -1,0 +1,27 @@
+{%- comment -%}
+  Leistungsgruppe für einen Namen: gibt " sk sk-a2" zurück, wenn der Name in den Theme-Einstellungen unter
+  „Leistungen mit Akzent 2" steht, sonst " sk". Optional group: 'a1' oder 'a2' erzwingt die Gruppe.
+{%- endcomment -%}
+{%- liquid
+  if group == 'a2'
+    echo ' sk sk-a2'
+  elsif group == 'a1'
+    echo ' sk'
+  else
+    assign needle = name | downcase | strip
+    assign hit = false
+    assign list = settings.accent_2_services | downcase | split: ','
+    for item in list
+      assign it = item | strip
+      if it == needle
+        assign hit = true
+        break
+      endif
+    endfor
+    if hit
+      echo ' sk sk-a2'
+    else
+      echo ' sk'
+    endif
+  endif
+-%}

@@ -1,0 +1,85 @@
+{%- comment -%}
+  Leistungs-Orbit (Port von ServiceOrbit). Positionen, Bögen und Verbindungen setzt sections.js.
+  Parameter:
+  - items: Blocks vom Typ „service" (Einstellungen key, name, long, promise, teaser, icon, group, link, link_label, pairs)
+  - detail: true = mit Karten daneben (Startseite), false = nur das Rad als Navigation (Leistungsübersicht)
+  - label, group_1_label, group_2_label, pair_label: Texte
+  - uid: eindeutige Kennung (section.id)
+{%- endcomment -%}
+{%- liquid
+  assign first = items.first
+  assign first_group = first.settings.group | default: 'a1'
+  assign oa = 'var(--a1)'
+  if first_group == 'a2'
+    assign oa = 'var(--a2)'
+  endif
+-%}
+<service-orbit
+  class="orbit{% if detail %} has-detail{% endif %}"
+  data-mode="{% if detail %}detail{% else %}nav{% endif %}"
+  data-group-1="{{ group_1_label | escape }}"
+  data-group-2="{{ group_2_label | escape }}"
+  style="--n: {{ items.size }}"
+>
+  <div class="orbit-side">
+    <div class="orbit-stage{% render 'group-class', group: first_group %}" role="group" aria-label="{{ label | escape }}" style="--oa: {{ oa }}">
+      <div class="orbit-rot" style="--rot: 0deg">
+        <svg class="orbit-svg" viewBox="0 0 400 400" aria-hidden="true">
+          <circle class="ring-outer" cx="200" cy="200" r="194" />
+          <circle class="ring-track" cx="200" cy="200" r="160" />
+          <circle class="ring-a1" cx="200" cy="200" r="160" data-arc="a1" />
+          <circle class="ring-a2" cx="200" cy="200" r="160" data-arc="a2" />
+          <g data-spokes></g>
+          <g data-chords></g>
+        </svg>
+        {%- for block in items -%}
+          {%- assign g = block.settings.group | default: 'a1' -%}
+          <button
+            type="button"
+            class="orbit-node{% render 'group-class', group: g %}{% if forloop.first %} is-on{% endif %}"
+            data-key="{{ block.settings.key | handleize }}"
+            data-pairs="{{ block.settings.pairs | escape }}"
+            data-group="{{ g }}"
+            data-name="{{ block.settings.name | escape }}"
+            data-long="{{ block.settings.long | escape }}"
+            aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <span class="orbit-dot" aria-hidden="true">{%- render 'icon', name: block.settings.icon, size: 20 -%}</span>
+            <span class="orbit-label">{{ block.settings.name }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+      <div class="orbit-core" aria-live="polite">
+        <span class="orbit-core-name">{{ first.settings.name }}</span>
+        <span class="orbit-core-long">{{ first.settings.long }}</span>
+        <span class="orbit-core-group"><i class="svc-dot" aria-hidden="true"></i><span data-core-group>{% if first_group == 'a2' %}{{ group_2_label }}{% else %}{{ group_1_label }}{% endif %}</span></span>
+      </div>
+      {%- if detail -%}<span class="orbit-link" aria-hidden="true"></span>{%- endif -%}
+    </div>
+    <p class="orbit-legend">
+      <span><i class="svc-dot" style="background: var(--a1)" aria-hidden="true"></i>{{ group_1_label }}</span>
+      <span><i class="svc-dot" style="background: var(--a2)" aria-hidden="true"></i>{{ group_2_label }}</span>
+      {%- if pair_label != blank -%}<span class="orbit-legend-pair">{{ pair_label }}</span>{%- endif -%}
+    </p>
+  </div>
+
+  {%- if detail -%}
+    <ol class="orbit-cards" role="list">
+      {%- for block in items -%}
+        {%- assign g = block.settings.group | default: 'a1' -%}
+        <li id="oc-{{ uid }}-{{ block.settings.key | handleize }}" class="oc{% render 'group-class', group: g %}{% if forloop.first %} is-on{% endif %}" data-key="{{ block.settings.key | handleize }}">
+          <span class="oc-n mono" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+          <h3 class="oc-title">{{ block.settings.promise }}</h3>
+          <p class="oc-text">{{ block.settings.teaser }}</p>
+          {%- if block.settings.link != blank and block.settings.link_label != blank -%}
+            <a href="{{ block.settings.link }}" class="oc-link">
+              <span>{{ block.settings.link_label }}</span>
+              {%- render 'icon', name: 'arrow-right', size: 16 -%}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+</service-orbit>

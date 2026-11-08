@@ -1,0 +1,75 @@
+{%- comment -%}
+  Leistungs-Orbit mit Karten (Startseite): Das Rad dreht sich zur Karte in der Bildmitte,
+  Partner-Leistungen sind gestrichelt verbunden.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign items = section.blocks | where: 'type', 'service'
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="s-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="svc-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="sec-head">
+      {%- if s.heading != blank -%}<h2 id="svc-title-{{ section.id }}" class="sec-title">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<p class="sec-lead">{{ s.text }}</p>{%- endif -%}
+      {%- if s.link_label != blank -%}
+        <a href="{{ s.link | default: '#' }}" class="arrow-link">
+          <span>{{ s.link_label }}</span>
+          {%- render 'icon', name: 'arrow-right', size: 16 -%}
+        </a>
+      {%- endif -%}
+    </div>
+    {%- if items.size > 0 -%}
+      {%- render 'orbit',
+        items: items,
+        detail: true,
+        uid: section.id,
+        label: s.orbit_label,
+        group_1_label: s.group_1_label,
+        group_2_label: s.group_2_label,
+        pair_label: s.pair_label
+      -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'sections.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Leistungs-Orbit",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Leistungen" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Von der ersten Idee bis zur laufenden Optimierung" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Ob Relaunch, SEO-Aufbau und -Pflege, Google Ads, GEO oder Shopify-Theme: Wir bauen digitale Grundlagen, die nicht nur beim Launch gut aussehen, sondern im Alltag messbar weiterarbeiten. Jede Leistung funktioniert für sich und wird stärker, wenn sie mit den anderen verbunden ist. Scroll durch die Leistungen oder klick im Rad eine an." },
+    { "type": "text", "id": "link_label", "label": "Link", "default": "Alle Leistungen und Preise" },
+    { "type": "url", "id": "link", "label": "Link-Ziel" },
+    { "type": "header", "content": "Rad" },
+    { "type": "text", "id": "orbit_label", "label": "Beschreibung für Screenreader", "default": "Leistungen im Orbit" },
+    { "type": "text", "id": "group_1_label", "label": "Gruppe Akzent 1", "default": "Sichtbarkeit" },
+    { "type": "text", "id": "group_2_label", "label": "Gruppe Akzent 2", "default": "Umsetzung" },
+    { "type": "text", "id": "pair_label", "label": "Legende gestrichelt", "default": "gestrichelt: arbeitet zusammen mit" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Leistung",
+      "limit": 12,
+      "settings": [{"type": "text", "id": "key", "label": "Kennung", "info": "Kurz und ohne Leerzeichen, zum Beispiel seo. Verbindet Leistungen und dient als Sprungziel.", "default": "seo"}, {"type": "text", "id": "name", "label": "Name", "default": "SEO"}, {"type": "text", "id": "long", "label": "Langname", "default": "Suchmaschinenoptimierung"}, {"type": "select", "id": "icon", "label": "Icon", "default": "search", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}]}, {"type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{"value": "a1", "label": "Akzent 1 (Sichtbarkeit)"}, {"value": "a2", "label": "Akzent 2 (Umsetzung)"}]}, {"type": "text", "id": "pairs", "label": "Arbeitet zusammen mit", "info": "Kennungen anderer Leistungen, mit Komma getrennt", "default": "geo, webdesign"}, {"type": "text", "id": "promise", "label": "Titel der Karte", "default": "Gefunden werden"}, {"type": "textarea", "id": "teaser", "label": "Text der Karte", "default": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird."}, {"type": "text", "id": "link_label", "label": "Link", "default": "Mehr zu SEO"}, {"type": "url", "id": "link", "label": "Link-Ziel"}]
+    }
+  ],
+  "presets": [{ "name": "Leistungs-Orbit", "blocks": [{ "type": "service" }, { "type": "service" }, { "type": "service" }] }]
+}
+{% endschema %}

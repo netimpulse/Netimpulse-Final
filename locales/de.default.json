@@ -1,0 +1,78 @@
+{
+  "general": {
+    "page": "Seite {{ number }}",
+    "password_title": "Bald geöffnet",
+    "password_label": "Passwort",
+    "password_submit": "Eintreten",
+    "password_link": "Mit Passwort eintreten",
+    "powered_by": "Betrieben mit Shopify"
+  },
+  "accessibility": {
+    "skip_to_content": "Zum Inhalt springen",
+    "outline": "Sektionen dieser Seite",
+    "breadcrumbs": "Brotkrumen",
+    "new_window": "Öffnet in einem neuen Fenster"
+  },
+  "header": {
+    "home_label": "{{ shop }}, zur Startseite",
+    "main_nav": "Hauptnavigation",
+    "mobile_nav": "Mobile Navigation",
+    "menu": "Menü",
+    "open_menu": "Menü öffnen",
+    "close_menu": "Menü schließen",
+    "search": "Suchen",
+    "close_search": "Suche schließen",
+    "results": "Ergebnisse",
+    "cart_label": "Warenkorb, {{ count }} Artikel"
+  },
+  "motion": {
+    "pause": "Animation anhalten",
+    "play": "Animation abspielen",
+    "pause_video": "Video anhalten",
+    "play_video": "Video abspielen"
+  },
+  "cart": {
+    "toast": "{{ title }} liegt im Warenkorb",
+    "toast_link": "Zum Warenkorb",
+    "remove": "Entfernen",
+    "quantity": "Menge",
+    "error": "Das hat nicht geklappt. Bitte lade die Seite neu und versuch es noch einmal.",
+    "addon_note": "Zusatzleistungen",
+    "addon_for": "Zusatzleistung zu {{ title }}"
+  },
+  "copy": {
+    "copy": "{{ label }} kopieren",
+    "copied": "{{ label }} kopiert"
+  },
+  "products": {
+    "unavailable": "Nicht verfügbar",
+    "placeholder": "Dieses Theme ist noch nicht angelegt. Lege in Shopify ein Produkt an, dann erscheint es hier."
+  },
+  "search": {
+    "title": "Suche",
+    "results_for": "Ergebnisse für „{{ terms }}“",
+    "no_results": "Nichts gefunden für „{{ terms }}“.",
+    "placeholder": "Seiten und Themes durchsuchen",
+    "submit": "Suchen",
+    "count": {
+      "one": "{{ count }} Ergebnis",
+      "other": "{{ count }} Ergebnisse"
+    }
+  },
+  "pagination": {
+    "label": "Seiten",
+    "previous": "Vorherige Seite",
+    "next": "Nächste Seite"
+  },
+  "contact": {
+    "error_heading": "Bitte prüfe die Angaben"
+  },
+  "gift_card": {
+    "title": "Dein Geschenkgutschein",
+    "code": "Code",
+    "print": "Drucken"
+  },
+  "blog": {
+    "read_more": "Weiterlesen"
+  }
+}

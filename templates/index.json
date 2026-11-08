@@ -9,12 +9,545 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero": {
+      "type": "hero-build",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "outline_label": "Video",
+        "padding_top": 24,
+        "padding_bottom": 64
+      }
+    },
+    "problem": {
+      "type": "problem-row",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": true,
+        "outline_label": "Problem",
+        "heading": "Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen",
+        "text": "Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht.",
+        "goal_text": "Keiner ist für das Ganze zuständig, also bleibt das Ganze unter seinen Möglichkeiten.",
+        "goal_strong": "Bei uns laufen die Fäden zusammen.",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "problem_1": {
+          "type": "problem",
+          "settings": {
+            "icon": "monitor",
+            "title": "Webdesigner",
+            "text": "baut die Seite und ist weg",
+            "group": "a2"
+          }
+        },
+        "problem_2": {
+          "type": "problem",
+          "settings": {
+            "icon": "bar-chart",
+            "title": "Ads-Agentur",
+            "text": "meldet Klicks statt Anfragen",
+            "group": "a1"
+          }
+        },
+        "problem_3": {
+          "type": "problem",
+          "settings": {
+            "icon": "search",
+            "title": "SEO",
+            "text": "macht irgendwann mal jemand",
+            "group": "a1"
+          }
+        },
+        "problem_4": {
+          "type": "problem",
+          "settings": {
+            "icon": "bag",
+            "title": "Shop-Theme",
+            "text": "von der Stange gekauft",
+            "group": "a2"
+          }
+        },
+        "problem_5": {
+          "type": "problem",
+          "settings": {
+            "icon": "megaphone",
+            "title": "Social Media",
+            "text": "läuft nebenbei, wenn Zeit ist",
+            "group": "a1"
+          }
+        },
+        "problem_6": {
+          "type": "problem",
+          "settings": {
+            "icon": "activity",
+            "title": "Tracking",
+            "text": "misst, aber keiner schaut hin",
+            "group": "a1"
+          }
+        }
+      },
+      "block_order": [
+        "problem_1",
+        "problem_2",
+        "problem_3",
+        "problem_4",
+        "problem_5",
+        "problem_6"
+      ]
+    },
+    "leistungen": {
+      "type": "service-orbit",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Leistungen",
+        "heading": "Von der ersten Idee bis zur laufenden Optimierung",
+        "text": "Ob Relaunch, SEO-Aufbau und -Pflege, Google Ads, GEO oder Shopify-Theme: Wir bauen digitale Grundlagen, die nicht nur beim Launch gut aussehen, sondern im Alltag messbar weiterarbeiten. Jede Leistung funktioniert für sich und wird stärker, wenn sie mit den anderen verbunden ist. Scroll durch die Leistungen oder klick im Rad eine an.",
+        "link_label": "Alle Leistungen und Preise",
+        "link": "shopify://pages/leistungen",
+        "orbit_label": "Leistungen im Orbit",
+        "group_1_label": "Sichtbarkeit",
+        "group_2_label": "Umsetzung",
+        "pair_label": "gestrichelt: arbeitet zusammen mit",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "service_1": {
+          "type": "service",
+          "settings": {
+            "key": "seo",
+            "name": "SEO",
+            "long": "Suchmaschinenoptimierung",
+            "icon": "search",
+            "group": "a1",
+            "pairs": "geo, webdesign",
+            "promise": "Gefunden werden",
+            "teaser": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.",
+            "link_label": "Mehr zu SEO",
+            "link": "shopify://pages/seo"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "key": "sea",
+            "name": "SEA",
+            "long": "Google Ads",
+            "icon": "bar-chart",
+            "group": "a1",
+            "pairs": "seo, webdesign",
+            "promise": "Nachfrage aktivieren",
+            "teaser": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.",
+            "link_label": "Mehr zu SEA",
+            "link": "shopify://pages/sea"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "key": "smm",
+            "name": "SMM",
+            "long": "Social Media Marketing",
+            "icon": "megaphone",
+            "group": "a1",
+            "pairs": "sea, webdesign",
+            "promise": "Aufmerksamkeit formen",
+            "teaser": "Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.",
+            "link_label": "Mehr zu SMM",
+            "link": "shopify://pages/smm"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "key": "geo",
+            "name": "GEO",
+            "long": "Generative Engine Optimization",
+            "icon": "message-circle",
+            "group": "a1",
+            "pairs": "seo, webdesign",
+            "promise": "In KI-Antworten auftauchen",
+            "teaser": "Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.",
+            "link_label": "Mehr zu GEO",
+            "link": "shopify://pages/geo"
+          }
+        },
+        "service_5": {
+          "type": "service",
+          "settings": {
+            "key": "webdesign",
+            "name": "Webdesign",
+            "long": "Webdesign und Shopify",
+            "icon": "monitor",
+            "group": "a2",
+            "pairs": "seo, shopify",
+            "promise": "Website als Gespräch",
+            "teaser": "Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.",
+            "link_label": "Mehr zu Webdesign",
+            "link": "shopify://pages/web-design"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "key": "shopify",
+            "name": "Shopify",
+            "long": "Shopify-Entwicklung",
+            "icon": "bag",
+            "group": "a2",
+            "pairs": "webdesign, themes",
+            "promise": "Shops, die skalieren",
+            "teaser": "Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.",
+            "link_label": "Mehr zu Shopify",
+            "link": "/pages/leistungen#l-shopify"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "key": "themes",
+            "name": "Themes",
+            "long": "Theme Store",
+            "icon": "layers",
+            "group": "a2",
+            "pairs": "shopify, webdesign",
+            "promise": "Schneller starten",
+            "teaser": "Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.",
+            "link_label": "Zum Theme Store",
+            "link": "shopify://collections/themes"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "key": "ki",
+            "name": "KI-Automation",
+            "long": "KI und Automatisierung",
+            "icon": "workflow",
+            "group": "a2",
+            "pairs": "shopify, webdesign",
+            "promise": "Routine, die sich selbst erledigt",
+            "teaser": "Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.",
+            "link_label": "Mehr zu KI-Automation",
+            "link": "/pages/ki"
+          }
+        }
+      },
+      "block_order": [
+        "service_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "service_5",
+        "service_6",
+        "service_7",
+        "service_8"
+      ]
+    },
+    "projekte": {
+      "type": "case-studies",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "outline_label": "Projekte",
+        "heading": "Shops, die wir bauen",
+        "text": "Drei Beispiele aus unserem Theme Store, jeweils als komplette Storefront. Klick rein und probier sie auf dem Desktop und auf dem Handy aus.",
+        "scope_label": "Umfang",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "case_1": {
+          "type": "case",
+          "settings": {
+            "title": "Holzwerk Ahorn",
+            "meta": "Handwerk und Betriebe · Theme Werkbank",
+            "text": "Für Betriebe, die Leistungen zeigen und Anfragen bekommen wollen. Esstische, Einbauschränke und Treppen aus Massivholz. Geplant und gebaut in Mittelhessen.",
+            "scope": "Shopify, Webdesign, SEO",
+            "badge": "Beispiel",
+            "link_label": "Shop-Vorschau ansehen",
+            "fav_color": "#C2552A"
+          }
+        },
+        "case_2": {
+          "type": "case",
+          "settings": {
+            "title": "Kräuterhaus Wiese",
+            "meta": "Naturkosmetik · Theme Salbei",
+            "text": "Für Kosmetik-Marken, die Inhaltsstoffe erklären wollen. Naturkosmetik aus Kräutern, in kleinen Chargen abgefüllt.",
+            "scope": "Shopify, SMM, SEA",
+            "badge": "Beispiel",
+            "link_label": "Shop-Vorschau ansehen",
+            "fav_color": "#4F6D54"
+          }
+        },
+        "case_3": {
+          "type": "case",
+          "settings": {
+            "title": "Lagerhaus Nord",
+            "meta": "B2B und Großhandel · Theme Kontor",
+            "text": "Für Händler mit großem Sortiment und Geschäftskunden. Staffelpreise, Kauf auf Rechnung und Schnellbestellung per Artikelnummer.",
+            "scope": "Shopify, SEO, GEO",
+            "badge": "Beispiel",
+            "link_label": "Shop-Vorschau ansehen",
+            "fav_color": "#2C53C2"
+          }
+        }
+      },
+      "block_order": [
+        "case_1",
+        "case_2",
+        "case_3"
+      ]
+    },
+    "themes": {
+      "type": "theme-editor",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "dots": false,
+        "outline_label": "Themes",
+        "heading": "Themes, live ausprobiert",
+        "text": "Theme- und Section-Packs für verschiedene Branchen. Wähl ein Theme, klick dich durch die Sektionen und schau es dir auf dem Handy an, genau wie später im Shopify-Editor.",
+        "detail_label": "[name] ansehen",
+        "store_label": "Theme Store",
+        "store_link": "shopify://collections/themes",
+        "page_label": "Startseite",
+        "badge": "Beispiel-Themes, Namen und Preise sind Platzhalter",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "theme_1": {
+          "type": "theme",
+          "settings": {
+            "name": "Werkbank",
+            "branche": "Handwerk und Betriebe",
+            "price": "290 €",
+            "swatch_bg": "#F3F1EC",
+            "swatch_accent": "#C2552A"
+          }
+        },
+        "theme_2": {
+          "type": "theme",
+          "settings": {
+            "name": "Atelier",
+            "branche": "Mode und Accessoires",
+            "price": "340 €",
+            "swatch_bg": "#FAF9F7",
+            "swatch_accent": "#151515"
+          }
+        },
+        "theme_3": {
+          "type": "theme",
+          "settings": {
+            "name": "Kornfeld",
+            "branche": "Bäckerei und Café",
+            "price": "260 €",
+            "swatch_bg": "#F5EBDD",
+            "swatch_accent": "#A9662A"
+          }
+        },
+        "theme_4": {
+          "type": "theme",
+          "settings": {
+            "name": "Salbei",
+            "branche": "Naturkosmetik",
+            "price": "310 €",
+            "swatch_bg": "#EDF0E8",
+            "swatch_accent": "#4F6D54"
+          }
+        },
+        "theme_5": {
+          "type": "theme",
+          "settings": {
+            "name": "Lahn",
+            "branche": "Outdoor und Sport",
+            "price": "320 €",
+            "swatch_bg": "#173A31",
+            "swatch_accent": "#F0B23E"
+          }
+        },
+        "theme_6": {
+          "type": "theme",
+          "settings": {
+            "name": "Kontor",
+            "branche": "B2B und Großhandel",
+            "price": "380 €",
+            "swatch_bg": "#F4F5F7",
+            "swatch_accent": "#2C53C2"
+          }
+        }
+      },
+      "block_order": [
+        "theme_1",
+        "theme_2",
+        "theme_3",
+        "theme_4",
+        "theme_5",
+        "theme_6"
+      ]
+    },
+    "team": {
+      "type": "team-principles",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "dots": false,
+        "outline_label": "Team",
+        "heading": "Direkt. Klar. Ohne Umwege.",
+        "text": "Bei NetImpulse arbeiten Strategie, Design, Marketing und Shopify-Umsetzung nah zusammen. So entstehen Websites, Kampagnen und Themes, die sich wie ein gemeinsames System anfühlen.",
+        "link_label": "Team kennenlernen",
+        "link": "shopify://pages/ueber-uns",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "principle_1": {
+          "type": "principle",
+          "settings": {
+            "title": "Strategie statt Einzelmaßnahmen",
+            "text": "Wir starten mit der Frage, wo Sichtbarkeit, Vertrauen und Conversion gerade die größte Wirkung erzeugen. Deine Präsenz ist am stärksten, wenn alle Kanäle zusammenarbeiten."
+          }
+        },
+        "principle_2": {
+          "type": "principle",
+          "settings": {
+            "title": "Individuelles Design für jeden",
+            "text": "Jede Seite soll Inhalte schneller erklären, hochwertiger wirken, Besucher gezielter führen und auf deine Vorstellungen abgestimmt sein."
+          }
+        },
+        "principle_3": {
+          "type": "principle",
+          "settings": {
+            "title": "Am Puls der Zeit",
+            "text": "Künstliche Intelligenz verändert, wie Marketing funktioniert. Wir bleiben auf dem neuesten Stand und setzen sie dort ein, wo sie dir nützt."
+          }
+        },
+        "person_4": {
+          "type": "person",
+          "settings": {
+            "name": "Niklas",
+            "focus": "Online-Marketing und Shopify-Entwicklung"
+          }
+        },
+        "person_5": {
+          "type": "person",
+          "settings": {
+            "name": "Luca",
+            "focus": "Design, Konzept und digitale Auftritte"
+          }
+        },
+        "person_6": {
+          "type": "person",
+          "settings": {
+            "name": "Tom",
+            "focus": "Content, Organisation und Projektunterstützung"
+          }
+        }
+      },
+      "block_order": [
+        "principle_1",
+        "principle_2",
+        "principle_3",
+        "person_4",
+        "person_5",
+        "person_6"
+      ]
+    },
+    "kontakt": {
+      "type": "contact-band",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "dots": true,
+        "outline_label": "Kontakt",
+        "heading": "Bereit für planbares Wachstum?",
+        "text": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.",
+        "question": "Worum geht es dir?",
+        "button_label": "Kostenloses Erstgespräch anfragen",
+        "message": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: ",
+        "note": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden",
+        "show_direct": true,
+        "direct_label": "Oder direkt:",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": {
+            "label": "Shopify-Shop",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": {
+            "label": "Website",
+            "topic": "Webdesign und UX",
+            "preselect": false
+          }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": {
+            "label": "SEO und GEO",
+            "topic": "SEO und Performance",
+            "preselect": false
+          }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": {
+            "label": "Google Ads",
+            "topic": "Google Ads (SEA)",
+            "preselect": false
+          }
+        },
+        "topic_5": {
+          "type": "topic",
+          "settings": {
+            "label": "Social Media",
+            "topic": "Social Media",
+            "preselect": false
+          }
+        },
+        "topic_6": {
+          "type": "topic",
+          "settings": {
+            "label": "KI-Automation",
+            "topic": "KI und Automation",
+            "preselect": false
+          }
+        },
+        "topic_7": {
+          "type": "topic",
+          "settings": {
+            "label": "Theme aus dem Store",
+            "topic": "Shopify-Theme",
+            "preselect": false
+          }
+        }
+      },
+      "block_order": [
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6",
+        "topic_7"
+      ]
     }
   },
   "order": [
-    "main"
+    "hero",
+    "problem",
+    "leistungen",
+    "projekte",
+    "themes",
+    "team",
+    "kontakt"
   ]
 }

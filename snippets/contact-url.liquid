@@ -1,0 +1,2 @@
+{%- comment -%} URL der Kontaktseite aus den Theme-Einstellungen, sonst /pages/kontakt {%- endcomment -%}
+{%- if settings.contact_page != blank -%}{{ settings.contact_page.url }}{%- else -%}/pages/kontakt{%- endif -%}

@@ -9,17 +9,12 @@
  */
 {
   "type": "footer",
-  "name": "t:general.footer",
+  "name": "Footer",
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {
-        "menu": "",
-        "show_payment_icons": true
-      }
+      "settings": {}
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

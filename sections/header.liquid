@@ -1,77 +1,268 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+{%- comment -%}
+  Header: Logo, Hauptmenü mit Leistungs-Dropdown, Suche, Warenkorb, Kontakt-Button, Mobile-Menü.
+  Menüpunkte mit Unterpunkten werden zum Dropdown. Untertitel kommen aus „Untertitel im Dropdown".
+{%- endcomment -%}
+{%- liquid
+  assign menu = section.settings.menu
+  assign cta_url = section.settings.cta_link | default: ''
+  if cta_url == blank
+    capture cta_url
+      render 'contact-url'
+    endcapture
+  endif
+  assign mobile_cta_url = section.settings.mobile_cta_link | default: cta_url
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  assign desc_lines = section.settings.menu_descriptions | newline_to_br | split: '<br />'
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
+  assign cart_count = 0
+  for item in cart.items
+    unless item.properties._addon_for
+      assign cart_count = cart_count | plus: 1
+    endunless
+  endfor
+-%}
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
+{%- capture logo -%}
+  <a href="{{ routes.root_url }}" class="logo" aria-label="{{ 'header.home_label' | t: shop: shop.name }}">
+    {%- if section.settings.logo != blank -%}
+      {{- section.settings.logo | image_url: width: 400 | image_tag: width: section.settings.logo_width, height: nil, alt: shop.name, class: 'logo-img', loading: 'eager' -}}
+    {%- else -%}
+      <span class="logo-dot" aria-hidden="true"></span>
+      <span class="logo-word">{{ section.settings.logo_text }}<span>{{ section.settings.logo_suffix }}</span></span>
+    {%- endif -%}
+  </a>
+{%- endcapture -%}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
-  </div>
-</header>
+{%- render 'section-padding', id: section.id, top: section.settings.padding_top, bottom: section.settings.padding_bottom, selector: '.header-row', tablet: 100, mobile: 100 -%}
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+<site-header>
+  <header class="site-header color-{{ section.settings.color_scheme.id }}">
+    <div class="wrap header-row">
+      {{ logo }}
+      <nav class="main-nav" aria-label="{{ 'header.main_nav' | t }}">
+        {%- for link in menu.links -%}
+          {%- if link.url == cta_url and link.links.size == 0 -%}{%- continue -%}{%- endif -%}
+          {%- if link.links.size > 0 -%}
+            <div class="nav-dd">
+              <button
+                type="button"
+                class="nav-link{% if link.active or link.child_active %} is-current{% endif %}"
+                aria-expanded="false"
+                aria-controls="dd-{{ section.id }}-{{ forloop.index }}"
+              >
+                {{ link.title }}
+                {%- render 'icon', name: 'chevron-down', size: 16 -%}
+              </button>
+              <div class="dd-panel" id="dd-{{ section.id }}-{{ forloop.index }}" hidden>
+                <ul role="list" class="dd-list">
+                  {%- for child in link.links -%}
+                    {%- liquid
+                      assign desc = ''
+                      for line in desc_lines
+                        assign parts = line | strip | split: '='
+                        assign key = parts.first | strip | downcase
+                        assign child_title = child.title | downcase | strip
+                        if key == child_title
+                          assign desc = parts.last | strip
+                        endif
+                      endfor
+                    -%}
+                    <li class="{% render 'group-class', name: child.title %}">
+                      <a href="{{ child.url }}" class="dd-item"{% if child.active %} aria-current="page"{% endif %}>
+                        <span class="dd-name"><i class="svc-dot" aria-hidden="true"></i>{{ child.title }}</span>
+                        {%- if desc != blank -%}<span class="dd-desc">{{ desc }}</span>{%- endif -%}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                {%- if section.settings.dropdown_all_label != blank -%}
+                  <div class="dd-foot">
+                    <a href="{{ link.url }}" class="arrow-link">
+                      <span>{{ section.settings.dropdown_all_label }}</span>
+                      {%- render 'icon', name: 'arrow-right', size: 16 -%}
+                    </a>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" class="nav-link"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <div class="header-actions">
+        {%- if section.settings.show_search -%}
+          <button type="button" class="icon-btn" aria-label="{{ 'header.search' | t }}" data-open-search>
+            {%- render 'icon', name: 'search' -%}
+          </button>
+        {%- endif -%}
+        <a
+          href="{{ routes.cart_url }}"
+          class="icon-btn"
+          data-cart-link
+          data-label="{{ 'header.cart_label' | t: count: '[n]' }}"
+          aria-label="{{ 'header.cart_label' | t: count: cart_count }}"
+        >
+          {%- render 'icon', name: 'bag' -%}
+          <span class="count mono" data-cart-count{% if cart_count == 0 %} hidden{% endif %}>{{ cart_count }}</span>
+        </a>
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ cta_url }}" class="btn btn-primary btn-sm hide-md"><span>{{ section.settings.cta_label }}</span></a>
+        {%- endif -%}
+        <button type="button" class="icon-btn show-md" aria-label="{{ 'header.open_menu' | t }}" aria-expanded="false" data-open-menu>
+          {%- render 'icon', name: 'menu' -%}
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <mobile-menu hidden>
+    <div class="sheet-layer">
+      <div class="sheet color-scheme-1" role="dialog" aria-modal="true" aria-label="{{ 'header.menu' | t }}">
+        <div class="sheet-head">
+          {{ logo }}
+          <button type="button" class="icon-btn" aria-label="{{ 'header.close_menu' | t }}" data-close>
+            {%- render 'icon', name: 'x' -%}
+          </button>
+        </div>
+        <nav aria-label="{{ 'header.mobile_nav' | t }}" class="sheet-nav">
+          {%- if section.settings.mobile_home_label != blank -%}
+            <a href="{{ routes.root_url }}">{{ section.settings.mobile_home_label }}</a>
+          {%- endif -%}
+          {%- for link in menu.links -%}
+            <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <div class="sheet-sub">
+                {%- for child in link.links -%}
+                  {%- liquid
+                    assign desc = ''
+                    for line in desc_lines
+                      assign parts = line | strip | split: '='
+                      assign key = parts.first | strip | downcase
+                      assign child_title = child.title | downcase | strip
+                      if key == child_title
+                        assign desc = parts.last | strip
+                      endif
+                    endfor
+                  -%}
+                  <a href="{{ child.url }}" class="{% render 'group-class', name: child.title %}">
+                    <i class="svc-dot" aria-hidden="true"></i>
+                    {{ child.title }}
+                    {%- if desc != blank %} <span>{{ desc }}</span>{% endif -%}
+                  </a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+        {%- if section.settings.mobile_cta_label != blank -%}
+          <a href="{{ mobile_cta_url }}" class="btn btn-primary sheet-cta">
+            <span>{{ section.settings.mobile_cta_label }}</span>
+            {%- render 'icon', name: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </mobile-menu>
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+  {%- endfor -%}
+</site-header>
+
+{%- if section.settings.show_search -%}
+  {%- liquid
+    assign quick_menu = section.settings.search_menu
+    if quick_menu == blank
+      assign quick_menu = menu
+    endif
+  -%}
+  <search-dialog
+    hidden
+    data-pages-label="{{ section.settings.search_pages_label | escape }}"
+    data-products-label="{{ section.settings.search_products_label | escape }}"
+    data-empty="{{ section.settings.search_empty | escape }}"
+    data-search-url="{{ routes.search_url }}"
+  >
+    <script type="application/json" data-quick>
+      [
+        {%- assign first = true -%}
+        {%- for link in quick_menu.links -%}
+          {%- unless first %},{% endunless -%}{%- assign first = false -%}
+          {"t": {{ link.title | json }}, "u": {{ link.url | json }}, "group": {{ section.settings.search_pages_label | json }}, "featured": {% if forloop.index <= 5 %}true{% else %}false{% endif %}}
+          {%- for child in link.links -%}
+            ,{"t": {{ child.title | json }}, "u": {{ child.url | json }}, "group": {{ section.settings.search_pages_label | json }}, "featured": false}
+          {%- endfor -%}
+        {%- endfor -%}
+      ]
+    </script>
+    <template data-arrow>{%- render 'icon', name: 'arrow-right', size: 16 -%}</template>
+    <div class="sheet-layer is-search">
+      <div class="search-panel color-scheme-1" role="dialog" aria-modal="true" aria-label="{{ 'header.search' | t }}">
+        <div class="search-field">
+          {%- render 'icon', name: 'search' -%}
+          <input
+            id="site-search-{{ section.id }}"
+            type="search"
+            placeholder="{{ section.settings.search_placeholder | escape }}"
+            aria-label="{{ 'header.search' | t }}"
+            aria-controls="search-results-{{ section.id }}"
+            autocomplete="off"
+          >
+          <button type="button" class="icon-btn icon-btn-sm" aria-label="{{ 'header.close_search' | t }}" data-close>
+            {%- render 'icon', name: 'x', size: 16 -%}
+          </button>
+        </div>
+        <ul class="search-results" id="search-results-{{ section.id }}" role="listbox" aria-label="{{ 'header.results' | t }}"></ul>
+        {%- if section.settings.search_hint != blank -%}
+          <p class="search-hint t-meta">{{ section.settings.search_hint | replace: '[taste]', '<kbd>/</kbd>' }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </search-dialog>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Header",
+  "class": "ni-header-section",
+  "enabled_on": { "groups": ["header"] },
   "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo-Bild", "info": "Ohne Bild wird das Wort-Logo mit Punkt gezeigt." },
+    { "type": "range", "id": "logo_width", "label": "Breite des Logo-Bilds", "min": 60, "max": 240, "step": 4, "unit": "px", "default": 160 },
+    { "type": "text", "id": "logo_text", "label": "Wort-Logo", "default": "NetImpulse" },
+    { "type": "text", "id": "logo_suffix", "label": "Wort-Logo Zusatz", "default": "marketing" },
+    { "type": "header", "content": "Menü" },
+    { "type": "link_list", "id": "menu", "label": "Menü", "default": "main-menu", "info": "Menüpunkte mit Unterpunkten werden zum Dropdown. Ein Link auf dieselbe Seite wie der Button wird nicht doppelt gezeigt." },
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "textarea",
+      "id": "menu_descriptions",
+      "label": "Untertitel im Dropdown",
+      "info": "Eine Zeile pro Unterpunkt: Name = Untertitel",
+      "default": "SEO = Suchmaschinenoptimierung\nSEA = Google Ads\nSMM = Social Media Marketing\nGEO = Generative Engine Optimization\nWeb design = Webdesign und Shopify\nWebdesign = Webdesign und Shopify\nKI-Automation = KI und Automatisierung"
     },
-    {
-      "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
-    }
-  ]
+    { "type": "text", "id": "dropdown_all_label", "label": "Link unten im Dropdown", "default": "Alle Leistungen und Preise" },
+    { "type": "text", "id": "cta_label", "label": "Button", "default": "Kontakt" },
+    { "type": "url", "id": "cta_link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite aus den Theme-Einstellungen" },
+    { "type": "header", "content": "Mobile-Menü" },
+    { "type": "text", "id": "mobile_home_label", "label": "Link zur Startseite", "default": "Start" },
+    { "type": "text", "id": "mobile_cta_label", "label": "Button", "default": "Kostenloses Erstgespräch" },
+    { "type": "url", "id": "mobile_cta_link", "label": "Button-Link" },
+    { "type": "header", "content": "Suche" },
+    { "type": "checkbox", "id": "show_search", "label": "Suche zeigen", "default": true },
+    { "type": "link_list", "id": "search_menu", "label": "Schnellzugriff", "info": "Wird gezeigt, bevor jemand tippt. Ohne Auswahl: das Menü oben." },
+    { "type": "text", "id": "search_placeholder", "label": "Platzhalter", "default": "Seiten und Themes durchsuchen" },
+    { "type": "text", "id": "search_pages_label", "label": "Gruppe Seiten", "default": "Seiten" },
+    { "type": "text", "id": "search_products_label", "label": "Gruppe Produkte", "default": "Themes" },
+    { "type": "text", "id": "search_empty", "label": "Keine Treffer", "info": "[q] steht für den Suchbegriff", "default": "Nichts gefunden für „[q]“. Versuch es mit „Shopify“, „SEO“ oder einer Branche." },
+    { "type": "text", "id": "search_hint", "label": "Hinweis unten", "info": "[taste] steht für die Taste /", "default": "Taste [taste] öffnet die Suche überall" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "blocks": [{ "type": "@app" }]
 }
 {% endschema %}

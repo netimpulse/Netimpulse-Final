@@ -1,0 +1,165 @@
+{%- comment -%}
+  Header der Startseite: nur Video-Fläche. Ohne Video läuft die Aufbau-Animation (Port von HeroBuild):
+  Ein Shop setzt sich zusammen, dann docken SEO, SEA, SMM und GEO an. Bei reduzierter Bewegung steht das fertige Bild.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign phases = s.phases | newline_to_br | split: '<br />'
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.hero-media', tablet: 100, mobile: 100 -%}
+
+<section
+  class="hero-media {% render 'scheme-classes', scheme: s.color_scheme %}"
+  id="s-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  aria-labelledby="intro-title-{{ section.id }}"
+>
+  <h1 id="intro-title-{{ section.id }}" class="sr-only">{{ s.heading }}</h1>
+  <div class="hero-media-inner">
+    {%- if s.video != blank -%}
+      <hero-video class="hero-video" role="group" aria-label="{{ s.video_label | escape }}">
+        {{ s.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false, image_size: '1600x' }}
+        <button type="button" class="hb-pause" data-label-pause="{{ 'motion.pause_video' | t }}" data-label-play="{{ 'motion.play_video' | t }}" aria-label="{{ 'motion.pause_video' | t }}">
+          <span data-icon="pause">{%- render 'icon', name: 'pause', size: 16 -%}</span>
+          <span data-icon="play" hidden>{%- render 'icon', name: 'play', size: 16 -%}</span>
+        </button>
+      </hero-video>
+    {%- else -%}
+      <hero-build class="hb-wrap" data-steps="10" data-ms="850" data-hold="3400">
+        <scaled-frame width="880" max-scale="1.35">
+          <div class="scaled-inner">
+            <div class="hb" aria-hidden="true">
+              <div class="hb-browser">
+                <div class="hb-url">
+                  <span class="hb-dots"><i></i><i></i><i></i></span>
+                  <span class="hb-addr">{{ s.browser_url }}</span>
+                  <span class="hb-live"><i></i>{{ s.live_label }}</span>
+                </div>
+                <div class="hb-screen">
+                  <div class="hb-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="hb-shop">
+                    {%- if s.screen_image != blank -%}
+                      <div class="sf-shot-wrap" data-section="hero">
+                        {{ s.screen_image | image_url: width: 900 | image_tag: loading: 'eager', alt: '', sizes: '380px' }}
+                      </div>
+                    {%- else -%}
+                      <scaled-frame width="1180">
+                        <div class="scaled-inner">
+                          {%- render 'storefront-skeleton', device: 'desktop', bg: s.shop_bg, fg: s.shop_fg, accent: s.shop_accent -%}
+                        </div>
+                      </scaled-frame>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+
+              <svg class="hb-lines" viewBox="0 0 880 600" aria-hidden="true">
+                <path class="l-seo" d="M226 150 C 250 150, 236 190, 262 190" pathLength="1" />
+                <path class="l-sea" d="M236 400 C 256 400, 240 360, 262 360" pathLength="1" />
+                <path class="l-smm" d="M656 120 C 630 120, 642 170, 618 170" pathLength="1" />
+                <path class="l-geo" d="M646 410 C 626 410, 640 380, 618 380" pathLength="1" />
+              </svg>
+
+              <div class="hb-card c-seo">
+                <span class="hb-tag">{{ s.seo_label }}</span>
+                <span class="hb-search">{%- render 'icon', name: 'search', size: 16 -%}{{ s.seo_query }}</span>
+                <span class="hb-res is-own">
+                  <span class="mono">1</span>
+                  <span><small>{{ s.seo_own_url }}</small>{{ s.seo_own_title }}</span>
+                </span>
+                <span class="hb-res">
+                  <span class="mono">2</span>
+                  <span><small>{{ s.seo_other_url }}</small>{{ s.seo_other_title }}</span>
+                </span>
+              </div>
+
+              <div class="hb-card c-sea">
+                <span class="hb-tag">{{ s.sea_label }}</span>
+                <small class="hb-meta">{{ s.sea_meta }}</small>
+                <strong class="hb-ad">{{ s.sea_title }}</strong>
+                <span class="hb-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              </div>
+
+              <div class="hb-card c-smm">
+                <span class="hb-tag">{{ s.smm_label }}</span>
+                <span class="hb-post"></span>
+                <strong>{{ s.smm_title }}</strong>
+                <small class="hb-meta">{{ s.smm_meta }}</small>
+              </div>
+
+              <div class="hb-card c-geo">
+                <span class="hb-tag">{{ s.geo_label }}</span>
+                <small class="hb-meta">{{ s.geo_engine }}</small>
+                <span class="hb-answer">{{ s.geo_answer }}<sup>1</sup>.</span>
+                <span class="hb-src"><span class="mono">1</span>{{ s.geo_source }}</span>
+              </div>
+            </div>
+          </div>
+        </scaled-frame>
+
+        <p class="sr-only" aria-live="polite" data-phase></p>
+        <script type="application/json" data-phases>
+          [
+            {%- for p in phases -%}
+              {%- assign t = p | strip -%}
+              {{ t | json }}{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]
+        </script>
+        <button type="button" class="hb-pause" data-label-pause="{{ 'motion.pause' | t }}" data-label-play="{{ 'motion.play' | t }}" aria-label="{{ 'motion.pause' | t }}">
+          <span data-icon="pause">{%- render 'icon', name: 'pause', size: 16 -%}</span>
+          <span data-icon="play" hidden>{%- render 'icon', name: 'play', size: 16 -%}</span>
+        </button>
+      </hero-build>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'hero-build.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Header-Animation",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
+    { "type": "text", "id": "heading", "label": "Überschrift für Screenreader und Suchmaschinen", "info": "Wird nicht sichtbar angezeigt.", "default": "NetImpulse: Shopify-Shops und Websites, die gefunden werden. Digitalagentur aus Gießen für Shopify, Webdesign, SEO, GEO, Google Ads und KI-Automation." },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Video" },
+    { "type": "header", "content": "Video" },
+    { "type": "video", "id": "video", "label": "Video", "info": "Ersetzt die Aufbau-Animation, sobald ein Video gewählt ist." },
+    { "type": "text", "id": "video_label", "label": "Beschreibung des Videos", "default": "Video: Ein Shop setzt sich zusammen" },
+    { "type": "header", "content": "Aufbau-Animation" },
+    { "type": "textarea", "id": "phases", "label": "Phasen (für Screenreader)", "info": "Vier Zeilen, eine pro Phase", "default": "Struktur planen\nGestalten\nIn Shopify bauen\nSichtbar machen" },
+    { "type": "text", "id": "browser_url", "label": "Adresse im Browserfenster", "default": "deine-domain.de" },
+    { "type": "text", "id": "live_label", "label": "Live-Hinweis", "default": "Live" },
+    { "type": "image_picker", "id": "screen_image", "label": "Bild im Browserfenster", "info": "Optional, zum Beispiel ein langer Screenshot. Ohne Bild erscheint ein neutraler Shop-Aufbau." },
+    { "type": "color", "id": "shop_bg", "label": "Platzhalter-Shop: Hintergrund", "default": "#F3F1EC" },
+    { "type": "color", "id": "shop_fg", "label": "Platzhalter-Shop: Text", "default": "#1D2320" },
+    { "type": "color", "id": "shop_accent", "label": "Platzhalter-Shop: Akzent", "default": "#C2552A" },
+    { "type": "header", "content": "Karte SEO" },
+    { "type": "text", "id": "seo_label", "label": "Etikett", "default": "SEO" },
+    { "type": "text", "id": "seo_query", "label": "Suchanfrage", "default": "schreinerei gießen" },
+    { "type": "text", "id": "seo_own_url", "label": "Eigenes Ergebnis: Adresse", "default": "deine-domain.de" },
+    { "type": "text", "id": "seo_own_title", "label": "Eigenes Ergebnis: Titel", "default": "Möbel nach Maß aus Gießen" },
+    { "type": "text", "id": "seo_other_url", "label": "Zweites Ergebnis: Adresse", "default": "branchenbuch-beispiel.de" },
+    { "type": "text", "id": "seo_other_title", "label": "Zweites Ergebnis: Titel", "default": "Schreinereien in Gießen" },
+    { "type": "header", "content": "Karte SEA" },
+    { "type": "text", "id": "sea_label", "label": "Etikett", "default": "SEA" },
+    { "type": "text", "id": "sea_meta", "label": "Zeile über der Anzeige", "default": "Gesponsert · deine-domain.de" },
+    { "type": "text", "id": "sea_title", "label": "Anzeigentitel", "default": "Esstisch nach Maß | Schreinerei in Gießen" },
+    { "type": "header", "content": "Karte SMM" },
+    { "type": "text", "id": "smm_label", "label": "Etikett", "default": "SMM" },
+    { "type": "text", "id": "smm_title", "label": "Beitrag", "default": "Ein Tag in der Werkstatt" },
+    { "type": "text", "id": "smm_meta", "label": "Zeile unter dem Beitrag", "default": "Reel · geplant für Montag" },
+    { "type": "header", "content": "Karte GEO" },
+    { "type": "text", "id": "geo_label", "label": "Etikett", "default": "GEO" },
+    { "type": "text", "id": "geo_engine", "label": "KI-System", "default": "ChatGPT" },
+    { "type": "textarea", "id": "geo_answer", "label": "Antwort", "default": "… baut unter anderem die Schreinerei auf deine-domain.de Esstische nach Maß" },
+    { "type": "text", "id": "geo_source", "label": "Quelle", "default": "deine-domain.de" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [{ "name": "Header-Animation" }]
+}
+{% endschema %}

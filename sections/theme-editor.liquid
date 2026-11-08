@@ -1,0 +1,195 @@
+{%- comment -%}
+  Themes, live ausprobiert: links die Auswahl, rechts ein Theme-Editor mit Sektionsliste und Vorschau.
+  Pro Theme ein Block. Mit Theme-Produkt kommen Name, Preis, Farben, Screenshots und Sprungmarken aus dem Produkt.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign outline_default = settings.preview_outline | newline_to_br | split: '<br />'
+  assign skel_keys = 'announcement,header,hero,collection,feature,newsletter,footer' | split: ','
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="s-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="themes-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <theme-editor class="themes-grid" data-selected="2" data-outline-default="{{ outline_default | join: '|' | escape }}">
+      <div class="themes-copy">
+        {%- if s.heading != blank -%}<h2 id="themes-title-{{ section.id }}" class="ch-title">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<p class="ch-lead">{{ s.text }}</p>{%- endif -%}
+        <ul class="theme-pick" role="radiogroup" aria-label="{{ s.pick_label | escape }}">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign b = block.settings
+              assign p = b.product
+              assign v = nil
+              assign name = b.name
+              assign branche = b.branche
+              assign price = b.price
+              assign c_bg = b.swatch_bg
+              assign c_ac = b.swatch_accent
+              assign url = b.link
+              assign preview = b.preview_link
+              if p != blank
+                assign v = p.selected_or_first_available_variant
+                assign name = p.title
+                assign branche = p.metafields.theme.branche.value | default: p.type
+                assign price = p.price | money_without_trailing_zeros
+                assign url = p.url
+                assign preview = p.url | append: '?view=vorschau'
+                if v.metafields.theme.farbe_grund.value != blank
+                  assign c_bg = v.metafields.theme.farbe_grund.value
+                endif
+                if v.metafields.theme.farbe_akzent.value != blank
+                  assign c_ac = v.metafields.theme.farbe_akzent.value
+                endif
+              endif
+            -%}
+            <li {{ block.shopify_attributes }}>
+              <button
+                type="button"
+                role="radio"
+                aria-checked="{% if forloop.first %}true{% else %}false{% endif %}"
+                class="{% if forloop.first %}is-on{% endif %}"
+                data-index="{{ forloop.index0 }}"
+                data-name="{{ name | escape }}"
+                data-branche="{{ branche | escape }}"
+                data-price="{{ price | escape }}"
+                data-url="{{ url | escape }}"
+                data-preview="{{ preview | escape }}"
+              >
+                <span class="swatch" aria-hidden="true"><i style="background: {{ c_bg }}"></i><i style="background: {{ c_ac }}"></i></span>
+                <span class="pick-name">{{ name }}</span>
+                <span class="pick-branche">{{ branche }}</span>
+                <span class="pick-price mono">{{ price }}</span>
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="actions">
+          {%- assign first = section.blocks.first -%}
+          <a href="{{ first.settings.link | default: '#' }}" class="btn btn-primary" data-detail-link data-label="{{ s.detail_label | escape }}">
+            <span data-detail-text>{{ s.detail_label | replace: '[name]', first.settings.name }}</span>
+            {%- render 'icon', name: 'arrow-right' -%}
+          </a>
+          {%- if s.store_label != blank -%}
+            <a href="{{ s.store_link | default: routes.all_products_collection_url }}" class="btn btn-secondary"><span>{{ s.store_label }}</span></a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="themes-editor">
+        <div class="editor-wrap">
+          <div class="editor is-desktop">
+            <div class="editor-bar">
+              <div class="editor-title">
+                <span class="logo-dot" aria-hidden="true"></span>
+                <strong data-editor-name>{{ first.settings.name }}</strong>
+                <span class="t-meta">{{ s.page_label }}</span>
+              </div>
+              <div class="editor-tools">
+                <div class="seg" role="radiogroup" aria-label="{{ s.device_label | escape }}">
+                  <button type="button" role="radio" aria-checked="true" class="seg-btn is-on" data-device="desktop" title="{{ s.desktop_label | escape }}" aria-label="{{ s.desktop_label | escape }}">{%- render 'icon', name: 'monitor', size: 16 -%}</button>
+                  <button type="button" role="radio" aria-checked="false" class="seg-btn" data-device="mobile" title="{{ s.mobile_label | escape }}" aria-label="{{ s.mobile_label | escape }}">{%- render 'icon', name: 'smartphone', size: 16 -%}</button>
+                </div>
+                {%- if s.preview_label != blank -%}
+                  <a href="#" class="btn btn-ghost btn-sm" data-preview-link>
+                    {%- render 'icon', name: 'eye', size: 16 -%}
+                    <span>{{ s.preview_label }}</span>
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="editor-body">
+              <nav class="editor-outline" aria-label="{{ s.outline_title | escape }}">
+                <p class="outline-title">{{ s.outline_title }}</p>
+                <ul role="list" data-outline-list></ul>
+              </nav>
+              <div class="editor-canvas">
+                <div class="desk" data-frame>
+                  <div class="editor-viewport" role="img" aria-label="{{ s.viewport_label | escape }}" data-viewport>
+                    <div aria-hidden="true" data-content></div>
+                    <div class="sel-box" aria-hidden="true" hidden><span class="sel-tag"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- if s.badge != blank -%}<p class="t-meta te-badge">{{ s.badge }}</p>{%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign b = block.settings
+          assign p = b.product
+          assign v = nil
+          assign anchors = nil
+          if p != blank
+            assign v = p.selected_or_first_available_variant
+            assign anchors = p.metafields.theme.sprungmarken.value
+          endif
+        -%}
+        <template data-view="{{ forloop.index0 }}-desktop">{%- render 'theme-shot', variant: v, device: 'desktop', image: b.image_desktop, width: 1180, sizes: '700px', bg: b.swatch_bg, accent: b.swatch_accent -%}</template>
+        <template data-view="{{ forloop.index0 }}-mobile">{%- render 'theme-shot', variant: v, device: 'mobile', image: b.image_mobile, width: 390, sizes: '250px', bg: b.swatch_bg, accent: b.swatch_accent -%}</template>
+        <script type="application/json" data-anchors="{{ forloop.index0 }}">{% if anchors != blank %}{{ anchors | json }}{% else %}null{% endif %}</script>
+      {%- endfor -%}
+      <script type="application/json" data-skel-keys>{{ skel_keys | json }}</script>
+    </theme-editor>
+  </div>
+</section>
+
+<script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Theme-Editor",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Themes" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Themes, live ausprobiert" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Theme- und Section-Packs für verschiedene Branchen. Wähl ein Theme, klick dich durch die Sektionen und schau es dir auf dem Handy an, genau wie später im Shopify-Editor." },
+    { "type": "text", "id": "pick_label", "label": "Beschreibung der Auswahl für Screenreader", "default": "Theme in der Vorschau" },
+    { "type": "text", "id": "detail_label", "label": "Button zum Theme", "info": "[name] steht für den Namen des Themes", "default": "[name] ansehen" },
+    { "type": "text", "id": "store_label", "label": "Zweiter Button", "default": "Theme Store" },
+    { "type": "url", "id": "store_link", "label": "Zweiter Button: Link" },
+    { "type": "header", "content": "Editor" },
+    { "type": "text", "id": "page_label", "label": "Seite im Editor", "default": "Startseite" },
+    { "type": "text", "id": "badge", "label": "Kennzeichnung unter dem Editor", "info": "Solange die Themes Beispiele sind", "default": "Beispiel-Themes, Namen und Preise sind Platzhalter" },
+    { "type": "text", "id": "outline_title", "label": "Titel der Sektionsliste", "default": "Sektionen" },
+    { "type": "text", "id": "device_label", "label": "Gerätewahl für Screenreader", "default": "Vorschau-Gerät" },
+    { "type": "text", "id": "desktop_label", "label": "Desktop", "default": "Desktop" },
+    { "type": "text", "id": "mobile_label", "label": "Handy", "default": "Mobil" },
+    { "type": "text", "id": "preview_label", "label": "Vorschau-Link", "default": "Vorschau" },
+    { "type": "text", "id": "viewport_label", "label": "Beschreibung der Vorschau für Screenreader", "info": "[name] steht für das Theme, [sektion] für die gewählte Sektion", "default": "Vorschau des Themes [name], Sektion [sektion] ausgewählt" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "theme",
+      "name": "Theme",
+      "limit": 8,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Theme-Produkt", "info": "Liefert Name, Preis, Farben, Screenshots und Sprungmarken. Die Felder darunter gelten nur ohne Produkt." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Werkbank" },
+        { "type": "text", "id": "branche", "label": "Branche", "default": "Handwerk und Betriebe" },
+        { "type": "text", "id": "price", "label": "Preis", "default": "290 €" },
+        { "type": "color", "id": "swatch_bg", "label": "Farbe Grund", "default": "#F3F1EC" },
+        { "type": "color", "id": "swatch_accent", "label": "Farbe Akzent", "default": "#C2552A" },
+        { "type": "url", "id": "link", "label": "Link zum Theme" },
+        { "type": "url", "id": "preview_link", "label": "Link zur Vorschau" },
+        { "type": "image_picker", "id": "image_desktop", "label": "Screenshot Desktop" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Screenshot Handy" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Theme-Editor", "blocks": [{ "type": "theme" }, { "type": "theme" }] }]
+}
+{% endschema %}

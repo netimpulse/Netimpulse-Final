@@ -1,0 +1,45 @@
+/* NetImpulse Theme – Ergänzungen für Shopify. Die Gestaltung selbst steht in base.css (aus dem Prototyp). */
+
+[hidden] { display: none !important; }
+site-header, contact-band, copy-value, outline-spy { display: block; }
+copy-value { display: inline-flex; }
+mobile-menu, search-dialog { display: block; }
+
+/* Header bleibt oben: sticky auf dem Section-Wrapper (Klasse aus dem Schema), sonst endet sticky am Wrapper */
+.ni-header-section { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; }
+.logo-img { height: auto; max-height: 40px; width: auto; }
+
+/* Suche: Treffer sind Links, das Layout bleibt das der Listeneinträge */
+.search-item > a { display: contents; color: inherit; }
+
+/* Gruppe Akzent 2 für Leistungen aus den Einstellungen */
+.sk-a2 { --sk-a: var(--a2); --sk-ink: var(--a2-ink); --sk-dot: var(--a2); --sk-accent: var(--a2); }
+
+/* Farbschemata: sehr dunkle Schemata wie der Footer */
+.tone-deep.is-night { background-color: var(--night-deep); }
+
+/* Bilder aus Shopify füllen ihre Rahmen */
+.fill-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Platzhalter-Shop: gleiche Struktur wie die Shop-Vorschau im Prototyp, Text als Balken ---------- */
+scaled-frame { display: block; }
+.skl { display: block; height: 0.62em; width: var(--w, 100%); max-width: 100%; border-radius: 999px; background: currentColor; opacity: 0.16; }
+.sf-h .skl { height: 0.78em; opacity: 0.85; margin-block: 0.14em; }
+.sf-btn .skl { width: 6em; opacity: 0.5; height: 0.6em; }
+.sf-nav .skl, .sf-footer .skl { width: 4.5em; }
+.sf-skel .sf-hero-art { min-height: 100%; }
+.sf-skel .sf-card-art { aspect-ratio: 1 / 1; background: var(--s-alt); }
+.sf-skel .sf-feature-art { background: var(--s-alt); min-height: 320px; }
+.sf-skel .sf-input .skl { width: 8em; }
+.sf-shot { display: block; width: 100%; height: auto; }
+
+/* Header-Animation: schmale Fassung ohne Verbindungslinien */
+.hb.is-compact .hb-lines { display: none; }
+.hb-shop .sf-shot-wrap { position: absolute; inset: 0; }
+.hb-shop .sf-shot-wrap img { width: 100%; height: auto; display: block; }
+
+/* ---------- Richtlinien: Shopify rendert den Text, das Theme gibt den Rahmen ---------- */
+.policy-body .shopify-policy__container { max-width: none; margin: 0; padding: 0; }
+.policy-body .shopify-policy__title { text-align: left; margin-bottom: 24px; }
+.policy-body .shopify-policy__title h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 3.8vw, 52px); line-height: 1.06; letter-spacing: -0.025em; text-wrap: balance; color: var(--fg); margin: 0; }
+policy-toc { display: contents; }

@@ -1,0 +1,34 @@
+{%- comment -%}
+  Layout der Theme-Vorschau: ohne Header und Footer, nur die Vorschau-Leiste und das Gerät.
+  Genutzt von templates/product.vorschau.json (Aufruf: /products/<handle>?view=vorschau).
+{%- endcomment -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}"{% unless settings.dark_mode %} data-theme="light"{% endunless %}>
+  <head>
+    {%- render 'meta-tags' -%}
+    <meta name="robots" content="noindex">
+    {{ 'work-sans-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {%- render 'css-variables' -%}
+    <script>
+      window.NI_SHOP = {
+        moneyFormat: {{ shop.money_format | json }},
+        cartUrl: {{ routes.cart_url | json }},
+        cartAddUrl: {{ routes.cart_add_url | json }},
+        cartChangeUrl: {{ routes.cart_change_url | json }},
+        cartUpdateUrl: {{ routes.cart_update_url | json }},
+        predictiveUrl: {{ routes.predictive_search_url | json }},
+        searchUrl: {{ routes.search_url | json }}
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+  <body class="template-{{ template.name }} is-preview">
+    <main id="main" class="main is-bare" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {%- render 'cart-toast' -%}
+  </body>
+</html>

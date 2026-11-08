@@ -1,18 +1,77 @@
-{% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+{%- comment -%}
+  Schriften (lokal im Theme, kein Google-Server), Akzentfarben und Farbschemata.
+  Die Grundwerte stehen in base.css (Graphit G3 aus dem Prototyp), die Einstellungen überschreiben sie.
+{%- endcomment -%}
+{%- liquid
+  assign latin = 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD'
+  assign latin_ext = 'U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF'
+-%}
+{%- capture scheme_css -%}
+  {%- for scheme in settings.color_schemes -%}
+    {%- liquid
+      assign bg = scheme.settings.background
+      assign fg = scheme.settings.text
+      assign brightness = bg | color_brightness
+    -%}
+    .color-{{ scheme.id }} {
+      --scheme-bg: {{ bg }};
+      --scheme-fg: {{ fg }};
+      --btn-bg: {{ scheme.settings.button }};
+      --btn-fg: {{ scheme.settings.button_label }};
+      --btn-hover: {{ scheme.settings.button | color_darken: 6 }};
+      {%- if brightness < 128 %}
+      --night: {{ bg }};
+      --night-deep: {{ bg }};
+      --night-2: {{ bg | color_mix: fg, 96 }};
+      --night-line: {{ bg | color_mix: fg, 87 }};
+      --on-night: {{ fg }};
+      --on-night-2: {{ fg | color_mix: bg, 70 }};
+      --on-night-3: {{ fg | color_mix: bg, 52 }};
+      --hero-bg: {{ bg }};
+      --hero-fg: {{ fg }};
+      --hero-fg-2: {{ fg | color_mix: bg, 70 }};
+      --cta-bg: {{ bg }};
+      --foot-bg: {{ bg }};
+      --foot-fg: {{ fg }};
+      --foot-fg-2: {{ fg | color_mix: bg, 70 }};
+      --foot-line: {{ bg | color_mix: fg, 87 }};
+      {%- else %}
+      --fg: {{ fg }};
+      --fg-2: {{ fg | color_mix: bg, 71 }};
+      --fg-3: {{ fg | color_mix: bg, 63 }};
+      {%- endif %}
+      background-color: {{ bg }};
+      {%- if scheme.settings.background_gradient != blank %}
+      background-image: {{ scheme.settings.background_gradient }};
+      {%- endif %}
+      color: {{ fg }};
+    }
+  {%- endfor -%}
+{%- endcapture -%}
+{%- style -%}
+  @font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 600; font-stretch: 100%; font-display: swap; src: url({{ 'bricolage-latin.woff2' | asset_url }}) format("woff2"); unicode-range: {{ latin }}; }
+  @font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 600; font-stretch: 100%; font-display: swap; src: url({{ 'bricolage-latin-ext.woff2' | asset_url }}) format("woff2"); unicode-range: {{ latin_ext }}; }
+  @font-face { font-family: "Work Sans"; font-style: normal; font-weight: 400 600; font-display: swap; src: url({{ 'work-sans-latin.woff2' | asset_url }}) format("woff2"); unicode-range: {{ latin }}; }
+  @font-face { font-family: "Work Sans"; font-style: normal; font-weight: 400 600; font-display: swap; src: url({{ 'work-sans-latin-ext.woff2' | asset_url }}) format("woff2"); unicode-range: {{ latin_ext }}; }
+  @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400 500; font-display: swap; src: url({{ 'jetbrains-mono-latin.woff2' | asset_url }}) format("woff2"); unicode-range: {{ latin }}; }
+  @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400 500; font-display: swap; src: url({{ 'jetbrains-mono-latin-ext.woff2' | asset_url }}) format("woff2"); unicode-range: {{ latin_ext }}; }
 
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --a1: {{ settings.accent_1 }};
+    --a1-ink: {{ settings.accent_1_deep }};
+    --a1-soft: {{ settings.accent_1_light }};
+    --a1-hover: {{ settings.accent_1 | color_darken: 6 }};
+    --a2: {{ settings.accent_2 }};
+    --a2-ink: {{ settings.accent_2_deep }};
+    --a2-hover: {{ settings.accent_2 | color_darken: 6 }};
   }
-{% endstyle %}
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --a1-hover: {{ settings.accent_1 | color_lighten: 8 }}; }
+  }
+
+  {% if settings.dark_mode -%}
+    @media (prefers-color-scheme: light) { {{ scheme_css }} }
+  {%- else -%}
+    {{ scheme_css }}
+  {%- endif %}
+{%- endstyle -%}

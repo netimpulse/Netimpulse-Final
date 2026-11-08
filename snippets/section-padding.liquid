@@ -1,0 +1,19 @@
+{%- comment -%}
+  Abstand oben/unten einer Section aus den Einstellungen.
+  Der Wert gilt für den Desktop; Tablet und Handy übernehmen höchstens die Werte aus dem Design (Standard 80 / 64 px).
+  Aufruf: {% render 'section-padding', id: section.id, top: section.settings.padding_top, bottom: section.settings.padding_bottom, selector: '.section-pad' %}
+{%- endcomment -%}
+{%- liquid
+  assign sel = selector | default: '.section-pad'
+  assign cap_t = tablet | default: 80
+  assign cap_m = mobile | default: 64
+  assign top_t = top | at_most: cap_t
+  assign bottom_t = bottom | at_most: cap_t
+  assign top_m = top | at_most: cap_m
+  assign bottom_m = bottom | at_most: cap_m
+-%}
+{%- style -%}
+  #shopify-section-{{ id }} {{ sel }} { padding-top: {{ top }}px; padding-bottom: {{ bottom }}px; }
+  @media (max-width: 1000px) { #shopify-section-{{ id }} {{ sel }} { padding-top: {{ top_t }}px; padding-bottom: {{ bottom_t }}px; } }
+  @media (max-width: 560px) { #shopify-section-{{ id }} {{ sel }} { padding-top: {{ top_m }}px; padding-bottom: {{ bottom_m }}px; } }
+{%- endstyle -%}

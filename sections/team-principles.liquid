@@ -1,0 +1,91 @@
+{%- comment -%} Team-Abschnitt der Startseite: Überschrift, Prinzipien und die Personen in einer Reihe. {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign principles = section.blocks | where: 'type', 'principle'
+  assign people = section.blocks | where: 'type', 'person'
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+
+<section
+  id="s-{{ section.id }}"
+  data-outline="{{ s.outline_label | escape }}"
+  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  {% if s.heading != blank %}aria-labelledby="team-title-{{ section.id }}"{% endif %}
+>
+  <div class="wrap">
+    <div class="team-top">
+      <div class="sec-head">
+        {%- if s.heading != blank -%}<h2 id="team-title-{{ section.id }}" class="sec-title">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<p class="sec-lead">{{ s.text }}</p>{%- endif -%}
+      </div>
+      {%- if s.link_label != blank -%}
+        <a href="{{ s.link | default: '#' }}" class="arrow-link">
+          <span>{{ s.link_label }}</span>
+          {%- render 'icon', name: 'arrow-right', size: 16 -%}
+        </a>
+      {%- endif -%}
+    </div>
+    {%- if principles.size > 0 -%}
+      <ul class="principles" role="list">
+        {%- for block in principles -%}
+          <li class="principle" {{ block.shopify_attributes }}>
+            <h3 class="principle-t"><i aria-hidden="true"></i>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if people.size > 0 -%}
+      <ul class="people-row" role="list">
+        {%- for block in people -%}
+          <li class="person" {{ block.shopify_attributes }}>
+            {%- render 'portrait', name: block.settings.name, image: block.settings.image -%}
+            <div>
+              <p class="person-name">{{ block.settings.name }}</p>
+              <p class="t-meta">{{ block.settings.focus }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Team und Prinzipien",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-3" },
+    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Team" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Direkt. Klar. Ohne Umwege." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Bei NetImpulse arbeiten Strategie, Design, Marketing und Shopify-Umsetzung nah zusammen. So entstehen Websites, Kampagnen und Themes, die sich wie ein gemeinsames System anfühlen." },
+    { "type": "text", "id": "link_label", "label": "Link", "default": "Team kennenlernen" },
+    { "type": "url", "id": "link", "label": "Link-Ziel" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Prinzip",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Strategie statt Einzelmaßnahmen" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Wir starten mit der Frage, wo Sichtbarkeit, Vertrauen und Conversion gerade die größte Wirkung erzeugen." }
+      ]
+    },
+    {
+      "type": "person",
+      "name": "Person",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Niklas" },
+        { "type": "text", "id": "focus", "label": "Schwerpunkt", "default": "Online-Marketing und Shopify-Entwicklung" },
+        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Ohne Foto wird der Anfangsbuchstabe gezeigt." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Team und Prinzipien", "blocks": [{ "type": "principle" }, { "type": "person" }] }]
+}
+{% endschema %}

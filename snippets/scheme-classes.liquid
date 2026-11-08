@@ -1,0 +1,18 @@
+{%- comment -%}
+  Gibt die Klassen für ein Farbschema aus: color-scheme-x plus den passenden Ton aus dem Design
+  (tone-paper, tone-white, tone-dark is-night, tone-deep is-night). Dunkle Schemata bekommen is-night.
+  Aufruf: class="chapter {% render 'scheme-classes', scheme: section.settings.color_scheme %}"
+{%- endcomment -%}
+{%- liquid
+  assign brightness = scheme.settings.background | color_brightness
+  if brightness < 15
+    assign tone = 'tone-deep is-night'
+  elsif brightness < 128
+    assign tone = 'tone-dark is-night'
+  elsif brightness >= 252
+    assign tone = 'tone-white'
+  else
+    assign tone = 'tone-paper'
+  endif
+  echo 'color-' | append: scheme.id | append: ' ' | append: tone
+-%}
