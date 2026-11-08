@@ -1,0 +1,34 @@
+{%- comment -%}
+  Karte eines Theme-Produkts (Port von ThemeCard): Vorschau, Name, Branche, Preis, Farbstile, Link zur Live-Vorschau.
+  Parameter: product, heading_level (2 oder 3), preview_label
+{%- endcomment -%}
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign h = heading_level | default: 3
+  assign branche = product.metafields.theme.branche.value | default: product.type
+  assign preview_url = product.url | append: '?view=vorschau'
+-%}
+<article class="theme-card" data-type="{{ product.type | escape }}" data-price="{{ product.price }}" data-name="{{ product.title | escape }}">
+  <a href="{{ product.url }}" class="theme-thumb" aria-label="{{ product.title | escape }}" tabindex="-1">
+    {%- render 'theme-shot', variant: v, device: 'desktop', sizes: '(min-width: 1000px) 400px, (min-width: 640px) 50vw, 100vw' -%}
+  </a>
+  <div class="theme-meta">
+    <div>
+      <h{{ h }} class="theme-name"><a href="{{ product.url }}">{{ product.title }}</a></h{{ h }}>
+      {%- if branche != blank -%}<p class="theme-branche">{{ branche }}</p>{%- endif -%}
+    </div>
+    <span class="theme-price mono">{{ product.price | money_without_trailing_zeros }}</span>
+  </div>
+  <div class="theme-foot">
+    <span class="swatches" aria-label="{{ product.variants.size }} {{ swatch_label }}">
+      {%- for variant in product.variants -%}
+        {%- assign c_bg = variant.metafields.theme.farbe_grund.value -%}
+        {%- assign c_ac = variant.metafields.theme.farbe_akzent.value -%}
+        <span class="swatch" title="{{ variant.title | escape }}"><i style="background: {{ c_bg | default: '#eeeff0' }}"></i><i style="background: {{ c_ac | default: '#585b5f' }}"></i></span>
+      {%- endfor -%}
+    </span>
+    {%- if preview_label != blank -%}
+      <a href="{{ preview_url }}" class="arrow-link"><span>{{ preview_label }}</span>{%- render 'icon', name: 'arrow-up-right', size: 16 -%}</a>
+    {%- endif -%}
+  </div>
+</article>

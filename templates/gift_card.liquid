@@ -1,0 +1,23 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ 'gift_card.title' | t }} · {{ shop.name }}</title>
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {%- render 'css-variables' -%}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="page-hero">
+      <div class="wrap empty">
+        <h1 class="t-h2">{{ 'gift_card.title' | t }}</h1>
+        <p class="detail-price mono">{{ gift_card.balance | money }}</p>
+        <p class="t-body">{{ 'gift_card.code' | t }}: <span class="mono">{{ gift_card.code | format_code }}</span></p>
+        <button type="button" class="btn btn-secondary" onclick="window.print()"><span>{{ 'gift_card.print' | t }}</span></button>
+      </div>
+    </main>
+  </body>
+</html>

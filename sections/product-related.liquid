@@ -1,0 +1,47 @@
+{%- comment -%} Weitere Themes: andere Produkte aus der gewählten Kollektion, ohne das aktuelle. {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+{%- liquid
+  assign coll = s.collection
+  assign shown = 0
+-%}
+{%- if coll != blank and coll.products_count > 1 -%}
+  <section class="section section-soft section-pad {% render 'scheme-classes', scheme: s.color_scheme %}" aria-labelledby="others-title-{{ section.id }}">
+    <div class="wrap">
+      <div class="section-head is-split">
+        <h2 id="others-title-{{ section.id }}" class="t-h2">{{ s.heading }}</h2>
+        {%- if s.link_label != blank -%}
+          <a href="{{ coll.url }}" class="arrow-link"><span>{{ s.link_label }}</span>{%- render 'icon', name: 'arrow-right', size: 16 -%}</a>
+        {%- endif -%}
+      </div>
+      <div class="theme-grid">
+        {%- for item in coll.products -%}
+          {%- if item.id == product.id -%}{%- continue -%}{%- endif -%}
+          {%- if shown >= s.limit -%}{%- break -%}{%- endif -%}
+          {%- render 'theme-card', product: item, heading_level: 3, preview_label: s.preview_label, swatch_label: s.swatch_label -%}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Weitere Themes",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-3" },
+    { "type": "collection", "id": "collection", "label": "Kollektion" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Weitere Themes" },
+    { "type": "text", "id": "link_label", "label": "Link", "default": "Alle Themes" },
+    { "type": "range", "id": "limit", "label": "Anzahl", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "preview_label", "label": "Link zur Vorschau", "default": "Live-Vorschau" },
+    { "type": "text", "id": "swatch_label", "label": "Wort für Farbstile (Screenreader)", "default": "Stile" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "presets": [{ "name": "Weitere Themes" }]
+}
+{% endschema %}

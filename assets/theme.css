@@ -50,3 +50,19 @@ contact-form { display: grid; gap: 20px; }
 .form-errors { display: grid; gap: 4px; }
 .form-errors ul { padding-left: 18px; list-style: disc; }
 .form-foot .t-meta a, .t-meta a.text-link { color: var(--a1-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Suche als Seite */
+.search-page { display: grid; gap: 24px; max-width: 760px; }
+.search-page-field { border-radius: var(--r); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); padding-right: 6px; }
+.search-page-field input { flex: 1; min-width: 0; height: 52px; border: 0; background: transparent; font-size: 17px; outline: none; }
+.search-page-results { padding: 0; border-top: 1px solid var(--line); }
+.search-page-results .search-item { border-bottom: 1px solid var(--line); border-radius: 0; }
+.pagination { margin-top: 32px; display: flex; gap: 8px; font-size: 15px; }
+.pagination .page, .pagination .next, .pagination .prev { padding: 6px 10px; }
+.page-prose { max-width: 760px; }
+.page-prose .rte > * + * { margin-top: 1em; }
+.password-form { display: grid; gap: 16px; width: min(360px, 100%); }
+
+/* Theme-Vorschau: Sprung zu Sektionen */
+.preview-jump select { height: 36px; font-size: 14px; }
+.cart-page[aria-busy="true"] { opacity: 0.6; pointer-events: none; transition: opacity 150ms var(--ease); }

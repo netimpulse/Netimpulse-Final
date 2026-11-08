@@ -1,0 +1,171 @@
+{%- comment -%}
+  Warenkorb: Themes als Karten mit Vorschau, Farbstil und Zusatzleistungen zum Dazubuchen,
+  rechts die Zusammenfassung. Zusatzleistungen mit Preis liegen als eigene Zeilen im Warenkorb (Eigenschaft _addon_for),
+  die übrigen stehen als Vermerk am Theme.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign addon_key = 'cart.addon_note' | t
+  assign theme_count = 0
+  assign theme_total = 0
+  assign has_ab = false
+  assign has_request = false
+  for item in cart.items
+    unless item.properties._addon_for
+      assign theme_count = theme_count | plus: 1
+      assign theme_total = theme_total | plus: item.final_line_price
+    endunless
+  endfor
+  assign store_url = s.store_link | default: routes.all_products_collection_url
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.cart-page', tablet: 72, mobile: 40 -%}
+
+<cart-page class="page-hero cart-page {% render 'scheme-classes', scheme: s.color_scheme %}" data-section="{{ section.id }}" data-addons-key="{{ addon_key | escape }}">
+  {%- if theme_count == 0 -%}
+    <div class="wrap empty">
+      <span class="empty-icon" aria-hidden="true">{%- render 'icon', name: 'bag', size: 24 -%}</span>
+      <h1 class="t-h2">{{ s.empty_title }}</h1>
+      {%- if s.empty_text != blank -%}<p class="t-body">{{ s.empty_text }}</p>{%- endif -%}
+      <div class="actions">
+        <a href="{{ store_url }}" class="btn btn-primary"><span>{{ s.continue_label }}</span>{%- render 'icon', name: 'arrow-right' -%}</a>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="wrap">
+      <div class="cart-top">
+        <h1 class="t-h1">{{ s.title }}</h1>
+        <a href="{{ store_url }}" class="arrow-link">{%- render 'icon', name: 'arrow-left', size: 16 -%}<span>{{ s.continue_label }}</span></a>
+      </div>
+      <div class="cart-grid">
+        <ul class="cart-list" role="list" aria-label="{{ s.list_label | escape }}">
+          {%- for item in cart.items -%}
+            {%- if item.properties._addon_for -%}{%- continue -%}{%- endif -%}
+            {%- liquid
+              assign p = item.product
+              assign v = item.variant
+              assign chosen = item.properties[addon_key]
+              assign branche = p.metafields.theme.branche.value | default: p.type
+              assign c_bg = v.metafields.theme.farbe_grund.value
+              assign c_ac = v.metafields.theme.farbe_akzent.value
+            -%}
+            <li class="cart-card" data-key="{{ item.key }}" data-product="{{ item.product_id }}" data-variant="{{ item.variant_id }}" data-title="{{ p.title | escape }}">
+              <a href="{{ item.url }}" class="cart-preview" tabindex="-1" aria-hidden="true">
+                {%- render 'theme-shot', variant: v, device: 'desktop', sizes: '220px' -%}
+              </a>
+              <div class="cart-detail">
+                <div class="cart-head">
+                  <div>
+                    <a href="{{ item.url }}" class="cart-name">{{ p.title }}</a>
+                    <p class="t-meta">{{ s.type_label }}{% if branche != blank %} · {{ branche }}{% endif %}</p>
+                  </div>
+                  <span class="cart-price mono">{{ item.final_line_price | money_without_trailing_zeros }}</span>
+                </div>
+                <div class="cart-meta">
+                  {%- unless v.title == 'Default Title' -%}
+                    <span class="cart-style">
+                      {%- if c_bg != blank -%}<span class="swatch" aria-hidden="true"><i style="background: {{ c_bg }}"></i><i style="background: {{ c_ac }}"></i></span>{%- endif -%}
+                      {{ s.style_label }} {{ v.title }}
+                    </span>
+                  {%- endunless -%}
+                  <a href="{{ p.url }}?view=vorschau&variant={{ v.id }}" class="text-link">{{ s.preview_label }}</a>
+                  <button type="button" class="text-link cart-remove" data-remove>{{ 'cart.remove' | t }}</button>
+                </div>
+                {%- render 'addon-picker', prefix: item.key, compact: false, selected: chosen -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <aside class="summary" aria-labelledby="sum-title-{{ section.id }}">
+          <h2 id="sum-title-{{ section.id }}" class="summary-title">{{ s.summary_title }}</h2>
+          <dl>
+            <div>
+              <dt>{% if theme_count == 1 %}{{ s.theme_one }}{% else %}{{ s.theme_other | replace: '[n]', theme_count }}{% endif %}</dt>
+              <dd class="mono">{{ theme_total | money_without_trailing_zeros }}</dd>
+            </div>
+            {%- for item in cart.items -%}
+              {%- if item.properties._addon_for -%}{%- continue -%}{%- endif -%}
+              {%- assign chosen = item.properties[addon_key] | split: ',' -%}
+              {%- for c in chosen -%}
+                {%- liquid
+                  assign name = c | strip
+                  assign label = ''
+                  for i in (1..3)
+                    assign k_name = 'addon_' | append: i | append: '_name'
+                    assign k_price = 'addon_' | append: i | append: '_price'
+                    if settings[k_name] == name
+                      assign label = settings[k_price]
+                    endif
+                  endfor
+                  assign first_two = label | slice: 0, 3
+                  if first_two == 'ab '
+                    assign has_ab = true
+                  endif
+                  assign label_down = label | downcase
+                  if label_down contains 'anfrage'
+                    assign has_request = true
+                  endif
+                -%}
+                <div class="is-addon">
+                  <dt>{{ name }}{% if theme_count > 1 %}<small> · {{ item.product.title }}</small>{% endif %}</dt>
+                  <dd>{{ label }}</dd>
+                </div>
+              {%- endfor -%}
+            {%- endfor -%}
+            <div class="is-total">
+              <dt>{{ s.total_label }}</dt>
+              <dd class="mono">{% if has_ab %}{{ s.from_label }} {% endif %}{{ cart.total_price | money_without_trailing_zeros }}</dd>
+            </div>
+          </dl>
+          {%- if has_request and s.request_note != blank -%}<p class="t-meta">{{ s.request_note }}</p>{%- endif -%}
+          {%- if s.tax_note != blank -%}<p class="t-meta">{{ s.tax_note }}</p>{%- endif -%}
+          <form action="{{ routes.cart_url }}" method="post">
+            <button type="submit" name="checkout" class="btn btn-primary btn-block">
+              <span>{{ s.checkout_label }}</span>
+              {%- render 'icon', name: 'arrow-right' -%}
+            </button>
+          </form>
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+          {%- endfor -%}
+        </aside>
+      </div>
+    </div>
+  {%- endif -%}
+</cart-page>
+
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Warenkorb",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "title", "label": "Überschrift", "default": "Dein Warenkorb" },
+    { "type": "text", "id": "continue_label", "label": "Weiter stöbern", "default": "Weiter stöbern" },
+    { "type": "url", "id": "store_link", "label": "Link zum Theme-Shop" },
+    { "type": "text", "id": "list_label", "label": "Beschreibung der Liste für Screenreader", "default": "Artikel im Warenkorb" },
+    { "type": "text", "id": "type_label", "label": "Art des Produkts", "default": "Shopify-Theme" },
+    { "type": "text", "id": "style_label", "label": "Bezeichnung Farbstil", "default": "Stil" },
+    { "type": "text", "id": "preview_label", "label": "Link zur Vorschau", "default": "Vorschau" },
+    { "type": "header", "content": "Zusammenfassung" },
+    { "type": "text", "id": "summary_title", "label": "Überschrift", "default": "Zusammenfassung" },
+    { "type": "text", "id": "theme_one", "label": "Ein Theme", "default": "Theme" },
+    { "type": "text", "id": "theme_other", "label": "Mehrere Themes", "info": "[n] steht für die Anzahl", "default": "[n] Themes" },
+    { "type": "text", "id": "total_label", "label": "Gesamt", "default": "Gesamt" },
+    { "type": "text", "id": "from_label", "label": "Wort vor dem Gesamtpreis bei ab-Preisen", "default": "ab" },
+    { "type": "textarea", "id": "request_note", "label": "Hinweis zu Leistungen auf Anfrage", "default": "Leistungen „auf Anfrage“ bieten wir dir nach einem kurzen Gespräch einzeln an." },
+    { "type": "textarea", "id": "tax_note", "label": "Hinweis zur Umsatzsteuer", "default": "Als Kleinunternehmer nach § 19 UStG weisen wir keine Umsatzsteuer aus." },
+    { "type": "text", "id": "checkout_label", "label": "Button zur Kasse", "default": "Zur Kasse" },
+    { "type": "header", "content": "Leerer Warenkorb" },
+    { "type": "text", "id": "empty_title", "label": "Überschrift", "default": "Dein Warenkorb ist leer" },
+    { "type": "textarea", "id": "empty_text", "label": "Text", "default": "Im Theme Store findest du fertige Shopify-Themes für verschiedene Branchen, jedes mit Live-Vorschau." },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [{ "type": "@app" }]
+}
+{% endschema %}

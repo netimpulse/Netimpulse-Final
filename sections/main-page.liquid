@@ -1,0 +1,24 @@
+{%- comment -%} Standardseite: Titel und Inhalt aus dem Shopify-Admin, im Stil der Rechtstexte. {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.page-hero', tablet: 72, mobile: 40 -%}
+<section class="page-hero {% render 'scheme-classes', scheme: s.color_scheme %}">
+  <div class="wrap">
+    <article class="prose page-prose">
+      <h1 class="t-h1">{{ page.title }}</h1>
+      <div class="rte">{{ page.content }}</div>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Seiteninhalt",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "presets": [{ "name": "Seiteninhalt" }]
+}
+{% endschema %}

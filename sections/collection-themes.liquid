@@ -1,0 +1,110 @@
+{%- comment -%}
+  Theme-Shop: Kopf, Filter nach Branche (Produkttyp), Sortierung und das Raster der Themes.
+  Funktioniert auf der Kollektionsseite und auf einer Seite (dann mit der gewählten Kollektion).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign coll = collection
+  if coll == blank
+    assign coll = s.collection
+  endif
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.store-wrap', tablet: 72, mobile: 40 -%}
+
+<div class="store-wrap {% render 'scheme-classes', scheme: s.color_scheme %}" id="s-{{ section.id }}" data-outline="{{ s.outline_label | escape }}">
+  <section class="page-hero store-head">
+    <div class="wrap">
+      <div class="store-hero">
+        <h1 class="t-h1">{{ s.title | default: coll.title | default: page.title }}</h1>
+        {%- if s.text != blank -%}<p class="t-lead">{{ s.text }}</p>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-flush-top store-list" aria-label="{{ s.list_label | escape }}">
+    <div class="wrap">
+      {%- if coll == blank or coll.products_count == 0 -%}
+        <div class="empty store-empty">
+          <span class="empty-icon" aria-hidden="true">{%- render 'icon', name: 'layers', size: 24 -%}</span>
+          <p class="t-body">{{ s.empty_text }}</p>
+        </div>
+      {%- else -%}
+        {%- paginate coll.products by 48 -%}
+          {%- liquid
+            assign types = coll.products | map: 'type' | uniq | sort
+          -%}
+          <theme-store data-count-one="{{ s.count_one | escape }}" data-count-other="{{ s.count_other | escape }}" data-count-for="{{ s.count_for | escape }}">
+            <div class="store-toolbar">
+              <div class="filter-chips" role="radiogroup" aria-label="{{ s.filter_label | escape }}">
+                <button type="button" role="radio" aria-checked="true" class="chip is-on" data-type="">
+                  {{ s.all_label }}<span class="chip-n mono">{{ coll.products.size }}</span>
+                </button>
+                {%- for t in types -%}
+                  {%- if t != blank -%}
+                    {%- assign n = coll.products | where: 'type', t | size -%}
+                    <button type="button" role="radio" aria-checked="false" class="chip" data-type="{{ t | escape }}">
+                      {{ t }}<span class="chip-n mono">{{ n }}</span>
+                    </button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <label class="select-wrap">
+                <span class="sr-only">{{ s.sort_label }}</span>
+                <select data-sort>
+                  <option value="empfohlen">{{ s.sort_recommended }}</option>
+                  <option value="preis-auf">{{ s.sort_price_asc }}</option>
+                  <option value="preis-ab">{{ s.sort_price_desc }}</option>
+                  <option value="name">{{ s.sort_name }}</option>
+                </select>
+                {%- render 'icon', name: 'chevron-down', size: 16 -%}
+              </label>
+            </div>
+            <p class="t-meta store-count" aria-live="polite" data-count></p>
+            <div class="theme-grid is-store">
+              {%- for product in coll.products -%}
+                {%- render 'theme-card', product: product, heading_level: 2, preview_label: s.preview_label, swatch_label: s.swatch_label -%}
+              {%- endfor -%}
+            </div>
+          </theme-store>
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="{{ 'pagination.label' | t }}">{{ paginate | default_pagination: previous: '←', next: '→' }}</nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+<script src="{{ 'store.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Theme-Shop",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Themes" },
+    { "type": "collection", "id": "collection", "label": "Kollektion", "info": "Nur nötig, wenn der Theme-Shop auf einer Seite steht" },
+    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Name der Kollektion", "default": "Shopify-Themes, die nicht nach Baukasten aussehen" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Fertige Themes für verschiedene Branchen, gebaut mit Online Store 2.0 und eigenen Sections. Kaufen, installieren und im Theme-Editor anpassen, oder von uns einrichten lassen." },
+    { "type": "text", "id": "list_label", "label": "Beschreibung der Liste für Screenreader", "default": "Themes" },
+    { "type": "text", "id": "filter_label", "label": "Beschreibung des Filters für Screenreader", "default": "Branche" },
+    { "type": "text", "id": "all_label", "label": "Filter: alle", "default": "Alle" },
+    { "type": "text", "id": "sort_label", "label": "Sortierung für Screenreader", "default": "Sortieren" },
+    { "type": "text", "id": "sort_recommended", "label": "Sortierung: empfohlen", "default": "Empfohlen" },
+    { "type": "text", "id": "sort_price_asc", "label": "Sortierung: Preis aufsteigend", "default": "Preis aufsteigend" },
+    { "type": "text", "id": "sort_price_desc", "label": "Sortierung: Preis absteigend", "default": "Preis absteigend" },
+    { "type": "text", "id": "sort_name", "label": "Sortierung: Name", "default": "Name" },
+    { "type": "text", "id": "count_one", "label": "Anzahl: eins", "info": "[n] steht für die Anzahl", "default": "[n] Theme" },
+    { "type": "text", "id": "count_other", "label": "Anzahl: mehrere", "default": "[n] Themes" },
+    { "type": "text", "id": "count_for", "label": "Anzahl mit Filter", "info": "[branche] steht für die gewählte Branche", "default": " für [branche]" },
+    { "type": "text", "id": "preview_label", "label": "Link zur Vorschau", "default": "Live-Vorschau" },
+    { "type": "text", "id": "swatch_label", "label": "Wort für Farbstile (Screenreader)", "default": "Stile" },
+    { "type": "textarea", "id": "empty_text", "label": "Text ohne Themes", "default": "Hier erscheinen bald unsere Themes. Bis dahin beraten wir dich gern direkt." },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "presets": [{ "name": "Theme-Shop" }]
+}
+{% endschema %}

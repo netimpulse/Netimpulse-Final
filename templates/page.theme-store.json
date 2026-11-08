@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "collection-themes",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "outline_label": "Themes",
+        "title": "Shopify-Themes, die nicht nach Baukasten aussehen",
+        "text": "Fertige Themes für verschiedene Branchen, gebaut mit Online Store 2.0 und eigenen Sections. Kaufen, installieren und im Theme-Editor anpassen, oder von uns einrichten lassen.",
+        "empty_text": "Hier erscheinen bald unsere Themes. Bis dahin beraten wir dich gern direkt.",
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "collection": "themes"
+      }
+    },
+    "setup": {
+      "type": "setup-band",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "outline_label": "",
+        "heading": "Lieber einrichten lassen?",
+        "text": "Wir installieren dein Theme, übernehmen Logo und Farben und konfigurieren die Grundeinstellungen. Theme-Setup ab 200 €.",
+        "button_label": "Zusatzleistungen ansehen",
+        "button_link": "/pages/leistungen#zusatz",
+        "padding_top": 0,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "setup"
+  ]
+}

@@ -1,0 +1,49 @@
+{%- comment -%} Suchergebnisse. Die schnelle Suche läuft im Such-Dialog im Header, diese Seite zeigt alle Treffer. {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.page-hero', tablet: 72, mobile: 40 -%}
+<section class="page-hero {% render 'scheme-classes', scheme: s.color_scheme %}">
+  <div class="wrap search-page">
+    <h1 class="t-h1">{% if search.terms != blank %}{{ 'search.results_for' | t: terms: search.terms }}{% else %}{{ s.title }}{% endif %}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-field search-page-field">
+      {%- render 'icon', name: 'search' -%}
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" aria-label="{{ 'search.submit' | t }}">
+      <button type="submit" class="btn btn-primary btn-sm"><span>{{ 'search.submit' | t }}</span></button>
+    </form>
+    {%- if search.performed -%}
+      {%- paginate search.results by 24 -%}
+        <p class="t-meta">{{ 'search.count' | t: count: search.results_count }}</p>
+        {%- if search.results_count == 0 -%}
+          <p class="t-body">{{ 'search.no_results' | t: terms: search.terms }}</p>
+        {%- else -%}
+          <ul class="search-results search-page-results" role="list">
+            {%- for item in search.results -%}
+              <li class="search-item">
+                <a href="{{ item.url }}">
+                  <span>{{ item.title }}</span>
+                  {%- if item.object_type == 'product' -%}<span class="t-meta">{{ item.type }} · {{ item.price | money_without_trailing_zeros }}</span>{%- endif -%}
+                  {%- render 'icon', name: 'arrow-right', size: 16 -%}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="{{ 'pagination.label' | t }}">{{ paginate | default_pagination: previous: '←', next: '→' }}</nav>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Suchergebnisse",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "title", "label": "Überschrift ohne Suchbegriff", "default": "Suche" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ]
+}
+{% endschema %}

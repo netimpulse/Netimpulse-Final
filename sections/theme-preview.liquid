@@ -1,0 +1,126 @@
+{%- comment -%}
+  Theme-Vorschau (Layout „vorschau", Aufruf /products/<handle>?view=vorschau):
+  Leiste mit Zurück, Gerät (Desktop/Handy), Farbstil, Sprung zu Sektionen, Preis und Warenkorb.
+  Lange Screenshots scrollen im Gerät. Sprungmarken aus dem Metafeld theme.sprungmarken.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.preview-canvas', tablet: 24, mobile: 12 -%}
+{%- if product != blank -%}
+  {%- liquid
+    assign current = product.selected_or_first_available_variant
+    assign branche = product.metafields.theme.branche.value | default: product.type
+    assign anchors = product.metafields.theme.sprungmarken.value
+    assign outline_default = settings.preview_outline | newline_to_br | split: '<br />'
+    assign skel_keys = 'announcement,header,hero,collection,feature,newsletter,footer' | split: ','
+    assign addon_key = 'cart.addon_note' | t
+    assign chosen = ''
+    for item in cart.items
+      if item.product_id == product.id
+        unless item.properties._addon_for
+          assign chosen = item.properties[addon_key]
+        endunless
+      endif
+    endfor
+  -%}
+  <theme-preview
+    class="preview-page {% render 'scheme-classes', scheme: s.color_scheme %}"
+    data-back="{{ product.url }}"
+    data-product-title="{{ product.title | escape }}"
+    data-product-id="{{ product.id }}"
+    data-addons-key="{{ addon_key | escape }}"
+    data-addons="{{ chosen | escape }}"
+    data-variant="{{ current.id }}"
+  >
+    <div class="preview-bar">
+      <div class="preview-left">
+        <a href="{{ product.url }}" class="btn btn-ghost btn-sm" data-back-link>
+          {%- render 'icon', name: 'arrow-left', size: 16 -%}
+          <span>{{ product.title }}</span>
+        </a>
+        {%- if branche != blank -%}<span class="t-meta hide-sm">{{ branche }}</span>{%- endif -%}
+      </div>
+      <div class="preview-mid">
+        <div class="seg" role="radiogroup" aria-label="{{ s.device_label | escape }}">
+          <button type="button" role="radio" aria-checked="true" class="seg-btn is-on" data-device="desktop" title="{{ s.desktop_label | escape }}" aria-label="{{ s.desktop_label | escape }}">{%- render 'icon', name: 'monitor', size: 16 -%}</button>
+          <button type="button" role="radio" aria-checked="false" class="seg-btn" data-device="mobile" title="{{ s.mobile_label | escape }}" aria-label="{{ s.mobile_label | escape }}">{%- render 'icon', name: 'smartphone', size: 16 -%}</button>
+        </div>
+        {%- unless product.has_only_default_variant -%}
+          <div class="seg hide-sm" role="radiogroup" aria-label="{{ s.style_label | escape }}">
+            {%- for variant in product.variants -%}
+              {%- liquid
+                assign c_bg = variant.metafields.theme.farbe_grund.value
+                assign c_ac = variant.metafields.theme.farbe_akzent.value
+              -%}
+              <button type="button" role="radio" aria-checked="{% if variant.id == current.id %}true{% else %}false{% endif %}" class="seg-btn{% if variant.id == current.id %} is-on{% endif %}" data-variant="{{ variant.id }}" data-price="{{ variant.price | money_without_trailing_zeros | escape }}">
+                <span>{{ variant.title }}</span>
+                {%- if c_bg != blank -%}<span class="swatch" aria-hidden="true"><i style="background: {{ c_bg }}"></i><i style="background: {{ c_ac }}"></i></span>{%- endif -%}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+        <label class="select-wrap preview-jump">
+          <span class="sr-only">{{ s.jump_label }}</span>
+          <select data-jump>
+            <option value="">{{ s.jump_label }}</option>
+            {%- if anchors != blank -%}
+              {%- for a in anchors -%}<option value="{{ forloop.index0 }}">{{ a.name }}</option>{%- endfor -%}
+            {%- else -%}
+              {%- for name in outline_default -%}
+                {%- assign n = name | strip -%}
+                {%- if n != blank -%}<option value="{{ forloop.index0 }}">{{ n }}</option>{%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </select>
+          {%- render 'icon', name: 'chevron-down', size: 16 -%}
+        </label>
+      </div>
+      <div class="preview-right">
+        <span class="mono hide-sm" data-price>{{ current.price | money_without_trailing_zeros }}</span>
+        <button type="button" class="btn btn-primary btn-sm" data-add data-label-add="{{ s.add_label | escape }}" data-label-done="{{ s.added_label | escape }}">
+          {%- render 'icon', name: 'bag', size: 16 -%}
+          <span data-add-text>{{ s.add_label }}</span>
+        </button>
+      </div>
+    </div>
+    <div class="preview-canvas" data-canvas>
+      <div class="preview-device is-desktop" style="--dw: 1280px" data-device-wrap>
+        <div class="preview-frame" data-scroller>
+          <div class="fade-in">{%- render 'theme-shot', variant: current, device: 'desktop', width: 1280, eager: true, sizes: '1280px' -%}</div>
+        </div>
+      </div>
+    </div>
+    {%- for variant in product.variants -%}
+      <template data-shot="{{ variant.id }}-desktop"><div class="preview-frame" data-scroller><div class="fade-in">{%- render 'theme-shot', variant: variant, device: 'desktop', width: 1280, sizes: '1280px' -%}</div></div></template>
+      <template data-shot="{{ variant.id }}-mobile"><div class="phone is-large"><div class="phone-screen" data-scroller><div class="fade-in">{%- render 'theme-shot', variant: variant, device: 'mobile', width: 390, sizes: '400px' -%}</div></div></div></template>
+    {%- endfor -%}
+    <script type="application/json" data-anchors>{% if anchors != blank %}{{ anchors | json }}{% else %}null{% endif %}</script>
+    <script type="application/json" data-skel-keys>{{ skel_keys | json }}</script>
+  </theme-preview>
+{%- else -%}
+  <div class="wrap empty">
+    <p class="t-body">{{ 'products.placeholder' | t }}</p>
+  </div>
+{%- endif -%}
+
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Theme-Vorschau",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "device_label", "label": "Gerätewahl für Screenreader", "default": "Gerät" },
+    { "type": "text", "id": "desktop_label", "label": "Desktop", "default": "Desktop" },
+    { "type": "text", "id": "mobile_label", "label": "Handy", "default": "Mobil" },
+    { "type": "text", "id": "style_label", "label": "Farbstil-Wahl für Screenreader", "default": "Stil" },
+    { "type": "text", "id": "jump_label", "label": "Sprung zu Sektion", "default": "Zu Sektion springen" },
+    { "type": "text", "id": "add_label", "label": "Button", "default": "In den Warenkorb" },
+    { "type": "text", "id": "added_label", "label": "Button, wenn das Theme im Warenkorb liegt", "default": "Im Warenkorb" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "paragraph", "content": "Die Vorschau füllt den ganzen Bildschirm, die Abstände gelten für den Rahmen um das Gerät." },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ]
+}
+{% endschema %}

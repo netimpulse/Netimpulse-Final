@@ -1,0 +1,28 @@
+{%- comment -%} Seite nicht gefunden (Port der NotFound-Ansicht des Prototyps). {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.page-hero', tablet: 72, mobile: 40 -%}
+<section class="page-hero {% render 'scheme-classes', scheme: s.color_scheme %}">
+  <div class="wrap empty">
+    <h1 class="t-h2">{{ s.title }}</h1>
+    {%- if s.text != blank -%}<p class="t-body">{{ s.text }}</p>{%- endif -%}
+    <div class="actions">
+      <a href="{{ s.link | default: routes.root_url }}" class="btn btn-primary"><span>{{ s.button_label }}</span>{%- render 'icon', name: 'arrow-right' -%}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nicht gefunden",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "title", "label": "Überschrift", "default": "Diese Seite gibt es nicht" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Vielleicht hat sich die Adresse geändert. Von der Startseite aus findest du alles wieder." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Zur Startseite" },
+    { "type": "url", "id": "link", "label": "Button-Link" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ]
+}
+{% endschema %}

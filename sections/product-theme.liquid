@@ -1,0 +1,171 @@
+{%- comment -%}
+  Theme-Produktseite: Vorschau (Desktop/Handy, lange Screenshots scrollen im Rahmen) links,
+  rechts Name, Branche, Beschreibung, Preis, Farbstil (= Variante), Zusatzleistungen und Warenkorb.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.detail', tablet: 96, mobile: 96 -%}
+
+<section class="detail {% render 'scheme-classes', scheme: s.color_scheme %}" id="s-{{ section.id }}">
+  <div class="wrap">
+    {%- if product != blank -%}
+      {%- liquid
+        assign current = product.selected_or_first_available_variant
+        assign branche = product.metafields.theme.branche.value | default: product.type
+        assign in_cart = false
+        assign chosen = ''
+        assign addon_key = 'cart.addon_note' | t
+        for item in cart.items
+          if item.product_id == product.id
+            unless item.properties._addon_for
+              assign in_cart = true
+              assign chosen = item.properties[addon_key]
+            endunless
+          endif
+        endfor
+        assign preview_url = product.url | append: '?view=vorschau'
+        assign points = s.points | newline_to_br | split: '<br />'
+      -%}
+      <nav aria-label="{{ 'accessibility.breadcrumbs' | t }}" class="crumbs">
+        <ol role="list">
+          <li><a href="{{ s.crumb_link | default: routes.all_products_collection_url }}">{{ s.crumb_label }}</a>{%- render 'icon', name: 'chevron-right', size: 16 -%}</li>
+          <li><span aria-current="page">{{ product.title }}</span></li>
+        </ol>
+      </nav>
+      <product-theme
+        class="detail-grid"
+        data-product-title="{{ product.title | escape }}"
+        data-product-id="{{ product.id }}"
+        data-addons-key="{{ addon_key | escape }}"
+        data-label-add="{{ s.add_label | escape }}"
+        data-label-update="{{ s.update_label | escape }}"
+        data-style-label="{{ s.style_label | escape }}"
+        data-preview-url="{{ preview_url }}"
+      >
+        <div class="detail-preview">
+          <div class="detail-tools">
+            <div class="seg" role="radiogroup" aria-label="{{ s.device_label | escape }}">
+              <button type="button" role="radio" aria-checked="true" class="seg-btn is-on" data-device="desktop">{%- render 'icon', name: 'monitor', size: 16 -%}<span>{{ s.desktop_label }}</span></button>
+              <button type="button" role="radio" aria-checked="false" class="seg-btn" data-device="mobile">{%- render 'icon', name: 'smartphone', size: 16 -%}<span>{{ s.mobile_label }}</span></button>
+            </div>
+            {%- if s.fullscreen_label != blank -%}
+              <a href="{{ preview_url }}" class="arrow-link" data-preview-link><span>{{ s.fullscreen_label }}</span>{%- render 'icon', name: 'arrow-right', size: 16 -%}</a>
+            {%- endif -%}
+          </div>
+          <div class="detail-canvas is-desktop" data-canvas>
+            <div class="desk" data-frame>
+              <div class="detail-viewport" data-viewport>
+                <div class="fade-in">{%- render 'theme-shot', variant: current, device: 'desktop', width: 1280, eager: true -%}</div>
+              </div>
+            </div>
+          </div>
+          {%- for variant in product.variants -%}
+            <template data-shot="{{ variant.id }}-desktop"><div class="fade-in">{%- render 'theme-shot', variant: variant, device: 'desktop', width: 1280 -%}</div></template>
+            <template data-shot="{{ variant.id }}-mobile"><div class="fade-in">{%- render 'theme-shot', variant: variant, device: 'mobile', width: 390 -%}</div></template>
+          {%- endfor -%}
+        </div>
+
+        <aside class="detail-aside" aria-labelledby="theme-title-{{ section.id }}">
+          <h1 id="theme-title-{{ section.id }}" class="t-h1">{{ product.title }}</h1>
+          {%- if branche != blank -%}<p class="detail-branche">{{ branche }}</p>{%- endif -%}
+          {%- if product.description != blank -%}<div class="t-body rte">{{ product.description }}</div>{%- endif -%}
+          <p class="detail-price mono" data-price>{{ current.price | money_without_trailing_zeros }}</p>
+
+          {%- form 'product', product, id: 'theme-form', class: 'detail-form', novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+            {%- unless product.has_only_default_variant -%}
+              <div class="detail-presets">
+                <p class="field-label" data-style-text>{{ s.style_label }} {{ current.title }}</p>
+                <div class="seg" role="radiogroup" aria-label="{{ s.style_choose_label | escape }}">
+                  {%- for variant in product.variants -%}
+                    {%- liquid
+                      assign on = false
+                      if variant.id == current.id
+                        assign on = true
+                      endif
+                      assign c_bg = variant.metafields.theme.farbe_grund.value
+                      assign c_ac = variant.metafields.theme.farbe_akzent.value
+                    -%}
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked="{{ on }}"
+                      class="seg-btn{% if on %} is-on{% endif %}"
+                      data-variant="{{ variant.id }}"
+                      data-title="{{ variant.title | escape }}"
+                      data-price="{{ variant.price | money_without_trailing_zeros | escape }}"
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                      <span>{{ variant.title }}</span>
+                      {%- if c_bg != blank -%}<span class="swatch" aria-hidden="true"><i style="background: {{ c_bg }}"></i><i style="background: {{ c_ac }}"></i></span>{%- endif -%}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endunless -%}
+
+            {%- render 'addon-picker', prefix: section.id, compact: true, selected: chosen -%}
+
+            <div class="detail-actions">
+              <button type="submit" name="add" class="btn btn-primary btn-block" data-add {% unless current.available %}disabled{% endunless %}>
+                <span data-icon="bag"{% if in_cart %} hidden{% endif %}>{%- render 'icon', name: 'bag' -%}</span>
+                <span data-icon="check"{% unless in_cart %} hidden{% endunless %}>{%- render 'icon', name: 'check' -%}</span>
+                <span data-add-text>{% if in_cart %}{{ s.update_label }}{% else %}{{ s.add_label }}{% endif %}</span>
+              </button>
+              {%- if s.preview_label != blank -%}
+                <a href="{{ preview_url }}" class="btn btn-secondary btn-block" data-preview-link>{%- render 'icon', name: 'eye' -%}<span>{{ s.preview_label }}</span></a>
+              {%- endif -%}
+            </div>
+          {%- endform -%}
+
+          {%- if s.points != blank -%}
+            <ul class="checklist" role="list">
+              {%- for pt in points -%}
+                {%- assign t = pt | strip -%}
+                {%- if t != blank -%}<li>{%- render 'icon', name: 'check', size: 16 -%}<span>{{ t }}</span></li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+          {%- endfor -%}
+        </aside>
+      </product-theme>
+    {%- else -%}
+      <div class="empty">
+        <span class="empty-icon" aria-hidden="true">{%- render 'icon', name: 'layers', size: 24 -%}</span>
+        <p class="t-body">{{ 'products.placeholder' | t }}</p>
+        <button type="button" class="btn btn-primary" disabled><span>{{ s.add_label }}</span></button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Theme-Produkt",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "text", "id": "crumb_label", "label": "Brotkrumen: Theme-Shop", "default": "Theme Store" },
+    { "type": "url", "id": "crumb_link", "label": "Brotkrumen: Link" },
+    { "type": "text", "id": "device_label", "label": "Gerätewahl für Screenreader", "default": "Gerät" },
+    { "type": "text", "id": "desktop_label", "label": "Desktop", "default": "Desktop" },
+    { "type": "text", "id": "mobile_label", "label": "Handy", "default": "Mobil" },
+    { "type": "text", "id": "fullscreen_label", "label": "Link zur Vollbild-Vorschau", "default": "Vollbild-Vorschau" },
+    { "type": "text", "id": "style_label", "label": "Bezeichnung Farbstil", "default": "Stil:" },
+    { "type": "text", "id": "style_choose_label", "label": "Farbstil-Wahl für Screenreader", "default": "Stil wählen" },
+    { "type": "text", "id": "add_label", "label": "Button", "default": "In den Warenkorb" },
+    { "type": "text", "id": "update_label", "label": "Button, wenn das Theme schon im Warenkorb liegt", "default": "Warenkorb aktualisieren" },
+    { "type": "text", "id": "preview_label", "label": "Zweiter Button", "default": "Live-Vorschau" },
+    { "type": "textarea", "id": "points", "label": "Punkte unter den Buttons", "info": "Einer pro Zeile", "default": "Custom-Sections mit Theme-Editor-Einstellungen\nLiquid, OS 2.0 und Dawn-kompatible Logik\nPerformance, mobile Optimierung und saubere Pflege" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [{ "type": "@app" }]
+}
+{% endschema %}

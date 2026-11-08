@@ -1,0 +1,53 @@
+{%- comment -%} Theme-Produkt: enthaltene Sektionen (Metafeld theme.sektionen) und „Passt gut für" (theme.passt_fuer). {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
+{%- if product != blank -%}
+  {%- liquid
+    assign list = product.metafields.theme.sektionen.value
+    assign good = product.metafields.theme.passt_fuer.value
+  -%}
+  {%- if list != blank or good != blank -%}
+    <section class="section section-pad {% render 'scheme-classes', scheme: s.color_scheme %}" aria-labelledby="sections-title-{{ section.id }}">
+      <div class="wrap split">
+        <div>
+          <h2 id="sections-title-{{ section.id }}" class="t-h2">{{ s.heading }}</h2>
+          {%- if s.text != blank -%}<p class="t-body">{{ s.text }}</p>{%- endif -%}
+          {%- if good != blank -%}
+            <div class="good-for">
+              <p class="field-label">{{ s.good_label }}</p>
+              <ul class="checklist" role="list">
+                {%- for g in good -%}<li>{%- render 'icon', name: 'check', size: 16 -%}<span>{{ g }}</span></li>{%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if list != blank -%}
+          <ul class="section-list" role="list" aria-label="{{ s.list_label | replace: '[name]', product.title | escape }}">
+            {%- for item in list -%}
+              <li>{%- render 'icon', name: 'grip', size: 16 -%}<span>{{ item }}</span><span class="t-meta mono">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Enthaltene Sektionen",
+  "tag": "div",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
+    { "type": "paragraph", "content": "Liest die Produkt-Metafelder theme.sektionen und theme.passt_fuer (Listen mit einzeiligem Text)." },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Enthaltene Sektionen" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Jede Sektion lässt sich im Theme-Editor ein- und ausblenden, verschieben und mit eigenen Inhalten füllen. Ganz ohne Code." },
+    { "type": "text", "id": "good_label", "label": "Überschrift Passt gut für", "default": "Passt gut für" },
+    { "type": "text", "id": "list_label", "label": "Beschreibung der Liste für Screenreader", "info": "[name] steht für das Theme", "default": "Sektionen von [name]" },
+    { "type": "header", "content": "Abstände" },
+    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+  ],
+  "presets": [{ "name": "Enthaltene Sektionen" }]
+}
+{% endschema %}
