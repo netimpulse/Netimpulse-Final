@@ -3,19 +3,15 @@
 {%- endcomment -%}
 {%- liquid
   assign menu_1 = section.settings.menu_1
-  assign menu_2 = section.settings.menu_2
-  assign menu_3 = section.settings.menu_3
   assign year = 'now' | date: '%Y'
 
-  assign services = menu_2.links
-  if menu_2 == blank
-    for link in menu_1.links
-      if link.links.size > 0
-        assign services = link.links
-        break
-      endif
-    endfor
-  endif
+  assign services = nil
+  for link in menu_1.links
+    if link.links.size > 0
+      assign services = link.links
+      break
+    endif
+  endfor
 -%}
 
 {%- render 'section-padding', id: section.id, top: section.settings.padding_top, bottom: section.settings.padding_bottom, selector: '.site-footer', tablet: 64, mobile: 64 -%}
@@ -56,18 +52,23 @@
 
       <nav aria-label="{{ section.settings.heading_3 | escape }}" class="footer-col">
         <p class="footer-h">{{ section.settings.heading_3 }}</p>
-        {%- if menu_3.links.size > 0 -%}
-          {%- for link in menu_3.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        {%- else -%}
           {%- if shop.legal_notice_policy != blank -%}<a href="{{ shop.legal_notice_policy.url }}">{{ shop.legal_notice_policy.title }}</a>{%- endif -%}
           {%- if shop.privacy_policy != blank -%}<a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>{%- endif -%}
           {%- if shop.terms_of_service != blank -%}<a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title }}</a>{%- endif -%}
           {%- if shop.refund_policy != blank -%}<a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title }}</a>{%- endif -%}
           {%- if section.settings.extra_page != blank -%}<a href="{{ section.settings.extra_page.url }}">{{ section.settings.extra_page.title }}</a>{%- endif -%}
-        {%- endif -%}
       </nav>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu' and block.settings.menu.links.size > 0 -%}
+          <nav aria-label="{{ block.settings.heading | escape }}" class="footer-col" {{ block.shopify_attributes }}>
+            <p class="footer-h">{{ block.settings.heading }}</p>
+            {%- for link in block.settings.menu.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
     <div class="footer-base">
       <span class="t-meta">{{ section.settings.copyright | replace: '[jahr]', year }}</span>
@@ -98,11 +99,11 @@
     { "type": "link_list", "id": "menu_1", "label": "Menü", "default": "main-menu" },
     { "type": "header", "content": "Spalte 2" },
     { "type": "text", "id": "heading_2", "label": "Überschrift", "default": "Leistungen" },
-    { "type": "link_list", "id": "menu_2", "label": "Menü", "info": "Ohne Auswahl: die Unterpunkte aus Spalte 1" },
+    { "type": "paragraph", "content": "Zeigt die Unterpunkte des ersten Menüpunkts mit Unterpunkten aus Spalte 1." },
     { "type": "checkbox", "id": "show_dots", "label": "Punkte in den Gruppenfarben zeigen", "default": true },
     { "type": "header", "content": "Spalte 3" },
     { "type": "text", "id": "heading_3", "label": "Überschrift", "default": "Rechtliches" },
-    { "type": "link_list", "id": "menu_3", "label": "Menü", "info": "Ohne Auswahl: die Richtlinien aus Einstellungen > Richtlinien" },
+    { "type": "paragraph", "content": "Zeigt die Richtlinien aus Einstellungen > Richtlinien." },
     { "type": "page", "id": "extra_page", "label": "Zusätzliche Seite", "info": "Zum Beispiel Widerruf, solange keine Rückgaberichtlinie gepflegt ist" },
     { "type": "header", "content": "Unten" },
     { "type": "text", "id": "copyright", "label": "Copyright", "info": "[jahr] steht für das aktuelle Jahr", "default": "© [jahr] NetImpulse GbR" },
@@ -111,6 +112,17 @@
     { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 }
   ],
-  "blocks": [{ "type": "@app" }]
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "menu",
+      "name": "Weitere Spalte",
+      "limit": 2,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Mehr" },
+        { "type": "link_list", "id": "menu", "label": "Menü", "default": "footer" }
+      ]
+    }
+  ]
 }
 {% endschema %}

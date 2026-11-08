@@ -173,10 +173,7 @@
 
 {%- if section.settings.show_search -%}
   {%- liquid
-    assign quick_menu = section.settings.search_menu
-    if quick_menu == blank
-      assign quick_menu = menu
-    endif
+    assign quick_menu = menu
   -%}
   <search-dialog
     hidden
@@ -253,7 +250,6 @@
     { "type": "url", "id": "mobile_cta_link", "label": "Button-Link" },
     { "type": "header", "content": "Suche" },
     { "type": "checkbox", "id": "show_search", "label": "Suche zeigen", "default": true },
-    { "type": "link_list", "id": "search_menu", "label": "Schnellzugriff", "info": "Wird gezeigt, bevor jemand tippt. Ohne Auswahl: das Menü oben." },
     { "type": "text", "id": "search_placeholder", "label": "Platzhalter", "default": "Seiten und Themes durchsuchen" },
     { "type": "text", "id": "search_pages_label", "label": "Gruppe Seiten", "default": "Seiten" },
     { "type": "text", "id": "search_products_label", "label": "Gruppe Produkte", "default": "Themes" },
