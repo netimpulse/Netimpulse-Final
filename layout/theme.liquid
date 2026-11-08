@@ -37,7 +37,7 @@
     {% sections 'footer-group' %}
 
     {%- render 'cart-toast' -%}
-    {%- if settings.show_outline -%}
+    {%- if settings.show_outline and template.name == 'index' -%}
       <outline-spy class="outline-spy" hidden>
         <nav aria-label="{{ 'accessibility.outline' | t }}">
           <p class="outline-spy-title">{{ settings.outline_title }}</p>

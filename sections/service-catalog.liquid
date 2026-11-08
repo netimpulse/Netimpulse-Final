@@ -14,7 +14,7 @@
 <section
   id="{{ s.anchor | default: 'angebote' }}"
   data-outline="{{ s.outline_label | escape }}"
-  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}{% render 'group-class', group: s.group %}"
+  class="chapter svc-page section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}{% render 'group-class', group: s.group %}"
   {% if s.heading != blank %}aria-labelledby="parts-title-{{ section.id }}"{% endif %}
 >
   <div class="wrap">

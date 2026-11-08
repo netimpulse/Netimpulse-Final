@@ -2,6 +2,9 @@
 
 [hidden] { display: none !important; }
 site-header, contact-band, copy-value, outline-spy { display: block; }
+/* Eigene Elemente sind sonst inline; die Klassen aus base.css setzen bei Bedarf grid oder flex */
+problem-row, service-orbit, theme-editor, values-path, service-catalog, leistungen-dock, theme-store,
+product-theme, theme-preview, cart-page, hero-build, hero-video, service-visual { display: block; }
 copy-value { display: inline-flex; }
 mobile-menu, search-dialog { display: block; }
 

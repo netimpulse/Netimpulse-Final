@@ -8,7 +8,7 @@
 <section
   id="{{ s.anchor | default: 'ablauf' }}"
   data-outline="{{ s.outline_label | escape }}"
-  class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
+  class="chapter svc-page section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
   {% if s.heading != blank %}aria-labelledby="steps-title-{{ section.id }}"{% endif %}
 >
   <div class="wrap">

@@ -420,7 +420,7 @@
       {
         "type": "checkbox",
         "id": "show_outline",
-        "label": "Sektions-Gliederung links zeigen",
+        "label": "Sektions-Gliederung auf der Startseite zeigen",
         "info": "Ab 1500 px Breite. Zeigt alle Sektionen mit einem Namen für die Gliederung.",
         "default": true
       },

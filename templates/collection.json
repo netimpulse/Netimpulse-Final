@@ -25,7 +25,7 @@
       "type": "setup-band",
       "settings": {
         "color_scheme": "scheme-1",
-        "outline_label": "",
+        "outline_label": "Einrichtung",
         "heading": "Lieber einrichten lassen?",
         "text": "Wir installieren dein Theme, übernehmen Logo und Farben und konfigurieren die Grundeinstellungen. Theme-Setup ab 200 €.",
         "button_label": "Zusatzleistungen ansehen",
