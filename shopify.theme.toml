@@ -1,18 +1,12 @@
-# Shopify CLI – Theme-Konfiguration (Template)
+# Shopify CLI – Theme-Konfiguration
 #
-# Diese Datei muss pro Shop angepasst werden. Beim ersten Auftrag in
-# einem neu erzeugten Shop-Repo erkennt der shopify-visual-qa Skill
-# (Schritt 0.5 Repo-Config-Check) die Platzhalter und stoppt den
-# Workflow, bis die Werte gesetzt sind.
+# Shop: NetImpulsemarketing (live unter netimpulsemarketing.de)
+# Es gibt bewusst nur das Test-Environment: Aus diesem Repo wird nie ins
+# Live-Theme gepusht (siehe CLAUDE.md und .claude/hooks/block-live-push.js).
 
 [environments.development]
-store = "__STORE_DOMAIN__.myshopify.com"
-theme = "__THEME_ID__"
-
-# Production-Block wird pro Kundenshop ergaenzt:
-# [environments.production]
-# store = "kunde.myshopify.com"
-# theme = "__PROD_THEME_ID__"
+store = "a50c23-ed.myshopify.com"
+theme = "210831737177" # „Netimpulse-Final – Test" (unveröffentlicht)
 
 ignore = [
   "tests/**",

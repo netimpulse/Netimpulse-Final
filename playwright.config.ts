@@ -1,11 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Visual-QA Konfiguration (Template).
+ * Visual-QA Konfiguration fuer den Shop NetImpulsemarketing.
  *
- * baseURL muss pro Shop angepasst werden. Schritt 0.5 des
- * shopify-visual-qa Skills detektiert den Platzhalter und stoppt
- * den Workflow, bis der echte Wert gesetzt ist.
+ * Die myshopify-Adresse leitet auf netimpulsemarketing.de weiter; der
+ * Parameter preview_theme_id bleibt dabei erhalten. Getestet wird also
+ * immer das Test-Theme aus tests/fixtures.ts, nie das Live-Theme.
  */
 export default defineConfig({
   testDir: "./tests",
@@ -15,7 +15,7 @@ export default defineConfig({
   reporter: [["list"], ["html", { open: "never" }]],
   globalSetup: "./tests/global-setup.ts",
   use: {
-    baseURL: "https://__STORE_DOMAIN__.myshopify.com",
+    baseURL: "https://a50c23-ed.myshopify.com",
     storageState: "playwright/.auth/storefront.json",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
