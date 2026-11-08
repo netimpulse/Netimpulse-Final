@@ -68,36 +68,144 @@
 
 {% schema %}
 {
-  "name": "Kontakt-Abschluss",
+  "name": "t:sections.contact_band.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Kontakt" },
-    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Bereit für planbares Wachstum?" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch." },
-    { "type": "text", "id": "question", "label": "Frage über den Themen", "default": "Worum geht es dir?" },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Kostenloses Erstgespräch anfragen" },
-    { "type": "url", "id": "link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite aus den Theme-Einstellungen" },
-    { "type": "textarea", "id": "message", "label": "Vorbelegte Nachricht", "info": "[auswahl] steht für die gewählten Themen", "default": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: " },
-    { "type": "text", "id": "note", "label": "Hinweis neben dem Button", "default": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden" },
-    { "type": "checkbox", "id": "show_direct", "label": "Telefon und E-Mail zeigen", "info": "Aus den Theme-Einstellungen unter Kontaktdaten", "default": true },
-    { "type": "text", "id": "direct_label", "label": "Text vor Telefon und E-Mail", "default": "Oder direkt:" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Kontakt"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.contact_band.settings.heading.label",
+      "default": "Bereit für planbares Wachstum?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.contact_band.settings.text.label",
+      "default": "Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch."
+    },
+    {
+      "type": "text",
+      "id": "question",
+      "label": "t:sections.contact_band.settings.question.label",
+      "default": "Worum geht es dir?"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.contact_band.settings.button_label.label",
+      "default": "Kostenloses Erstgespräch anfragen"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.contact_band.settings.link.label",
+      "info": "t:sections.contact_band.settings.link.info"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "t:sections.contact_band.settings.message.label",
+      "info": "t:sections.contact_band.settings.message.info",
+      "default": "Hallo NetImpulse, es geht um: [auswahl].\n\nKurz zu meinem Projekt: "
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "t:sections.contact_band.settings.note.label",
+      "default": "Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_direct",
+      "label": "t:sections.contact_band.settings.show_direct.label",
+      "info": "t:sections.contact_band.settings.show_direct.info",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "direct_label",
+      "label": "t:sections.contact_band.settings.direct_label.label",
+      "default": "Oder direkt:"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_band.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ],
   "blocks": [
     {
       "type": "topic",
-      "name": "Thema",
+      "name": "t:sections.contact_band.blocks.topic.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Bezeichnung", "default": "Website" },
-        { "type": "text", "id": "topic", "label": "Thema im Kontaktformular", "info": "Muss einem Thema im Kontaktformular entsprechen", "default": "Webdesign und UX" },
-        { "type": "checkbox", "id": "preselect", "label": "Vorausgewählt", "default": false }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.contact_band.blocks.topic.settings.label.label",
+          "default": "Website"
+        },
+        {
+          "type": "text",
+          "id": "topic",
+          "label": "t:sections.contact_band.blocks.topic.settings.topic.label",
+          "info": "t:sections.contact_band.blocks.topic.settings.topic.info",
+          "default": "Webdesign und UX"
+        },
+        {
+          "type": "checkbox",
+          "id": "preselect",
+          "label": "t:sections.contact_band.blocks.topic.settings.preselect.label",
+          "default": false
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Kontakt-Abschluss", "blocks": [{ "type": "topic" }] }]
+  "presets": [
+    {
+      "name": "t:sections.contact_band.presets.name",
+      "blocks": [
+        {
+          "type": "topic"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

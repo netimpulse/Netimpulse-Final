@@ -12,13 +12,40 @@
 
 {% schema %}
 {
-  "name": "Seiteninhalt",
+  "name": "t:sections.main_page.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ],
-  "presets": [{ "name": "Seiteninhalt" }]
+  "presets": [
+    {
+      "name": "t:sections.main_page.presets.name"
+    }
+  ]
 }
 {% endschema %}

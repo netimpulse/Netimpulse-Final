@@ -81,43 +81,292 @@
 
 {% schema %}
 {
-  "name": "Leistung: Baukasten",
+  "name": "t:sections.service_catalog.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
-    { "type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1 (Sichtbarkeit)" }, { "value": "a2", "label": "Akzent 2 (Umsetzung)" }] },
-    { "type": "text", "id": "anchor", "label": "Sprungziel", "info": "Ohne Leerzeichen, zum Beispiel angebote", "default": "angebote" },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Angebote" },
-    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Unsere Leistungen im Bereich SEO" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Wir entwickeln keine Standardlösungen, sondern nehmen uns die Zeit, dein Geschäftsmodell und deine Zielgruppe zu verstehen." },
-    { "type": "header", "content": "Anfrage mit Auswahl" },
-    { "type": "text", "id": "empty_text", "label": "Hinweis ohne Auswahl", "default": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch." },
-    { "type": "text", "id": "count_text", "label": "Hinweis mit Auswahl", "info": "[n] steht für die Anzahl, [gesamt] für alle Angebote", "default": "[n] von [gesamt] Angeboten ausgewählt" },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Mit dieser Auswahl anfragen" },
-    { "type": "url", "id": "link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite" },
-    { "type": "text", "id": "topic", "label": "Thema im Kontaktformular", "default": "SEO und Performance" },
-    { "type": "textarea", "id": "message", "label": "Vorbelegte Nachricht", "info": "[auswahl] steht für die gewählten Angebote, je eins pro Zeile", "default": "Hallo NetImpulse, ich interessiere mich für SEO mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: " },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "group",
+      "label": "t:general.group.label",
+      "default": "a1",
+      "options": [
+        {
+          "value": "a1",
+          "label": "t:general.groups.a1"
+        },
+        {
+          "value": "a2",
+          "label": "t:general.groups.a2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "t:sections.service_catalog.settings.anchor.label",
+      "info": "t:sections.service_catalog.settings.anchor.info",
+      "default": "angebote"
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Angebote"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.service_catalog.settings.heading.label",
+      "default": "Unsere Leistungen im Bereich SEO"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.service_catalog.settings.text.label",
+      "default": "Wir entwickeln keine Standardlösungen, sondern nehmen uns die Zeit, dein Geschäftsmodell und deine Zielgruppe zu verstehen."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.service_catalog.settings.header_1.content"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "t:sections.service_catalog.settings.empty_text.label",
+      "default": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch."
+    },
+    {
+      "type": "text",
+      "id": "count_text",
+      "label": "t:sections.service_catalog.settings.count_text.label",
+      "info": "t:sections.service_catalog.settings.count_text.info",
+      "default": "[n] von [gesamt] Angeboten ausgewählt"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.service_catalog.settings.button_label.label",
+      "default": "Mit dieser Auswahl anfragen"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.service_catalog.settings.link.label",
+      "info": "t:sections.service_catalog.settings.link.info"
+    },
+    {
+      "type": "text",
+      "id": "topic",
+      "label": "t:sections.service_catalog.settings.topic.label",
+      "default": "SEO und Performance"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "t:sections.service_catalog.settings.message.label",
+      "info": "t:sections.service_catalog.settings.message.info",
+      "default": "Hallo NetImpulse, ich interessiere mich für SEO mit diesen Bausteinen:\n[auswahl]\n\nKurz zu meinem Projekt: "
+    },
+    {
+      "type": "header",
+      "content": "t:sections.service_catalog.settings.header_2.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
   ],
   "blocks": [
     {
       "type": "category",
-      "name": "Gruppe",
-      "settings": [{ "type": "text", "id": "title", "label": "Titel", "default": "Analyse und Technik" }]
+      "name": "t:sections.service_catalog.blocks.category.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.service_catalog.blocks.category.settings.title.label",
+          "default": "Analyse und Technik"
+        }
+      ]
     },
     {
       "type": "offer",
-      "name": "Angebot",
+      "name": "t:sections.service_catalog.blocks.offer.name",
       "settings": [
-        { "type": "text", "id": "title", "label": "Titel", "default": "SEO-Audit" },
-        { "type": "text", "id": "text", "label": "Text", "default": "Bestandsaufnahme von Technik, Inhalten und Rankings deiner Seite" },
-        { "type": "select", "id": "icon", "label": "Icon", "default": "eye", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}] }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.service_catalog.blocks.offer.settings.title.label",
+          "default": "SEO-Audit"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.service_catalog.blocks.offer.settings.text.label",
+          "default": "Bestandsaufnahme von Technik, Inhalten und Rankings deiner Seite"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.service_catalog.blocks.offer.settings.icon.label",
+          "default": "eye",
+          "options": [
+            {
+              "value": "arrow-right",
+              "label": "t:general.icons.arrow_right"
+            },
+            {
+              "value": "arrow-up-right",
+              "label": "t:general.icons.arrow_up_right"
+            },
+            {
+              "value": "search",
+              "label": "t:general.icons.search"
+            },
+            {
+              "value": "bar-chart",
+              "label": "t:general.icons.bar_chart"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:general.icons.megaphone"
+            },
+            {
+              "value": "message-circle",
+              "label": "t:general.icons.message_circle"
+            },
+            {
+              "value": "monitor",
+              "label": "t:general.icons.monitor"
+            },
+            {
+              "value": "smartphone",
+              "label": "t:general.icons.smartphone"
+            },
+            {
+              "value": "bag",
+              "label": "t:general.icons.bag"
+            },
+            {
+              "value": "layers",
+              "label": "t:general.icons.layers"
+            },
+            {
+              "value": "workflow",
+              "label": "t:general.icons.workflow"
+            },
+            {
+              "value": "bot",
+              "label": "t:general.icons.bot"
+            },
+            {
+              "value": "mail",
+              "label": "t:general.icons.mail"
+            },
+            {
+              "value": "file-text",
+              "label": "t:general.icons.file_text"
+            },
+            {
+              "value": "eye",
+              "label": "t:general.icons.eye"
+            },
+            {
+              "value": "sliders",
+              "label": "t:general.icons.sliders"
+            },
+            {
+              "value": "user",
+              "label": "t:general.icons.user"
+            },
+            {
+              "value": "map-pin",
+              "label": "t:general.icons.map_pin"
+            },
+            {
+              "value": "activity",
+              "label": "t:general.icons.activity"
+            },
+            {
+              "value": "corner-down-right",
+              "label": "t:general.icons.corner_down_right"
+            },
+            {
+              "value": "wrench",
+              "label": "t:general.icons.wrench"
+            },
+            {
+              "value": "rocket",
+              "label": "t:general.icons.rocket"
+            },
+            {
+              "value": "github",
+              "label": "t:general.icons.github"
+            },
+            {
+              "value": "check",
+              "label": "t:general.icons.check"
+            },
+            {
+              "value": "info",
+              "label": "t:general.icons.info"
+            },
+            {
+              "value": "phone",
+              "label": "t:general.icons.phone"
+            },
+            {
+              "value": "plus",
+              "label": "t:general.icons.plus"
+            }
+          ]
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Leistung: Baukasten", "blocks": [{ "type": "category" }, { "type": "offer" }, { "type": "offer" }] }]
+  "presets": [
+    {
+      "name": "t:sections.service_catalog.presets.name",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "offer"
+        },
+        {
+          "type": "offer"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

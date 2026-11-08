@@ -83,40 +83,156 @@
 
 {% schema %}
 {
-  "name": "Footer",
-  "enabled_on": { "groups": ["footer"] },
+  "name": "t:sections.footer.name",
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  },
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-4" },
-    { "type": "text", "id": "logo_text", "label": "Wort-Logo", "default": "NetImpulse" },
-    { "type": "text", "id": "logo_suffix", "label": "Wort-Logo Zusatz", "default": "marketing" },
-    { "type": "textarea", "id": "text", "label": "Kurztext", "default": "Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads." },
-    { "type": "header", "content": "Spalte 1" },
-    { "type": "text", "id": "heading_1", "label": "Überschrift", "default": "Menü" },
-    { "type": "link_list", "id": "menu_1", "label": "Menü", "default": "main-menu" },
-    { "type": "header", "content": "Spalte 2" },
-    { "type": "text", "id": "heading_2", "label": "Überschrift", "default": "Leistungen" },
-    { "type": "paragraph", "content": "Zeigt die Unterpunkte des ersten Menüpunkts mit Unterpunkten aus Spalte 1." },
-    { "type": "checkbox", "id": "show_dots", "label": "Punkte in den Gruppenfarben zeigen", "default": true },
-    { "type": "header", "content": "Spalte 3" },
-    { "type": "text", "id": "heading_3", "label": "Überschrift", "default": "Rechtliches" },
-    { "type": "paragraph", "content": "Zeigt die Richtlinien aus Einstellungen > Richtlinien." },
-    { "type": "page", "id": "extra_page", "label": "Zusätzliche Seite", "info": "Zum Beispiel Widerruf, solange keine Rückgaberichtlinie gepflegt ist" },
-    { "type": "header", "content": "Unten" },
-    { "type": "text", "id": "copyright", "label": "Copyright", "info": "[jahr] steht für das aktuelle Jahr", "default": "© [jahr] NetImpulse GbR" },
-    { "type": "text", "id": "top_label", "label": "Nach oben", "default": "Nach oben" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "t:sections.footer.settings.logo_text.label",
+      "default": "NetImpulse"
+    },
+    {
+      "type": "text",
+      "id": "logo_suffix",
+      "label": "t:sections.footer.settings.logo_suffix.label",
+      "default": "marketing"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.footer.settings.text.label",
+      "default": "Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_1.content"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "t:sections.footer.settings.heading_1.label",
+      "default": "Menü"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "t:sections.footer.settings.menu_1.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_2.content"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "t:sections.footer.settings.heading_2.label",
+      "default": "Leistungen"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.footer.settings.paragraph_1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "t:sections.footer.settings.show_dots.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_3.content"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "t:sections.footer.settings.heading_3.label",
+      "default": "Rechtliches"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.footer.settings.paragraph_2.content"
+    },
+    {
+      "type": "page",
+      "id": "extra_page",
+      "label": "t:sections.footer.settings.extra_page.label",
+      "info": "t:sections.footer.settings.extra_page.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_4.content"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "t:sections.footer.settings.copyright.label",
+      "info": "t:sections.footer.settings.copyright.info",
+      "default": "© [jahr] NetImpulse GbR"
+    },
+    {
+      "type": "text",
+      "id": "top_label",
+      "label": "t:sections.footer.settings.top_label.label",
+      "default": "Nach oben"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_5.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
   ],
   "blocks": [
-    { "type": "@app" },
+    {
+      "type": "@app"
+    },
     {
       "type": "menu",
-      "name": "Weitere Spalte",
+      "name": "t:sections.footer.blocks.menu.name",
       "limit": 2,
       "settings": [
-        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Mehr" },
-        { "type": "link_list", "id": "menu", "label": "Menü", "default": "footer" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.footer.blocks.menu.settings.heading.label",
+          "default": "Mehr"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "t:sections.footer.blocks.menu.settings.menu.label",
+          "default": "footer"
+        }
       ]
     }
   ]

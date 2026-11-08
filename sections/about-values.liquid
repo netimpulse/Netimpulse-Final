@@ -38,29 +38,104 @@
 
 {% schema %}
 {
-  "name": "Werte-Streifen",
+  "name": "t:sections.about_values.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Werte" },
-    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Werte, die sich durchziehen" },
-    { "type": "text", "id": "text", "label": "Text", "default": "Vier Prinzipien, die in jedem Projekt einen roten Faden bilden." },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Werte"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.about_values.settings.title.label",
+      "info": "t:sections.about_values.settings.title.info",
+      "default": "Werte, die sich durchziehen"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.about_values.settings.text.label",
+      "default": "Vier Prinzipien, die in jedem Projekt einen roten Faden bilden."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.about_values.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
   ],
   "blocks": [
     {
       "type": "value",
-      "name": "Wert",
+      "name": "t:sections.about_values.blocks.value.name",
       "limit": 4,
       "settings": [
-        { "type": "text", "id": "title", "label": "Titel", "default": "Klarheit" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Wir sprechen klar, erklären sauber und sorgen dafür, dass alle mitkommen." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.about_values.blocks.value.settings.title.label",
+          "default": "Klarheit"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.about_values.blocks.value.settings.text.label",
+          "default": "Wir sprechen klar, erklären sauber und sorgen dafür, dass alle mitkommen."
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Werte-Streifen", "blocks": [{ "type": "value" }, { "type": "value" }, { "type": "value" }, { "type": "value" }] }]
+  "presets": [
+    {
+      "name": "t:sections.about_values.presets.name",
+      "blocks": [
+        {
+          "type": "value"
+        },
+        {
+          "type": "value"
+        },
+        {
+          "type": "value"
+        },
+        {
+          "type": "value"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -58,27 +58,134 @@
 
 {% schema %}
 {
-  "name": "Leistungsblock",
+  "name": "t:sections.service_row.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-3" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
-    { "type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1 (Sichtbarkeit)" }, { "value": "a2", "label": "Akzent 2 (Umsetzung)" }] },
-    { "type": "text", "id": "key", "label": "Kennung", "info": "Wie im Rad, zum Beispiel seo. Sprungziel ist dann l-seo.", "default": "seo" },
-    { "type": "text", "id": "name", "label": "Name", "default": "SEO" },
-    { "type": "text", "id": "subtitle", "label": "Untertitel", "default": "Gefunden werden, bevor andere sichtbar sind" },
-    { "type": "text", "id": "partners_label", "label": "Text vor den Partnern", "default": "Arbeitet zusammen mit" },
-    { "type": "text", "id": "partners", "label": "Partner", "info": "Name = Kennung, mit Komma getrennt, zum Beispiel GEO = geo, Webdesign = webdesign", "default": "GEO = geo, Webdesign = webdesign" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Damit deine Website gefunden wird, braucht es mehr als ein paar Keywords." },
-    { "type": "textarea", "id": "points", "label": "Punkte", "info": "Einer pro Zeile", "default": "Keyword- und Seitenstruktur mit klarer Suchintention\nTechnische SEO-Grundlagen für Performance und Indexierung" },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Mehr zu SEO" },
-    { "type": "url", "id": "button_link", "label": "Button-Link" },
-    { "type": "text", "id": "link_label", "label": "Link", "default": "Projekt anfragen" },
-    { "type": "url", "id": "link", "label": "Link-Ziel", "info": "Ohne Link: Kontaktseite" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-3"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "group",
+      "label": "t:general.group.label",
+      "default": "a1",
+      "options": [
+        {
+          "value": "a1",
+          "label": "t:general.groups.a1"
+        },
+        {
+          "value": "a2",
+          "label": "t:general.groups.a2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "key",
+      "label": "t:sections.service_row.settings.key.label",
+      "info": "t:sections.service_row.settings.key.info",
+      "default": "seo"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "t:sections.service_row.settings.name.label",
+      "default": "SEO"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:sections.service_row.settings.subtitle.label",
+      "default": "Gefunden werden, bevor andere sichtbar sind"
+    },
+    {
+      "type": "text",
+      "id": "partners_label",
+      "label": "t:sections.service_row.settings.partners_label.label",
+      "default": "Arbeitet zusammen mit"
+    },
+    {
+      "type": "text",
+      "id": "partners",
+      "label": "t:sections.service_row.settings.partners.label",
+      "info": "t:sections.service_row.settings.partners.info",
+      "default": "GEO = geo, Webdesign = webdesign"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.service_row.settings.text.label",
+      "default": "Damit deine Website gefunden wird, braucht es mehr als ein paar Keywords."
+    },
+    {
+      "type": "textarea",
+      "id": "points",
+      "label": "t:sections.service_row.settings.points.label",
+      "info": "t:sections.service_row.settings.points.info",
+      "default": "Keyword- und Seitenstruktur mit klarer Suchintention\nTechnische SEO-Grundlagen für Performance und Indexierung"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.service_row.settings.button_label.label",
+      "default": "Mehr zu SEO"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.service_row.settings.button_link.label"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.service_row.settings.link_label.label",
+      "default": "Projekt anfragen"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.service_row.settings.link.label",
+      "info": "t:sections.service_row.settings.link.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.service_row.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ],
-  "presets": [{ "name": "Leistungsblock" }]
+  "presets": [
+    {
+      "name": "t:sections.service_row.presets.name"
+    }
+  ]
 }
 {% endschema %}

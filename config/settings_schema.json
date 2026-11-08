@@ -8,7 +8,7 @@
     "theme_support_url": "https://netimpulsemarketing.de/pages/kontakt"
   },
   {
-    "name": "Farben",
+    "name": "t:settings_schema.farben.name",
     "settings": [
       {
         "type": "color_scheme_group",
@@ -17,43 +17,43 @@
           {
             "type": "color",
             "id": "background",
-            "label": "Hintergrund",
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.background",
             "default": "#F7F8F8"
           },
           {
             "type": "color_background",
             "id": "background_gradient",
-            "label": "Hintergrund-Verlauf",
-            "info": "Ersetzt den Hintergrund, wenn gesetzt. Laut Design gibt es keine Verläufe."
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.background_gradient",
+            "info": "t:settings_schema.farben.settings.color_schemes.definition.background_gradient_info"
           },
           {
             "type": "color",
             "id": "text",
-            "label": "Text",
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.text",
             "default": "#16191C"
           },
           {
             "type": "color",
             "id": "button",
-            "label": "Button",
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.button",
             "default": "#62A7FD"
           },
           {
             "type": "color",
             "id": "button_label",
-            "label": "Button-Text",
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.button_label",
             "default": "#111418"
           },
           {
             "type": "color",
             "id": "secondary_button_label",
-            "label": "Zweiter Button und Links",
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.secondary_button_label",
             "default": "#3464A0"
           },
           {
             "type": "color",
             "id": "shadow",
-            "label": "Schatten",
+            "label": "t:settings_schema.farben.settings.color_schemes.definition.shadow",
             "default": "#111418"
           }
         ],
@@ -75,163 +75,163 @@
       },
       {
         "type": "header",
-        "content": "Akzente"
+        "content": "t:settings_schema.farben.settings.header_1.content"
       },
       {
         "type": "paragraph",
-        "content": "Akzent 1 steht für gefunden werden (SEO, SEA, Social Media, GEO), Akzent 2 für bauen (Webdesign, Shopify, Themes, KI-Automation)."
+        "content": "t:settings_schema.farben.settings.paragraph_1.content"
       },
       {
         "type": "color",
         "id": "accent_1",
-        "label": "Akzent 1 kräftig",
+        "label": "t:settings_schema.farben.settings.accent_1.label",
         "default": "#62A7FD"
       },
       {
         "type": "color",
         "id": "accent_1_deep",
-        "label": "Akzent 1 tief (Links auf hellem Grund)",
+        "label": "t:settings_schema.farben.settings.accent_1_deep.label",
         "default": "#3464A0"
       },
       {
         "type": "color",
         "id": "accent_1_light",
-        "label": "Akzent 1 hell (Flächen)",
+        "label": "t:settings_schema.farben.settings.accent_1_light.label",
         "default": "#EDF5FF"
       },
       {
         "type": "color",
         "id": "accent_2",
-        "label": "Akzent 2 kräftig",
+        "label": "t:settings_schema.farben.settings.accent_2.label",
         "default": "#DD9225"
       },
       {
         "type": "color",
         "id": "accent_2_deep",
-        "label": "Akzent 2 tief",
+        "label": "t:settings_schema.farben.settings.accent_2_deep.label",
         "default": "#895707"
       },
       {
         "type": "text",
         "id": "accent_2_services",
-        "label": "Leistungen mit Akzent 2",
-        "info": "Namen von Leistungen und Menüpunkten, die den Punkt in Akzent 2 bekommen, mit Komma getrennt. Alle anderen bekommen Akzent 1.",
+        "label": "t:settings_schema.farben.settings.accent_2_services.label",
+        "info": "t:settings_schema.farben.settings.accent_2_services.info",
         "default": "Webdesign, Web design, Shopify, Themes, Theme Store, KI-Automation"
       },
       {
         "type": "checkbox",
         "id": "dark_mode",
-        "label": "Dunkle Darstellung, wenn das Gerät auf dunkel steht",
+        "label": "t:settings_schema.farben.settings.dark_mode.label",
         "default": true
       }
     ]
   },
   {
-    "name": "Kontaktdaten",
+    "name": "t:settings_schema.kontaktdaten.name",
     "settings": [
       {
         "type": "text",
         "id": "contact_company",
-        "label": "Firma",
+        "label": "t:settings_schema.kontaktdaten.settings.contact_company.label",
         "default": "NetImpulse GbR"
       },
       {
         "type": "text",
         "id": "contact_street",
-        "label": "Straße",
+        "label": "t:settings_schema.kontaktdaten.settings.contact_street.label",
         "default": "Liebigstraße 96"
       },
       {
         "type": "text",
         "id": "contact_city",
-        "label": "PLZ und Ort",
+        "label": "t:settings_schema.kontaktdaten.settings.contact_city.label",
         "default": "35392 Gießen"
       },
       {
         "type": "text",
         "id": "contact_phone",
-        "label": "Telefon",
+        "label": "t:settings_schema.kontaktdaten.settings.contact_phone.label",
         "default": "+49 175 8950320"
       },
       {
         "type": "text",
         "id": "contact_email",
-        "label": "E-Mail",
+        "label": "t:settings_schema.kontaktdaten.settings.contact_email.label",
         "default": "netimpulsemarketing@gmail.com"
       },
       {
         "type": "page",
         "id": "contact_page",
-        "label": "Kontaktseite",
-        "info": "Dorthin führen der Kontakt-Abschluss und der Baukasten. Ohne Auswahl: /pages/kontakt"
+        "label": "t:settings_schema.kontaktdaten.settings.contact_page.label",
+        "info": "t:settings_schema.kontaktdaten.settings.contact_page.info"
       }
     ]
   },
   {
-    "name": "Zusatzleistungen",
+    "name": "t:settings_schema.zusatzleistungen.name",
     "settings": [
       {
         "type": "paragraph",
-        "content": "Diese Leistungen lassen sich auf der Produktseite und im Warenkorb zu einem Theme dazubuchen. Ist ein Produkt ausgewählt, landet es mit Preis im Warenkorb. Sonst wird die Auswahl als Vermerk am Theme gespeichert."
+        "content": "t:settings_schema.zusatzleistungen.settings.paragraph_1.content"
       },
       {
         "type": "text",
         "id": "addons_label",
-        "label": "Überschrift",
+        "label": "t:settings_schema.zusatzleistungen.settings.addons_label.label",
         "default": "Dazubuchen"
       },
       {
         "type": "header",
-        "content": "Zusatzleistung 1"
+        "content": "t:settings_schema.zusatzleistungen.settings.header_1.content"
       },
       {
         "type": "checkbox",
         "id": "addon_1_enabled",
-        "label": "Anzeigen",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_1_enabled.label",
         "default": true
       },
       {
         "type": "text",
         "id": "addon_1_name",
-        "label": "Name",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_1_name.label",
         "default": "Theme-Setup"
       },
       {
         "type": "text",
         "id": "addon_1_price",
-        "label": "Preisangabe",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_1_price.label",
         "default": "ab 200 €"
       },
       {
         "type": "textarea",
         "id": "addon_1_text",
-        "label": "Beschreibung",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_1_text.label",
         "default": "Installation, Grundkonfiguration, Logo und Farben. Danach ist dein Shop startklar."
       },
       {
         "type": "select",
         "id": "addon_1_icon",
-        "label": "Icon",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_1_icon.label",
         "options": [
           {
             "value": "rocket",
-            "label": "Rakete"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_1_icon.options.rocket"
           },
           {
             "value": "github",
-            "label": "GitHub"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_1_icon.options.github"
           },
           {
             "value": "wrench",
-            "label": "Werkzeug"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_1_icon.options.wrench"
           },
           {
             "value": "layers",
-            "label": "Ebenen"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_1_icon.options.layers"
           },
           {
             "value": "sliders",
-            "label": "Regler"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_1_icon.options.sliders"
           }
         ],
         "default": "rocket"
@@ -239,60 +239,60 @@
       {
         "type": "product",
         "id": "addon_1_product",
-        "label": "Produkt mit Preis (optional)"
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_1_product.label"
       },
       {
         "type": "header",
-        "content": "Zusatzleistung 2"
+        "content": "t:settings_schema.zusatzleistungen.settings.header_2.content"
       },
       {
         "type": "checkbox",
         "id": "addon_2_enabled",
-        "label": "Anzeigen",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_2_enabled.label",
         "default": true
       },
       {
         "type": "text",
         "id": "addon_2_name",
-        "label": "Name",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_2_name.label",
         "default": "GitHub-Repository aufsetzen"
       },
       {
         "type": "text",
         "id": "addon_2_price",
-        "label": "Preisangabe",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_2_price.label",
         "default": "Preis auf Anfrage"
       },
       {
         "type": "textarea",
         "id": "addon_2_text",
-        "label": "Beschreibung",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_2_text.label",
         "default": "Der Theme-Code liegt in einem eigenen Repository und ist mit deinem Shop verbunden. Jede Änderung bleibt nachvollziehbar."
       },
       {
         "type": "select",
         "id": "addon_2_icon",
-        "label": "Icon",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_2_icon.label",
         "options": [
           {
             "value": "rocket",
-            "label": "Rakete"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_2_icon.options.rocket"
           },
           {
             "value": "github",
-            "label": "GitHub"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_2_icon.options.github"
           },
           {
             "value": "wrench",
-            "label": "Werkzeug"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_2_icon.options.wrench"
           },
           {
             "value": "layers",
-            "label": "Ebenen"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_2_icon.options.layers"
           },
           {
             "value": "sliders",
-            "label": "Regler"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_2_icon.options.sliders"
           }
         ],
         "default": "github"
@@ -300,60 +300,60 @@
       {
         "type": "product",
         "id": "addon_2_product",
-        "label": "Produkt mit Preis (optional)"
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_2_product.label"
       },
       {
         "type": "header",
-        "content": "Zusatzleistung 3"
+        "content": "t:settings_schema.zusatzleistungen.settings.header_3.content"
       },
       {
         "type": "checkbox",
         "id": "addon_3_enabled",
-        "label": "Anzeigen",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_3_enabled.label",
         "default": true
       },
       {
         "type": "text",
         "id": "addon_3_name",
-        "label": "Name",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_3_name.label",
         "default": "Theme customizen"
       },
       {
         "type": "text",
         "id": "addon_3_price",
-        "label": "Preisangabe",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_3_price.label",
         "default": "Preis auf Anfrage"
       },
       {
         "type": "textarea",
         "id": "addon_3_text",
-        "label": "Beschreibung",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_3_text.label",
         "default": "Sections, Farben und Layout an deine Marke anpassen, inklusive Performance und mobilem Feinschliff."
       },
       {
         "type": "select",
         "id": "addon_3_icon",
-        "label": "Icon",
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_3_icon.label",
         "options": [
           {
             "value": "rocket",
-            "label": "Rakete"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_3_icon.options.rocket"
           },
           {
             "value": "github",
-            "label": "GitHub"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_3_icon.options.github"
           },
           {
             "value": "wrench",
-            "label": "Werkzeug"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_3_icon.options.wrench"
           },
           {
             "value": "layers",
-            "label": "Ebenen"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_3_icon.options.layers"
           },
           {
             "value": "sliders",
-            "label": "Regler"
+            "label": "t:settings_schema.zusatzleistungen.settings.addon_3_icon.options.sliders"
           }
         ],
         "default": "wrench"
@@ -361,79 +361,79 @@
       {
         "type": "product",
         "id": "addon_3_product",
-        "label": "Produkt mit Preis (optional)"
+        "label": "t:settings_schema.zusatzleistungen.settings.addon_3_product.label"
       }
     ]
   },
   {
-    "name": "Theme-Vorschau",
+    "name": "t:settings_schema.theme_vorschau.name",
     "settings": [
       {
         "type": "paragraph",
-        "content": "Die Vorschau liest pro Variante die Metafelder theme.screenshot_desktop und theme.screenshot_mobile (Bilder) sowie theme.farbe_grund und theme.farbe_akzent (Farben). Pro Produkt: theme.branche, theme.passt_fuer, theme.sektionen und theme.sprungmarken."
+        "content": "t:settings_schema.theme_vorschau.settings.paragraph_1.content"
       },
       {
         "type": "textarea",
         "id": "preview_outline",
-        "label": "Sektionen im Platzhalter",
-        "info": "Eine Zeile pro Sektion. Wird gezeigt, solange ein Theme keine Sprungmarken hat.",
+        "label": "t:settings_schema.theme_vorschau.settings.preview_outline.label",
+        "info": "t:settings_schema.theme_vorschau.settings.preview_outline.info",
         "default": "Ankündigungsleiste\nHeader\nHero-Banner\nKollektion\nBild mit Text\nNewsletter\nFooter"
       },
       {
         "type": "text",
         "id": "preview_placeholder",
-        "label": "Hinweis ohne Screenshot",
+        "label": "t:settings_schema.theme_vorschau.settings.preview_placeholder.label",
         "default": "Screenshot folgt"
       }
     ]
   },
   {
-    "name": "Rechtliches",
+    "name": "t:settings_schema.rechtliches.name",
     "settings": [
       {
         "type": "paragraph",
-        "content": "Impressum, Datenschutz, AGB und Widerruf kommen aus Einstellungen > Richtlinien. Das Theme legt die Navigation und das Inhaltsverzeichnis darum."
+        "content": "t:settings_schema.rechtliches.settings.paragraph_1.content"
       },
       {
         "type": "text",
         "id": "legal_title",
-        "label": "Überschrift der Navigation",
+        "label": "t:settings_schema.rechtliches.settings.legal_title.label",
         "default": "Rechtliches"
       },
       {
         "type": "text",
         "id": "legal_toc_title",
-        "label": "Überschrift des Inhaltsverzeichnisses",
+        "label": "t:settings_schema.rechtliches.settings.legal_toc_title.label",
         "default": "Auf dieser Seite"
       },
       {
         "type": "page",
         "id": "legal_extra_page",
-        "label": "Zusätzliche Seite in der Navigation",
-        "info": "Zum Beispiel Widerruf, solange keine Rückgaberichtlinie gepflegt ist"
+        "label": "t:settings_schema.rechtliches.settings.legal_extra_page.label",
+        "info": "t:settings_schema.rechtliches.settings.legal_extra_page.info"
       }
     ]
   },
   {
-    "name": "Seitenaufbau",
+    "name": "t:settings_schema.seitenaufbau.name",
     "settings": [
       {
         "type": "checkbox",
         "id": "show_outline",
-        "label": "Sektions-Gliederung auf der Startseite zeigen",
-        "info": "Ab 1500 px Breite. Zeigt alle Sektionen mit einem Namen für die Gliederung.",
+        "label": "t:settings_schema.seitenaufbau.settings.show_outline.label",
+        "info": "t:settings_schema.seitenaufbau.settings.show_outline.info",
         "default": true
       },
       {
         "type": "text",
         "id": "outline_title",
-        "label": "Titel der Gliederung",
+        "label": "t:settings_schema.seitenaufbau.settings.outline_title.label",
         "default": "Sektionen"
       },
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon"
+        "label": "t:settings_schema.seitenaufbau.settings.favicon.label"
       }
     ]
   }

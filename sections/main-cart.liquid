@@ -139,33 +139,154 @@
 
 {% schema %}
 {
-  "name": "Warenkorb",
+  "name": "t:sections.main_cart.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "text", "id": "title", "label": "Überschrift", "default": "Dein Warenkorb" },
-    { "type": "text", "id": "continue_label", "label": "Weiter stöbern", "default": "Weiter stöbern" },
-    { "type": "url", "id": "store_link", "label": "Link zum Theme-Shop" },
-    { "type": "text", "id": "list_label", "label": "Beschreibung der Liste für Screenreader", "default": "Artikel im Warenkorb" },
-    { "type": "text", "id": "type_label", "label": "Art des Produkts", "default": "Shopify-Theme" },
-    { "type": "text", "id": "style_label", "label": "Bezeichnung Farbstil", "default": "Stil" },
-    { "type": "text", "id": "preview_label", "label": "Link zur Vorschau", "default": "Vorschau" },
-    { "type": "header", "content": "Zusammenfassung" },
-    { "type": "text", "id": "summary_title", "label": "Überschrift", "default": "Zusammenfassung" },
-    { "type": "text", "id": "theme_one", "label": "Ein Theme", "default": "Theme" },
-    { "type": "text", "id": "theme_other", "label": "Mehrere Themes", "info": "[n] steht für die Anzahl", "default": "[n] Themes" },
-    { "type": "text", "id": "total_label", "label": "Gesamt", "default": "Gesamt" },
-    { "type": "text", "id": "from_label", "label": "Wort vor dem Gesamtpreis bei ab-Preisen", "default": "ab" },
-    { "type": "textarea", "id": "request_note", "label": "Hinweis zu Leistungen auf Anfrage", "default": "Leistungen „auf Anfrage“ bieten wir dir nach einem kurzen Gespräch einzeln an." },
-    { "type": "textarea", "id": "tax_note", "label": "Hinweis zur Umsatzsteuer", "default": "Als Kleinunternehmer nach § 19 UStG weisen wir keine Umsatzsteuer aus." },
-    { "type": "text", "id": "checkout_label", "label": "Button zur Kasse", "default": "Zur Kasse" },
-    { "type": "header", "content": "Leerer Warenkorb" },
-    { "type": "text", "id": "empty_title", "label": "Überschrift", "default": "Dein Warenkorb ist leer" },
-    { "type": "textarea", "id": "empty_text", "label": "Text", "default": "Im Theme Store findest du fertige Shopify-Themes für verschiedene Branchen, jedes mit Live-Vorschau." },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main_cart.settings.title.label",
+      "default": "Dein Warenkorb"
+    },
+    {
+      "type": "text",
+      "id": "continue_label",
+      "label": "t:sections.main_cart.settings.continue_label.label",
+      "default": "Weiter stöbern"
+    },
+    {
+      "type": "url",
+      "id": "store_link",
+      "label": "t:sections.main_cart.settings.store_link.label"
+    },
+    {
+      "type": "text",
+      "id": "list_label",
+      "label": "t:sections.main_cart.settings.list_label.label",
+      "default": "Artikel im Warenkorb"
+    },
+    {
+      "type": "text",
+      "id": "type_label",
+      "label": "t:sections.main_cart.settings.type_label.label",
+      "default": "Shopify-Theme"
+    },
+    {
+      "type": "text",
+      "id": "style_label",
+      "label": "t:sections.main_cart.settings.style_label.label",
+      "default": "Stil"
+    },
+    {
+      "type": "text",
+      "id": "preview_label",
+      "label": "t:sections.main_cart.settings.preview_label.label",
+      "default": "Vorschau"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_cart.settings.header_1.content"
+    },
+    {
+      "type": "text",
+      "id": "summary_title",
+      "label": "t:sections.main_cart.settings.summary_title.label",
+      "default": "Zusammenfassung"
+    },
+    {
+      "type": "text",
+      "id": "theme_one",
+      "label": "t:sections.main_cart.settings.theme_one.label",
+      "default": "Theme"
+    },
+    {
+      "type": "text",
+      "id": "theme_other",
+      "label": "t:sections.main_cart.settings.theme_other.label",
+      "info": "t:sections.main_cart.settings.theme_other.info",
+      "default": "[n] Themes"
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "t:sections.main_cart.settings.total_label.label",
+      "default": "Gesamt"
+    },
+    {
+      "type": "text",
+      "id": "from_label",
+      "label": "t:sections.main_cart.settings.from_label.label",
+      "default": "ab"
+    },
+    {
+      "type": "textarea",
+      "id": "request_note",
+      "label": "t:sections.main_cart.settings.request_note.label",
+      "default": "Leistungen „auf Anfrage“ bieten wir dir nach einem kurzen Gespräch einzeln an."
+    },
+    {
+      "type": "textarea",
+      "id": "tax_note",
+      "label": "t:sections.main_cart.settings.tax_note.label",
+      "default": "Als Kleinunternehmer nach § 19 UStG weisen wir keine Umsatzsteuer aus."
+    },
+    {
+      "type": "text",
+      "id": "checkout_label",
+      "label": "t:sections.main_cart.settings.checkout_label.label",
+      "default": "Zur Kasse"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_cart.settings.header_2.content"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "t:sections.main_cart.settings.empty_title.label",
+      "default": "Dein Warenkorb ist leer"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_text",
+      "label": "t:sections.main_cart.settings.empty_text.label",
+      "default": "Im Theme Store findest du fertige Shopify-Themes für verschiedene Branchen, jedes mit Live-Vorschau."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_cart.settings.header_3.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ],
-  "blocks": [{ "type": "@app" }]
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}

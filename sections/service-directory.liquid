@@ -54,34 +54,256 @@
 
 {% schema %}
 {
-  "name": "Weitere Leistungen",
+  "name": "t:sections.service_directory.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": false },
-    { "type": "text", "id": "anchor", "label": "Sprungziel", "default": "weiter" },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Weitere Leistungen" },
-    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Was wir noch anbieten" },
-    { "type": "text", "id": "link_label", "label": "Link", "default": "Alle Leistungen" },
-    { "type": "url", "id": "link", "label": "Link-Ziel" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "t:sections.service_directory.settings.anchor.label",
+      "default": "weiter"
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Weitere Leistungen"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.service_directory.settings.heading.label",
+      "default": "Was wir noch anbieten"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.service_directory.settings.link_label.label",
+      "default": "Alle Leistungen"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.service_directory.settings.link.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.service_directory.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
   ],
   "blocks": [
-    { "type": "category", "name": "Gruppe", "settings": [{ "type": "text", "id": "title", "label": "Titel", "default": "Sichtbarkeit" }] },
+    {
+      "type": "category",
+      "name": "t:sections.service_directory.blocks.category.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.service_directory.blocks.category.settings.title.label",
+          "default": "Sichtbarkeit"
+        }
+      ]
+    },
     {
       "type": "service",
-      "name": "Leistung",
+      "name": "t:sections.service_directory.blocks.service.name",
       "settings": [
-        { "type": "text", "id": "name", "label": "Name", "default": "SEA" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind." },
-        { "type": "select", "id": "icon", "label": "Icon", "default": "bar-chart", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}] },
-        { "type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1 (Sichtbarkeit)" }, { "value": "a2", "label": "Akzent 2 (Umsetzung)" }] },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:sections.service_directory.blocks.service.settings.name.label",
+          "default": "SEA"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.service_directory.blocks.service.settings.text.label",
+          "default": "Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.service_directory.blocks.service.settings.icon.label",
+          "default": "bar-chart",
+          "options": [
+            {
+              "value": "arrow-right",
+              "label": "t:general.icons.arrow_right"
+            },
+            {
+              "value": "arrow-up-right",
+              "label": "t:general.icons.arrow_up_right"
+            },
+            {
+              "value": "search",
+              "label": "t:general.icons.search"
+            },
+            {
+              "value": "bar-chart",
+              "label": "t:general.icons.bar_chart"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:general.icons.megaphone"
+            },
+            {
+              "value": "message-circle",
+              "label": "t:general.icons.message_circle"
+            },
+            {
+              "value": "monitor",
+              "label": "t:general.icons.monitor"
+            },
+            {
+              "value": "smartphone",
+              "label": "t:general.icons.smartphone"
+            },
+            {
+              "value": "bag",
+              "label": "t:general.icons.bag"
+            },
+            {
+              "value": "layers",
+              "label": "t:general.icons.layers"
+            },
+            {
+              "value": "workflow",
+              "label": "t:general.icons.workflow"
+            },
+            {
+              "value": "bot",
+              "label": "t:general.icons.bot"
+            },
+            {
+              "value": "mail",
+              "label": "t:general.icons.mail"
+            },
+            {
+              "value": "file-text",
+              "label": "t:general.icons.file_text"
+            },
+            {
+              "value": "eye",
+              "label": "t:general.icons.eye"
+            },
+            {
+              "value": "sliders",
+              "label": "t:general.icons.sliders"
+            },
+            {
+              "value": "user",
+              "label": "t:general.icons.user"
+            },
+            {
+              "value": "map-pin",
+              "label": "t:general.icons.map_pin"
+            },
+            {
+              "value": "activity",
+              "label": "t:general.icons.activity"
+            },
+            {
+              "value": "corner-down-right",
+              "label": "t:general.icons.corner_down_right"
+            },
+            {
+              "value": "wrench",
+              "label": "t:general.icons.wrench"
+            },
+            {
+              "value": "rocket",
+              "label": "t:general.icons.rocket"
+            },
+            {
+              "value": "github",
+              "label": "t:general.icons.github"
+            },
+            {
+              "value": "check",
+              "label": "t:general.icons.check"
+            },
+            {
+              "value": "info",
+              "label": "t:general.icons.info"
+            },
+            {
+              "value": "phone",
+              "label": "t:general.icons.phone"
+            },
+            {
+              "value": "plus",
+              "label": "t:general.icons.plus"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "group",
+          "label": "t:general.group.label",
+          "default": "a1",
+          "options": [
+            {
+              "value": "a1",
+              "label": "t:general.groups.a1"
+            },
+            {
+              "value": "a2",
+              "label": "t:general.groups.a2"
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.service_directory.blocks.service.settings.link.label"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Weitere Leistungen", "blocks": [{ "type": "category" }, { "type": "service" }] }]
+  "presets": [
+    {
+      "name": "t:sections.service_directory.presets.name",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "service"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

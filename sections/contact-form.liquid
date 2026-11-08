@@ -95,42 +95,209 @@
 
 {% schema %}
 {
-  "name": "Kontaktformular",
+  "name": "t:sections.contact_form.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Kontakt" },
-    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Lass uns reden" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Erzähl uns von deinem Projekt. Wir melden uns innerhalb von 48 Stunden mit klaren nächsten Schritten." },
-    { "type": "header", "content": "Kontaktdaten", "info": "Telefon, E-Mail und Adresse kommen aus den Theme-Einstellungen." },
-    { "type": "text", "id": "phone_label", "label": "Bezeichnung Telefon", "default": "Telefon" },
-    { "type": "text", "id": "email_label", "label": "Bezeichnung E-Mail", "default": "E-Mail" },
-    { "type": "text", "id": "address_label", "label": "Bezeichnung Adresse", "default": "Adresse" },
-    { "type": "header", "content": "Formular" },
-    { "type": "text", "id": "form_label", "label": "Beschreibung für Screenreader", "default": "Kontaktformular" },
-    { "type": "text", "id": "label_name", "label": "Feld Name", "default": "Name" },
-    { "type": "text", "id": "label_email", "label": "Feld E-Mail", "default": "E-Mail" },
-    { "type": "text", "id": "label_phone", "label": "Feld Telefon", "default": "Telefon" },
-    { "type": "text", "id": "label_company", "label": "Feld Unternehmen", "default": "Unternehmen" },
-    { "type": "text", "id": "label_topic", "label": "Feld Thema", "default": "Worum geht es?" },
-    { "type": "text", "id": "topic_placeholder", "label": "Thema: erste Option", "default": "Bitte wählen" },
-    { "type": "textarea", "id": "topics", "label": "Themen", "info": "Eins pro Zeile. Kontakt-Abschluss und Baukasten übergeben eines dieser Themen.", "default": "Strategie und Beratung\nWebdesign und UX\nSEO und Performance\nGoogle Ads (SEA)\nSocial Media\nShopify-Theme\nKI und Automation\nSonstiges" },
-    { "type": "text", "id": "label_message", "label": "Feld Nachricht", "default": "Nachricht" },
-    { "type": "text", "id": "required_label", "label": "Hinweis Pflichtfeld", "default": "(Pflichtfeld)" },
-    { "type": "text", "id": "optional_label", "label": "Hinweis optional", "default": "(optional)" },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Nachricht senden" },
-    { "type": "inline_richtext", "id": "privacy_text", "label": "Hinweis neben dem Button", "default": "Kostenlos und unverbindlich. Mehr dazu in der <a href=\"/policies/privacy-policy\">Datenschutzerklärung</a>." },
-    { "type": "header", "content": "Meldungen" },
-    { "type": "text", "id": "error_name", "label": "Name fehlt", "default": "Bitte gib deinen Namen an." },
-    { "type": "text", "id": "error_email", "label": "E-Mail fehlt", "default": "Bitte gib deine E-Mail-Adresse an." },
-    { "type": "text", "id": "error_email_format", "label": "E-Mail unvollständig", "default": "Diese E-Mail-Adresse sieht unvollständig aus, zum Beispiel name@firma.de." },
-    { "type": "text", "id": "error_message", "label": "Nachricht fehlt", "default": "Schreib uns kurz, worum es geht." },
-    { "type": "text", "id": "success_title", "label": "Nach dem Senden: Überschrift", "default": "Danke für deine Nachricht" },
-    { "type": "textarea", "id": "success_text", "label": "Nach dem Senden: Text", "default": "Wir melden uns innerhalb von 48 Stunden mit klaren nächsten Schritten." },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Kontakt"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.contact_form.settings.title.label",
+      "info": "t:sections.contact_form.settings.title.info",
+      "default": "Lass uns reden"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.contact_form.settings.text.label",
+      "default": "Erzähl uns von deinem Projekt. Wir melden uns innerhalb von 48 Stunden mit klaren nächsten Schritten."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.settings.header_1.content",
+      "info": "t:sections.contact_form.settings.header_1.info"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "t:sections.contact_form.settings.phone_label.label",
+      "default": "Telefon"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "t:sections.contact_form.settings.email_label.label",
+      "default": "E-Mail"
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "t:sections.contact_form.settings.address_label.label",
+      "default": "Adresse"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.settings.header_2.content"
+    },
+    {
+      "type": "text",
+      "id": "form_label",
+      "label": "t:sections.contact_form.settings.form_label.label",
+      "default": "Kontaktformular"
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "t:sections.contact_form.settings.label_name.label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "t:sections.contact_form.settings.label_email.label",
+      "default": "E-Mail"
+    },
+    {
+      "type": "text",
+      "id": "label_phone",
+      "label": "t:sections.contact_form.settings.label_phone.label",
+      "default": "Telefon"
+    },
+    {
+      "type": "text",
+      "id": "label_company",
+      "label": "t:sections.contact_form.settings.label_company.label",
+      "default": "Unternehmen"
+    },
+    {
+      "type": "text",
+      "id": "label_topic",
+      "label": "t:sections.contact_form.settings.label_topic.label",
+      "default": "Worum geht es?"
+    },
+    {
+      "type": "text",
+      "id": "topic_placeholder",
+      "label": "t:sections.contact_form.settings.topic_placeholder.label",
+      "default": "Bitte wählen"
+    },
+    {
+      "type": "textarea",
+      "id": "topics",
+      "label": "t:sections.contact_form.settings.topics.label",
+      "info": "t:sections.contact_form.settings.topics.info",
+      "default": "Strategie und Beratung\nWebdesign und UX\nSEO und Performance\nGoogle Ads (SEA)\nSocial Media\nShopify-Theme\nKI und Automation\nSonstiges"
+    },
+    {
+      "type": "text",
+      "id": "label_message",
+      "label": "t:sections.contact_form.settings.label_message.label",
+      "default": "Nachricht"
+    },
+    {
+      "type": "text",
+      "id": "required_label",
+      "label": "t:sections.contact_form.settings.required_label.label",
+      "default": "(Pflichtfeld)"
+    },
+    {
+      "type": "text",
+      "id": "optional_label",
+      "label": "t:sections.contact_form.settings.optional_label.label",
+      "default": "(optional)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.contact_form.settings.button_label.label",
+      "default": "Nachricht senden"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "privacy_text",
+      "label": "t:sections.contact_form.settings.privacy_text.label",
+      "default": "Kostenlos und unverbindlich. Mehr dazu in der <a href=\"/policies/privacy-policy\">Datenschutzerklärung</a>."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.settings.header_3.content"
+    },
+    {
+      "type": "text",
+      "id": "error_name",
+      "label": "t:sections.contact_form.settings.error_name.label",
+      "default": "Bitte gib deinen Namen an."
+    },
+    {
+      "type": "text",
+      "id": "error_email",
+      "label": "t:sections.contact_form.settings.error_email.label",
+      "default": "Bitte gib deine E-Mail-Adresse an."
+    },
+    {
+      "type": "text",
+      "id": "error_email_format",
+      "label": "t:sections.contact_form.settings.error_email_format.label",
+      "default": "Diese E-Mail-Adresse sieht unvollständig aus, zum Beispiel name@firma.de."
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "t:sections.contact_form.settings.error_message.label",
+      "default": "Schreib uns kurz, worum es geht."
+    },
+    {
+      "type": "text",
+      "id": "success_title",
+      "label": "t:sections.contact_form.settings.success_title.label",
+      "default": "Danke für deine Nachricht"
+    },
+    {
+      "type": "textarea",
+      "id": "success_text",
+      "label": "t:sections.contact_form.settings.success_text.label",
+      "default": "Wir melden uns innerhalb von 48 Stunden mit klaren nächsten Schritten."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.settings.header_4.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ],
-  "presets": [{ "name": "Kontaktformular" }]
+  "presets": [
+    {
+      "name": "t:sections.contact_form.presets.name"
+    }
+  ]
 }
 {% endschema %}

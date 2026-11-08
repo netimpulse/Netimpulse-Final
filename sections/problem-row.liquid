@@ -75,45 +75,170 @@
 
 {% schema %}
 {
-  "name": "Problem-Karten",
+  "name": "t:sections.problem_row.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Problem" },
-    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht." },
-    { "type": "textarea", "id": "goal_text", "label": "Satz unter den Karten", "default": "Keiner ist für das Ganze zuständig, also bleibt das Ganze unter seinen Möglichkeiten." },
-    { "type": "text", "id": "goal_strong", "label": "Satz unter den Karten, hervorgehoben", "default": "Bei uns laufen die Fäden zusammen." },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Problem"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.problem_row.settings.heading.label",
+      "default": "Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.problem_row.settings.text.label",
+      "default": "Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht."
+    },
+    {
+      "type": "textarea",
+      "id": "goal_text",
+      "label": "t:sections.problem_row.settings.goal_text.label",
+      "default": "Keiner ist für das Ganze zuständig, also bleibt das Ganze unter seinen Möglichkeiten."
+    },
+    {
+      "type": "text",
+      "id": "goal_strong",
+      "label": "t:sections.problem_row.settings.goal_strong.label",
+      "default": "Bei uns laufen die Fäden zusammen."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.problem_row.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
   ],
   "blocks": [
     {
       "type": "problem",
-      "name": "Karte",
+      "name": "t:sections.problem_row.blocks.problem.name",
       "limit": 6,
       "settings": [
-        { "type": "text", "id": "title", "label": "Titel", "default": "Webdesigner" },
-        { "type": "text", "id": "text", "label": "Text", "default": "baut die Seite und ist weg" },
         {
-          "type": "select", "id": "icon", "label": "Icon", "default": "monitor",
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.problem_row.blocks.problem.settings.title.label",
+          "default": "Webdesigner"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.problem_row.blocks.problem.settings.text.label",
+          "default": "baut die Seite und ist weg"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.problem_row.blocks.problem.settings.icon.label",
+          "default": "monitor",
           "options": [
-            { "value": "monitor", "label": "Bildschirm" }, { "value": "bar-chart", "label": "Diagramm" }, { "value": "search", "label": "Lupe" },
-            { "value": "bag", "label": "Tasche" }, { "value": "megaphone", "label": "Megafon" }, { "value": "activity", "label": "Kurve" },
-            { "value": "message-circle", "label": "Sprechblase" }, { "value": "workflow", "label": "Ablauf" }, { "value": "layers", "label": "Ebenen" }
+            {
+              "value": "monitor",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.monitor"
+            },
+            {
+              "value": "bar-chart",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.bar_chart"
+            },
+            {
+              "value": "search",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.search"
+            },
+            {
+              "value": "bag",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.bag"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.megaphone"
+            },
+            {
+              "value": "activity",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.activity"
+            },
+            {
+              "value": "message-circle",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.message_circle"
+            },
+            {
+              "value": "workflow",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.workflow"
+            },
+            {
+              "value": "layers",
+              "label": "t:sections.problem_row.blocks.problem.settings.icon.options.layers"
+            }
           ]
         },
-        { "type": "select", "id": "group", "label": "Farbe", "default": "a1", "options": [{ "value": "a1", "label": "Akzent 1" }, { "value": "a2", "label": "Akzent 2" }] }
+        {
+          "type": "select",
+          "id": "group",
+          "label": "t:sections.problem_row.blocks.problem.settings.group.label",
+          "default": "a1",
+          "options": [
+            {
+              "value": "a1",
+              "label": "t:general.groups.a1"
+            },
+            {
+              "value": "a2",
+              "label": "t:general.groups.a2"
+            }
+          ]
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Problem-Karten",
+      "name": "t:sections.problem_row.presets.name",
       "blocks": [
-        { "type": "problem" }, { "type": "problem" }, { "type": "problem" }
+        {
+          "type": "problem"
+        },
+        {
+          "type": "problem"
+        },
+        {
+          "type": "problem"
+        }
       ]
     }
   ]

@@ -79,32 +79,155 @@
 
 {% schema %}
 {
-  "name": "Theme-Shop",
+  "name": "t:sections.collection_themes.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Themes" },
-    { "type": "collection", "id": "collection", "label": "Kollektion", "info": "Nur nötig, wenn der Theme-Shop auf einer Seite steht" },
-    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Name der Kollektion", "default": "Shopify-Themes, die nicht nach Baukasten aussehen" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Fertige Themes für verschiedene Branchen, gebaut mit Online Store 2.0 und eigenen Sections. Kaufen, installieren und im Theme-Editor anpassen, oder von uns einrichten lassen." },
-    { "type": "text", "id": "list_label", "label": "Beschreibung der Liste für Screenreader", "default": "Themes" },
-    { "type": "text", "id": "filter_label", "label": "Beschreibung des Filters für Screenreader", "default": "Branche" },
-    { "type": "text", "id": "all_label", "label": "Filter: alle", "default": "Alle" },
-    { "type": "text", "id": "sort_label", "label": "Sortierung für Screenreader", "default": "Sortieren" },
-    { "type": "text", "id": "sort_recommended", "label": "Sortierung: empfohlen", "default": "Empfohlen" },
-    { "type": "text", "id": "sort_price_asc", "label": "Sortierung: Preis aufsteigend", "default": "Preis aufsteigend" },
-    { "type": "text", "id": "sort_price_desc", "label": "Sortierung: Preis absteigend", "default": "Preis absteigend" },
-    { "type": "text", "id": "sort_name", "label": "Sortierung: Name", "default": "Name" },
-    { "type": "text", "id": "count_one", "label": "Anzahl: eins", "info": "[n] steht für die Anzahl", "default": "[n] Theme" },
-    { "type": "text", "id": "count_other", "label": "Anzahl: mehrere", "default": "[n] Themes" },
-    { "type": "text", "id": "count_for", "label": "Anzahl mit Filter", "info": "[branche] steht für die gewählte Branche", "default": " für [branche]" },
-    { "type": "text", "id": "preview_label", "label": "Link zur Vorschau", "default": "Live-Vorschau" },
-    { "type": "text", "id": "swatch_label", "label": "Wort für Farbstile (Screenreader)", "default": "Stile" },
-    { "type": "textarea", "id": "empty_text", "label": "Text ohne Themes", "default": "Hier erscheinen bald unsere Themes. Bis dahin beraten wir dich gern direkt." },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Themes"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.collection_themes.settings.collection.label",
+      "info": "t:sections.collection_themes.settings.collection.info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.collection_themes.settings.title.label",
+      "info": "t:sections.collection_themes.settings.title.info",
+      "default": "Shopify-Themes, die nicht nach Baukasten aussehen"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.collection_themes.settings.text.label",
+      "default": "Fertige Themes für verschiedene Branchen, gebaut mit Online Store 2.0 und eigenen Sections. Kaufen, installieren und im Theme-Editor anpassen, oder von uns einrichten lassen."
+    },
+    {
+      "type": "text",
+      "id": "list_label",
+      "label": "t:sections.collection_themes.settings.list_label.label",
+      "default": "Themes"
+    },
+    {
+      "type": "text",
+      "id": "filter_label",
+      "label": "t:sections.collection_themes.settings.filter_label.label",
+      "default": "Branche"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "t:sections.collection_themes.settings.all_label.label",
+      "default": "Alle"
+    },
+    {
+      "type": "text",
+      "id": "sort_label",
+      "label": "t:sections.collection_themes.settings.sort_label.label",
+      "default": "Sortieren"
+    },
+    {
+      "type": "text",
+      "id": "sort_recommended",
+      "label": "t:sections.collection_themes.settings.sort_recommended.label",
+      "default": "Empfohlen"
+    },
+    {
+      "type": "text",
+      "id": "sort_price_asc",
+      "label": "t:sections.collection_themes.settings.sort_price_asc.label",
+      "default": "Preis aufsteigend"
+    },
+    {
+      "type": "text",
+      "id": "sort_price_desc",
+      "label": "t:sections.collection_themes.settings.sort_price_desc.label",
+      "default": "Preis absteigend"
+    },
+    {
+      "type": "text",
+      "id": "sort_name",
+      "label": "t:sections.collection_themes.settings.sort_name.label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "count_one",
+      "label": "t:sections.collection_themes.settings.count_one.label",
+      "info": "t:sections.collection_themes.settings.count_one.info",
+      "default": "[n] Theme"
+    },
+    {
+      "type": "text",
+      "id": "count_other",
+      "label": "t:sections.collection_themes.settings.count_other.label",
+      "default": "[n] Themes"
+    },
+    {
+      "type": "text",
+      "id": "count_for",
+      "label": "t:sections.collection_themes.settings.count_for.label",
+      "info": "t:sections.collection_themes.settings.count_for.info",
+      "default": " für [branche]"
+    },
+    {
+      "type": "text",
+      "id": "preview_label",
+      "label": "t:sections.collection_themes.settings.preview_label.label",
+      "default": "Live-Vorschau"
+    },
+    {
+      "type": "text",
+      "id": "swatch_label",
+      "label": "t:sections.collection_themes.settings.swatch_label.label",
+      "default": "Stile"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_text",
+      "label": "t:sections.collection_themes.settings.empty_text.label",
+      "default": "Hier erscheinen bald unsere Themes. Bis dahin beraten wir dich gern direkt."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collection_themes.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
   ],
-  "presets": [{ "name": "Theme-Shop" }]
+  "presets": [
+    {
+      "name": "t:sections.collection_themes.presets.name"
+    }
+  ]
 }
 {% endschema %}

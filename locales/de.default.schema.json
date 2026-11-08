@@ -1,1 +1,1995 @@
-{}
+{
+  "sections": {
+    "about_team": {
+      "name": "Team",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "lead": {
+          "label": "Einleitung"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "member": {
+          "name": "Person",
+          "settings": {
+            "name": {
+              "label": "Name"
+            },
+            "role": {
+              "label": "Rolle"
+            },
+            "focus": {
+              "label": "Schwerpunkt"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "image": {
+              "label": "Foto",
+              "info": "Ohne Foto wird der Anfangsbuchstabe gezeigt."
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Team"
+      }
+    },
+    "about_values": {
+      "name": "Werte-Streifen",
+      "settings": {
+        "title": {
+          "label": "Überschrift",
+          "info": "Ohne Text: Seitentitel"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "value": {
+          "name": "Wert",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "text": {
+              "label": "Text"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Werte-Streifen"
+      }
+    },
+    "billing_steps": {
+      "name": "Abrechnung in Schritten",
+      "settings": {
+        "anchor": {
+          "label": "Sprungziel"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "button_link": {
+          "label": "Button-Link",
+          "info": "Ohne Link: Kontaktseite"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "step": {
+          "name": "Schritt",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "text": {
+              "label": "Text"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Abrechnung in Schritten"
+      }
+    },
+    "case_studies": {
+      "name": "Projekte",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "scope_label": {
+          "label": "Bezeichnung Umfang"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "case": {
+          "name": "Projekt",
+          "settings": {
+            "product": {
+              "label": "Theme-Produkt",
+              "info": "Optional. Liefert Screenshots, Branche und Link zur Vorschau."
+            },
+            "title": {
+              "label": "Name"
+            },
+            "meta": {
+              "label": "Zeile unter dem Namen"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "scope": {
+              "label": "Umfang",
+              "info": "Leistungen mit Komma getrennt"
+            },
+            "badge": {
+              "label": "Kennzeichnung",
+              "info": "Für Beispielprojekte. Leer lassen bei echten Kundenprojekten."
+            },
+            "link_label": {
+              "label": "Link"
+            },
+            "link": {
+              "label": "Link-Ziel",
+              "info": "Ohne Link: Vorschau des Theme-Produkts"
+            },
+            "image_desktop": {
+              "label": "Screenshot Desktop",
+              "info": "Ersetzt den Screenshot des Produkts"
+            },
+            "image_mobile": {
+              "label": "Screenshot Handy"
+            },
+            "fav_color": {
+              "label": "Farbe des Kürzels"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Projekte"
+      }
+    },
+    "collection_themes": {
+      "name": "Theme-Shop",
+      "settings": {
+        "collection": {
+          "label": "Kollektion",
+          "info": "Nur nötig, wenn der Theme-Shop auf einer Seite steht"
+        },
+        "title": {
+          "label": "Überschrift",
+          "info": "Ohne Text: Name der Kollektion"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "list_label": {
+          "label": "Beschreibung der Liste für Screenreader"
+        },
+        "filter_label": {
+          "label": "Beschreibung des Filters für Screenreader"
+        },
+        "all_label": {
+          "label": "Filter: alle"
+        },
+        "sort_label": {
+          "label": "Sortierung für Screenreader"
+        },
+        "sort_recommended": {
+          "label": "Sortierung: empfohlen"
+        },
+        "sort_price_asc": {
+          "label": "Sortierung: Preis aufsteigend"
+        },
+        "sort_price_desc": {
+          "label": "Sortierung: Preis absteigend"
+        },
+        "sort_name": {
+          "label": "Sortierung: Name"
+        },
+        "count_one": {
+          "label": "Anzahl: eins",
+          "info": "[n] steht für die Anzahl"
+        },
+        "count_other": {
+          "label": "Anzahl: mehrere"
+        },
+        "count_for": {
+          "label": "Anzahl mit Filter",
+          "info": "[branche] steht für die gewählte Branche"
+        },
+        "preview_label": {
+          "label": "Link zur Vorschau"
+        },
+        "swatch_label": {
+          "label": "Wort für Farbstile (Screenreader)"
+        },
+        "empty_text": {
+          "label": "Text ohne Themes"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Theme-Shop"
+      }
+    },
+    "contact_band": {
+      "name": "Kontakt-Abschluss",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "question": {
+          "label": "Frage über den Themen"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "link": {
+          "label": "Button-Link",
+          "info": "Ohne Link: Kontaktseite aus den Theme-Einstellungen"
+        },
+        "message": {
+          "label": "Vorbelegte Nachricht",
+          "info": "[auswahl] steht für die gewählten Themen"
+        },
+        "note": {
+          "label": "Hinweis neben dem Button"
+        },
+        "show_direct": {
+          "label": "Telefon und E-Mail zeigen",
+          "info": "Aus den Theme-Einstellungen unter Kontaktdaten"
+        },
+        "direct_label": {
+          "label": "Text vor Telefon und E-Mail"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "topic": {
+          "name": "Thema",
+          "settings": {
+            "label": {
+              "label": "Bezeichnung"
+            },
+            "topic": {
+              "label": "Thema im Kontaktformular",
+              "info": "Muss einem Thema im Kontaktformular entsprechen"
+            },
+            "preselect": {
+              "label": "Vorausgewählt"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Kontakt-Abschluss"
+      }
+    },
+    "contact_form": {
+      "name": "Kontaktformular",
+      "settings": {
+        "title": {
+          "label": "Überschrift",
+          "info": "Ohne Text: Seitentitel"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "header_1": {
+          "content": "Kontaktdaten",
+          "info": "Telefon, E-Mail und Adresse kommen aus den Theme-Einstellungen."
+        },
+        "phone_label": {
+          "label": "Bezeichnung Telefon"
+        },
+        "email_label": {
+          "label": "Bezeichnung E-Mail"
+        },
+        "address_label": {
+          "label": "Bezeichnung Adresse"
+        },
+        "header_2": {
+          "content": "Formular"
+        },
+        "form_label": {
+          "label": "Beschreibung für Screenreader"
+        },
+        "label_name": {
+          "label": "Feld Name"
+        },
+        "label_email": {
+          "label": "Feld E-Mail"
+        },
+        "label_phone": {
+          "label": "Feld Telefon"
+        },
+        "label_company": {
+          "label": "Feld Unternehmen"
+        },
+        "label_topic": {
+          "label": "Feld Thema"
+        },
+        "topic_placeholder": {
+          "label": "Thema: erste Option"
+        },
+        "topics": {
+          "label": "Themen",
+          "info": "Eins pro Zeile. Kontakt-Abschluss und Baukasten übergeben eines dieser Themen."
+        },
+        "label_message": {
+          "label": "Feld Nachricht"
+        },
+        "required_label": {
+          "label": "Hinweis Pflichtfeld"
+        },
+        "optional_label": {
+          "label": "Hinweis optional"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "privacy_text": {
+          "label": "Hinweis neben dem Button"
+        },
+        "header_3": {
+          "content": "Meldungen"
+        },
+        "error_name": {
+          "label": "Name fehlt"
+        },
+        "error_email": {
+          "label": "E-Mail fehlt"
+        },
+        "error_email_format": {
+          "label": "E-Mail unvollständig"
+        },
+        "error_message": {
+          "label": "Nachricht fehlt"
+        },
+        "success_title": {
+          "label": "Nach dem Senden: Überschrift"
+        },
+        "success_text": {
+          "label": "Nach dem Senden: Text"
+        },
+        "header_4": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Kontaktformular"
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "logo_text": {
+          "label": "Wort-Logo"
+        },
+        "logo_suffix": {
+          "label": "Wort-Logo Zusatz"
+        },
+        "text": {
+          "label": "Kurztext"
+        },
+        "header_1": {
+          "content": "Spalte 1"
+        },
+        "heading_1": {
+          "label": "Überschrift"
+        },
+        "menu_1": {
+          "label": "Menü"
+        },
+        "header_2": {
+          "content": "Spalte 2"
+        },
+        "heading_2": {
+          "label": "Überschrift"
+        },
+        "paragraph_1": {
+          "content": "Zeigt die Unterpunkte des ersten Menüpunkts mit Unterpunkten aus Spalte 1."
+        },
+        "show_dots": {
+          "label": "Punkte in den Gruppenfarben zeigen"
+        },
+        "header_3": {
+          "content": "Spalte 3"
+        },
+        "heading_3": {
+          "label": "Überschrift"
+        },
+        "paragraph_2": {
+          "content": "Zeigt die Richtlinien aus Einstellungen > Richtlinien."
+        },
+        "extra_page": {
+          "label": "Zusätzliche Seite",
+          "info": "Zum Beispiel Widerruf, solange keine Rückgaberichtlinie gepflegt ist"
+        },
+        "header_4": {
+          "content": "Unten"
+        },
+        "copyright": {
+          "label": "Copyright",
+          "info": "[jahr] steht für das aktuelle Jahr"
+        },
+        "top_label": {
+          "label": "Nach oben"
+        },
+        "header_5": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "menu": {
+          "name": "Weitere Spalte",
+          "settings": {
+            "heading": {
+              "label": "Überschrift"
+            },
+            "menu": {
+              "label": "Menü"
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "name": "Header",
+      "settings": {
+        "header_1": {
+          "content": "Logo"
+        },
+        "logo": {
+          "label": "Logo-Bild",
+          "info": "Ohne Bild wird das Wort-Logo mit Punkt gezeigt."
+        },
+        "logo_width": {
+          "label": "Breite des Logo-Bilds"
+        },
+        "logo_text": {
+          "label": "Wort-Logo"
+        },
+        "logo_suffix": {
+          "label": "Wort-Logo Zusatz"
+        },
+        "header_2": {
+          "content": "Menü"
+        },
+        "menu": {
+          "label": "Menü",
+          "info": "Menüpunkte mit Unterpunkten werden zum Dropdown. Ein Link auf dieselbe Seite wie der Button wird nicht doppelt gezeigt."
+        },
+        "menu_descriptions": {
+          "label": "Untertitel im Dropdown",
+          "info": "Eine Zeile pro Unterpunkt: Name = Untertitel"
+        },
+        "dropdown_all_label": {
+          "label": "Link unten im Dropdown"
+        },
+        "cta_label": {
+          "label": "Button"
+        },
+        "cta_link": {
+          "label": "Button-Link",
+          "info": "Ohne Link: Kontaktseite aus den Theme-Einstellungen"
+        },
+        "header_3": {
+          "content": "Mobile-Menü"
+        },
+        "mobile_home_label": {
+          "label": "Link zur Startseite"
+        },
+        "mobile_cta_label": {
+          "label": "Button"
+        },
+        "mobile_cta_link": {
+          "label": "Button-Link"
+        },
+        "header_4": {
+          "content": "Suche"
+        },
+        "show_search": {
+          "label": "Suche zeigen"
+        },
+        "search_placeholder": {
+          "label": "Platzhalter"
+        },
+        "search_pages_label": {
+          "label": "Gruppe Seiten"
+        },
+        "search_products_label": {
+          "label": "Gruppe Produkte"
+        },
+        "search_empty": {
+          "label": "Keine Treffer",
+          "info": "[q] steht für den Suchbegriff"
+        },
+        "search_hint": {
+          "label": "Hinweis unten",
+          "info": "[taste] steht für die Taste /"
+        },
+        "header_5": {
+          "content": "Abstände"
+        }
+      }
+    },
+    "hero_build": {
+      "name": "Header-Animation",
+      "settings": {
+        "heading": {
+          "label": "Überschrift für Screenreader und Suchmaschinen",
+          "info": "Wird nicht sichtbar angezeigt."
+        },
+        "header_1": {
+          "content": "Video"
+        },
+        "video": {
+          "label": "Video",
+          "info": "Ersetzt die Aufbau-Animation, sobald ein Video gewählt ist."
+        },
+        "video_label": {
+          "label": "Beschreibung des Videos"
+        },
+        "header_2": {
+          "content": "Aufbau-Animation"
+        },
+        "phases": {
+          "label": "Phasen (für Screenreader)",
+          "info": "Vier Zeilen, eine pro Phase"
+        },
+        "browser_url": {
+          "label": "Adresse im Browserfenster"
+        },
+        "live_label": {
+          "label": "Live-Hinweis"
+        },
+        "screen_image": {
+          "label": "Bild im Browserfenster",
+          "info": "Optional, zum Beispiel ein langer Screenshot. Ohne Bild erscheint ein neutraler Shop-Aufbau."
+        },
+        "shop_bg": {
+          "label": "Platzhalter-Shop: Hintergrund"
+        },
+        "shop_fg": {
+          "label": "Platzhalter-Shop: Text"
+        },
+        "shop_accent": {
+          "label": "Platzhalter-Shop: Akzent"
+        },
+        "header_3": {
+          "content": "Karte SEO"
+        },
+        "seo_label": {
+          "label": "Etikett"
+        },
+        "seo_query": {
+          "label": "Suchanfrage"
+        },
+        "seo_own_url": {
+          "label": "Eigenes Ergebnis: Adresse"
+        },
+        "seo_own_title": {
+          "label": "Eigenes Ergebnis: Titel"
+        },
+        "seo_other_url": {
+          "label": "Zweites Ergebnis: Adresse"
+        },
+        "seo_other_title": {
+          "label": "Zweites Ergebnis: Titel"
+        },
+        "header_4": {
+          "content": "Karte SEA"
+        },
+        "sea_label": {
+          "label": "Etikett"
+        },
+        "sea_meta": {
+          "label": "Zeile über der Anzeige"
+        },
+        "sea_title": {
+          "label": "Anzeigentitel"
+        },
+        "header_5": {
+          "content": "Karte SMM"
+        },
+        "smm_label": {
+          "label": "Etikett"
+        },
+        "smm_title": {
+          "label": "Beitrag"
+        },
+        "smm_meta": {
+          "label": "Zeile unter dem Beitrag"
+        },
+        "header_6": {
+          "content": "Karte GEO"
+        },
+        "geo_label": {
+          "label": "Etikett"
+        },
+        "geo_engine": {
+          "label": "KI-System"
+        },
+        "geo_answer": {
+          "label": "Antwort"
+        },
+        "geo_source": {
+          "label": "Quelle"
+        },
+        "header_7": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Header-Animation"
+      }
+    },
+    "leistungen_hero": {
+      "name": "Leistungen: Kopf mit Rad",
+      "settings": {
+        "title": {
+          "label": "Überschrift",
+          "info": "Ohne Text: Seitentitel"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "button_link": {
+          "label": "Button-Link",
+          "info": "Ohne Link: Kontaktseite"
+        },
+        "price_label": {
+          "label": "Zweiter Button (springt zu den Preisen)"
+        },
+        "price_anchor": {
+          "label": "Sprungziel des zweiten Buttons"
+        },
+        "header_1": {
+          "content": "Rad und Leiste"
+        },
+        "orbit_label": {
+          "label": "Beschreibung des Rads für Screenreader"
+        },
+        "dock_label": {
+          "label": "Beschreibung der Leiste für Screenreader"
+        },
+        "group_1_label": {
+          "label": "Gruppe Akzent 1"
+        },
+        "group_2_label": {
+          "label": "Gruppe Akzent 2"
+        },
+        "pair_label": {
+          "label": "Legende gestrichelt"
+        },
+        "header_2": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "service": {
+          "name": "Leistung",
+          "settings": {
+            "key": {
+              "label": "Kennung",
+              "info": "Kurz und ohne Leerzeichen, zum Beispiel seo. Verbindet Leistungen und dient als Sprungziel."
+            },
+            "name": {
+              "label": "Name"
+            },
+            "long": {
+              "label": "Langname"
+            },
+            "icon": {
+              "label": "Icon"
+            },
+            "pairs": {
+              "label": "Arbeitet zusammen mit",
+              "info": "Kennungen anderer Leistungen, mit Komma getrennt"
+            },
+            "promise": {
+              "label": "Titel der Karte"
+            },
+            "teaser": {
+              "label": "Text der Karte"
+            },
+            "link_label": {
+              "label": "Link"
+            },
+            "link": {
+              "label": "Link-Ziel"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Leistungen: Kopf mit Rad"
+      }
+    },
+    "main_404": {
+      "name": "Nicht gefunden",
+      "settings": {
+        "title": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "link": {
+          "label": "Button-Link"
+        }
+      }
+    },
+    "main_cart": {
+      "name": "Warenkorb",
+      "settings": {
+        "title": {
+          "label": "Überschrift"
+        },
+        "continue_label": {
+          "label": "Weiter stöbern"
+        },
+        "store_link": {
+          "label": "Link zum Theme-Shop"
+        },
+        "list_label": {
+          "label": "Beschreibung der Liste für Screenreader"
+        },
+        "type_label": {
+          "label": "Art des Produkts"
+        },
+        "style_label": {
+          "label": "Bezeichnung Farbstil"
+        },
+        "preview_label": {
+          "label": "Link zur Vorschau"
+        },
+        "header_1": {
+          "content": "Zusammenfassung"
+        },
+        "summary_title": {
+          "label": "Überschrift"
+        },
+        "theme_one": {
+          "label": "Ein Theme"
+        },
+        "theme_other": {
+          "label": "Mehrere Themes",
+          "info": "[n] steht für die Anzahl"
+        },
+        "total_label": {
+          "label": "Gesamt"
+        },
+        "from_label": {
+          "label": "Wort vor dem Gesamtpreis bei ab-Preisen"
+        },
+        "request_note": {
+          "label": "Hinweis zu Leistungen auf Anfrage"
+        },
+        "tax_note": {
+          "label": "Hinweis zur Umsatzsteuer"
+        },
+        "checkout_label": {
+          "label": "Button zur Kasse"
+        },
+        "header_2": {
+          "content": "Leerer Warenkorb"
+        },
+        "empty_title": {
+          "label": "Überschrift"
+        },
+        "empty_text": {
+          "label": "Text"
+        },
+        "header_3": {
+          "content": "Abstände"
+        }
+      }
+    },
+    "main_page": {
+      "name": "Seiteninhalt",
+      "presets": {
+        "name": "Seiteninhalt"
+      }
+    },
+    "main_password": {
+      "name": "Passwort",
+      "settings": {
+        "title": {
+          "label": "Überschrift"
+        }
+      }
+    },
+    "main_search": {
+      "name": "Suchergebnisse",
+      "settings": {
+        "title": {
+          "label": "Überschrift ohne Suchbegriff"
+        }
+      }
+    },
+    "pricing_cards": {
+      "name": "Preiskarten",
+      "settings": {
+        "anchor": {
+          "label": "Sprungziel"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "card": {
+          "name": "Karte",
+          "settings": {
+            "name": {
+              "label": "Name"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "price": {
+              "label": "Preisangabe"
+            },
+            "note": {
+              "label": "Hervorhebung",
+              "info": "Mit Text wird die Karte hervorgehoben"
+            },
+            "points": {
+              "label": "Punkte",
+              "info": "Einer pro Zeile"
+            },
+            "button_label": {
+              "label": "Button"
+            },
+            "button_link": {
+              "label": "Button-Link",
+              "info": "Ohne Link: Kontaktseite"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Preiskarten"
+      }
+    },
+    "problem_row": {
+      "name": "Problem-Karten",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "goal_text": {
+          "label": "Satz unter den Karten"
+        },
+        "goal_strong": {
+          "label": "Satz unter den Karten, hervorgehoben"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "problem": {
+          "name": "Karte",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "icon": {
+              "label": "Icon",
+              "options": {
+                "monitor": "Bildschirm",
+                "bar_chart": "Diagramm",
+                "search": "Lupe",
+                "bag": "Tasche",
+                "megaphone": "Megafon",
+                "activity": "Kurve",
+                "message_circle": "Sprechblase",
+                "workflow": "Ablauf",
+                "layers": "Ebenen"
+              }
+            },
+            "group": {
+              "label": "Farbe"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Problem-Karten"
+      }
+    },
+    "product_related": {
+      "name": "Weitere Themes",
+      "settings": {
+        "collection": {
+          "label": "Kollektion"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "link_label": {
+          "label": "Link"
+        },
+        "limit": {
+          "label": "Anzahl"
+        },
+        "preview_label": {
+          "label": "Link zur Vorschau"
+        },
+        "swatch_label": {
+          "label": "Wort für Farbstile (Screenreader)"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Weitere Themes"
+      }
+    },
+    "product_sections": {
+      "name": "Enthaltene Sektionen",
+      "settings": {
+        "paragraph_1": {
+          "content": "Liest die Produkt-Metafelder theme.sektionen und theme.passt_fuer (Listen mit einzeiligem Text)."
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "good_label": {
+          "label": "Überschrift Passt gut für"
+        },
+        "list_label": {
+          "label": "Beschreibung der Liste für Screenreader",
+          "info": "[name] steht für das Theme"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Enthaltene Sektionen"
+      }
+    },
+    "product_theme": {
+      "name": "Theme-Produkt",
+      "settings": {
+        "crumb_label": {
+          "label": "Brotkrumen: Theme-Shop"
+        },
+        "crumb_link": {
+          "label": "Brotkrumen: Link"
+        },
+        "device_label": {
+          "label": "Gerätewahl für Screenreader"
+        },
+        "desktop_label": {
+          "label": "Desktop"
+        },
+        "mobile_label": {
+          "label": "Handy"
+        },
+        "fullscreen_label": {
+          "label": "Link zur Vollbild-Vorschau"
+        },
+        "style_label": {
+          "label": "Bezeichnung Farbstil"
+        },
+        "style_choose_label": {
+          "label": "Farbstil-Wahl für Screenreader"
+        },
+        "add_label": {
+          "label": "Button"
+        },
+        "update_label": {
+          "label": "Button, wenn das Theme schon im Warenkorb liegt"
+        },
+        "preview_label": {
+          "label": "Zweiter Button"
+        },
+        "points": {
+          "label": "Punkte unter den Buttons",
+          "info": "Einer pro Zeile"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      }
+    },
+    "service_catalog": {
+      "name": "Leistung: Baukasten",
+      "settings": {
+        "anchor": {
+          "label": "Sprungziel",
+          "info": "Ohne Leerzeichen, zum Beispiel angebote"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "header_1": {
+          "content": "Anfrage mit Auswahl"
+        },
+        "empty_text": {
+          "label": "Hinweis ohne Auswahl"
+        },
+        "count_text": {
+          "label": "Hinweis mit Auswahl",
+          "info": "[n] steht für die Anzahl, [gesamt] für alle Angebote"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "link": {
+          "label": "Button-Link",
+          "info": "Ohne Link: Kontaktseite"
+        },
+        "topic": {
+          "label": "Thema im Kontaktformular"
+        },
+        "message": {
+          "label": "Vorbelegte Nachricht",
+          "info": "[auswahl] steht für die gewählten Angebote, je eins pro Zeile"
+        },
+        "header_2": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "category": {
+          "name": "Gruppe",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            }
+          }
+        },
+        "offer": {
+          "name": "Angebot",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "icon": {
+              "label": "Icon"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Leistung: Baukasten"
+      }
+    },
+    "service_directory": {
+      "name": "Weitere Leistungen",
+      "settings": {
+        "anchor": {
+          "label": "Sprungziel"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "link_label": {
+          "label": "Link"
+        },
+        "link": {
+          "label": "Link-Ziel"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "category": {
+          "name": "Gruppe",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            }
+          }
+        },
+        "service": {
+          "name": "Leistung",
+          "settings": {
+            "name": {
+              "label": "Name"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "icon": {
+              "label": "Icon"
+            },
+            "link": {
+              "label": "Link"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Weitere Leistungen"
+      }
+    },
+    "service_hero": {
+      "name": "Leistung: Kopf",
+      "settings": {
+        "crumb_parent": {
+          "label": "Brotkrumen: übergeordnete Seite"
+        },
+        "crumb_parent_link": {
+          "label": "Brotkrumen: Link"
+        },
+        "crumb_current": {
+          "label": "Brotkrumen: diese Seite",
+          "info": "Ohne Text: Seitentitel"
+        },
+        "title": {
+          "label": "Überschrift",
+          "info": "Ohne Text: Seitentitel"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "group_label": {
+          "label": "Bereich"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "button_link": {
+          "label": "Button-Link",
+          "info": "Ohne Link: Kontaktseite"
+        },
+        "button_2_label": {
+          "label": "Zweiter Button"
+        },
+        "button_2_link": {
+          "label": "Zweiter Button: Link"
+        },
+        "header_1": {
+          "content": "Arbeitsfläche"
+        },
+        "visual": {
+          "label": "Art",
+          "options": {
+            "none": "Keine",
+            "seo": "SEO: Suchergebnisse",
+            "sea": "SEA: Kampagnen-Kennzahlen",
+            "smm": "SMM: A/B-Test",
+            "geo": "GEO: KI-Antworten",
+            "webdesign": "Webdesign: Seite baut sich auf",
+            "ki": "KI-Automation: Ablauf"
+          }
+        },
+        "paragraph_1": {
+          "content": "Zeilen sind Blocks: bei SEO die anderen Suchergebnisse (Bezeichnung = Adresse, Text = Titel), bei SEA die Kennzahlen (Wert, Hervorheben = Hauptziel), bei SMM die Varianten (Bezeichnung = Buchstabe, Text = Anzeige, Wert = Klickrate, Hervorheben = Gewinner), bei GEO die KI-Systeme, bei Webdesign die Karten, bei KI-Automation die Schritte."
+        },
+        "vis_title": {
+          "label": "Titel der Fläche",
+          "info": "Bei Webdesign steht [n] für den Schritt"
+        },
+        "vis_tag": {
+          "label": "Kennzeichnung"
+        },
+        "vis_query": {
+          "label": "Suchanfrage oder Frage"
+        },
+        "vis_own_url": {
+          "label": "Eigenes Ergebnis: Adresse"
+        },
+        "vis_own_title": {
+          "label": "Eigenes Ergebnis: Titel"
+        },
+        "vis_own_badge": {
+          "label": "Eigenes Ergebnis: Hinweis"
+        },
+        "vis_meta": {
+          "label": "Kleine Zeile (Anzeige oder Beitrag)"
+        },
+        "vis_headline": {
+          "label": "Anzeigentitel oder Überschrift der Seite"
+        },
+        "vis_brand": {
+          "label": "Marke"
+        },
+        "vis_brand_short": {
+          "label": "Kürzel der Marke"
+        },
+        "vis_variant_label": {
+          "label": "Wort für Variante"
+        },
+        "vis_note": {
+          "label": "Hinweis unten"
+        },
+        "vis_note_done": {
+          "label": "Hinweis am Ende"
+        },
+        "vis_answer": {
+          "label": "Antwort bis zur Quellenangabe"
+        },
+        "vis_answer_after": {
+          "label": "Antwort nach der Quellenangabe"
+        },
+        "vis_source": {
+          "label": "Quelle"
+        },
+        "vis_cited": {
+          "label": "Hinweis Zitiert"
+        },
+        "vis_hero_text": {
+          "label": "Text der Seite"
+        },
+        "vis_cta": {
+          "label": "Button der Seite"
+        },
+        "vis_list": {
+          "label": "Schritte",
+          "info": "Eine Zeile pro Schritt"
+        },
+        "vis_live": {
+          "label": "Live-Hinweis"
+        },
+        "vis_checks": {
+          "label": "Haken unten",
+          "info": "Eine Zeile pro Haken"
+        },
+        "header_2": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "row": {
+          "name": "Zeile der Arbeitsfläche",
+          "settings": {
+            "label": {
+              "label": "Bezeichnung"
+            },
+            "text": {
+              "label": "Text"
+            },
+            "value": {
+              "label": "Wert"
+            },
+            "highlight": {
+              "label": "Hervorheben"
+            },
+            "icon": {
+              "label": "Icon"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Leistung: Kopf"
+      }
+    },
+    "service_orbit": {
+      "name": "Leistungs-Orbit",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "link_label": {
+          "label": "Link"
+        },
+        "link": {
+          "label": "Link-Ziel"
+        },
+        "header_1": {
+          "content": "Rad"
+        },
+        "orbit_label": {
+          "label": "Beschreibung für Screenreader"
+        },
+        "group_1_label": {
+          "label": "Gruppe Akzent 1"
+        },
+        "group_2_label": {
+          "label": "Gruppe Akzent 2"
+        },
+        "pair_label": {
+          "label": "Legende gestrichelt"
+        },
+        "header_2": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "service": {
+          "name": "Leistung",
+          "settings": {
+            "key": {
+              "label": "Kennung",
+              "info": "Kurz und ohne Leerzeichen, zum Beispiel seo. Verbindet Leistungen und dient als Sprungziel."
+            },
+            "name": {
+              "label": "Name"
+            },
+            "long": {
+              "label": "Langname"
+            },
+            "icon": {
+              "label": "Icon"
+            },
+            "pairs": {
+              "label": "Arbeitet zusammen mit",
+              "info": "Kennungen anderer Leistungen, mit Komma getrennt"
+            },
+            "promise": {
+              "label": "Titel der Karte"
+            },
+            "teaser": {
+              "label": "Text der Karte"
+            },
+            "link_label": {
+              "label": "Link"
+            },
+            "link": {
+              "label": "Link-Ziel"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Leistungs-Orbit"
+      }
+    },
+    "service_pair": {
+      "name": "Leistung: Für wen / Warum",
+      "settings": {
+        "anchor": {
+          "label": "Sprungziel"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "column": {
+          "name": "Spalte",
+          "settings": {
+            "title": {
+              "label": "Überschrift"
+            },
+            "text": {
+              "label": "Text",
+              "info": "Leerzeile oder Zeilenumbruch beginnt einen neuen Absatz"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Für wen / Warum"
+      }
+    },
+    "service_row": {
+      "name": "Leistungsblock",
+      "settings": {
+        "key": {
+          "label": "Kennung",
+          "info": "Wie im Rad, zum Beispiel seo. Sprungziel ist dann l-seo."
+        },
+        "name": {
+          "label": "Name"
+        },
+        "subtitle": {
+          "label": "Untertitel"
+        },
+        "partners_label": {
+          "label": "Text vor den Partnern"
+        },
+        "partners": {
+          "label": "Partner",
+          "info": "Name = Kennung, mit Komma getrennt, zum Beispiel GEO = geo, Webdesign = webdesign"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "points": {
+          "label": "Punkte",
+          "info": "Einer pro Zeile"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "button_link": {
+          "label": "Button-Link"
+        },
+        "link_label": {
+          "label": "Link"
+        },
+        "link": {
+          "label": "Link-Ziel",
+          "info": "Ohne Link: Kontaktseite"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Leistungsblock"
+      }
+    },
+    "service_steps": {
+      "name": "Leistung: Ablauf",
+      "settings": {
+        "anchor": {
+          "label": "Sprungziel"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "focus_title": {
+          "label": "Überschrift der Schwerpunkte",
+          "info": "Leer lassen, um den Kasten auszublenden"
+        },
+        "focus_list": {
+          "label": "Schwerpunkte",
+          "info": "Einer pro Zeile"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "step": {
+          "name": "Schritt",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "text": {
+              "label": "Text"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Leistung: Ablauf"
+      }
+    },
+    "setup_band": {
+      "name": "Hinweis-Band",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_label": {
+          "label": "Button"
+        },
+        "button_link": {
+          "label": "Button-Link"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "presets": {
+        "name": "Hinweis-Band"
+      }
+    },
+    "team_principles": {
+      "name": "Team und Prinzipien",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "link_label": {
+          "label": "Link"
+        },
+        "link": {
+          "label": "Link-Ziel"
+        },
+        "header_1": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "principle": {
+          "name": "Prinzip",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "text": {
+              "label": "Text"
+            }
+          }
+        },
+        "person": {
+          "name": "Person",
+          "settings": {
+            "name": {
+              "label": "Name"
+            },
+            "focus": {
+              "label": "Schwerpunkt"
+            },
+            "image": {
+              "label": "Foto",
+              "info": "Ohne Foto wird der Anfangsbuchstabe gezeigt."
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Team und Prinzipien"
+      }
+    },
+    "theme_editor": {
+      "name": "Theme-Editor",
+      "settings": {
+        "heading": {
+          "label": "Überschrift"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "pick_label": {
+          "label": "Beschreibung der Auswahl für Screenreader"
+        },
+        "detail_label": {
+          "label": "Button zum Theme",
+          "info": "[name] steht für den Namen des Themes"
+        },
+        "store_label": {
+          "label": "Zweiter Button"
+        },
+        "store_link": {
+          "label": "Zweiter Button: Link"
+        },
+        "header_1": {
+          "content": "Editor"
+        },
+        "page_label": {
+          "label": "Seite im Editor"
+        },
+        "badge": {
+          "label": "Kennzeichnung unter dem Editor",
+          "info": "Solange die Themes Beispiele sind"
+        },
+        "outline_title": {
+          "label": "Titel der Sektionsliste"
+        },
+        "device_label": {
+          "label": "Gerätewahl für Screenreader"
+        },
+        "desktop_label": {
+          "label": "Desktop"
+        },
+        "mobile_label": {
+          "label": "Handy"
+        },
+        "preview_label": {
+          "label": "Vorschau-Link"
+        },
+        "viewport_label": {
+          "label": "Beschreibung der Vorschau für Screenreader",
+          "info": "[name] steht für das Theme, [sektion] für die gewählte Sektion"
+        },
+        "header_2": {
+          "content": "Abstände"
+        }
+      },
+      "blocks": {
+        "theme": {
+          "name": "Theme",
+          "settings": {
+            "product": {
+              "label": "Theme-Produkt",
+              "info": "Liefert Name, Preis, Farben, Screenshots und Sprungmarken. Die Felder darunter gelten nur ohne Produkt."
+            },
+            "name": {
+              "label": "Name"
+            },
+            "branche": {
+              "label": "Branche"
+            },
+            "price": {
+              "label": "Preis"
+            },
+            "swatch_bg": {
+              "label": "Farbe Grund"
+            },
+            "swatch_accent": {
+              "label": "Farbe Akzent"
+            },
+            "link": {
+              "label": "Link zum Theme"
+            },
+            "preview_link": {
+              "label": "Link zur Vorschau"
+            },
+            "image_desktop": {
+              "label": "Screenshot Desktop"
+            },
+            "image_mobile": {
+              "label": "Screenshot Handy"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Theme-Editor"
+      }
+    },
+    "theme_preview": {
+      "name": "Theme-Vorschau",
+      "settings": {
+        "device_label": {
+          "label": "Gerätewahl für Screenreader"
+        },
+        "desktop_label": {
+          "label": "Desktop"
+        },
+        "mobile_label": {
+          "label": "Handy"
+        },
+        "style_label": {
+          "label": "Farbstil-Wahl für Screenreader"
+        },
+        "jump_label": {
+          "label": "Sprung zu Sektion"
+        },
+        "add_label": {
+          "label": "Button"
+        },
+        "added_label": {
+          "label": "Button, wenn das Theme im Warenkorb liegt"
+        },
+        "header_1": {
+          "content": "Abstände"
+        },
+        "paragraph_1": {
+          "content": "Die Vorschau füllt den ganzen Bildschirm, die Abstände gelten für den Rahmen um das Gerät."
+        }
+      }
+    }
+  },
+  "general": {
+    "color_scheme": {
+      "label": "Farbschema"
+    },
+    "dots": {
+      "label": "Punktraster im Hintergrund"
+    },
+    "outline_label": {
+      "label": "Name in der Sektions-Gliederung"
+    },
+    "padding_top": {
+      "label": "Abstand oben"
+    },
+    "padding_bottom": {
+      "label": "Abstand unten"
+    },
+    "icons": {
+      "arrow_right": "Pfeil",
+      "arrow_up_right": "Pfeil schräg",
+      "search": "Lupe",
+      "bar_chart": "Diagramm",
+      "megaphone": "Megafon",
+      "message_circle": "Sprechblase",
+      "monitor": "Bildschirm",
+      "smartphone": "Handy",
+      "bag": "Tasche",
+      "layers": "Ebenen",
+      "workflow": "Ablauf",
+      "bot": "Roboter",
+      "mail": "Brief",
+      "file_text": "Dokument",
+      "eye": "Auge",
+      "sliders": "Regler",
+      "user": "Person",
+      "map_pin": "Ort",
+      "activity": "Kurve",
+      "corner_down_right": "Abzweig",
+      "wrench": "Werkzeug",
+      "rocket": "Rakete",
+      "github": "GitHub",
+      "check": "Haken",
+      "info": "Info",
+      "phone": "Telefon",
+      "plus": "Plus"
+    },
+    "group": {
+      "label": "Gruppe"
+    },
+    "groups": {
+      "a1": "Akzent 1 (Sichtbarkeit)",
+      "a2": "Akzent 2 (Umsetzung)"
+    }
+  },
+  "settings_schema": {
+    "farben": {
+      "name": "Farben",
+      "settings": {
+        "color_schemes": {
+          "definition": {
+            "background": "Hintergrund",
+            "background_gradient": "Hintergrund-Verlauf",
+            "background_gradient_info": "Ersetzt den Hintergrund, wenn gesetzt. Laut Design gibt es keine Verläufe.",
+            "text": "Text",
+            "button": "Button",
+            "button_label": "Button-Text",
+            "secondary_button_label": "Zweiter Button und Links",
+            "shadow": "Schatten"
+          }
+        },
+        "header_1": {
+          "content": "Akzente"
+        },
+        "paragraph_1": {
+          "content": "Akzent 1 steht für gefunden werden (SEO, SEA, Social Media, GEO), Akzent 2 für bauen (Webdesign, Shopify, Themes, KI-Automation)."
+        },
+        "accent_1": {
+          "label": "Akzent 1 kräftig"
+        },
+        "accent_1_deep": {
+          "label": "Akzent 1 tief (Links auf hellem Grund)"
+        },
+        "accent_1_light": {
+          "label": "Akzent 1 hell (Flächen)"
+        },
+        "accent_2": {
+          "label": "Akzent 2 kräftig"
+        },
+        "accent_2_deep": {
+          "label": "Akzent 2 tief"
+        },
+        "accent_2_services": {
+          "label": "Leistungen mit Akzent 2",
+          "info": "Namen von Leistungen und Menüpunkten, die den Punkt in Akzent 2 bekommen, mit Komma getrennt. Alle anderen bekommen Akzent 1."
+        },
+        "dark_mode": {
+          "label": "Dunkle Darstellung, wenn das Gerät auf dunkel steht"
+        }
+      }
+    },
+    "kontaktdaten": {
+      "name": "Kontaktdaten",
+      "settings": {
+        "contact_company": {
+          "label": "Firma"
+        },
+        "contact_street": {
+          "label": "Straße"
+        },
+        "contact_city": {
+          "label": "PLZ und Ort"
+        },
+        "contact_phone": {
+          "label": "Telefon"
+        },
+        "contact_email": {
+          "label": "E-Mail"
+        },
+        "contact_page": {
+          "label": "Kontaktseite",
+          "info": "Dorthin führen der Kontakt-Abschluss und der Baukasten. Ohne Auswahl: /pages/kontakt"
+        }
+      }
+    },
+    "zusatzleistungen": {
+      "name": "Zusatzleistungen",
+      "settings": {
+        "paragraph_1": {
+          "content": "Diese Leistungen lassen sich auf der Produktseite und im Warenkorb zu einem Theme dazubuchen. Ist ein Produkt ausgewählt, landet es mit Preis im Warenkorb. Sonst wird die Auswahl als Vermerk am Theme gespeichert."
+        },
+        "addons_label": {
+          "label": "Überschrift"
+        },
+        "header_1": {
+          "content": "Zusatzleistung 1"
+        },
+        "addon_1_enabled": {
+          "label": "Anzeigen"
+        },
+        "addon_1_name": {
+          "label": "Name"
+        },
+        "addon_1_price": {
+          "label": "Preisangabe"
+        },
+        "addon_1_text": {
+          "label": "Beschreibung"
+        },
+        "addon_1_icon": {
+          "label": "Icon",
+          "options": {
+            "rocket": "Rakete",
+            "github": "GitHub",
+            "wrench": "Werkzeug",
+            "layers": "Ebenen",
+            "sliders": "Regler"
+          }
+        },
+        "addon_1_product": {
+          "label": "Produkt mit Preis (optional)"
+        },
+        "header_2": {
+          "content": "Zusatzleistung 2"
+        },
+        "addon_2_enabled": {
+          "label": "Anzeigen"
+        },
+        "addon_2_name": {
+          "label": "Name"
+        },
+        "addon_2_price": {
+          "label": "Preisangabe"
+        },
+        "addon_2_text": {
+          "label": "Beschreibung"
+        },
+        "addon_2_icon": {
+          "label": "Icon",
+          "options": {
+            "rocket": "Rakete",
+            "github": "GitHub",
+            "wrench": "Werkzeug",
+            "layers": "Ebenen",
+            "sliders": "Regler"
+          }
+        },
+        "addon_2_product": {
+          "label": "Produkt mit Preis (optional)"
+        },
+        "header_3": {
+          "content": "Zusatzleistung 3"
+        },
+        "addon_3_enabled": {
+          "label": "Anzeigen"
+        },
+        "addon_3_name": {
+          "label": "Name"
+        },
+        "addon_3_price": {
+          "label": "Preisangabe"
+        },
+        "addon_3_text": {
+          "label": "Beschreibung"
+        },
+        "addon_3_icon": {
+          "label": "Icon",
+          "options": {
+            "rocket": "Rakete",
+            "github": "GitHub",
+            "wrench": "Werkzeug",
+            "layers": "Ebenen",
+            "sliders": "Regler"
+          }
+        },
+        "addon_3_product": {
+          "label": "Produkt mit Preis (optional)"
+        }
+      }
+    },
+    "theme_vorschau": {
+      "name": "Theme-Vorschau",
+      "settings": {
+        "paragraph_1": {
+          "content": "Die Vorschau liest pro Variante die Metafelder theme.screenshot_desktop und theme.screenshot_mobile (Bilder) sowie theme.farbe_grund und theme.farbe_akzent (Farben). Pro Produkt: theme.branche, theme.passt_fuer, theme.sektionen und theme.sprungmarken."
+        },
+        "preview_outline": {
+          "label": "Sektionen im Platzhalter",
+          "info": "Eine Zeile pro Sektion. Wird gezeigt, solange ein Theme keine Sprungmarken hat."
+        },
+        "preview_placeholder": {
+          "label": "Hinweis ohne Screenshot"
+        }
+      }
+    },
+    "rechtliches": {
+      "name": "Rechtliches",
+      "settings": {
+        "paragraph_1": {
+          "content": "Impressum, Datenschutz, AGB und Widerruf kommen aus Einstellungen > Richtlinien. Das Theme legt die Navigation und das Inhaltsverzeichnis darum."
+        },
+        "legal_title": {
+          "label": "Überschrift der Navigation"
+        },
+        "legal_toc_title": {
+          "label": "Überschrift des Inhaltsverzeichnisses"
+        },
+        "legal_extra_page": {
+          "label": "Zusätzliche Seite in der Navigation",
+          "info": "Zum Beispiel Widerruf, solange keine Rückgaberichtlinie gepflegt ist"
+        }
+      }
+    },
+    "seitenaufbau": {
+      "name": "Seitenaufbau",
+      "settings": {
+        "show_outline": {
+          "label": "Sektions-Gliederung auf der Startseite zeigen",
+          "info": "Ab 1500 px Breite. Zeigt alle Sektionen mit einem Namen für die Gliederung."
+        },
+        "outline_title": {
+          "label": "Titel der Gliederung"
+        },
+        "favicon": {
+          "label": "Favicon"
+        }
+      }
+    }
+  }
+}

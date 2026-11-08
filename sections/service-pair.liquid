@@ -25,28 +25,92 @@
 
 {% schema %}
 {
-  "name": "Leistung: Für wen / Warum",
+  "name": "t:sections.service_pair.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
-    { "type": "text", "id": "anchor", "label": "Sprungziel", "default": "fuer-wen" },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Für wen" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 100 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "t:sections.service_pair.settings.anchor.label",
+      "default": "fuer-wen"
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Für wen"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.service_pair.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
   ],
   "blocks": [
     {
       "type": "column",
-      "name": "Spalte",
+      "name": "t:sections.service_pair.blocks.column.name",
       "limit": 2,
       "settings": [
-        { "type": "text", "id": "title", "label": "Überschrift", "default": "Für wen ist das sinnvoll?" },
-        { "type": "textarea", "id": "text", "label": "Text", "info": "Leerzeile oder Zeilenumbruch beginnt einen neuen Absatz", "default": "Für Unternehmen, die nachhaltig wachsen wollen." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.service_pair.blocks.column.settings.title.label",
+          "default": "Für wen ist das sinnvoll?"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.service_pair.blocks.column.settings.text.label",
+          "info": "t:sections.service_pair.blocks.column.settings.text.info",
+          "default": "Für Unternehmen, die nachhaltig wachsen wollen."
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Für wen / Warum", "blocks": [{ "type": "column" }, { "type": "column" }] }]
+  "presets": [
+    {
+      "name": "t:sections.service_pair.presets.name",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

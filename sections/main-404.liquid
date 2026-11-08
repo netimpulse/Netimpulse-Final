@@ -13,16 +13,58 @@
 
 {% schema %}
 {
-  "name": "Nicht gefunden",
+  "name": "t:sections.main_404.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "text", "id": "title", "label": "Überschrift", "default": "Diese Seite gibt es nicht" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Vielleicht hat sich die Adresse geändert. Von der Startseite aus findest du alles wieder." },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Zur Startseite" },
-    { "type": "url", "id": "link", "label": "Button-Link" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main_404.settings.title.label",
+      "default": "Diese Seite gibt es nicht"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.main_404.settings.text.label",
+      "default": "Vielleicht hat sich die Adresse geändert. Von der Startseite aus findest du alles wieder."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.main_404.settings.button_label.label",
+      "default": "Zur Startseite"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.main_404.settings.link.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ]
 }
 {% endschema %}

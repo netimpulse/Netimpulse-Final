@@ -57,29 +57,328 @@
 
 {% schema %}
 {
-  "name": "Leistungen: Kopf mit Rad",
+  "name": "t:sections.leistungen_hero.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-2" },
-    { "type": "checkbox", "id": "dots", "label": "Punktraster im Hintergrund", "default": true },
-    { "type": "text", "id": "outline_label", "label": "Name in der Sektions-Gliederung", "default": "Übersicht" },
-    { "type": "text", "id": "title", "label": "Überschrift", "info": "Ohne Text: Seitentitel", "default": "Ein System aus Sichtbarkeit, Design und Umsetzung" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Acht Leistungen aus einer Hand. Jede funktioniert für sich und wird stärker, wenn sie mit den anderen zusammenarbeitet. Klick im Rad auf eine Leistung, um direkt dorthin zu springen." },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Erstgespräch vereinbaren" },
-    { "type": "url", "id": "button_link", "label": "Button-Link", "info": "Ohne Link: Kontaktseite" },
-    { "type": "text", "id": "price_label", "label": "Zweiter Button (springt zu den Preisen)", "default": "Abrechnung und Preise" },
-    { "type": "text", "id": "price_anchor", "label": "Sprungziel des zweiten Buttons", "default": "abrechnung" },
-    { "type": "header", "content": "Rad und Leiste" },
-    { "type": "text", "id": "orbit_label", "label": "Beschreibung des Rads für Screenreader", "default": "Zu einer Leistung springen" },
-    { "type": "text", "id": "dock_label", "label": "Beschreibung der Leiste für Screenreader", "default": "Leistungen auf dieser Seite" },
-    { "type": "text", "id": "group_1_label", "label": "Gruppe Akzent 1", "default": "Sichtbarkeit" },
-    { "type": "text", "id": "group_2_label", "label": "Gruppe Akzent 2", "default": "Umsetzung" },
-    { "type": "text", "id": "pair_label", "label": "Legende gestrichelt", "default": "gestrichelt: arbeitet zusammen mit" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 96 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:general.dots.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "outline_label",
+      "label": "t:general.outline_label.label",
+      "default": "Übersicht"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.leistungen_hero.settings.title.label",
+      "info": "t:sections.leistungen_hero.settings.title.info",
+      "default": "Ein System aus Sichtbarkeit, Design und Umsetzung"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.leistungen_hero.settings.text.label",
+      "default": "Acht Leistungen aus einer Hand. Jede funktioniert für sich und wird stärker, wenn sie mit den anderen zusammenarbeitet. Klick im Rad auf eine Leistung, um direkt dorthin zu springen."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.leistungen_hero.settings.button_label.label",
+      "default": "Erstgespräch vereinbaren"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.leistungen_hero.settings.button_link.label",
+      "info": "t:sections.leistungen_hero.settings.button_link.info"
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "t:sections.leistungen_hero.settings.price_label.label",
+      "default": "Abrechnung und Preise"
+    },
+    {
+      "type": "text",
+      "id": "price_anchor",
+      "label": "t:sections.leistungen_hero.settings.price_anchor.label",
+      "default": "abrechnung"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.leistungen_hero.settings.header_1.content"
+    },
+    {
+      "type": "text",
+      "id": "orbit_label",
+      "label": "t:sections.leistungen_hero.settings.orbit_label.label",
+      "default": "Zu einer Leistung springen"
+    },
+    {
+      "type": "text",
+      "id": "dock_label",
+      "label": "t:sections.leistungen_hero.settings.dock_label.label",
+      "default": "Leistungen auf dieser Seite"
+    },
+    {
+      "type": "text",
+      "id": "group_1_label",
+      "label": "t:sections.leistungen_hero.settings.group_1_label.label",
+      "default": "Sichtbarkeit"
+    },
+    {
+      "type": "text",
+      "id": "group_2_label",
+      "label": "t:sections.leistungen_hero.settings.group_2_label.label",
+      "default": "Umsetzung"
+    },
+    {
+      "type": "text",
+      "id": "pair_label",
+      "label": "t:sections.leistungen_hero.settings.pair_label.label",
+      "default": "gestrichelt: arbeitet zusammen mit"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.leistungen_hero.settings.header_2.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
   ],
-  "blocks": [{ "type": "service", "name": "Leistung", "limit": 12, "settings": [{"type": "text", "id": "key", "label": "Kennung", "info": "Kurz und ohne Leerzeichen, zum Beispiel seo. Verbindet Leistungen und dient als Sprungziel.", "default": "seo"}, {"type": "text", "id": "name", "label": "Name", "default": "SEO"}, {"type": "text", "id": "long", "label": "Langname", "default": "Suchmaschinenoptimierung"}, {"type": "select", "id": "icon", "label": "Icon", "default": "search", "options": [{"value": "arrow-right", "label": "Pfeil"}, {"value": "arrow-up-right", "label": "Pfeil schräg"}, {"value": "search", "label": "Lupe"}, {"value": "bar-chart", "label": "Diagramm"}, {"value": "megaphone", "label": "Megafon"}, {"value": "message-circle", "label": "Sprechblase"}, {"value": "monitor", "label": "Bildschirm"}, {"value": "smartphone", "label": "Handy"}, {"value": "bag", "label": "Tasche"}, {"value": "layers", "label": "Ebenen"}, {"value": "workflow", "label": "Ablauf"}, {"value": "bot", "label": "Roboter"}, {"value": "mail", "label": "Brief"}, {"value": "file-text", "label": "Dokument"}, {"value": "eye", "label": "Auge"}, {"value": "sliders", "label": "Regler"}, {"value": "user", "label": "Person"}, {"value": "map-pin", "label": "Ort"}, {"value": "activity", "label": "Kurve"}, {"value": "corner-down-right", "label": "Abzweig"}, {"value": "wrench", "label": "Werkzeug"}, {"value": "rocket", "label": "Rakete"}, {"value": "github", "label": "GitHub"}, {"value": "check", "label": "Haken"}, {"value": "info", "label": "Info"}, {"value": "phone", "label": "Telefon"}, {"value": "plus", "label": "Plus"}]}, {"type": "select", "id": "group", "label": "Gruppe", "default": "a1", "options": [{"value": "a1", "label": "Akzent 1 (Sichtbarkeit)"}, {"value": "a2", "label": "Akzent 2 (Umsetzung)"}]}, {"type": "text", "id": "pairs", "label": "Arbeitet zusammen mit", "info": "Kennungen anderer Leistungen, mit Komma getrennt", "default": "geo, webdesign"}, {"type": "text", "id": "promise", "label": "Titel der Karte", "default": "Gefunden werden"}, {"type": "textarea", "id": "teaser", "label": "Text der Karte", "default": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird."}, {"type": "text", "id": "link_label", "label": "Link", "default": "Mehr zu SEO"}, {"type": "url", "id": "link", "label": "Link-Ziel"}] }],
-  "presets": [{ "name": "Leistungen: Kopf mit Rad", "blocks": [{ "type": "service" }, { "type": "service" }, { "type": "service" }] }]
+  "blocks": [
+    {
+      "type": "service",
+      "name": "t:sections.leistungen_hero.blocks.service.name",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "text",
+          "id": "key",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.key.label",
+          "info": "t:sections.leistungen_hero.blocks.service.settings.key.info",
+          "default": "seo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.name.label",
+          "default": "SEO"
+        },
+        {
+          "type": "text",
+          "id": "long",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.long.label",
+          "default": "Suchmaschinenoptimierung"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.icon.label",
+          "default": "search",
+          "options": [
+            {
+              "value": "arrow-right",
+              "label": "t:general.icons.arrow_right"
+            },
+            {
+              "value": "arrow-up-right",
+              "label": "t:general.icons.arrow_up_right"
+            },
+            {
+              "value": "search",
+              "label": "t:general.icons.search"
+            },
+            {
+              "value": "bar-chart",
+              "label": "t:general.icons.bar_chart"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:general.icons.megaphone"
+            },
+            {
+              "value": "message-circle",
+              "label": "t:general.icons.message_circle"
+            },
+            {
+              "value": "monitor",
+              "label": "t:general.icons.monitor"
+            },
+            {
+              "value": "smartphone",
+              "label": "t:general.icons.smartphone"
+            },
+            {
+              "value": "bag",
+              "label": "t:general.icons.bag"
+            },
+            {
+              "value": "layers",
+              "label": "t:general.icons.layers"
+            },
+            {
+              "value": "workflow",
+              "label": "t:general.icons.workflow"
+            },
+            {
+              "value": "bot",
+              "label": "t:general.icons.bot"
+            },
+            {
+              "value": "mail",
+              "label": "t:general.icons.mail"
+            },
+            {
+              "value": "file-text",
+              "label": "t:general.icons.file_text"
+            },
+            {
+              "value": "eye",
+              "label": "t:general.icons.eye"
+            },
+            {
+              "value": "sliders",
+              "label": "t:general.icons.sliders"
+            },
+            {
+              "value": "user",
+              "label": "t:general.icons.user"
+            },
+            {
+              "value": "map-pin",
+              "label": "t:general.icons.map_pin"
+            },
+            {
+              "value": "activity",
+              "label": "t:general.icons.activity"
+            },
+            {
+              "value": "corner-down-right",
+              "label": "t:general.icons.corner_down_right"
+            },
+            {
+              "value": "wrench",
+              "label": "t:general.icons.wrench"
+            },
+            {
+              "value": "rocket",
+              "label": "t:general.icons.rocket"
+            },
+            {
+              "value": "github",
+              "label": "t:general.icons.github"
+            },
+            {
+              "value": "check",
+              "label": "t:general.icons.check"
+            },
+            {
+              "value": "info",
+              "label": "t:general.icons.info"
+            },
+            {
+              "value": "phone",
+              "label": "t:general.icons.phone"
+            },
+            {
+              "value": "plus",
+              "label": "t:general.icons.plus"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "group",
+          "label": "t:general.group.label",
+          "default": "a1",
+          "options": [
+            {
+              "value": "a1",
+              "label": "t:general.groups.a1"
+            },
+            {
+              "value": "a2",
+              "label": "t:general.groups.a2"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "pairs",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.pairs.label",
+          "info": "t:sections.leistungen_hero.blocks.service.settings.pairs.info",
+          "default": "geo, webdesign"
+        },
+        {
+          "type": "text",
+          "id": "promise",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.promise.label",
+          "default": "Gefunden werden"
+        },
+        {
+          "type": "textarea",
+          "id": "teaser",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.teaser.label",
+          "default": "Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.link_label.label",
+          "default": "Mehr zu SEO"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.leistungen_hero.blocks.service.settings.link.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.leistungen_hero.presets.name",
+      "blocks": [
+        {
+          "type": "service"
+        },
+        {
+          "type": "service"
+        },
+        {
+          "type": "service"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

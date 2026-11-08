@@ -106,21 +106,85 @@
 
 {% schema %}
 {
-  "name": "Theme-Vorschau",
+  "name": "t:sections.theme_preview.name",
   "tag": "div",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Farbschema", "default": "scheme-1" },
-    { "type": "text", "id": "device_label", "label": "Gerätewahl für Screenreader", "default": "Gerät" },
-    { "type": "text", "id": "desktop_label", "label": "Desktop", "default": "Desktop" },
-    { "type": "text", "id": "mobile_label", "label": "Handy", "default": "Mobil" },
-    { "type": "text", "id": "style_label", "label": "Farbstil-Wahl für Screenreader", "default": "Stil" },
-    { "type": "text", "id": "jump_label", "label": "Sprung zu Sektion", "default": "Zu Sektion springen" },
-    { "type": "text", "id": "add_label", "label": "Button", "default": "In den Warenkorb" },
-    { "type": "text", "id": "added_label", "label": "Button, wenn das Theme im Warenkorb liegt", "default": "Im Warenkorb" },
-    { "type": "header", "content": "Abstände" },
-    { "type": "paragraph", "content": "Die Vorschau füllt den ganzen Bildschirm, die Abstände gelten für den Rahmen um das Gerät." },
-    { "type": "range", "id": "padding_top", "label": "Abstand oben", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
-    { "type": "range", "id": "padding_bottom", "label": "Abstand unten", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "device_label",
+      "label": "t:sections.theme_preview.settings.device_label.label",
+      "default": "Gerät"
+    },
+    {
+      "type": "text",
+      "id": "desktop_label",
+      "label": "t:sections.theme_preview.settings.desktop_label.label",
+      "default": "Desktop"
+    },
+    {
+      "type": "text",
+      "id": "mobile_label",
+      "label": "t:sections.theme_preview.settings.mobile_label.label",
+      "default": "Mobil"
+    },
+    {
+      "type": "text",
+      "id": "style_label",
+      "label": "t:sections.theme_preview.settings.style_label.label",
+      "default": "Stil"
+    },
+    {
+      "type": "text",
+      "id": "jump_label",
+      "label": "t:sections.theme_preview.settings.jump_label.label",
+      "default": "Zu Sektion springen"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "t:sections.theme_preview.settings.add_label.label",
+      "default": "In den Warenkorb"
+    },
+    {
+      "type": "text",
+      "id": "added_label",
+      "label": "t:sections.theme_preview.settings.added_label.label",
+      "default": "Im Warenkorb"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.theme_preview.settings.header_1.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.theme_preview.settings.paragraph_1.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:general.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:general.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
   ]
 }
 {% endschema %}

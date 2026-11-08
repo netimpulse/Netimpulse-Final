@@ -69,3 +69,6 @@ contact-form { display: grid; gap: 20px; }
 /* Theme-Vorschau: Sprung zu Sektionen */
 .preview-jump select { height: 36px; font-size: 14px; }
 .cart-page[aria-busy="true"] { opacity: 0.6; pointer-events: none; transition: opacity 150ms var(--ease); }
+
+/* Theme-Shop ohne Produkte */
+.store-empty { margin-inline: auto; }
