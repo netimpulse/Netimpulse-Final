@@ -382,7 +382,8 @@
             "name": "Theme-Setup",
             "text": "Für einen schnellen, sauberen Start",
             "price": "ab 200 €",
-            "note": "",
+            "highlight": false,
+            "note": "Häufig gewählt",
             "points": "Theme-Installation\nGrundkonfiguration\nLogo und Farben\nSupport per E-Mail",
             "button_label": "Anfragen"
           }
@@ -393,6 +394,7 @@
             "name": "Bestehendes Theme anpassen",
             "text": "Wenn dein Theme steht, aber noch nicht überzeugt",
             "price": "Preis auf Anfrage",
+            "highlight": true,
             "note": "Häufig gewählt",
             "points": "Section- und Block-Anpassungen\nPerformance-Optimierung\nMobiler Feinschliff\nBevorzugter Support",
             "button_label": "Anfragen"
@@ -404,7 +406,8 @@
             "name": "Komplett individuelles Theme",
             "text": "Maßgeschneidert für deine Marke",
             "price": "Preis auf Anfrage",
-            "note": "",
+            "highlight": false,
+            "note": "Häufig gewählt",
             "points": "Individuelles Design\nVolle Section-Architektur\nFeste Ansprechperson\nVereinbarte Reaktionszeiten und Onboarding",
             "button_label": "Anfragen"
           }

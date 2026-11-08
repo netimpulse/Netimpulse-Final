@@ -884,7 +884,7 @@
             },
             "note": {
               "label": "Hervorhebung",
-              "info": "Mit Text wird die Karte hervorgehoben"
+              "info": "Erscheint als Etikett, wenn die Karte hervorgehoben ist"
             },
             "points": {
               "label": "Punkte",
@@ -896,6 +896,9 @@
             "button_link": {
               "label": "Button-Link",
               "info": "Ohne Link: Kontaktseite"
+            },
+            "highlight": {
+              "label": "Karte hervorheben"
             }
           }
         }

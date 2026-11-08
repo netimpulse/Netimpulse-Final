@@ -22,16 +22,13 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign b = block.settings
-          assign marked = false
-          if b.note != blank
-            assign marked = true
-          endif
+          assign marked = b.highlight
           assign points = b.points | newline_to_br | split: '<br />'
         -%}
         <article class="price-card{% if marked %} is-marked{% endif %}" {{ block.shopify_attributes }}>
           <div class="price-top">
             <h3 class="t-h3">{{ b.name }}</h3>
-            {%- if marked -%}<span class="price-note">{{ b.note }}</span>{%- endif -%}
+            {%- if marked and b.note != blank -%}<span class="price-note">{{ b.note }}</span>{%- endif -%}
           </div>
           <p class="t-small">{{ b.text }}</p>
           <p class="price-value">{{ b.price }}</p>
@@ -143,10 +140,17 @@
           "default": "ab 200 €"
         },
         {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "t:sections.pricing_cards.blocks.card.settings.highlight.label",
+          "default": false
+        },
+        {
           "type": "text",
           "id": "note",
           "label": "t:sections.pricing_cards.blocks.card.settings.note.label",
-          "info": "t:sections.pricing_cards.blocks.card.settings.note.info"
+          "info": "t:sections.pricing_cards.blocks.card.settings.note.info",
+          "default": "Häufig gewählt"
         },
         {
           "type": "textarea",

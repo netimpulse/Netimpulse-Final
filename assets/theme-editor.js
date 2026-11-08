@@ -13,6 +13,7 @@
       this.editor = this.querySelector('.editor');
       this.frame = this.querySelector('[data-frame]');
       this.viewport = this.querySelector('[data-viewport]');
+      this.vpLabel = this.viewport.getAttribute('aria-label') || '';
       this.content = this.querySelector('[data-content]');
       this.box = this.querySelector('.sel-box');
       this.tag = this.querySelector('.sel-tag');
@@ -156,11 +157,7 @@
       });
       const name = this.names()[this.selected] || '';
       const pick = this.picks[this.index];
-      this.viewport.setAttribute(
-        'aria-label',
-        (this.viewport.dataset.label || this.viewport.getAttribute('aria-label') || '').replace('[name]', pick ? pick.dataset.name : '').replace('[sektion]', name)
-      );
-      if (!this.viewport.dataset.label) this.viewport.dataset.label = this.viewport.getAttribute('aria-label');
+      this.viewport.setAttribute('aria-label', this.vpLabel.replace('[name]', pick ? pick.dataset.name : '').replace('[sektion]', name));
       if (!r) {
         this.box.hidden = true;
         return;

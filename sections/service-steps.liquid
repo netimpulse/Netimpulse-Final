@@ -48,7 +48,7 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:general.color_scheme.label",
-      "default": "scheme-3"
+      "default": "scheme-1"
     },
     {
       "type": "checkbox",
@@ -84,13 +84,15 @@
       "type": "text",
       "id": "focus_title",
       "label": "t:sections.service_steps.settings.focus_title.label",
-      "info": "t:sections.service_steps.settings.focus_title.info"
+      "info": "t:sections.service_steps.settings.focus_title.info",
+      "default": "Dabei achten wir vor allem auf"
     },
     {
       "type": "textarea",
       "id": "focus_list",
       "label": "t:sections.service_steps.settings.focus_list.label",
-      "info": "t:sections.service_steps.settings.focus_list.info"
+      "info": "t:sections.service_steps.settings.focus_list.info",
+      "default": "Saubere technische Grundlagen\nInhalte mit echtem Mehrwert"
     },
     {
       "type": "header",
@@ -150,7 +152,10 @@
         {
           "type": "step"
         }
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-3"
+      }
     }
   ]
 }
