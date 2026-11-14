@@ -86,7 +86,8 @@
         "outline_label": "Angebote",
         "heading": "Unsere Leistungen im Bereich Webdesign",
         "text": "Eine gute Website ist kein hübsches Schaufenster ohne Funktion. Sie braucht eine klare Struktur, starke Inhalte, gute Nutzerführung und ein Design, das zur Marke passt. Deshalb denken wir Webdesign immer auch strategisch und conversionorientiert.",
-        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "tray_title": "Deine Auswahl",
+        "empty_text": "Noch nichts ausgewählt. Klick oben an, was du brauchst, die Auswahl nehmen wir mit ins Erstgespräch.",
         "count_text": "[n] von [gesamt] Angeboten ausgewählt",
         "button_label": "Mit dieser Auswahl anfragen",
         "topic": "Webdesign und UX",
@@ -216,11 +217,19 @@
             "title": "Warum Webdesign mit uns?",
             "text": "Wir bauen keine Website, die nur auf den ersten Blick schön aussieht. Uns ist wichtig, dass sie verständlich, hochwertig und sinnvoll aufgebaut ist.\nDu bekommst einen digitalen Auftritt, der zu deinem Unternehmen passt, deine Leistungen klar erklärt und Besucher gezielt zur nächsten Handlung führt."
           }
+        },
+        "panel_3": {
+          "type": "panel",
+          "settings": {
+            "title": "Besonders relevant für",
+            "points": "Dienstleister\nLokale Unternehmen\nOnline-Shops\nStart-ups\nMarken, die hochwertiger auftreten wollen"
+          }
         }
       },
       "block_order": [
         "column_1",
-        "column_2"
+        "column_2",
+        "panel_3"
       ]
     },
     "weiter": {
@@ -342,7 +351,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

@@ -305,7 +305,7 @@
     "themes": {
       "type": "theme-editor",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-6",
         "dots": false,
         "outline_label": "Themes",
         "heading": "Themes, live ausprobiert",
@@ -458,7 +458,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

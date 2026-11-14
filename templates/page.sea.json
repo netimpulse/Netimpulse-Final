@@ -94,7 +94,8 @@
         "outline_label": "Angebote",
         "heading": "Unsere Leistungen im Bereich SEA",
         "text": "Wir betreuen Google Ads nicht nach Bauchgefühl, sondern datenbasiert: Jede unserer Kampagnen wird auf Ziel, Zielgruppe und Wirtschaftlichkeit ausgerichtet.",
-        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "tray_title": "Deine Auswahl",
+        "empty_text": "Noch nichts ausgewählt. Klick oben an, was du brauchst, die Auswahl nehmen wir mit ins Erstgespräch.",
         "count_text": "[n] von [gesamt] Angeboten ausgewählt",
         "button_label": "Mit dieser Auswahl anfragen",
         "topic": "Google Ads (SEA)",
@@ -269,10 +270,18 @@
             "title": "Warum SEA mit uns?",
             "text": "SEA funktioniert nur dann gut, wenn Strategie, Tracking und Optimierung zusammenspielen. Genau darauf liegt unser Fokus. Dabei setzen wir auf Transparenz und Performance statt auf Agentur-Gelaber.\nDu bekommst keine unübersichtlichen Dashboards, die überfordern, sondern konkrete Erkenntnisse und nachvollziehbare Aussagen. Das Wichtigste für uns ist dein Erfolg und dass du unser Vorgehen nachvollziehen kannst."
           }
+        },
+        "panel_2": {
+          "type": "panel",
+          "settings": {
+            "title": "Darauf liegt unser Fokus",
+            "points": "Strategie, Tracking und Optimierung greifen ineinander\nTransparenz statt Agentur-Gelaber\nKonkrete Erkenntnisse statt überladener Dashboards\nEin Vorgehen, das du nachvollziehen kannst"
+          }
         }
       },
       "block_order": [
-        "column_1"
+        "column_1",
+        "panel_2"
       ]
     },
     "weiter": {
@@ -394,7 +403,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

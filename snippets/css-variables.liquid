@@ -6,44 +6,76 @@
   assign latin = 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD'
   assign latin_ext = 'U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF'
 -%}
+{%- comment -%}
+  Jedes Farbschema setzt für seinen Bereich alle Farb-Token: Hintergrund, Flächen, Linien, Text und den Akzent
+  (Button-Farbe = Akzent 1, Button-Text = Schrift auf dem Akzent, zweiter Button = Linkfarbe).
+  Das erste Schema gilt zusätzlich für die ganze Seite (:root) und für helle Inseln in dunklen Bereichen (.ni-light),
+  das erste dunkle Schema liefert die dunklen Töne außerhalb dunkler Sections.
+{%- endcomment -%}
 {%- capture scheme_css -%}
+  {%- assign root_dark_done = false -%}
   {%- for scheme in settings.color_schemes -%}
     {%- liquid
       assign bg = scheme.settings.background
       assign fg = scheme.settings.text
+      assign btn = scheme.settings.button
+      assign btn_fg = scheme.settings.button_label
+      assign link = scheme.settings.secondary_button_label
       assign brightness = bg | color_brightness
+      assign cls = '.color-' | append: scheme.id
     -%}
-    .color-{{ scheme.id }} {
-      --scheme-bg: {{ bg }};
-      --scheme-fg: {{ fg }};
-      --btn-bg: {{ scheme.settings.button }};
-      --btn-fg: {{ scheme.settings.button_label }};
-      --btn-hover: {{ scheme.settings.button | color_darken: 6 }};
-      {%- if brightness < 128 %}
-      --night: {{ bg }};
-      --night-deep: {{ bg }};
-      --night-2: {{ bg | color_mix: fg, 96 }};
-      --night-line: {{ bg | color_mix: fg, 87 }};
-      --on-night: {{ fg }};
-      --on-night-2: {{ fg | color_mix: bg, 70 }};
-      --on-night-3: {{ fg | color_mix: bg, 52 }};
-      --hero-bg: {{ bg }};
-      --hero-fg: {{ fg }};
-      --hero-fg-2: {{ fg | color_mix: bg, 70 }};
-      --cta-bg: {{ bg }};
-      --foot-bg: {{ bg }};
-      --foot-fg: {{ fg }};
-      --foot-fg-2: {{ fg | color_mix: bg, 70 }};
-      --foot-line: {{ bg | color_mix: fg, 87 }};
-      {%- else %}
-      --fg: {{ fg }};
-      --fg-2: {{ fg | color_mix: bg, 71 }};
-      --fg-3: {{ fg | color_mix: bg, 63 }};
-      {%- endif %}
+    {%- if brightness < 128 -%}
+      {%- capture tokens -%}
+        --night: {{ bg }}; --night-deep: {{ bg }};
+        --night-2: {{ bg | color_mix: fg, 94 }}; --night-line: {{ bg | color_mix: fg, 85 }};
+        --on-night: {{ fg }}; --on-night-2: {{ fg | color_mix: bg, 72 }}; --on-night-3: {{ fg | color_mix: bg, 54 }};
+        --hero-bg: {{ bg }}; --hero-fg: {{ fg }}; --hero-fg-2: {{ fg | color_mix: bg, 72 }}; --cta-bg: {{ bg }};
+        --foot-bg: {{ bg }}; --foot-fg: {{ fg }}; --foot-fg-2: {{ fg | color_mix: bg, 72 }}; --foot-line: {{ bg | color_mix: fg, 85 }};
+        --dots-dark: {{ fg | color_modify: 'alpha', 0.07 }};
+      {%- endcapture -%}
+      {%- unless root_dark_done -%}
+        :root { {{ tokens }} }
+        {%- assign root_dark_done = true -%}
+      {%- endunless -%}
+      {{ cls }} {
+        --scheme-bg: {{ bg }}; --scheme-fg: {{ fg }};
+        {{ tokens }}
+        --a1: {{ btn }}; --on-a: {{ btn_fg }}; --a1-hover: {{ btn | color_lighten: 6 }};
+        --btn-bg: {{ btn }}; --btn-fg: {{ btn_fg }}; --btn-hover: {{ btn | color_lighten: 6 }};
+        --sk-btn-bg: {{ btn }}; --sk-btn-fg: {{ btn_fg }};
+      }
+    {%- else -%}
+      {%- liquid
+        if brightness >= 252
+          assign white = bg
+          assign paper = bg | color_mix: fg, 97
+        else
+          assign paper = bg
+          assign white = bg | color_mix: '#ffffff', 25
+        endif
+        assign tint = paper | color_mix: btn, 90
+      -%}
+      {%- capture tokens -%}
+        --bg: {{ paper }}; --surface: {{ white }};
+        --raised: {{ paper | color_mix: fg, 95 }}; --sunken: {{ paper | color_mix: fg, 91 }};
+        --line: {{ fg | color_modify: 'alpha', 0.1 }}; --line-strong: {{ fg | color_modify: 'alpha', 0.18 }};
+        --fg: {{ fg }}; --fg-2: {{ fg | color_mix: bg, 71 }}; --fg-3: {{ fg | color_mix: bg, 60 }};
+        --a1: {{ btn }}; --on-a: {{ btn_fg }}; --a1-ink: {{ link }}; --a1-soft: {{ tint }}; --a1-hover: {{ btn | color_darken: 5 }};
+        --accent: {{ link }}; --accent-ink: {{ link }}; --accent-soft: {{ tint }}; --dot: {{ btn }}; --focus: {{ link }};
+        --btn-bg: {{ btn }}; --btn-fg: {{ btn_fg }}; --btn-hover: {{ btn | color_darken: 5 }};
+        --sand: {{ tint }}; --mint: {{ tint }}; --c: {{ link }};
+        --pill-1: {{ tint }}; --pill-2: {{ paper | color_mix: fg, 95 }}; --pill-3: {{ paper | color_mix: fg, 88 }};
+        --dots-light: {{ fg | color_modify: 'alpha', 0.08 }};
+      {%- endcapture -%}
+      {%- if forloop.first -%}
+        :root, .ni-light { {{ tokens }} }
+        .ni-light { color: {{ fg }}; }
+      {%- endif -%}
+      {{ cls }} { --scheme-bg: {{ bg }}; --scheme-fg: {{ fg }}; {{ tokens }} }
+    {%- endif -%}
+    {{ cls }}{{ cls }}{{ cls }} {
       background-color: {{ bg }};
-      {%- if scheme.settings.background_gradient != blank %}
-      background-image: {{ scheme.settings.background_gradient }};
-      {%- endif %}
+      {%- if scheme.settings.background_gradient != blank %} background-image: {{ scheme.settings.background_gradient }};{% endif %}
       color: {{ fg }};
     }
   {%- endfor -%}
@@ -64,9 +96,8 @@
     --a2: {{ settings.accent_2 }};
     --a2-ink: {{ settings.accent_2_deep }};
     --a2-hover: {{ settings.accent_2 | color_darken: 6 }};
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --a1-hover: {{ settings.accent_1 | color_lighten: 8 }}; }
+    --spark: {{ settings.accent_2 }};
+    --spark-deep: {{ settings.accent_2_deep }};
   }
 
   {% if settings.dark_mode -%}

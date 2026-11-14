@@ -97,7 +97,8 @@
         "outline_label": "Angebote",
         "heading": "Unsere Leistungen im Bereich SMM",
         "text": "Wir betrachten Social Media nicht als Pflichtprogramm, bei dem einfach drei Posts pro Woche online gehen. Deine Inhalte brauchen eine klare Richtung: Sie sollen erklären, inspirieren, Vertrauen schaffen oder gezielt Nachfrage auslösen.",
-        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "tray_title": "Deine Auswahl",
+        "empty_text": "Noch nichts ausgewählt. Klick oben an, was du brauchst, die Auswahl nehmen wir mit ins Erstgespräch.",
         "count_text": "[n] von [gesamt] Angeboten ausgewählt",
         "button_label": "Mit dieser Auswahl anfragen",
         "topic": "Social Media",
@@ -263,10 +264,18 @@
             "title": "Warum SMM mit uns?",
             "text": "Gutes Social-Media-Marketing entsteht nicht dadurch, dass man Trends kopiert. Es entsteht durch ein klares Verständnis für Marke, Zielgruppe und Plattform.\nWir sorgen dafür, dass dein Auftritt professionell wirkt, wiedererkennbar bleibt und nicht nach zufälligem Content aussieht."
           }
+        },
+        "panel_2": {
+          "type": "panel",
+          "settings": {
+            "title": "Darauf achten wir",
+            "points": "Klares Verständnis für Marke, Zielgruppe und Plattform\nEin Auftritt, der wiedererkennbar bleibt\nKein zufälliger Content, keine kopierten Trends"
+          }
         }
       },
       "block_order": [
-        "column_1"
+        "column_1",
+        "panel_2"
       ]
     },
     "weiter": {
@@ -388,7 +397,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

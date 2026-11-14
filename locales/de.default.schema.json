@@ -1100,6 +1100,9 @@
         },
         "header_2": {
           "content": "Abstände"
+        },
+        "tray_title": {
+          "label": "Überschrift der Auswahl"
         }
       },
       "blocks": {
@@ -1415,6 +1418,10 @@
         },
         "header_1": {
           "content": "Abstände"
+        },
+        "image": {
+          "label": "Bild rechts",
+          "info": "Optional. Erscheint im Fensterrahmen neben dem Text."
         }
       },
       "blocks": {
@@ -1427,6 +1434,18 @@
             "text": {
               "label": "Text",
               "info": "Leerzeile oder Zeilenumbruch beginnt einen neuen Absatz"
+            }
+          }
+        },
+        "panel": {
+          "name": "Fenster mit Punkten",
+          "settings": {
+            "title": {
+              "label": "Titel"
+            },
+            "points": {
+              "label": "Punkte",
+              "info": "Einer pro Zeile"
             }
           }
         }
@@ -1798,7 +1817,8 @@
           }
         },
         "header_1": {
-          "content": "Akzente"
+          "content": "Akzente",
+          "info": "Akzent 1 kommt aus der Button-Farbe des jeweiligen Farbschemas. Die drei Felder für Akzent 1 gelten nur in der dunklen Darstellung."
         },
         "paragraph_1": {
           "content": "Akzent 1 steht für gefunden werden (SEO, SEA, Social Media, GEO), Akzent 2 für bauen (Webdesign, Shopify, Themes, KI-Automation)."

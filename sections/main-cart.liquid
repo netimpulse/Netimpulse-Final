@@ -18,9 +18,9 @@
   endfor
   assign store_url = s.store_link | default: routes.all_products_collection_url
 -%}
-{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.cart-page', tablet: 72, mobile: 40 -%}
+{%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom, selector: '.ni-cart', tablet: 72, mobile: 40 -%}
 
-<cart-page class="page-hero cart-page {% render 'scheme-classes', scheme: s.color_scheme %}" data-section="{{ section.id }}" data-addons-key="{{ addon_key | escape }}">
+<cart-page class="page-hero ni-cart {% render 'scheme-classes', scheme: s.color_scheme %}" data-section="{{ section.id }}" data-addons-key="{{ addon_key | escape }}">
   {%- if theme_count == 0 -%}
     <div class="wrap empty">
       <span class="empty-icon" aria-hidden="true">{%- render 'icon', name: 'bag', size: 24 -%}</span>

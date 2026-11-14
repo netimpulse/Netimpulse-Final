@@ -422,7 +422,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

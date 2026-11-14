@@ -1,6 +1,15 @@
-{%- comment -%} Zwei Spalten nebeneinander, zum Beispiel „Für wen" und „Warum". {%- endcomment -%}
+{%- comment -%}
+  „Für wen" und „Warum": Text links, rechts ein Fenster-Panel mit Punkten und/oder ein Bild.
+  Ohne Panel und Bild stehen die Textspalten nebeneinander.
+{%- endcomment -%}
 {%- liquid
   assign s = section.settings
+  assign columns = section.blocks | where: 'type', 'column'
+  assign panels = section.blocks | where: 'type', 'panel'
+  assign split = false
+  if panels.size > 0 or s.image != blank
+    assign split = true
+  endif
 -%}
 {%- render 'section-padding', id: section.id, top: s.padding_top, bottom: s.padding_bottom -%}
 
@@ -9,8 +18,9 @@
   data-outline="{{ s.outline_label | escape }}"
   class="chapter section-pad {% render 'scheme-classes', scheme: s.color_scheme %}{% if s.dots %} dots-bg{% endif %}"
 >
-  <div class="wrap pair-cols">
-    {%- for block in section.blocks -%}
+  <div class="wrap {% if split %}pair-split{% else %}pair-cols{% endif %}">
+    {%- if split -%}<div class="pair-texts">{%- endif -%}
+    {%- for block in columns -%}
       <div class="pair-col" {{ block.shopify_attributes }}>
         {%- if block.settings.title != blank -%}<h2 class="ch-title">{{ block.settings.title }}</h2>{%- endif -%}
         {%- assign paras = block.settings.text | newline_to_br | split: '<br />' -%}
@@ -20,6 +30,31 @@
         {%- endfor -%}
       </div>
     {%- endfor -%}
+    {%- if split -%}
+      </div>
+      <div class="pair-aside">
+        {%- if s.image != blank -%}
+          <figure class="pair-figure">
+            <div class="pair-bar" aria-hidden="true"><span class="win-dots"><i></i><i></i><i></i></span></div>
+            {{ s.image | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 560px, 100vw', class: 'pair-img' }}
+          </figure>
+        {%- endif -%}
+        {%- for block in panels -%}
+          {%- assign points = block.settings.points | newline_to_br | split: '<br />' -%}
+          <div class="pair-panel" {{ block.shopify_attributes }}>
+            <div class="pair-bar"><span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>{{ block.settings.title }}</span></div>
+            <ul class="pair-points" role="list">
+              {%- for pt in points -%}
+                {%- assign t = pt | strip -%}
+                {%- if t != blank -%}
+                  <li><span class="pair-check" aria-hidden="true">{%- render 'icon', name: 'check', size: 14 -%}</span><span>{{ t }}</span></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -51,6 +86,12 @@
       "id": "outline_label",
       "label": "t:general.outline_label.label",
       "default": "Für wen"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.service_pair.settings.image.label",
+      "info": "t:sections.service_pair.settings.image.info"
     },
     {
       "type": "header",
@@ -97,6 +138,26 @@
           "default": "Für Unternehmen, die nachhaltig wachsen wollen."
         }
       ]
+    },
+    {
+      "type": "panel",
+      "name": "t:sections.service_pair.blocks.panel.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.service_pair.blocks.panel.settings.title.label",
+          "default": "Darauf kannst du dich verlassen"
+        },
+        {
+          "type": "textarea",
+          "id": "points",
+          "label": "t:sections.service_pair.blocks.panel.settings.points.label",
+          "info": "t:sections.service_pair.blocks.panel.settings.points.info",
+          "default": "Klare Absprachen\nNachvollziehbares Vorgehen\nDirekter Kontakt zum Team"
+        }
+      ]
     }
   ],
   "presets": [
@@ -107,7 +168,7 @@
           "type": "column"
         },
         {
-          "type": "column"
+          "type": "panel"
         }
       ],
       "settings": {

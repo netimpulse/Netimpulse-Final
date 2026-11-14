@@ -212,17 +212,10 @@
       this._ready = true;
       this.parts = Array.from(this.querySelectorAll('.part'));
       this.status = this.querySelector('[data-status]');
+      this.empty = this.querySelector('[data-empty]');
+      this.chips = this.querySelector('[data-chips]');
       this.btn = this.querySelector('[data-send]');
-      this.parts.forEach((p) =>
-        p.addEventListener('click', () => {
-          const on = p.getAttribute('aria-pressed') !== 'true';
-          p.setAttribute('aria-pressed', on ? 'true' : 'false');
-          p.classList.toggle('is-on', on);
-          p.querySelector('[data-i="orig"]').hidden = on;
-          p.querySelector('[data-i="check"]').hidden = !on;
-          this.update();
-        })
-      );
+      this.parts.forEach((p) => p.addEventListener('click', () => this.set(p, p.getAttribute('aria-pressed') !== 'true')));
       this.btn.addEventListener('click', () => {
         const picked = this.picked();
         if (!picked.length) return;
@@ -230,25 +223,41 @@
         window.location.href = NI.contactUrl(this.dataset.contactUrl, this.dataset.topic, msg);
       });
     }
+    set(p, on) {
+      p.setAttribute('aria-pressed', on ? 'true' : 'false');
+      p.classList.toggle('is-on', on);
+      p.querySelector('[data-i="orig"]').hidden = on;
+      p.querySelector('[data-i="check"]').hidden = !on;
+      p.querySelector('[data-i="plus"]').hidden = on;
+      p.querySelector('[data-i="done"]').hidden = !on;
+      this.update();
+    }
     picked() {
       return this.parts.filter((p) => p.getAttribute('aria-pressed') === 'true').map((p) => p.dataset.title);
     }
     update() {
-      const n = this.picked().length;
+      const on = this.parts.filter((p) => p.getAttribute('aria-pressed') === 'true');
+      const n = on.length;
       this.btn.disabled = n === 0;
-      if (!n) {
-        this.status.textContent = this.dataset.empty || '';
-        return;
-      }
-      const tpl = (this.dataset.count || '').replace('[gesamt]', this.dataset.total);
-      const [before, after] = tpl.split('[n]');
-      this.status.textContent = '';
-      if (before) this.status.append(before);
-      const strong = document.createElement('strong');
-      strong.className = 'mono';
-      strong.textContent = n;
-      this.status.append(strong);
-      if (after) this.status.append(after);
+      this.empty.hidden = n > 0;
+      this.chips.hidden = n === 0;
+      this.chips.innerHTML = '';
+      const x = this.querySelector('template[data-chip-x]').innerHTML;
+      on.forEach((p) => {
+        const li = document.createElement('li');
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tray-chip';
+        b.setAttribute('aria-label', `${p.dataset.title}: ${this.dataset.removeLabel || ''}`);
+        const t = document.createElement('span');
+        t.textContent = p.dataset.title;
+        b.append(t);
+        b.insertAdjacentHTML('beforeend', x);
+        b.addEventListener('click', () => this.set(p, false));
+        li.append(b);
+        this.chips.append(li);
+      });
+      this.status.textContent = n ? (this.dataset.count || '').replace('[gesamt]', this.dataset.total).replace('[n]', n) : '';
     }
     disconnectedCallback() {
       this._ready = false;

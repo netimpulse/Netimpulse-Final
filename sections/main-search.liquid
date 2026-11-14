@@ -4,7 +4,7 @@
 <section class="page-hero {% render 'scheme-classes', scheme: s.color_scheme %}">
   <div class="wrap search-page">
     <h1 class="t-h1">{% if search.terms != blank %}{{ 'search.results_for' | t: terms: search.terms }}{% else %}{{ s.title }}{% endif %}</h1>
-    <form action="{{ routes.search_url }}" method="get" role="search" class="search-field search-page-field">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-page-field">
       {%- render 'icon', name: 'search' -%}
       <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" aria-label="{{ 'search.submit' | t }}">
       <button type="submit" class="btn btn-primary btn-sm"><span>{{ 'search.submit' | t }}</span></button>
@@ -15,9 +15,9 @@
         {%- if search.results_count == 0 -%}
           <p class="t-body">{{ 'search.no_results' | t: terms: search.terms }}</p>
         {%- else -%}
-          <ul class="search-results search-page-results" role="list">
+          <ul class="search-page-results" role="list">
             {%- for item in search.results -%}
-              <li class="search-item">
+              <li class="search-page-item">
                 <a href="{{ item.url }}">
                   <span>{{ item.title }}</span>
                   {%- if item.object_type == 'product' -%}<span class="t-meta">{{ item.type }} · {{ item.price | money_without_trailing_zeros }}</span>{%- endif -%}

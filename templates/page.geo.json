@@ -96,7 +96,8 @@
         "outline_label": "Angebote",
         "heading": "Unsere Leistungen im Bereich GEO",
         "text": "Wir optimieren nicht für einzelne Tricks oder kurzfristige KI-Hacks. Deine Website soll fachlich stärker, verständlicher und besser strukturiert sein: Inhalte, die echte Fragen beantworten, Zusammenhänge erklären und deine Expertise sichtbar machen.",
-        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "tray_title": "Deine Auswahl",
+        "empty_text": "Noch nichts ausgewählt. Klick oben an, was du brauchst, die Auswahl nehmen wir mit ins Erstgespräch.",
         "count_text": "[n] von [gesamt] Angeboten ausgewählt",
         "button_label": "Mit dieser Auswahl anfragen",
         "topic": "SEO und Performance",
@@ -219,10 +220,18 @@
             "title": "Warum GEO mit uns?",
             "text": "GEO ist kein Ersatz für SEO, sondern die Weiterentwicklung davon. Wir helfen dir, Inhalte so aufzubauen, dass sie für Menschen hilfreich und für Suchsysteme verständlich sind.\nOhne übertriebene Versprechen und ohne Buzzword-Gelaber, mit einem klaren Blick auf das, was deine Website wirklich besser macht."
           }
+        },
+        "panel_2": {
+          "type": "panel",
+          "settings": {
+            "title": "So gehen wir vor",
+            "points": "GEO als Weiterentwicklung von SEO, nicht als Ersatz\nInhalte, die für Menschen hilfreich sind\nStrukturen, die Suchsysteme verstehen\nOhne übertriebene Versprechen"
+          }
         }
       },
       "block_order": [
-        "column_1"
+        "column_1",
+        "panel_2"
       ]
     },
     "weiter": {
@@ -344,7 +353,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

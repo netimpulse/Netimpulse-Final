@@ -241,8 +241,8 @@
       if (this._ready) return;
       this._ready = true;
       this.input = this.querySelector('input[type="search"]');
-      this.list = this.querySelector('.search-results');
-      this.hint = this.querySelector('.search-hint');
+      this.list = this.querySelector('.ni-search-list');
+      this.hint = this.querySelector('.ni-search-hint');
       this.quick = JSON.parse((this.querySelector('[data-quick]') || {}).textContent || '[]');
       this.active = 0;
       this.results = [];
@@ -254,7 +254,7 @@
     open() {
       if (!this.hidden) return;
       this.hidden = false;
-      this.dialog = new NI.Dialog(this.querySelector('.sheet-layer'), this.querySelector('.search-panel'), () => this.close());
+      this.dialog = new NI.Dialog(this.querySelector('.ni-search-layer'), this.querySelector('.ni-search'), () => this.close());
       this.input.value = '';
       this.update();
       this.input.focus();
@@ -332,19 +332,19 @@
       const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
       const arrow = this.querySelector('template[data-arrow]').innerHTML;
       if (!this.results.length) {
-        this.list.innerHTML = `<li class="search-empty">${esc((this.dataset.empty || '').replace('[q]', q))}</li>`;
+        this.list.innerHTML = `<li class="ni-search-empty">${esc((this.dataset.empty || '').replace('[q]', q))}</li>`;
         this.input.removeAttribute('aria-activedescendant');
         return;
       }
       let last = null;
       this.list.innerHTML = this.results
         .map((r, i) => {
-          const head = r.group !== last ? `<li class="search-group" role="presentation">${esc(r.group || '')}</li>` : '';
+          const head = r.group !== last ? `<li class="ni-search-group" role="presentation">${esc(r.group || '')}</li>` : '';
           last = r.group;
-          return `${head}<li id="sr-${i}" role="option" aria-selected="false" class="search-item" data-i="${i}"><a href="${esc(r.u)}" tabindex="-1"><span>${esc(r.t)}</span>${r.sub ? `<span class="t-meta">${esc(r.sub)}</span>` : ''}${arrow}</a></li>`;
+          return `${head}<li id="sr-${i}" role="option" aria-selected="false" class="ni-search-item" data-i="${i}"><a href="${esc(r.u)}" tabindex="-1"><span>${esc(r.t)}</span>${r.sub ? `<span class="ni-search-sub">${esc(r.sub)}</span>` : ''}${arrow}</a></li>`;
         })
         .join('');
-      this.list.querySelectorAll('.search-item').forEach((li) => {
+      this.list.querySelectorAll('.ni-search-item').forEach((li) => {
         li.addEventListener('mouseenter', () => {
           this.active = Number(li.dataset.i);
           this.paint();
@@ -353,7 +353,7 @@
       this.paint();
     }
     paint() {
-      this.list.querySelectorAll('.search-item').forEach((li) => {
+      this.list.querySelectorAll('.ni-search-item').forEach((li) => {
         const on = Number(li.dataset.i) === this.active;
         li.classList.toggle('is-active', on);
         li.setAttribute('aria-selected', on ? 'true' : 'false');

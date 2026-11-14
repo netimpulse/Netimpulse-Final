@@ -75,7 +75,8 @@
       },
       {
         "type": "header",
-        "content": "t:settings_schema.farben.settings.header_1.content"
+        "content": "t:settings_schema.farben.settings.header_1.content",
+        "info": "t:settings_schema.farben.settings.header_1.info"
       },
       {
         "type": "paragraph",

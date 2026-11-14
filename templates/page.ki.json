@@ -91,7 +91,8 @@
         "outline_label": "Angebote",
         "heading": "Unsere Leistungen im Bereich KI-Automation",
         "text": "Wir fangen nicht beim Tool an, sondern bei deinen Abläufen. Erst schauen wir, wo im Alltag Zeit verloren geht, dann bauen wir Automationen, die zuverlässig laufen und die dein Team versteht.",
-        "empty_text": "Klick an, was du brauchst. Die Auswahl nehmen wir mit ins Erstgespräch.",
+        "tray_title": "Deine Auswahl",
+        "empty_text": "Noch nichts ausgewählt. Klick oben an, was du brauchst, die Auswahl nehmen wir mit ins Erstgespräch.",
         "count_text": "[n] von [gesamt] Angeboten ausgewählt",
         "button_label": "Mit dieser Auswahl anfragen",
         "topic": "KI und Automation",
@@ -264,11 +265,19 @@
             "title": "Warum KI-Automation mit uns?",
             "text": "Wir kennen Website, Shop und Marketing aus unseren Projekten. Deshalb bauen wir Automationen, die genau dort andocken, wo deine Arbeit ohnehin passiert.\nOhne KI-Hype: Du bekommst Abläufe, die nachvollziehbar sind, sauber dokumentiert und von deinem Team weitergeführt werden können."
           }
+        },
+        "panel_3": {
+          "type": "panel",
+          "settings": {
+            "title": "Typische Routinen",
+            "points": "Anfragen beantworten\nDaten zwischen Tools übertragen\nTexte vorbereiten"
+          }
         }
       },
       "block_order": [
         "column_1",
-        "column_2"
+        "column_2",
+        "panel_3"
       ]
     },
     "weiter": {
@@ -383,7 +392,7 @@
     "kontakt": {
       "type": "contact-band",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-5",
         "dots": true,
         "outline_label": "Kontakt",
         "heading": "Bereit für planbares Wachstum?",

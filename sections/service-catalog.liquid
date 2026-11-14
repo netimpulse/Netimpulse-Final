@@ -28,7 +28,7 @@
       data-topic="{{ s.topic | escape }}"
       data-message="{{ s.message | escape }}"
       data-count="{{ s.count_text | escape }}"
-      data-empty="{{ s.empty_text | escape }}"
+      data-remove-label="{{ 'cart.remove' | t }}"
       data-total="{{ offers.size }}"
     >
       <div class="parts">
@@ -58,6 +58,10 @@
                         <span data-i="check" hidden>{%- render 'icon', name: 'check', size: 18 -%}</span>
                       </span>
                       <span class="part-txt"><b>{{ item.settings.title }}</b><span>{{ item.settings.text }}</span></span>
+                      <span class="part-add" aria-hidden="true">
+                        <span data-i="plus">{%- render 'icon', name: 'plus', size: 14 -%}</span>
+                        <span data-i="done" hidden>{%- render 'icon', name: 'check', size: 14 -%}</span>
+                      </span>
                     </button>
                   </li>
                 {%- endfor -%}
@@ -66,13 +70,18 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
-      <div class="builder-bar" aria-live="polite">
-        <p data-status>{{ s.empty_text }}</p>
+      <div class="tray">
+        <div class="tray-main">
+          <p class="tray-head"><span class="tray-title">{{ s.tray_title }}</span><span class="tray-count" data-status aria-live="polite"></span></p>
+          <p class="tray-empty" data-empty>{{ s.empty_text }}</p>
+          <ul class="tray-chips" role="list" data-chips hidden></ul>
+        </div>
         <button type="button" class="btn btn-primary" data-send disabled>
           <span>{{ s.button_label }}</span>
           {%- render 'icon', name: 'arrow-right' -%}
         </button>
       </div>
+      <template data-chip-x>{%- render 'icon', name: 'x', size: 14 -%}</template>
     </service-catalog>
   </div>
 </section>
@@ -140,6 +149,12 @@
     {
       "type": "header",
       "content": "t:sections.service_catalog.settings.header_1.content"
+    },
+    {
+      "type": "text",
+      "id": "tray_title",
+      "label": "t:sections.service_catalog.settings.tray_title.label",
+      "default": "Deine Auswahl"
     },
     {
       "type": "text",
