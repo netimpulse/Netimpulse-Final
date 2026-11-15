@@ -588,3 +588,36 @@
   }
   NI.define('scaled-frame', ScaledFrame);
 })();
+
+/* ---------- Sanftes Einblenden: Elemente erscheinen, wenn sie ins Bild kommen ---------- */
+(function () {
+  'use strict';
+  const NI = window.NI;
+  const root = document.documentElement;
+  if (!root.classList.contains('ni-reveal') || NI.reduced() || !('IntersectionObserver' in window)) return;
+  const SEL = '.sec-head, .ch-head, .team-top, .case-grid > li, .principles > li, .people-row > li, .pricing > *, .parts-col, .tray, .timeline > li, .billing-head, .billing-steps > li, .pair-col, .pair-panel, .pair-figure, .dir-col, .team-full > li, .l-head, .l-body, .themes-copy, .themes-editor, .cta-copy, .cta-act, .about-team-head, .theme-card, .setup-band, .contact-intro, .form-card';
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  const scan = (scope) => {
+    (scope || document).querySelectorAll(SEL).forEach((el) => {
+      if (el.classList.contains('reveal')) return;
+      const sibs = Array.from(el.parentElement.children).filter((c) => c.matches(SEL));
+      el.style.setProperty('--reveal-delay', Math.min(sibs.indexOf(el), 5) * 70 + 'ms');
+      el.classList.add('reveal');
+      // Was beim Laden schon im Bild ist, bleibt ohne Animation sichtbar
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('is-in');
+      else io.observe(el);
+    });
+  };
+  const start = () => scan(document);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+  document.addEventListener('shopify:section:load', (e) => {
+    e.target.querySelectorAll(SEL).forEach((el) => el.classList.add('reveal', 'is-in'));
+  });
+})();

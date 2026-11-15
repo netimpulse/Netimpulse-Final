@@ -3,7 +3,7 @@
   Genutzt von templates/product.vorschau.json (Aufruf: /products/<handle>?view=vorschau).
 {%- endcomment -%}
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}"{% unless settings.dark_mode %} data-theme="light"{% endunless %}>
+<html class="{% if settings.single_accent %}ni-single{% endif %}{% if settings.reveal %} ni-reveal{% endif %}" lang="{{ request.locale.iso_code }}"{% unless settings.dark_mode %} data-theme="light"{% endunless %}>
   <head>
     {%- render 'meta-tags' -%}
     <meta name="robots" content="noindex">

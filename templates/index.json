@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero-build",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-6",
         "outline_label": "Video",
         "padding_top": 24,
         "padding_bottom": 64

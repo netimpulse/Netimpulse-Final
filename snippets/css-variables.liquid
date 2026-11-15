@@ -43,6 +43,7 @@
         --a1: {{ btn }}; --on-a: {{ btn_fg }}; --a1-hover: {{ btn | color_lighten: 6 }};
         --btn-bg: {{ btn }}; --btn-fg: {{ btn_fg }}; --btn-hover: {{ btn | color_lighten: 6 }};
         --sk-btn-bg: {{ btn }}; --sk-btn-fg: {{ btn_fg }};
+        {%- if settings.single_accent %} --a2: {{ btn }}; --a2-ink: {{ btn }}; --spark: {{ btn }}; --spark-deep: {{ btn }};{% endif %}
       }
     {%- else -%}
       {%- liquid
@@ -66,6 +67,7 @@
         --sand: {{ tint }}; --mint: {{ tint }}; --c: {{ link }};
         --pill-1: {{ tint }}; --pill-2: {{ paper | color_mix: fg, 95 }}; --pill-3: {{ paper | color_mix: fg, 88 }};
         --dots-light: {{ fg | color_modify: 'alpha', 0.08 }};
+        {%- if settings.single_accent %} --a2: {{ btn }}; --a2-ink: {{ link }}; --spark: {{ btn }}; --spark-deep: {{ link }};{% endif %}
       {%- endcapture -%}
       {%- if forloop.first -%}
         :root, .ni-light { {{ tokens }} }

@@ -36,7 +36,7 @@
 {%- render 'section-padding', id: section.id, top: section.settings.padding_top, bottom: section.settings.padding_bottom, selector: '.header-row', tablet: 100, mobile: 100 -%}
 
 <site-header>
-  <header class="site-header color-{{ section.settings.color_scheme.id }}">
+  <header class="site-header {% render 'scheme-classes', scheme: section.settings.color_scheme %}">
     <div class="wrap header-row">
       {{ logo }}
       <nav class="main-nav" aria-label="{{ 'header.main_nav' | t }}">
@@ -196,7 +196,7 @@
     </script>
     <template data-arrow>{%- render 'icon', name: 'arrow-right', size: 16 -%}</template>
     <div class="ni-search-layer">
-      <div class="ni-search color-{{ section.settings.color_scheme.id }}" role="dialog" aria-modal="true" aria-label="{{ 'header.search' | t }}">
+      <div class="ni-search {% render 'scheme-classes', scheme: section.settings.color_scheme %}" role="dialog" aria-modal="true" aria-label="{{ 'header.search' | t }}">
         <div class="wrap">
           <div class="ni-search-field">
             {%- render 'icon', name: 'search', size: 20 -%}
@@ -237,7 +237,7 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:general.color_scheme.label",
-      "default": "scheme-2"
+      "default": "scheme-1"
     },
     {
       "type": "header",

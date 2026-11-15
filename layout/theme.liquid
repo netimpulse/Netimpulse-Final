@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}"{% unless settings.dark_mode %} data-theme="light"{% endunless %}>
+<html class="{% if settings.single_accent %}ni-single{% endif %}{% if settings.reveal %} ni-reveal{% endif %}" lang="{{ request.locale.iso_code }}"{% unless settings.dark_mode %} data-theme="light"{% endunless %}>
   <head>
     {%- render 'meta-tags' -%}
     {{ 'bricolage-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}

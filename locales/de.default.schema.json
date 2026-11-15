@@ -1844,6 +1844,10 @@
         },
         "dark_mode": {
           "label": "Dunkle Darstellung, wenn das Gerät auf dunkel steht"
+        },
+        "single_accent": {
+          "label": "Nur eine Akzentfarbe",
+          "info": "Akzent 2 folgt der Akzentfarbe des Farbschemas. Die zweite Leistungsgruppe bekommt einen offenen statt einen gefüllten Punkt."
         }
       }
     },
@@ -2011,6 +2015,10 @@
         },
         "favicon": {
           "label": "Favicon"
+        },
+        "reveal": {
+          "label": "Inhalte beim Scrollen sanft einblenden",
+          "info": "Bei reduzierter Bewegung im Betriebssystem ist das immer aus."
         }
       }
     }

@@ -121,6 +121,13 @@
       },
       {
         "type": "checkbox",
+        "id": "single_accent",
+        "label": "t:settings_schema.farben.settings.single_accent.label",
+        "info": "t:settings_schema.farben.settings.single_accent.info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "dark_mode",
         "label": "t:settings_schema.farben.settings.dark_mode.label",
         "default": true
@@ -418,6 +425,13 @@
   {
     "name": "t:settings_schema.seitenaufbau.name",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "reveal",
+        "label": "t:settings_schema.seitenaufbau.settings.reveal.label",
+        "info": "t:settings_schema.seitenaufbau.settings.reveal.info",
+        "default": true
+      },
       {
         "type": "checkbox",
         "id": "show_outline",
