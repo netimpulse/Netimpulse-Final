@@ -24,7 +24,7 @@
         {%- if list != blank -%}
           <ul class="section-list" role="list" aria-label="{{ s.list_label | replace: '[name]', product.title | escape }}">
             {%- for item in list -%}
-              <li>{%- render 'icon', name: 'grip', size: 16 -%}<span>{{ item }}</span><span class="t-meta mono">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span></li>
+              <li>{%- render 'icon', name: 'grip', size: 16 -%}<span>{{ item }}</span></li>
             {%- endfor -%}
           </ul>
         {%- endif -%}

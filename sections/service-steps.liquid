@@ -19,7 +19,7 @@
     <ol class="timeline" role="list">
       {%- for block in section.blocks -%}
         <li {{ block.shopify_attributes }}>
-          <span class="tl-node mono" aria-hidden="true">{{ forloop.index }}</span>
+          <span class="tl-node" aria-hidden="true"></span>
           <h3 class="tl-title">{{ block.settings.title }}</h3>
           <p class="tl-text">{{ block.settings.text }}</p>
         </li>

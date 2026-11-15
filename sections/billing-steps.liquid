@@ -25,7 +25,7 @@
       <ol class="billing-steps" role="list">
         {%- for block in section.blocks -%}
           <li {{ block.shopify_attributes }}>
-            <span class="billing-n mono">{{ forloop.index }}</span>
+            <span class="billing-n" aria-hidden="true"></span>
             <h3>{{ block.settings.title }}</h3>
             <p>{{ block.settings.text }}</p>
           </li>

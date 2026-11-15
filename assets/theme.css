@@ -198,3 +198,9 @@ contact-form { display: grid; gap: 20px; }
 
 /* Logo-Punkt in der Akzentfarbe des Bereichs */
 .logo-dot.logo-dot { background: var(--a1); }
+
+/* Schritte ohne Ziffern: Punkt auf der Linie */
+.tl-node.tl-node, .chapter .tl-node.tl-node, .billing-n.billing-n {
+  background: radial-gradient(circle, var(--a1) 0 6px, transparent 6.5px);
+  box-shadow: none;
+}
