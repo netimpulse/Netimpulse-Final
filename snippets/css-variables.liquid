@@ -43,7 +43,11 @@
         --a1: {{ btn }}; --on-a: {{ btn_fg }}; --a1-hover: {{ btn | color_lighten: 6 }};
         --btn-bg: {{ btn }}; --btn-fg: {{ btn_fg }}; --btn-hover: {{ btn | color_lighten: 6 }};
         --sk-btn-bg: {{ btn }}; --sk-btn-fg: {{ btn_fg }};
-        {%- if settings.single_accent %} --a2: {{ btn }}; --a2-ink: {{ btn }}; --spark: {{ btn }}; --spark-deep: {{ btn }};{% endif %}
+        {%- liquid
+          assign a2_brightness = settings.accent_2 | color_brightness
+        -%}
+        {%- if settings.single_accent %} --a2: {{ btn }}; --a2-ink: {{ btn }}; --spark: {{ btn }}; --spark-deep: {{ btn }};
+        {%- elsif a2_brightness < 110 %} --a2: {{ fg }}; --a2-ink: {{ fg }}; --spark: {{ fg }}; --spark-deep: {{ fg }};{% endif %}
       }
     {%- else -%}
       {%- liquid

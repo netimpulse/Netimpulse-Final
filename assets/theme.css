@@ -195,3 +195,6 @@ contact-form { display: grid; gap: 20px; }
   .ni-reveal .reveal { opacity: 0; transform: translateY(18px); transition: opacity 600ms var(--ease), transform 700ms var(--ease); transition-delay: var(--reveal-delay, 0ms); }
   .ni-reveal .reveal.is-in { opacity: 1; transform: none; }
 }
+
+/* Logo-Punkt in der Akzentfarbe des Bereichs */
+.logo-dot.logo-dot { background: var(--a1); }
