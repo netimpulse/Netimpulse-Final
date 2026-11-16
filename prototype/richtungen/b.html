@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Richtung B · Faden</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+  /* Das Prinzip der Über-uns-Seite: eine Linie führt durch die Seite, Menschen statt Grafik */
+  .hero { padding-block: var(--s-16) 0; text-align: center; }
+  .hero h1 { font-size: clamp(2.75rem, 7.6vw, 7.5rem); line-height: 0.95; letter-spacing: -0.04em; max-width: 14ch; margin-inline: auto; }
+  .hero > p { max-width: 46ch; margin: var(--s-6) auto var(--s-8); color: var(--ink-2); }
+  .hero .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s-4) var(--s-6); }
+  .people { display: flex; justify-content: center; align-items: flex-end; gap: var(--s-4); margin-top: var(--s-16); }
+  .people figure { margin: 0; width: min(38vw, 300px); text-align: left; }
+  .people figure:first-child { transform: translateY(var(--s-8)); }
+  .people img { border-radius: var(--r-frame); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .people figcaption { margin-top: var(--s-3); font-size: var(--t-small); color: var(--ink-2); }
+  .people b { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; color: var(--ink); }
+
+  .path { position: relative; margin-top: var(--s-16); padding-block: var(--s-24) var(--s-32); }
+  .path-line { position: absolute; left: 50%; top: 0; height: 100%; width: 120px; transform: translateX(-50%); overflow: visible; }
+  .path-line path { fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .path-head { text-align: center; position: relative; background: var(--paper); width: fit-content; margin: 0 auto var(--s-16); padding: var(--s-4) var(--s-6); }
+  .path-head h2 { font-size: var(--t-big); line-height: 1; letter-spacing: -0.035em; }
+  .stops { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-24); position: relative; }
+  .stops li { display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; }
+  .stops a { text-decoration: none; display: block; max-width: 30ch; }
+  .stops li:nth-child(odd) a { grid-column: 1; justify-self: end; text-align: right; }
+  .stops li:nth-child(even) a { grid-column: 3; }
+  .stops i { grid-column: 2; grid-row: 1; justify-self: center; width: 12px; height: 12px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 6px var(--paper); }
+  .stops h3 { font-size: clamp(1.75rem, 3.4vw, 3rem); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: var(--s-2); }
+  .stops a:hover h3 { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: var(--signal); }
+  @media (max-width: 760px) {
+    .path-line { left: 0; transform: none; width: 12px; }
+    .path-head { margin-left: var(--s-8); text-align: left; padding-left: 0; background: none; }
+    .stops { gap: var(--s-12); }
+    .stops li { grid-template-columns: 12px 1fr; gap: var(--s-6); }
+    .stops li a, .stops li:nth-child(odd) a, .stops li:nth-child(even) a { grid-column: 2; justify-self: start; text-align: left; }
+    .stops i { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#"><i></i>NetImpulse<span>marketing</span></a>
+    <nav><a href="#">Über uns</a><a href="#leistungen">Leistungen</a><a href="#">Theme Store</a><a class="keep link" href="#">Kontakt</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Online-Präsenz für dein Unternehmen</h1>
+    <p>NetImpulse entwickelt Shopify-Websites, SEA-Kampagnen und Strategien. Du arbeitest dabei direkt mit den beiden, die dein Projekt umsetzen.</p>
+    <div class="row">
+      <a class="btn" href="#">Kostenloses Erstgespräch <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="link" href="#">Theme Store ansehen</a>
+    </div>
+    <div class="people">
+      <figure><img src="../assets/img/niklas.jpg" alt="Niklas" width="700" height="875"><figcaption><b>Niklas</b>Online-Marketing und Shopify-Entwicklung</figcaption></figure>
+      <figure><img src="../assets/img/luca.jpg" alt="Luca" width="700" height="875"><figcaption><b>Luca</b>Design, Konzept und digitale Auftritte</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="path" id="leistungen">
+    <svg class="path-line" viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true"><path d="M60 0 C60 120 20 160 20 260 S100 400 100 500 20 640 20 740 60 880 60 1000"/></svg>
+    <div class="path-head"><h2>Von der ersten Idee bis zur laufenden Optimierung</h2></div>
+    <ul class="stops">
+      <li><i></i><a href="#"><h3>Website als Gespräch</h3><p class="small">Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen.</p></a></li>
+      <li><i></i><a href="#"><h3>Shops, die skalieren</h3><p class="small">Shopify-Shops, die du später selbst anpassen, erweitern und pflegen kannst.</p></a></li>
+      <li><i></i><a href="#"><h3>Gefunden werden</h3><p class="small">Technik, Inhalte und Suchanfragen sauber zusammenbringen.</p></a></li>
+      <li><i></i><a href="#"><h3>Nachfrage aktivieren</h3><p class="small">Google Ads, die auf echte Anfragen ausgerichtet sind.</p></a></li>
+    </ul>
+  </section>
+</div>
+<p class="note">Richtung B · Faden · <a href="a.html">zu A</a></p>
+</body>
+</html>
