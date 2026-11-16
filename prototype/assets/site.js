@@ -29,6 +29,14 @@
   }));
   if (location.hash && $(location.hash)) setTimeout(() => jump($(location.hash)), 300);
 
+  /* Ton der Seite: der Abschnitt in der Bildschirmmitte bestimmt die Farbe */
+  const toned = $$('[data-tone]');
+  if (toned.length) {
+    document.body.dataset.tone = toned[0].dataset.tone;
+    const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) document.body.dataset.tone = en.target.dataset.tone; }), { rootMargin: '-50% 0px -50% 0px' });
+    toned.forEach((t) => io.observe(t));
+  }
+
   /* Menü: Aufklapper und mobile Fläche */
   const dd = $('.dd');
   if (dd) {
@@ -64,7 +72,7 @@
     const nodes = data.map((s, i) => {
       const el = document.createElement('div'); el.className = 'orbit-node';
       const b = document.createElement('button'); b.type = 'button'; b.textContent = s.name; b.setAttribute('aria-pressed', 'false');
-      b.addEventListener('click', () => { select(i); stop(); if (mode === 'jump') { const t = document.getElementById('l-' + s.key); if (t) jump(t); } });
+      b.addEventListener('click', () => { select(i); stop(); const t = mode === 'jump' ? document.getElementById('l-' + s.key) : mode === 'story' ? document.getElementById('ch-' + s.key) : null; if (t) jump(t); });
       el.appendChild(b); holder.appendChild(el); return el;
     });
     const pos = (i) => { const a = (i * step + state.rot - 90) * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; };
@@ -94,7 +102,8 @@
       if (hasGsap && !calm) gsap.to(state, { rot: target, duration: 0.9, ease: 'power3.inOut', onUpdate: place });
       else { state.rot = target; place(); }
     }
-    const start = () => { if (!calm && !timer && mode !== 'jump') timer = setInterval(() => select(active + 1), 3400); };
+    const start = () => { if (!calm && !timer && mode === 'auto' && orbit.offsetParent) timer = setInterval(() => select(active + 1), 3400); };
+    orbit._byKey = (key) => { const k = data.findIndex((d) => d.key === key); if (k >= 0 && k !== active) select(k); };
     const stop = () => { clearInterval(timer); timer = null; };
     orbit.addEventListener('pointerenter', stop);
     orbit.addEventListener('focusin', stop);
@@ -103,19 +112,21 @@
     select(0); start();
   });
 
-  /* Hero-Ringe drehen mit dem Scrollen leicht mit */
-  const rings = $('.hero-rings');
-  if (rings && hasGsap && !calm) gsap.to(rings, { rotate: 40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 } });
-
-  /* Leistungsstrecke */
-  const run = $('.run');
-  if (run) {
-    const track = $('.run-track', run), bar = $('.run-bar i', run);
-    const wide = matchMedia('(min-width: 900px) and (min-height: 640px)');
-    if (hasGsap && !calm && wide.matches) {
-      const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
-      gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.run-pin', pin: true, start: 'top top', end: () => '+=' + dist(), scrub: 0.5, invalidateOnRefresh: true, onUpdate: (s) => { bar.style.transform = `scaleX(${s.progress})`; } } });
-    } else run.classList.add('is-native');
+  /* Startseite: das Rad wandert vom Hero an den Rand und begleitet die Leistungen */
+  const story = $('.story');
+  if (story && matchMedia('(min-width: 1000px) and (min-height: 600px)').matches) {
+    const railOrbit = $('.rail .orbit', story);
+    document.body.classList.add('has-story');
+    const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting && railOrbit._byKey) railOrbit._byKey(en.target.dataset.key); }), { rootMargin: '-50% 0px -50% 0px' });
+    $$('.chapter[data-key]', story).forEach((c) => io.observe(c));
+    const x0 = () => window.innerWidth - railOrbit.offsetWidth - 2 * railOrbit.offsetLeft;
+    if (hasGsap && !calm) {
+      gsap.fromTo(railOrbit, { x: x0 }, { x: 0, ease: 'power1.inOut', scrollTrigger: { trigger: '.hero', start: 'top 68px', end: 'bottom 45%', scrub: 0.6, invalidateOnRefresh: true } });
+    } else {
+      const hero = $('.hero', story);
+      const park = () => { railOrbit.style.transform = hero.getBoundingClientRect().bottom > window.innerHeight * 0.5 ? `translateX(${x0()}px)` : ''; };
+      addEventListener('scroll', park, { passive: true }); addEventListener('resize', park); park();
+    }
   }
 
   /* Entwurf wird zur fertigen Seite */
@@ -186,12 +197,24 @@
     });
   }
 
-  /* Theme-Detail */
-  const device = $('.device');
-  if (device) $$('.seg button').forEach((b) => b.addEventListener('click', () => {
-    $$('.seg button').forEach((x) => x.setAttribute('aria-pressed', x === b));
-    device.classList.toggle('is-phone', b.dataset.view === 'phone');
-  }));
+  /* Vorschau-Umschalter Desktop und Handy */
+  $$('.seg').forEach((seg) => {
+    const dev = $('.device', seg.closest('.ex-stage, .td-stage'));
+    $$('button', seg).forEach((b) => b.addEventListener('click', () => { $$('button', seg).forEach((x) => x.setAttribute('aria-pressed', x === b)); dev.classList.toggle('is-phone', b.dataset.view === 'phone'); }));
+  });
+
+  /* Theme-Auswahl */
+  $$('[data-explorer]').forEach((ex) => {
+    const dev = $('.device', ex), name = $('[data-ex-name]', ex), buttons = $$('.ex-list button', ex);
+    let swap;
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      const tpl = $(`template[data-i="${b.dataset.i}"]`, ex);
+      buttons.forEach((x) => x.setAttribute('aria-pressed', x === b));
+      dev.classList.add('is-swap'); clearTimeout(swap);
+      swap = setTimeout(() => { dev.innerHTML = tpl.innerHTML; dev.style.setProperty('--sb', tpl.dataset.sb); name.textContent = tpl.dataset.name; dev.classList.remove('is-swap'); }, calm ? 0 : 200);
+    }));
+  });
+
   const buy = $('[data-buy]');
   if (buy) buy.addEventListener('click', () => {
     const extra = $$('.addon input:checked').map((i) => i.value);

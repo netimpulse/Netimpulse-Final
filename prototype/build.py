@@ -34,13 +34,15 @@ for s in SERVICES:
     s['url'] = PAGES[s['key']]
     s['nice'] = NICE[s['key']]
 TOPICS = ['Shopify-Shop', 'Website', 'SEO und GEO', 'Google Ads', 'Social Media', 'KI-Automation', 'Theme aus dem Store']
-THEMES = [
-    ('Werkbank', 'Handwerk und Betriebe', '290 €', 'Holzwerk Ahorn', 'Möbel nach Maß', 'Anfrage stellen', '#F3F1EC', '#1b1a17', '#C2552A'),
-    ('Atelier', 'Mode und Accessoires', '340 €', 'Atelier', 'Neue Kollektion', 'Jetzt ansehen', '#FAF9F7', '#151515', '#151515'),
-    ('Salbei', 'Naturkosmetik', '310 €', 'Kräuterhaus Wiese', 'Naturkosmetik aus Kräutern', 'Zum Sortiment', '#EDF0E8', '#1d2a20', '#4F6D54'),
-    ('Kornfeld', 'Bäckerei und Café', '260 €', 'Kornfeld', 'Frisch aus dem Ofen', 'Vorbestellen', '#F5EBDD', '#33230f', '#A9662A'),
-    ('Lahn', 'Outdoor und Sport', '320 €', 'Lahn', 'Ausrüstung für draußen', 'Entdecken', '#173A31', '#F4EFE2', '#F0B23E'),
-    ('Kontor', 'B2B und Großhandel', '380 €', 'Lagerhaus Nord', 'Großhandel mit Staffelpreisen', 'Schnellbestellung', '#F4F5F7', '#141a2b', '#2C53C2'),
+def _t(name, branche, price, shop, nav, head, sub, cta, cats, band, sb, sf, sa, lay):
+    return dict(name=name, branche=branche, price=price, shop=shop, nav=nav, head=head, sub=sub, cta=cta, cats=cats, band=band, sb=sb, sf=sf, sa=sa, lay=lay)
+T = [
+    _t('Werkbank', 'Handwerk und Betriebe', '290 €', 'Holzwerk Ahorn', ('Leistungen', 'Projekte'), 'Möbel nach Maß aus Mittelhessen', 'Esstische, Einbauschränke und Treppen aus Massivholz, geplant und gebaut in unserer Werkstatt.', 'Anfrage stellen', [('Esstische', 'auf Anfrage'), ('Einbauschränke', 'auf Anfrage'), ('Treppen', 'auf Anfrage')], 'Vom ersten Aufmaß bis zur Montage aus einer Hand', '#F3F1EC', '#1b1a17', '#C2552A', 'lay-a'),
+    _t('Atelier', 'Mode und Accessoires', '340 €', 'Atelier', ('Neu', 'Kollektion'), 'Neue Kollektion', 'Ruhige Schnitte, feste Stoffe und Farben, die länger als eine Saison halten.', 'Jetzt ansehen', [('Mantel', '189 €'), ('Hemd', '79 €'), ('Tasche', '129 €')], 'Kostenloser Versand ab 80 €', '#FAF9F7', '#151515', '#151515', 'lay-b'),
+    _t('Salbei', 'Naturkosmetik', '310 €', 'Kräuterhaus Wiese', ('Pflege', 'Inhaltsstoffe'), 'Naturkosmetik aus Kräutern', 'In kleinen Chargen abgefüllt, mit Inhaltsstoffen, die wir einzeln erklären.', 'Zum Sortiment', [('Gesichtsöl', '24 €'), ('Handcreme', '14 €'), ('Seife', '9 €')], 'Jede Zutat steht auf dem Etikett', '#EDF0E8', '#1d2a20', '#4F6D54', 'lay-c'),
+    _t('Kornfeld', 'Bäckerei und Café', '260 €', 'Kornfeld', ('Brot', 'Café'), 'Frisch aus dem Ofen', 'Brot und Gebäck zum Vorbestellen und Abholen, jeden Morgen ab sieben.', 'Vorbestellen', [('Roggenbrot', '5,40 €'), ('Dinkelbrötchen', '0,90 €'), ('Zimtschnecke', '2,80 €')], 'Heute bestellen, morgen früh abholen', '#F5EBDD', '#33230f', '#A9662A', 'lay-a'),
+    _t('Lahn', 'Outdoor und Sport', '320 €', 'Lahn', ('Ausrüstung', 'Touren'), 'Ausrüstung für draußen', 'Zelte, Rucksäcke und Jacken, die wir selbst auf Tour getestet haben.', 'Entdecken', [('Zelt', '349 €'), ('Rucksack', '159 €'), ('Jacke', '219 €')], 'Getestet zwischen Lahn und Vogelsberg', '#173A31', '#F4EFE2', '#F0B23E', 'lay-b'),
+    _t('Kontor', 'B2B und Großhandel', '380 €', 'Lagerhaus Nord', ('Sortiment', 'Konto'), 'Großhandel mit Staffelpreisen', 'Kauf auf Rechnung, Staffelpreise und Schnellbestellung per Artikelnummer.', 'Schnellbestellung', [('Kartonagen', 'ab 0,38 €'), ('Klebeband', 'ab 1,10 €'), ('Folien', 'ab 4,20 €')], 'Preise für Geschäftskunden nach Anmeldung', '#F4F5F7', '#141a2b', '#2C53C2', 'lay-c'),
 ]
 
 VIS = {
@@ -48,9 +50,9 @@ VIS = {
     'sea': '<div class="sheet"><div class="row you"><small>Anzeige · deine-domain.de</small><b>Einbauschränke nach Maß anfragen</b></div><svg viewBox="0 0 300 110" style="width:100%"><path d="M0 96 C60 90 90 70 140 62 S230 30 300 12" fill="none" stroke="oklch(33% 0.055 188)" stroke-width="2.5"/><path d="M0 100 C80 98 160 92 300 84" fill="none" stroke="oklch(20% 0.02 190 / 0.3)" stroke-width="1.5" stroke-dasharray="4 5"/></svg><div class="row"><small>Anfragen über die Suche im Vergleich zu Klicks ohne Anfrage</small></div></div>',
     'smm': '<div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>',
     'geo': '<div class="sheet"><div class="bar">Welche Schreinerei in Gießen baut Einbauschränke?</div><div class="row"><div class="dim" style="width:92%"></div></div><div class="row"><div class="dim" style="width:74%"></div></div><div class="row you"><small>Quelle</small><b>deine-domain.de</b></div></div>',
-    'webdesign': '<div class="sheet" style="padding:20px;gap:14px"><h3>Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="fake-btn">Anfrage senden</span></div>',
+    'webdesign': '<div class="sheet surface" style="padding:20px;gap:14px"><h3>Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="fake-btn">Anfrage senden</span></div>',
     'shopify': '<div class="sheet"><div class="row"><small>Theme-Editor · Startseite</small></div><div class="row">Header</div><div class="row">Hero</div><div class="row you"><b>Produktraster</b></div><div class="row">Footer</div></div>',
-    'themes': '<div class="sheet" style="background:#F3F1EC;padding:20px;gap:14px"><small style="font:600 13px var(--display)">Holzwerk Ahorn</small><h3>Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:96px;border-radius:12px;background:#C2552A"></div></div>',
+    'themes': '<div class="sheet surface" style="background:#F3F1EC;padding:20px;gap:14px"><small style="font:600 13px var(--display)">Holzwerk Ahorn</small><h3>Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:96px;border-radius:12px;background:#C2552A"></div></div>',
     'ki': '<div class="flow"><div>Neue Anfrage<small>kommt über das Formular</small></div><div>Wird einsortiert<small>Thema, Dringlichkeit, Ansprechperson</small></div><div>Antwortentwurf liegt bereit<small>du prüfst und sendest</small></div></div>',
 }
 
@@ -133,17 +135,26 @@ def orbit(mode):
   <script type="application/json">%s</script>
 </div>''' % (mode, ico('arrow'), json.dumps(data, ensure_ascii=False))
 
-def shot(t):
+def _old_shot(t):
     name, branche, price, shop, head, cta, tb, tf, ta = t
     return '<div class="shot" style="--tb:%s;--tf:%s;--ta:%s"><div class="s-nav">%s<i></i></div><div class="s-h">%s<br><u>%s</u></div><div class="s-img"></div></div>' % (tb, tf, ta, e(shop), e(head), e(cta))
 
-def theme_card(t):
+def _old_theme_card(t):
     href = 'theme-werkbank.html'
     return '<a class="theme" href="%s">%s<div class="theme-meta"><b>%s</b><span>%s · <span class="num">%s</span></span></div></a>' % (href, shot(t), e(t[0]), e(t[1]), e(t[2]))
 
+def tone(c):
+    for a, t in [('class="sec deep lap', 'deep'), ('class="sec mist lap', 'mist'), ('class="sec white lap', 'paper'), ('class="sec soft lap', 'paper'), ('class="sec lap', 'paper'), ('class="sec light', 'paper')]:
+        c = c.replace(a, 'data-tone="%s" class="sec' % t)
+    c = c.replace('class="page-hero light-hero"', 'data-tone="paper" class="page-hero"').replace('<section class="page-hero" data-block', '<section data-tone="paper" class="page-hero" data-block')
+    c = c.replace('<footer class="foot">', '<footer class="foot" data-tone="deep">')
+    for a, k in [('sheet', 'surface'), ('dd-panel', 'surface'), ('form-done', 'surface'), ('tray', 'surface-deep'), ('hero-vis', 'surface-deep'), ('ch-vis', 'surface-deep'), ('sheet-nav', 'surface-deep')]:
+        c = c.replace('class="%s"' % a, 'class="%s %s"' % (a, k))
+    return c
+
 def page(fname, title, current, body, standalone=True):
     head = '<title>%s</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<link rel="stylesheet" href="assets/site.css">\n' % e(title)
-    content = head + header(current) + '<main>\n' + body + '</main>\n' + footer()
+    content = tone(head + header(current) + '<main>\n' + body + '</main>\n' + footer())
     full = '<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n' + content + '</body>\n</html>\n'
     if standalone:
         open(os.path.join(HERE, fname), 'w', encoding='utf-8').write(full)
@@ -152,70 +163,83 @@ def page(fname, title, current, body, standalone=True):
         open(os.path.join(HERE, '_local.html'), 'w', encoding='utf-8').write(full)
 
 # ---------- Startseite ----------
+def store(t, cls=''):
+    cards = ''.join('<div><i></i><span>%s</span><small>%s</small></div>' % (e(c), e(p)) for c, p in t['cats'])
+    return '<div class="store %s %s" style="--sb:%s;--sf:%s;--sa:%s"><div class="st-nav"><b>%s</b><span><i>%s</i><i>%s</i><i>Kontakt</i></span></div><div class="st-hero"><div><b>%s</b><p>%s</p><u>%s</u></div><div class="st-img"></div></div><div class="st-cards">%s</div><div class="st-band">%s</div></div>' % (
+        t['lay'], cls, t['sb'], t['sf'], t['sa'], e(t['shop']), e(t['nav'][0]), e(t['nav'][1]), e(t['head']), e(t['sub']), e(t['cta']), cards, e(t['band']))
+
+def explorer(link_all=True):
+    items = ''.join('<li><button type="button" data-i="%d" aria-pressed="%s"><b><span class="dot" style="background:%s"></span>%s</b><small class="num">%s</small><small>%s</small></button></li>' % (i, 'true' if i == 0 else 'false', t['sa'], e(t['name']), e(t['price']), e(t['branche'])) for i, t in enumerate(T))
+    tpls = ''.join('<template data-i="%d" data-sb="%s" data-name="%s">%s</template>' % (i, t['sb'], e(t['name']), store(t)) for i, t in enumerate(T))
+    return '''<div class="explorer" data-explorer>
+      <ul class="ex-list" aria-label="Theme auswählen">%s</ul>
+      <div class="ex-stage">
+        <div class="device" style="--sb:%s">%s</div>
+        <div class="ex-foot">
+          <div class="seg" role="group" aria-label="Vorschau wechseln"><button type="button" data-view="desktop" aria-pressed="true">Desktop</button><button type="button" data-view="phone" aria-pressed="false">Handy</button></div>
+          <a class="btn" href="theme-werkbank.html"><span data-ex-name>Werkbank</span> ansehen %s</a>
+        </div>
+        <p class="sample">Gezeichnete Beispiel-Vorschau. Namen und Preise sind Platzhalter, echte Screenshots folgen mit den fertigen Themes.</p>
+      </div>
+      %s
+    </div>''' % (items, T[0]['sb'], store(T[0]), ico('arrow'), tpls)
+
 def build_home():
     prob = next(s for s in home['sections'].values() if s['type'] == 'problem-row')
     loose = ''.join('<li><b>%s</b><span>%s</span></li>' % (e(b['settings']['title']), e(b['settings']['text'])) for b in blocks(prob))
-    tones = ['p-deep', '', 'p-mist', 'p-soft']
-    panels = ''.join('''
-      <article class="panel %s">
-        <p class="panel-tag">%s · %s</p>
-        <h3>%s</h3>
-        <p class="panel-text">%s</p>
-        <a class="more" href="%s"><span>%s</span>%s</a>
-        <div class="panel-vis" aria-hidden="true">%s<span class="sample">Beispiel</span></div>
-      </article>''' % (tones[i % 4], e(s['nice']), e(s['long']), e(s['promise']), e(s['teaser']), s['url'], e(s['link_label']), ico('arrow'), VIS[s['key']]) for i, s in enumerate(SERVICES))
-    body = '''<section class="hero" data-block="hero">
-  <svg class="hero-rings" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="199"/><circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="104" stroke-dasharray="1 5"/></svg>
-  <div class="wrap">
-    <div class="hero-grid">
+    chapters = ''.join('''
+        <article class="chapter" id="ch-%s" data-key="%s">
+          <p class="tag">%s · %s</p>
+          <h2>%s</h2>
+          <p class="lead">%s</p>
+          <p><a class="more" href="%s"><span>%s</span>%s</a></p>
+          <div class="ch-vis" aria-hidden="true">%s<span class="sample">Beispiel</span></div>
+        </article>''' % (s['key'], s['key'], e(s['nice']), e(s['long']), e(s['promise']), e(s['teaser']), s['url'], e(s['link_label']), ico('arrow'), VIS[s['key']]) for s in SERVICES)
+    body = '''<div class="story" data-tone="paper">
+  <div class="rail"><div class="rail-stick">%(orbit_story)s</div></div>
+  <section class="hero" data-block="hero">
+    <div class="wrap">
+      <h1 class="h-giant"><span class="ln"><span>Online-Präsenz</span></span><span class="ln"><span>für dein</span></span><span class="ln"><span>Unternehmen</span></span></h1>
       <div class="hero-copy">
-        <h1 class="h-giant"><span class="ln"><span>Online-Präsenz</span></span><span class="ln"><span>für dein</span></span><span class="ln"><span>Unternehmen</span></span></h1>
         <p>NetImpulse entwickelt Shopify-Websites, SEA-Kampagnen und Strategien, damit du online klarer auftrittst, besser gefunden wirst und professioneller verkaufst.</p>
         <div class="hero-actions"><a class="btn" href="kontakt.html">Kostenloses Erstgespräch %(arrow)s</a><a class="more" href="leistungen.html"><span>Alle Leistungen ansehen</span></a></div>
       </div>
-      %(orbit)s
+      <div class="hero-orbit">%(orbit_auto)s</div>
+    </div>
+  </section>
+  <div class="wrap" id="leistungen" data-block="leistungen">
+    <div class="chapters">
+      <article class="chapter">
+        <h2>%(p_head)s</h2>
+        <p class="lead">%(p_text)s</p>
+        <ul class="loose">%(loose)s</ul>
+        <p class="h-mid">%(p_strong)s</p>
+      </article>%(chapters)s
+    </div>
+  </div>
+</div>
+
+<section class="sec" data-tone="deep" data-block="entwurf">
+  <div class="wrap">
+    <div class="wipe-head">
+      <h2 class="h-giant">Vom Gerüst zur fertigen Seite</h2>
+      <div><p class="lead">Eine Website sollte sofort verständlich machen, wer du bist, was du anbietest und warum es relevant ist. Zieh den Regler oder scroll weiter und sieh, wie aus einem Entwurf eine Seite wird.</p><p style="margin-top:20px"><a class="more" href="webdesign.html"><span>Mehr zu Webdesign</span>%(arrow)s</a></p></div>
+    </div>
+    <div class="wipe">
+      <div class="device" style="--sb:%(sb)s"><div class="wipe-draft" aria-hidden="true">%(store)s</div><div class="wipe-done">%(store)s</div><div class="wipe-line" aria-hidden="true"></div><input type="range" id="wipe-range" min="0" max="100" value="55" aria-label="Zwischen Entwurf und fertiger Seite wechseln"></div>
+      <p class="wipe-tags small"><span>Fertige Seite</span><span>Entwurf</span></p>
     </div>
   </div>
 </section>
 
-<section class="sec deep lap" data-block="aussage">
-  <div class="wrap claim-grid">
-    <div><h2 class="h-big">%(p_head)s</h2><p class="lead">%(p_text)s</p></div>
-    <div><ul class="loose">%(loose)s</ul><p class="claim-end h-mid">%(p_strong)s</p></div>
+<section class="sec tight" id="themes" data-tone="deep" data-block="themes">
+  <div class="wrap">
+    <div class="sec-head"><div><h2 class="h-big">Themes für Shopify, bereit zum Anpassen</h2><p class="lead">Theme- und Section-Packs für verschiedene Branchen. Such dir eins aus und sieh es dir am Desktop und am Handy an.</p></div><a class="more" href="themes.html"><span>Zum Theme Store</span>%(arrow)s</a></div>
+    %(explorer)s
   </div>
 </section>
 
-<section class="run" id="leistungen" data-block="leistungen">
-  <div class="run-pin">
-    <div class="wrap">
-      <div class="run-head"><h2>Von der ersten Idee bis zur laufenden Optimierung</h2><a class="more" href="leistungen.html"><span>Alle Leistungen und Preise</span>%(arrow)s</a></div>
-      <div class="run-bar" aria-hidden="true"><i></i></div>
-    </div>
-    <div class="run-track" tabindex="0" aria-label="Alle acht Leistungen">%(panels)s
-    </div>
-  </div>
-</section>
-
-<section class="sec deep lap" data-block="entwurf">
-  <div class="wrap wipe-grid">
-    <div class="wipe-copy">
-      <h2 class="h-big">Vom Gerüst zur fertigen Seite</h2>
-      <p class="lead">Eine Website sollte sofort verständlich machen, wer du bist, was du anbietest und warum es relevant ist. Zieh den Regler oder scroll weiter und sieh, wie aus einem Entwurf eine Seite wird.</p>
-      <a class="more" href="webdesign.html"><span>Mehr zu Webdesign</span>%(arrow)s</a>
-    </div>
-    %(wipe)s
-  </div>
-</section>
-
-<section class="sec lap" id="themes" data-block="themes" style="overflow:clip">
-  <div class="wrap sec-head">
-    <div><h2 class="h-big">Themes für Shopify, bereit zum Anpassen</h2></div>
-    <div><p class="small">Theme- und Section-Packs für verschiedene Branchen. Namen und Preise sind Platzhalter, die Themes erscheinen bald.</p><p style="margin-top:16px"><a class="more" href="themes.html"><span>Zum Theme Store</span>%(arrow)s</a></p></div>
-  </div>
-  <div class="rail" tabindex="0" aria-label="Beispiel-Themes, seitlich scrollbar">%(rail)s</div>
-</section>
-
-<section class="sec soft lap" data-block="team">
+<section class="sec" data-tone="paper" data-block="team">
   <div class="wrap team-grid">
     <div><h2 class="h-big">Direkt. Klar. Ohne Umwege.</h2><p class="lead">Bei NetImpulse arbeiten Strategie, Design, Marketing und Shopify-Umsetzung nah zusammen. So entstehen Websites, Kampagnen und Themes, die sich wie ein gemeinsames System anfühlen.</p><a class="more" href="ueber-uns.html"><span>Team kennenlernen</span>%(arrow)s</a></div>
     <ul class="faces">
@@ -225,18 +249,9 @@ def build_home():
     </ul>
   </div>
 </section>
-''' % dict(arrow=ico('arrow'), orbit=orbit('auto'), p_head=e(prob['settings']['heading']), p_text=e(prob['settings']['text']), loose=loose,
-           p_strong=e(prob['settings']['goal_strong']), panels=panels, wipe=WIPE, rail=''.join(theme_card(t) for t in THEMES))
+''' % dict(arrow=ico('arrow'), orbit_story=orbit('story'), orbit_auto=orbit('auto'), p_head=e(prob['settings']['heading']), p_text=e(prob['settings']['text']), loose=loose,
+           p_strong=e(prob['settings']['goal_strong']), chapters=chapters, sb=T[0]['sb'], store=store(T[0]), explorer=explorer())
     page('index.html', 'NetImpulse Prototyp', 'home', body + ask(), standalone=False)
-
-def wipe_layer(cls):
-    return '''<div class="wipe-layer %s"><div class="w-nav">Holzwerk Ahorn<span><i>Leistungen</i><i>Projekte</i><i>Kontakt</i></span></div><div class="w-h"><b>Möbel nach Maß aus Mittelhessen</b><p>Esstische, Einbauschränke und Treppen aus Massivholz, geplant und gebaut in unserer Werkstatt.</p><u>Anfrage stellen</u></div><div class="w-img"></div><div class="w-row"><div>Esstische</div><div>Einbauschränke</div><div>Treppen</div></div></div>''' % cls
-WIPE = '''<div class="wipe">
-      <div class="wipe-bar"><i></i><i></i><i></i><span>holzwerk-ahorn-beispiel.de</span></div>
-      <div class="wipe-stage">%s%s<div class="wipe-line" aria-hidden="true"></div></div>
-      <div class="wipe-tags"><span>Fertige Seite</span><span>Entwurf</span></div>
-      <input type="range" id="wipe-range" min="0" max="100" value="55" aria-label="Zwischen Entwurf und fertiger Seite wechseln">
-    </div>''' % (wipe_layer('draft'), wipe_layer('done'))
 
 # ---------- Leistungsseiten ----------
 def build_service(tpl, fname, key):
@@ -291,7 +306,7 @@ def build_service(tpl, fname, key):
             cols_html = ''.join('<div style="margin-top:40px"><h2 class="h-mid" style="margin-bottom:16px">%s</h2><p class="lead">%s</p></div>' % (e(b['settings']['title']), e(b['settings']['text']).replace('\n\n', '</p><p class="lead" style="margin-top:16px">')) for b in blocks(sec, 'column')[1:])
             panel = ''
             if pan:
-                panel = '<div class="pair-panel"><h3>%s</h3><ul>%s</ul></div>' % (e(pan['title']), ''.join('<li>%s%s</li>' % (ico('check'), e(x)) for x in pan['points'].split('\n') if x.strip()))
+                panel = '<div class="pair-list"><h3>%s</h3><ul>%s</ul></div>' % (e(pan['title']), ''.join('<li>%s</li>' % e(x) for x in pan['points'].split('\n') if x.strip()))
             out.append('''<section class="sec deep lap" id="fuer-wen" data-block="fuer-wen">
   <div class="wrap pair">
     <div><h2 class="h-big">%s</h2><p class="lead">%s</p>%s</div>
@@ -369,39 +384,36 @@ def build_overview():
     page('leistungen.html', 'Leistungen · NetImpulse', 'leistungen', body + ask())
 
 # ---------- Theme Store ----------
+def mini(t):
+    return '<a class="theme" href="theme-werkbank.html"><div class="device" style="--sb:%s">%s</div><div class="theme-meta"><b>%s</b><span>%s · <span class="num">%s</span></span></div></a>' % (t['sb'], store(t), e(t['name']), e(t['branche']), e(t['price']))
+
 def build_themes():
-    body = '''<section class="page-hero light-hero" data-block="hero">
+    body = '''<section class="page-hero" data-tone="paper" data-block="hero">
   <div class="wrap">
-    <h1 class="h-giant" style="max-width:13ch">Shopify-Themes, die nicht nach Baukasten aussehen</h1>
-    <p class="lead">Fertige Themes für verschiedene Branchen, gebaut mit Online Store 2.0 und eigenen Sections. Kaufen, installieren und im Theme-Editor anpassen, oder von uns einrichten lassen. Die sechs Themes hier sind Beispiele, Namen und Preise sind Platzhalter.</p>
+    <h1 class="h-giant" style="max-width:12ch">Shopify-Themes, die nicht nach Baukasten aussehen</h1>
+    <p class="lead">Fertige Themes für verschiedene Branchen, gebaut mit Online Store 2.0 und eigenen Sections. Kaufen, installieren und im Theme-Editor anpassen, oder von uns einrichten lassen.</p>
   </div>
 </section>
-<section class="sec white lap" data-block="themes"><div class="wrap"><div class="theme-grid">%s</div></div></section>
-<section class="sec mist lap" data-block="einrichten">
+<section class="sec" data-tone="deep" data-block="themes"><div class="wrap">%s</div></section>
+<section class="sec" data-tone="mist" data-block="einrichten">
   <div class="wrap sec-head" style="margin-bottom:0">
-    <div><h2 class="h-big">Lieber einrichten lassen?</h2><p class="lead" style="color:var(--ink)">Wir installieren dein Theme, übernehmen Logo und Farben und konfigurieren die Grundeinstellungen. Theme-Setup ab 200 €.</p></div>
+    <div><h2 class="h-big">Lieber einrichten lassen?</h2><p class="lead">Wir installieren dein Theme, übernehmen Logo und Farben und konfigurieren die Grundeinstellungen. Theme-Setup ab 200 €.</p></div>
     <a class="btn" href="leistungen.html#zusatz">Zusatzleistungen ansehen %s</a>
   </div>
 </section>
-''' % (''.join(theme_card(t) for t in THEMES), ico('arrow'))
+''' % (explorer(), ico('arrow'))
     page('themes.html', 'Theme Store · NetImpulse', 'themes', body + ask('Theme aus dem Store'))
 
 def build_theme_detail():
-    t = THEMES[0]
-    others = ''.join(theme_card(x) for x in THEMES[1:4])
-    body = '''<section class="page-hero light-hero" data-block="produkt">
+    t = T[0]
+    body = '''<section class="page-hero" data-tone="paper" data-block="produkt">
   <div class="wrap">
     <p class="crumb"><a href="themes.html">Theme Store</a><span>›</span><span>Werkbank</span></p>
     <div class="td">
       <div class="td-stage">
+        <div class="device" style="--sb:%s">%s</div>
         <div class="seg" role="group" aria-label="Vorschau wechseln"><button type="button" data-view="desktop" aria-pressed="true">Desktop</button><button type="button" data-view="phone" aria-pressed="false">Handy</button></div>
-        <div class="device"><div class="store">
-          <div class="st-nav">Holzwerk Ahorn<span><i>Leistungen</i><i>Projekte</i><i>Kontakt</i></span></div>
-          <div class="st-hero"><div><b>Möbel nach Maß aus Mittelhessen</b><p>Esstische, Einbauschränke und Treppen aus Massivholz, geplant und gebaut in unserer Werkstatt.</p><u>Anfrage stellen</u></div><div class="st-img"></div></div>
-          <div class="st-cards"><div><i></i>Esstische</div><div><i></i>Einbauschränke</div><div><i></i>Treppen</div></div>
-          <div class="st-band">Vom ersten Aufmaß bis zur Montage aus einer Hand</div>
-        </div></div>
-        <p class="sample">Beispiel-Vorschau, gezeichnet. Echte Screenshots folgen mit dem fertigen Theme.</p>
+        <p class="sample">Gezeichnete Beispiel-Vorschau. Echte Screenshots folgen mit dem fertigen Theme.</p>
       </div>
       <div class="td-info">
         <h1>Werkbank</h1>
@@ -418,13 +430,13 @@ def build_theme_detail():
     </div>
   </div>
 </section>
-<section class="sec white lap" data-block="weitere">
+<section class="sec tight" data-tone="paper" data-block="weitere">
   <div class="wrap">
     <div class="sec-head"><div><h2 class="h-big">Weitere Themes</h2></div><a class="more" href="themes.html"><span>Alle Themes</span>%s</a></div>
     <div class="theme-row">%s</div>
   </div>
 </section>
-''' % (ico('arrow'), ico('arrow'), others)
+''' % (t['sb'], store(t), ico('arrow'), ico('arrow'), ''.join(mini(x) for x in T[1:4]))
     page('theme-werkbank.html', 'Theme Werkbank · NetImpulse', 'themes', body + ask('Theme aus dem Store'))
 
 # ---------- Über uns ----------
@@ -433,7 +445,7 @@ def build_about():
     v = S['werte']; vals = ''.join('<li><i></i><div><h2>%s</h2><p>%s</p></div></li>' % (e(b['settings']['title']), e(b['settings']['text'])) for b in blocks(v))
     tm = S['team']; imgs = {'Niklas': '<img src="assets/img/niklas.jpg" alt="Niklas" width="700" height="875">', 'Luca': '<img src="assets/img/luca.jpg" alt="Luca" width="700" height="875">'}
     members = ''.join('<li>%s<b>%s</b><span class="role">%s · %s</span><p>%s</p></li>' % (imgs.get(b['settings']['name'], '<div class="ph" role="img" aria-label="%s, Foto folgt">%s<small>Foto folgt</small></div>' % (e(b['settings']['name']), e(b['settings']['name'][0]))), e(b['settings']['name']), e(b['settings']['role']), e(b['settings']['focus']), e(b['settings']['text'])) for b in blocks(tm))
-    body = '''<section class="sec values" data-block="werte" style="padding-bottom:calc(var(--lap) + var(--gap))">
+    body = '''<section class="sec values" data-tone="paper" data-block="werte">
   <div class="wrap">
     <h1>%s</h1>
     <p class="lead">%s</p>
@@ -448,7 +460,7 @@ def build_about():
   <div class="wrap">
     <h2 class="h-big">%s</h2>
     <p class="big-lead">%s</p>
-    <p class="lead" style="color:var(--ink)">%s</p>
+    <p class="lead">%s</p>
     <ul class="faces">%s</ul>
   </div>
 </section>
@@ -481,7 +493,7 @@ def build_contact():
 ''' % (e(s['title']), e(s['text']), chips, ico('arrow'), LIVE)
     # Kontaktseite ohne zusätzliches Anfrage-Band, der Fuß schließt direkt an
     head = '<title>Kontakt · NetImpulse</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<link rel="stylesheet" href="assets/site.css">\n'
-    full = '<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n' + head + header('kontakt') + '<main>\n' + body + '</main>\n' + footer() + '</body>\n</html>\n'
+    full = '<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n' + tone(head + header('kontakt') + '<main>\n' + body + '</main>\n' + footer()) + '</body>\n</html>\n'
     open(os.path.join(HERE, 'kontakt.html'), 'w', encoding='utf-8').write(full)
 
 build_home()
