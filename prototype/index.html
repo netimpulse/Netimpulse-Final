@@ -1,0 +1,523 @@
+<title>NetImpulse Prototyp</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Papierfläche, ein petrolfarbenes Rad als Motiv, Kobalt nur für Klickbares. Zwei Schriftgrößen-Welten: sehr groß oder klein. */
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 400 600; font-display: swap; src: url(assets/fonts/bricolage-latin.woff2) format("woff2"); }
+@font-face { font-family: "Work Sans"; font-weight: 400 600; font-display: swap; src: url(assets/fonts/work-sans-latin.woff2) format("woff2"); }
+:root {
+  color-scheme: light;
+  --paper: oklch(97.2% 0.008 85);
+  --paper-2: oklch(94.4% 0.012 85);
+  --tint: oklch(93.5% 0.022 235);
+  --ink: oklch(19% 0.012 255);
+  --ink-2: oklch(41% 0.014 255);
+  --line: oklch(19% 0.012 255 / 0.13);
+  --petrol: oklch(34% 0.055 228);
+  --petrol-2: oklch(40% 0.055 228);
+  --petrol-deep: oklch(25% 0.045 232);
+  --cream: oklch(96% 0.02 85);
+  --cream-2: oklch(96% 0.02 85 / 0.72);
+  --cream-line: oklch(96% 0.02 85 / 0.2);
+  --signal: oklch(51% 0.2 264);
+  --signal-press: oklch(44% 0.2 264);
+  --on-signal: oklch(98.5% 0.005 85);
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --ui: "Work Sans", system-ui, sans-serif;
+  --t-hero: clamp(2.75rem, 6.3vw, 6.5rem);
+  --t-big: clamp(2.25rem, 5.2vw, 4.75rem);
+  --t-mid: clamp(1.5rem, 2.4vw, 2.125rem);
+  --t-body: 1.0625rem;
+  --t-small: 0.875rem;
+  --gap-section: clamp(80px, 11vw, 168px);
+  --r-l: 24px; --r-m: 16px; --r-s: 8px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ui); font-size: var(--t-body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; text-wrap: balance; letter-spacing: -0.035em; line-height: 1; }
+p { text-wrap: pretty; }
+a { color: inherit; }
+img, svg { display: block; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 6px; }
+.on-dark :focus-visible { outline-color: var(--cream); }
+.wrap { max-width: 1520px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px), 4vw); padding-right: max(16px, env(safe-area-inset-right, 0px), 4vw); }
+.small { font-size: var(--t-small); line-height: 1.5; color: var(--ink-2); }
+.sample { font-size: 12px; color: var(--ink-2); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Klickbares */
+.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--signal); color: var(--on-signal); font: 500 1rem var(--ui); text-decoration: none; cursor: pointer; transition: background-color 160ms var(--ease), transform 160ms var(--ease); }
+.btn:hover { background: var(--signal-press); }
+.btn:active { transform: scale(0.98); }
+.btn svg, .more svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.btn.light { background: var(--cream); color: var(--ink); }
+.btn.light:hover { background: oklch(100% 0 0); }
+.more { display: inline-flex; align-items: center; gap: 6px; color: var(--signal); font-weight: 500; text-decoration: none; }
+.more:hover span { text-decoration: underline; text-underline-offset: 4px; }
+.more svg { transition: transform 200ms var(--ease); }
+.more:hover svg { transform: translateX(3px); }
+.on-dark .more { color: var(--cream); }
+
+/* Kopf */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: oklch(97.2% 0.008 85 / 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 32px; min-height: 64px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font: 600 1.125rem var(--display); letter-spacing: -0.015em; text-decoration: none; }
+.brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--signal); }
+.brand span { font-weight: 400; color: var(--ink-2); }
+.nav { display: flex; align-items: center; gap: 28px; margin-left: auto; font-size: 0.9375rem; }
+.nav a:not(.btn) { text-decoration: none; padding-block: 8px; }
+.nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 6px; }
+.nav .btn { min-height: 40px; padding-inline: 20px; font-size: 0.9375rem; }
+.menu { display: none; margin-left: auto; position: relative; }
+.menu summary { list-style: none; cursor: pointer; min-height: 40px; display: flex; align-items: center; padding-inline: 16px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font-size: 0.9375rem; }
+.menu summary::-webkit-details-marker { display: none; }
+.menu nav { position: absolute; right: 0; top: 48px; width: min(280px, 80vw); padding: 8px; border-radius: var(--r-m); background: var(--paper); box-shadow: 0 0 0 1px var(--line), 0 24px 48px -24px oklch(19% 0.012 255 / 0.4); display: grid; }
+.menu nav a { padding: 12px; border-radius: var(--r-s); text-decoration: none; font: 500 1.25rem var(--display); }
+.menu nav a:hover { background: var(--paper-2); }
+@media (max-width: 860px) { .nav { display: none; } .menu { display: block; } }
+
+/* Hero: Schrift, Rad, Button */
+.hero { position: relative; overflow: clip; padding-block: clamp(40px, 6vw, 88px) clamp(56px, 7vw, 104px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center; gap: clamp(24px, 4vw, 72px); }
+.hero h1 { font-size: var(--t-hero); line-height: 0.94; letter-spacing: -0.045em; position: relative; z-index: 2; }
+.hero-copy > p { max-width: 42ch; margin-block: 28px 32px; color: var(--ink-2); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.wheel { position: relative; z-index: 1; width: 100%; max-width: 680px; aspect-ratio: 1; justify-self: end; border-radius: 50%; background: var(--petrol); color: var(--cream); container-type: inline-size; }
+.wheel::before, .wheel::after { content: ""; position: absolute; border-radius: 50%; inset: 11.5%; border: 1px solid var(--cream-line); }
+.wheel::after { inset: 27%; border-style: dashed; }
+.wheel-nodes { position: absolute; inset: 0; }
+.wheel-node { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+.wheel-node button { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 6px; min-width: 44px; min-height: 44px; padding: 4px; background: none; border: 0; color: var(--cream-2); font: 500 clamp(11px, 2.7cqi, 15px) var(--ui); cursor: pointer; white-space: nowrap; transition: color 200ms var(--ease); }
+.wheel-node button::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--petrol); box-shadow: inset 0 0 0 1.5px var(--cream-2); transition: box-shadow 200ms var(--ease), transform 200ms var(--ease); }
+.wheel-node button:hover { color: var(--cream); }
+.wheel-node.is-on button { color: var(--cream); }
+.wheel-node.is-on button::before { box-shadow: inset 0 0 0 6px var(--cream); transform: scale(1.35); }
+.wheel-core { position: absolute; inset: 27%; display: grid; place-content: center; justify-items: center; text-align: center; gap: 8px; padding: 6%; }
+.wheel-core h2 { font-size: clamp(1.125rem, 6.4cqi, 2.75rem); letter-spacing: -0.03em; line-height: 1.02; }
+.wheel-core p { font-size: clamp(11px, 2.4cqi, 14px); color: var(--cream-2); }
+.wheel-core .more { font-size: clamp(12px, 2.6cqi, 15px); margin-top: 4px; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .wheel { justify-self: center; margin-top: 16px; }
+}
+
+/* Aussage */
+.claim { padding-block: var(--gap-section); }
+.claim .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px clamp(32px, 7vw, 120px); align-items: end; }
+.claim h2 { font-size: var(--t-big); }
+.claim-lead { margin-top: 24px; max-width: 52ch; color: var(--ink-2); }
+.loose li { display: grid; grid-template-columns: 9.5em 1fr; gap: 16px; padding-block: 12px; border-top: 1px solid var(--line); font-size: var(--t-small); }
+.loose li:last-child { border-bottom: 1px solid var(--line); }
+.loose b { font-weight: 500; }
+.loose span { color: var(--ink-2); }
+.claim-end { margin-top: 24px; font: 500 var(--t-mid) var(--display); letter-spacing: -0.02em; line-height: 1.15; }
+@media (max-width: 860px) { .claim .wrap { grid-template-columns: 1fr; } }
+
+/* Leistungen: Liste links, Bühne rechts */
+.services { background: var(--tint); padding-block: var(--gap-section); }
+.services-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: clamp(40px, 6vw, 88px); }
+.services-head h2 { font-size: var(--t-big); max-width: 14ch; }
+.services-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: clamp(32px, 6vw, 104px); align-items: start; }
+.svc-group { font-size: var(--t-small); color: var(--ink-2); padding-bottom: 12px; }
+.svc-group:not(:first-child) { margin-top: 56px; }
+.svc { border-top: 1px solid var(--line); padding-block: 28px; opacity: 0.42; transition: opacity 300ms var(--ease); }
+.svc.is-on, .no-stage .svc { opacity: 1; }
+.svc h3 { font-size: clamp(1.875rem, 3.9vw, 3.5rem); margin-bottom: 12px; }
+.svc p { max-width: 44ch; color: var(--ink-2); margin-bottom: 12px; }
+.svc .tag { font-size: var(--t-small); color: var(--ink-2); margin-bottom: 8px; }
+.stage { position: sticky; top: 104px; aspect-ratio: 1 / 1.02; border-radius: var(--r-l); background: var(--petrol); overflow: hidden; }
+.vis { position: absolute; inset: 0; display: grid; place-items: center; padding: 9%; opacity: 0; visibility: hidden; transition: opacity 320ms var(--ease), visibility 0s 320ms; color: var(--ink); }
+.vis.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+.vis .sample { position: absolute; left: 20px; bottom: 16px; color: var(--cream-2); }
+.sheet { width: 100%; border-radius: var(--r-m); background: var(--paper); padding: 16px; display: grid; gap: 8px; box-shadow: 0 32px 56px -32px oklch(15% 0.03 232 / 0.7); font-size: 13px; }
+.sheet .bar { height: 36px; border-radius: 999px; background: var(--paper-2); display: flex; align-items: center; padding-inline: 16px; color: var(--ink-2); }
+.sheet .row { padding: 10px 12px; border-radius: var(--r-s); display: grid; gap: 2px; }
+.sheet .row small { color: var(--ink-2); font-size: 11px; }
+.sheet .row.you { background: var(--tint); box-shadow: inset 0 0 0 1px oklch(51% 0.2 264 / 0.35); }
+.sheet .row.you b { font-weight: 500; }
+.dim { height: 8px; border-radius: 4px; background: var(--paper-2); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.tiles i { aspect-ratio: 1; border-radius: var(--r-s); background: var(--petrol-2); }
+.tiles i:nth-child(2), .tiles i:nth-child(6), .tiles i:nth-child(7) { background: var(--cream); }
+.tiles i:nth-child(5) { background: var(--tint); }
+.flow { display: grid; gap: 12px; width: 100%; justify-items: start; }
+.flow div { padding: 12px 16px; border-radius: var(--r-m); background: var(--paper); font-size: 13px; }
+.flow div:nth-child(2) { margin-left: 14%; }
+.flow div:nth-child(3) { margin-left: 28%; }
+.flow div small { display: block; color: var(--ink-2); font-size: 11px; }
+.stage-in .vis { position: relative; inset: auto; opacity: 1; visibility: visible; aspect-ratio: 4 / 3; border-radius: var(--r-m); background: var(--petrol); margin-top: 20px; }
+@media (max-width: 960px) { .services-grid { grid-template-columns: 1fr; } .stage { display: none; } .svc { opacity: 1; } }
+
+/* Themes */
+.themes { padding-block: var(--gap-section); overflow: clip; }
+.themes-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr); gap: 24px 64px; align-items: end; margin-bottom: 48px; }
+.themes-head h2 { font-size: var(--t-big); }
+.rail { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(16px, 4vw) 24px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.rail::-webkit-scrollbar { display: none; }
+.theme { flex: 0 0 min(78vw, 420px); scroll-snap-align: center; text-decoration: none; display: grid; gap: 16px; }
+.shot { aspect-ratio: 4 / 5; border-radius: var(--r-m); background: var(--tb); color: var(--tf); padding: 8% 8% 0; display: grid; grid-template-rows: auto auto 1fr; gap: 6%; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); transition: transform 320ms var(--ease); }
+.theme:hover .shot { transform: translateY(-6px); }
+.shot .s-nav { display: flex; justify-content: space-between; font: 500 13px var(--display); }
+.shot .s-nav i { width: 28%; height: 8px; border-radius: 4px; background: currentColor; opacity: 0.18; align-self: center; }
+.shot .s-h { font: 500 clamp(1.5rem, 4.2vw, 2.125rem)/1.02 var(--display); letter-spacing: -0.03em; }
+.shot .s-h u { display: inline-block; margin-top: 12px; padding: 8px 14px; border-radius: 999px; background: var(--ta); color: var(--tb); font: 500 12px var(--ui); text-decoration: none; letter-spacing: 0; }
+.shot .s-img { border-radius: 12px 12px 0 0; background: linear-gradient(in oklch 160deg, var(--ta), color-mix(in oklch, var(--ta) 55%, var(--tb))); }
+.theme-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.theme-meta b { font: 500 1.375rem var(--display); letter-spacing: -0.02em; }
+.theme-meta span { color: var(--ink-2); font-size: var(--t-small); }
+@media (max-width: 860px) { .themes-head { grid-template-columns: 1fr; } }
+
+/* Ablauf: die Linie von der Über-uns-Seite */
+.path { padding-block: 0 var(--gap-section); }
+.path-box { position: relative; }
+.path h2 { font-size: var(--t-big); text-align: center; max-width: 12ch; margin: 0 auto 72px; }
+.path svg { position: absolute; left: 50%; top: 0; width: 120px; height: 100%; transform: translateX(-50%); overflow: visible; }
+.path svg path { fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.stops { display: grid; gap: 96px; position: relative; padding-block: 32px 96px; }
+.stops li { display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; }
+.stops i { grid-column: 2; grid-row: 1; justify-self: center; width: 14px; height: 14px; border-radius: 50%; background: var(--petrol); box-shadow: 0 0 0 8px var(--paper); }
+.stops div { max-width: 32ch; }
+.stops li:nth-child(odd) div { grid-column: 1; justify-self: end; text-align: right; }
+.stops li:nth-child(even) div { grid-column: 3; }
+.stops h3 { font-size: clamp(1.75rem, 3.2vw, 2.75rem); margin-bottom: 8px; }
+.stops p { color: var(--ink-2); }
+@media (max-width: 760px) {
+  .path h2 { text-align: left; margin-left: 40px; }
+  .path svg { left: 1px; width: 12px; transform: none; }
+  .stops { gap: 48px; }
+  .stops li { grid-template-columns: 14px 1fr; gap: 26px; }
+  .stops i { grid-column: 1; }
+  .stops li:nth-child(odd) div, .stops li:nth-child(even) div { grid-column: 2; justify-self: start; text-align: left; }
+}
+
+/* Team */
+.team { background: var(--paper-2); padding-block: var(--gap-section); }
+.team .wrap { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 48px clamp(32px, 6vw, 96px); align-items: center; }
+.team h2 { font-size: var(--t-big); margin-bottom: 24px; }
+.team-copy p { color: var(--ink-2); max-width: 44ch; margin-bottom: 24px; }
+.faces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+.faces li:nth-child(2) { margin-top: 48px; }
+.faces img, .faces .ph { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-m); }
+.faces .ph { background: var(--petrol); color: var(--cream); display: grid; place-content: center; justify-items: center; gap: 8px; font: 500 4rem var(--display); }
+.faces .ph small { font: 400 12px var(--ui); color: var(--cream-2); }
+.faces b { display: block; margin-top: 12px; font: 500 1.25rem var(--display); letter-spacing: -0.02em; }
+.faces span { font-size: var(--t-small); color: var(--ink-2); }
+@media (max-width: 860px) { .team .wrap { grid-template-columns: 1fr; } .faces { gap: 8px; } .faces li:nth-child(2) { margin-top: 24px; } }
+
+/* Anfrage: die Signalfarbe als ganze Fläche */
+.ask { background: var(--signal); color: var(--on-signal); padding-block: var(--gap-section); }
+.ask .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px clamp(32px, 6vw, 96px); align-items: end; }
+.ask h2 { font-size: clamp(2.75rem, 7vw, 6.5rem); line-height: 0.95; letter-spacing: -0.045em; }
+.ask-copy p { margin-top: 24px; max-width: 46ch; opacity: 0.86; }
+.ask fieldset { border: 0; margin: 0 0 24px; padding: 0; min-width: 0; }
+.ask legend { padding: 0; margin-bottom: 12px; font-size: var(--t-small); opacity: 0.86; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips label { position: relative; cursor: pointer; }
+.chips input { position: absolute; opacity: 0; inset: 0; }
+.chips span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; box-shadow: inset 0 0 0 1px oklch(98.5% 0.005 85 / 0.45); font-size: 0.9375rem; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
+.chips input:checked + span { background: var(--on-signal); color: var(--signal-press); box-shadow: none; }
+.chips input:focus-visible + span { outline: 2px solid var(--on-signal); outline-offset: 3px; }
+.ask .small { color: inherit; opacity: 0.86; margin-top: 16px; }
+@media (max-width: 860px) { .ask .wrap { grid-template-columns: 1fr; } }
+
+/* Fuß */
+.foot { background: var(--petrol-deep); color: var(--cream); padding-block: 64px 32px; }
+.foot .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+.foot .brand i { background: var(--cream); }
+.foot .brand span, .foot p, .foot h3 { color: var(--cream-2); }
+.foot p { font-size: var(--t-small); margin-top: 12px; max-width: 30ch; }
+.foot h3 { font: 400 var(--t-small) var(--ui); letter-spacing: 0; margin-bottom: 12px; }
+.foot li a { display: inline-block; padding-block: 6px; text-decoration: none; font-size: 0.9375rem; }
+.foot li a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.foot-base { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--cream-line); font-size: var(--t-small); color: var(--cream-2); }
+@media (max-width: 760px) { .foot .wrap { grid-template-columns: 1fr 1fr; } .foot .wrap > div:first-child { grid-column: 1 / -1; } }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>NetImpulse<span>marketing</span></a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <a href="#leistungen">Leistungen</a><a href="#themes">Theme Store</a><a href="#team">Über uns</a>
+      <a class="btn" href="#kontakt">Kontakt</a>
+    </nav>
+    <details class="menu">
+      <summary>Menü</summary>
+      <nav aria-label="Hauptmenü mobil"><a href="#leistungen">Leistungen</a><a href="#themes">Theme Store</a><a href="#team">Über uns</a><a href="#kontakt">Kontakt</a></nav>
+    </details>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" data-block="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Online-Präsenz für dein Unternehmen</h1>
+      <p>NetImpulse entwickelt Shopify-Websites, SEA-Kampagnen und Strategien, damit du online klarer auftrittst, besser gefunden wirst und professioneller verkaufst.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#kontakt">Kostenloses Erstgespräch <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="more" href="#leistungen"><span>Alle Leistungen ansehen</span></a>
+      </div>
+    </div>
+    <div class="wheel on-dark" id="wheel" role="group" aria-label="Unsere Leistungen im Rad">
+      <div class="wheel-nodes"></div>
+      <div class="wheel-core" aria-live="polite">
+        <h2 data-core-title></h2>
+        <p data-core-sub></p>
+        <a class="more" data-core-link href="#leistungen"><span>Zur Leistung</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="claim" data-block="aussage">
+  <div class="wrap">
+    <div>
+      <h2>Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen</h2>
+      <p class="claim-lead">Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht.</p>
+    </div>
+    <div>
+      <ul class="loose">
+        <li><b>Webdesigner</b><span>baut die Seite und ist weg</span></li>
+        <li><b>Ads-Agentur</b><span>meldet Klicks statt Anfragen</span></li>
+        <li><b>SEO</b><span>macht irgendwann mal jemand</span></li>
+        <li><b>Shop-Theme</b><span>von der Stange gekauft</span></li>
+        <li><b>Social Media</b><span>läuft nebenbei, wenn Zeit ist</span></li>
+        <li><b>Tracking</b><span>misst, aber keiner schaut hin</span></li>
+      </ul>
+      <p class="claim-end">Bei uns laufen die Fäden zusammen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="leistungen" data-block="leistungen">
+  <div class="wrap">
+    <div class="services-head">
+      <h2>Von der ersten Idee bis zur laufenden Optimierung</h2>
+      <a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Alle Leistungen und Preise</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="services-grid">
+      <div class="svc-list">
+        <p class="svc-group">Sichtbarkeit</p>
+        <article class="svc" data-key="seo"><p class="tag">SEO · Suchmaschinenoptimierung</p><h3>Gefunden werden</h3><p>Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.</p><a class="more" href="https://netimpulsemarketing.de/pages/seo"><span>Mehr zu SEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <article class="svc" data-key="sea"><p class="tag">SEA · Google Ads</p><h3>Nachfrage aktivieren</h3><p>Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.</p><a class="more" href="https://netimpulsemarketing.de/pages/sea"><span>Mehr zu SEA</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <article class="svc" data-key="smm"><p class="tag">SMM · Social Media Marketing</p><h3>Aufmerksamkeit formen</h3><p>Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.</p><a class="more" href="https://netimpulsemarketing.de/pages/smm"><span>Mehr zu SMM</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <article class="svc" data-key="geo"><p class="tag">GEO · Generative Engine Optimization</p><h3>In KI-Antworten auftauchen</h3><p>Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.</p><a class="more" href="https://netimpulsemarketing.de/pages/geo"><span>Mehr zu GEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <p class="svc-group">Websites und Shops</p>
+        <article class="svc" data-key="webdesign"><p class="tag">Webdesign</p><h3>Website als Gespräch</h3><p>Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.</p><a class="more" href="https://netimpulsemarketing.de/pages/web-design"><span>Mehr zu Webdesign</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <article class="svc" data-key="shopify"><p class="tag">Shopify-Entwicklung</p><h3>Shops, die skalieren</h3><p>Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.</p><a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Mehr zu Shopify</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <article class="svc" data-key="themes"><p class="tag">Theme Store</p><h3>Schneller starten</h3><p>Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.</p><a class="more" href="#themes"><span>Zum Theme Store</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+        <p class="svc-group">KI und Automatisierung</p>
+        <article class="svc" data-key="ki"><p class="tag">KI-Automation</p><h3>Routine, die sich selbst erledigt</h3><p>Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.</p><a class="more" href="#kontakt"><span>KI-Automation anfragen</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="vis" data-key="seo"><div class="sheet"><div class="bar">schreinerei gießen</div><div class="row you"><small>deine-domain.de · leistungen</small><b>Schreinerei in Gießen: Möbel nach Maß</b></div><div class="row"><small>branchenbuch-beispiel.de</small>Schreinereien in Gießen und Umgebung</div><div class="row"><small>ratgeber-beispiel.de</small>Möbel nach Maß: Worauf du achten solltest</div></div><span class="sample">Beispiel</span></div>
+        <div class="vis" data-key="sea"><div class="sheet"><div class="row you"><small>Anzeige · deine-domain.de</small><b>Einbauschränke nach Maß anfragen</b></div><svg viewBox="0 0 300 110" style="width:100%"><path d="M0 96 C60 90 90 70 140 62 S230 30 300 12" fill="none" stroke="oklch(51% 0.2 264)" stroke-width="2.5"/><path d="M0 100 C80 98 160 92 300 84" fill="none" stroke="oklch(19% 0.012 255 / 0.3)" stroke-width="1.5" stroke-dasharray="4 5"/></svg><div class="row"><small>Anfragen über Suche im Vergleich zu Klicks ohne Anfrage</small></div></div><span class="sample">Beispiel</span></div>
+        <div class="vis" data-key="smm"><div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="sample">Beispiel</span></div>
+        <div class="vis" data-key="geo"><div class="sheet"><div class="bar">Welche Schreinerei in Gießen baut Einbauschränke?</div><div class="row"><div class="dim" style="width:92%"></div></div><div class="row"><div class="dim" style="width:74%"></div></div><div class="row you"><small>Quelle</small><b>deine-domain.de</b></div></div><span class="sample">Beispiel</span></div>
+        <div class="vis" data-key="webdesign"><div class="sheet" style="padding:24px;gap:16px"><h3 style="font-size:1.75rem">Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="btn" style="justify-self:start;min-height:36px;font-size:13px;padding-inline:16px">Anfrage senden</span></div><span class="sample">Beispiel</span></div>
+        <div class="vis" data-key="shopify"><div class="sheet"><div class="row"><small>Theme-Editor · Startseite</small></div><div class="row">Header</div><div class="row">Hero</div><div class="row you"><b>Produktraster</b></div><div class="row">Footer</div></div><span class="sample">Beispiel</span></div>
+        <div class="vis" data-key="themes"><div class="sheet" style="background:#F3F1EC;padding:24px;gap:16px"><small style="font:500 13px var(--display)">Holzwerk Ahorn</small><h3 style="font-size:1.75rem">Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:120px;border-radius:12px;background:#C2552A"></div></div><span class="sample">Beispiel-Theme Werkbank</span></div>
+        <div class="vis" data-key="ki"><div class="flow"><div>Neue Anfrage<small>kommt über das Formular</small></div><div>Wird einsortiert<small>Thema, Dringlichkeit, Ansprechperson</small></div><div>Antwortentwurf liegt bereit<small>du prüfst und sendest</small></div></div><span class="sample">Beispiel</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="themes" id="themes" data-block="themes">
+  <div class="wrap themes-head">
+    <h2>Themes für Shopify, bereit zum Anpassen</h2>
+    <div><p class="small">Theme- und Section-Packs für verschiedene Branchen. Kaufen, installieren und im Theme-Editor anpassen oder von uns einrichten lassen. Namen und Preise sind Platzhalter, die Themes erscheinen bald.</p></div>
+  </div>
+  <div class="rail" tabindex="0" aria-label="Beispiel-Themes, seitlich scrollbar">
+    <a class="theme" href="#kontakt" style="--tb:#F3F1EC;--tf:#1b1a17;--ta:#C2552A"><div class="shot"><div class="s-nav">Holzwerk Ahorn<i></i></div><div class="s-h">Möbel nach Maß<br><u>Anfrage stellen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Werkbank</b><span>Handwerk und Betriebe · <span class="num">290 €</span></span></div></a>
+    <a class="theme" href="#kontakt" style="--tb:#FAF9F7;--tf:#151515;--ta:#151515"><div class="shot"><div class="s-nav">Atelier<i></i></div><div class="s-h">Neue Kollektion<br><u>Jetzt ansehen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Atelier</b><span>Mode und Accessoires · <span class="num">340 €</span></span></div></a>
+    <a class="theme" href="#kontakt" style="--tb:#EDF0E8;--tf:#1d2a20;--ta:#4F6D54"><div class="shot"><div class="s-nav">Kräuterhaus Wiese<i></i></div><div class="s-h">Naturkosmetik aus Kräutern<br><u>Zum Sortiment</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Salbei</b><span>Naturkosmetik · <span class="num">310 €</span></span></div></a>
+    <a class="theme" href="#kontakt" style="--tb:#F5EBDD;--tf:#33230f;--ta:#A9662A"><div class="shot"><div class="s-nav">Kornfeld<i></i></div><div class="s-h">Frisch aus dem Ofen<br><u>Vorbestellen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Kornfeld</b><span>Bäckerei und Café · <span class="num">260 €</span></span></div></a>
+    <a class="theme" href="#kontakt" style="--tb:#173A31;--tf:#F4EFE2;--ta:#F0B23E"><div class="shot"><div class="s-nav">Lahn<i></i></div><div class="s-h">Ausrüstung für draußen<br><u>Entdecken</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Lahn</b><span>Outdoor und Sport · <span class="num">320 €</span></span></div></a>
+    <a class="theme" href="#kontakt" style="--tb:#F4F5F7;--tf:#141a2b;--ta:#2C53C2"><div class="shot"><div class="s-nav">Lagerhaus Nord<i></i></div><div class="s-h">Großhandel mit Staffelpreisen<br><u>Schnellbestellung</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Kontor</b><span>B2B und Großhandel · <span class="num">380 €</span></span></div></a>
+  </div>
+</section>
+
+<section class="path" data-block="ablauf">
+  <div class="wrap">
+    <h2>So läuft die Zusammenarbeit</h2>
+    <div class="path-box">
+      <svg viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true"><path id="thread" d="M60 0 C60 110 22 150 22 250 S98 400 98 500 22 650 22 750 60 890 60 1000"/></svg>
+      <ol class="stops">
+        <li><i></i><div><h3>Kostenloses Erstgespräch</h3><p>Wir schauen gemeinsam, wo dein Auftritt steht und was er braucht.</p></div></li>
+        <li><i></i><div><h3>Angebot mit allen Posten</h3><p>Jede Leistung steht einzeln drin, mit Preis. Keine Pauschale, keine Überraschung.</p></div></li>
+        <li><i></i><div><h3>Start der Umsetzung</h3><p>Erst wenn du zustimmst, legen wir los. Du siehst früh, was entsteht.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="team" data-block="team">
+  <div class="wrap">
+    <div class="team-copy">
+      <h2>Direkt. Klar. Ohne Umwege.</h2>
+      <p>Bei NetImpulse arbeiten Strategie, Design, Marketing und Shopify-Umsetzung nah zusammen. So entstehen Websites, Kampagnen und Themes, die sich wie ein gemeinsames System anfühlen.</p>
+      <a class="more" href="https://netimpulsemarketing.de/pages/ueber-uns"><span>Team kennenlernen</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <ul class="faces">
+      <li><img src="assets/img/niklas.jpg" alt="Niklas" width="700" height="875" loading="lazy"><b>Niklas</b><span>Online-Marketing und Shopify-Entwicklung</span></li>
+      <li><img src="assets/img/luca.jpg" alt="Luca" width="700" height="875" loading="lazy"><b>Luca</b><span>Design, Konzept und digitale Auftritte</span></li>
+      <li><div class="ph" role="img" aria-label="Tom, Foto folgt">T<small>Foto folgt</small></div><b>Tom</b><span>Content, Organisation und Projektunterstützung</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="ask" id="kontakt" data-block="anfrage">
+  <div class="wrap">
+    <div class="ask-copy">
+      <h2>Bereit für planbares Wachstum?</h2>
+      <p>Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.</p>
+    </div>
+    <form id="ask-form">
+      <fieldset>
+        <legend>Worum geht es dir?</legend>
+        <div class="chips">
+          <label><input type="checkbox" id="t-shop" name="t" value="Shopify-Shop"><span>Shopify-Shop</span></label>
+          <label><input type="checkbox" id="t-web" name="t" value="Website"><span>Website</span></label>
+          <label><input type="checkbox" id="t-seo" name="t" value="SEO und GEO"><span>SEO und GEO</span></label>
+          <label><input type="checkbox" id="t-ads" name="t" value="Google Ads"><span>Google Ads</span></label>
+          <label><input type="checkbox" id="t-smm" name="t" value="Social Media"><span>Social Media</span></label>
+          <label><input type="checkbox" id="t-ki" name="t" value="KI-Automation"><span>KI-Automation</span></label>
+          <label><input type="checkbox" id="t-theme" name="t" value="Theme aus dem Store"><span>Theme aus dem Store</span></label>
+        </div>
+      </fieldset>
+      <button class="btn light" type="submit">Kostenloses Erstgespräch anfragen <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="small" id="ask-note" role="status">Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot on-dark">
+  <div class="wrap">
+    <div><a class="brand" href="#top"><i></i>NetImpulse<span>marketing</span></a><p>Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads.</p></div>
+    <div><h3>Menü</h3><ul><li><a href="#leistungen">Leistungen</a></li><li><a href="#themes">Theme Store</a></li><li><a href="#team">Über uns</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
+    <div><h3>Leistungen</h3><ul><li><a href="https://netimpulsemarketing.de/pages/seo">SEO</a></li><li><a href="https://netimpulsemarketing.de/pages/sea">Google Ads</a></li><li><a href="https://netimpulsemarketing.de/pages/smm">Social Media</a></li><li><a href="https://netimpulsemarketing.de/pages/geo">GEO</a></li><li><a href="https://netimpulsemarketing.de/pages/web-design">Webdesign</a></li></ul></div>
+    <div><h3>Rechtliches</h3><ul><li><a href="https://netimpulsemarketing.de/policies/legal-notice">Impressum</a></li><li><a href="https://netimpulsemarketing.de/policies/privacy-policy">Datenschutz</a></li><li><a href="https://netimpulsemarketing.de/policies/terms-of-service">AGB</a></li><li><a href="https://netimpulsemarketing.de/pages/widerruf">Widerruf</a></li></ul></div>
+    <p class="foot-base">© 2026 NetImpulse GbR</p>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script>
+(() => {
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+
+  /* Rad */
+  const SERVICES = [
+    ['seo', 'SEO', 'Gefunden werden', 'Suchmaschinenoptimierung'],
+    ['sea', 'Google Ads', 'Nachfrage aktivieren', 'SEA'],
+    ['smm', 'Social Media', 'Aufmerksamkeit formen', 'Social Media Marketing'],
+    ['geo', 'GEO', 'In KI-Antworten auftauchen', 'Generative Engine Optimization'],
+    ['webdesign', 'Webdesign', 'Website als Gespräch', 'Webdesign'],
+    ['shopify', 'Shopify', 'Shops, die skalieren', 'Shopify-Entwicklung'],
+    ['themes', 'Themes', 'Schneller starten', 'Theme Store'],
+    ['ki', 'KI-Automation', 'Routine, die sich selbst erledigt', 'KI und Automatisierung'],
+  ];
+  const wheel = document.getElementById('wheel');
+  const holder = wheel.querySelector('.wheel-nodes');
+  const coreTitle = wheel.querySelector('[data-core-title]');
+  const coreSub = wheel.querySelector('[data-core-sub]');
+  const coreLink = wheel.querySelector('[data-core-link]');
+  const step = 360 / SERVICES.length;
+  const state = { rot: 0 };
+  let active = 0, timer = null;
+  const nodes = SERVICES.map(([key, name], i) => {
+    const n = document.createElement('div');
+    n.className = 'wheel-node';
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = name; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => { select(i); stop(); });
+    n.appendChild(b); holder.appendChild(n);
+    return n;
+  });
+  const place = () => {
+    const r = wheel.clientWidth * 0.385;
+    nodes.forEach((n, i) => {
+      const a = (i * step + state.rot - 90) * Math.PI / 180;
+      n.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r}px)`;
+    });
+  };
+  function select(i) {
+    active = (i + SERVICES.length) % SERVICES.length;
+    const s = SERVICES[active];
+    nodes.forEach((n, k) => { n.classList.toggle('is-on', k === active); n.firstChild.setAttribute('aria-pressed', k === active); });
+    coreTitle.textContent = s[2]; coreSub.textContent = s[3];
+    coreLink.href = '#leistungen';
+    /* aktive Leistung nach oben drehen, auf dem kürzeren Weg */
+    let target = -active * step;
+    while (target - state.rot > 180) target -= 360;
+    while (target - state.rot < -180) target += 360;
+    if (hasGsap && !calm) gsap.to(state, { rot: target, duration: 0.9, ease: 'power3.inOut', onUpdate: place });
+    else { state.rot = target; place(); }
+  }
+  const start = () => { if (!calm && !timer) timer = setInterval(() => select(active + 1), 3400); };
+  const stop = () => { clearInterval(timer); timer = null; };
+  wheel.addEventListener('pointerenter', stop);
+  wheel.addEventListener('focusin', stop);
+  wheel.addEventListener('pointerleave', start);
+  new ResizeObserver(place).observe(wheel);
+  select(0); start();
+
+  /* Leistungen: Bühne folgt der Liste */
+  const rows = [...document.querySelectorAll('.svc')];
+  const visuals = [...document.querySelectorAll('.stage .vis')];
+  const show = (key) => {
+    rows.forEach((r) => r.classList.toggle('is-on', r.dataset.key === key));
+    visuals.forEach((v) => v.classList.toggle('is-on', v.dataset.key === key));
+  };
+  const wide = matchMedia('(min-width: 961px)');
+  const setupStage = () => {
+    if (wide.matches) {
+      const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && show(e.target.dataset.key)), { rootMargin: '-45% 0px -45% 0px' });
+      rows.forEach((r) => io.observe(r));
+      show('seo');
+    } else {
+      /* schmal: jedes Bild wandert unter seine Leistung */
+      document.querySelector('.svc-list').classList.add('stage-in', 'no-stage');
+      visuals.forEach((v) => { const row = rows.find((r) => r.dataset.key === v.dataset.key); if (row) row.appendChild(v); });
+    }
+  };
+  setupStage();
+
+  /* Linie zeichnet sich beim Scrollen, weiches Scrollen */
+  if (hasGsap && !calm) {
+    gsap.registerPlugin(ScrollTrigger);
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({ duration: 1.05 });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+      document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -64 }); const m = a.closest('details'); if (m) m.open = false; }
+      }));
+    }
+    const thread = document.getElementById('thread');
+    const len = thread.getTotalLength();
+    gsap.set(thread, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.to(thread, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.path-box', start: 'top 75%', end: 'bottom 60%', scrub: 0.6 } });
+  }
+
+  /* Anfrage */
+  document.getElementById('ask-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const picked = [...e.target.querySelectorAll('input:checked')].map((i) => i.value);
+    document.getElementById('ask-note').textContent = picked.length
+      ? 'Im Prototyp wird nichts gesendet. Gewählt: ' + picked.join(', ')
+      : 'Im Prototyp wird nichts gesendet. Wähl oben aus, worum es geht.';
+  });
+})();
+</script>
