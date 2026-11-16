@@ -1,545 +1,186 @@
 <title>NetImpulse Prototyp</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<style>
-/* Layout: Ultramarin als große Fläche, Weiß als Papier, Signalrot nur für Klickbares. Schmale fette Schrift riesig, alles andere klein. */
-@font-face { font-family: "Archivo"; font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; src: url(assets/fonts/archivo-var.woff2) format("woff2"); }
-:root {
-  color-scheme: light;
-  --paper: oklch(98.6% 0.004 265);
-  --tint: oklch(93.5% 0.035 268);
-  --ink: oklch(20% 0.045 268);
-  --ink-2: oklch(42% 0.04 268);
-  --line: oklch(20% 0.045 268 / 0.14);
-  --blue: oklch(44% 0.23 266);
-  --blue-deep: oklch(30% 0.16 268);
-  --white: oklch(99% 0.003 265);
-  --white-2: oklch(99% 0.003 265 / 0.76);
-  --white-line: oklch(99% 0.003 265 / 0.24);
-  --signal: oklch(70% 0.19 33);
-  --signal-press: oklch(64% 0.2 33);
-  --on-signal: oklch(20% 0.045 268);
-  --ff: "Archivo", "Arial Narrow", system-ui, sans-serif;
-  --t-giant: clamp(3.25rem, 10.7vw, 11.25rem);
-  --t-big: clamp(2.5rem, 6.6vw, 6.25rem);
-  --t-mid: clamp(1.75rem, 2.9vw, 2.75rem);
-  --t-body: 1.0625rem;
-  --t-small: 0.875rem;
-  --gap-section: clamp(80px, 11vw, 168px);
-  --r-l: 28px; --r-m: 16px; --r-s: 8px;
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-*, *::before, *::after { box-sizing: border-box; }
-body { background: var(--paper); color: var(--ink); font-family: var(--ff); font-size: var(--t-body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
-h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
-ul, ol { list-style: none; }
-h1, h2, h3 { font-weight: 800; font-stretch: 68%; text-wrap: balance; letter-spacing: -0.02em; line-height: 0.92; }
-p { text-wrap: pretty; }
-a { color: inherit; }
-img, svg { display: block; }
-:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 6px; }
-.wrap { max-width: 1560px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px), 4vw); padding-right: max(16px, env(safe-area-inset-right, 0px), 4vw); }
-.small { font-size: var(--t-small); line-height: 1.5; color: var(--ink-2); }
-.sample { font-size: 12px; opacity: 0.7; }
-.num { font-variant-numeric: tabular-nums; }
-
-/* Klickbares: immer Signalrot */
-.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--signal); color: var(--on-signal); font: 600 1.0625rem var(--ff); text-decoration: none; cursor: pointer; transition: background-color 160ms var(--ease), transform 160ms var(--ease); }
-.btn:hover { background: var(--signal-press); }
-.btn:active { transform: scale(0.98); }
-.btn svg, .more svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
-.btn.dark { background: var(--ink); color: var(--white); }
-.btn.dark:hover { background: var(--blue-deep); }
-.more { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; box-shadow: inset 0 -2px 0 var(--signal); padding-bottom: 3px; transition: box-shadow 200ms var(--ease); }
-.more:hover { box-shadow: inset 0 -1.6em 0 var(--signal); color: var(--on-signal); }
-.more svg { transition: transform 200ms var(--ease); }
-.more:hover svg { transform: translateX(3px); }
-
-/* Kopf auf der blauen Fläche */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--blue); color: var(--white); }
-.top .wrap { display: flex; align-items: center; gap: 32px; min-height: 68px; }
-.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-stretch: 80%; font-size: 1.375rem; letter-spacing: -0.01em; text-decoration: none; }
-.brand i { width: 10px; height: 10px; border-radius: 50%; background: var(--signal); }
-.nav { display: flex; align-items: center; gap: 28px; margin-left: auto; font-size: 0.9375rem; font-weight: 500; }
-.nav a:not(.btn) { text-decoration: none; padding-block: 8px; }
-.nav a:not(.btn):hover { box-shadow: inset 0 -2px 0 var(--signal); }
-.nav .btn { min-height: 40px; padding-inline: 20px; font-size: 0.9375rem; }
-.menu { display: none; margin-left: auto; position: relative; }
-.menu summary { list-style: none; cursor: pointer; min-height: 40px; display: flex; align-items: center; padding-inline: 16px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--white-line); font-weight: 500; }
-.menu summary::-webkit-details-marker { display: none; }
-.menu nav { position: absolute; right: 0; top: 48px; width: min(300px, 82vw); padding: 8px; border-radius: var(--r-m); background: var(--paper); color: var(--ink); box-shadow: 0 24px 48px -20px oklch(20% 0.045 268 / 0.5); display: grid; }
-.menu nav a { padding: 12px; border-radius: var(--r-s); text-decoration: none; font-weight: 800; font-stretch: 68%; font-size: 1.75rem; }
-.menu nav a:hover { background: var(--tint); }
-@media (max-width: 860px) { .nav { display: none; } .menu { display: block; } }
-
-/* Hero: Schrift hinten, Scheibe in der Mitte, Button vorne */
-.hero { position: relative; background: var(--blue); color: var(--white); overflow: clip; padding-block: clamp(24px, 3vw, 48px) clamp(56px, 7vw, 112px); }
-.hero h1 { font-size: var(--t-giant); font-weight: 900; font-stretch: 62%; line-height: 0.84; letter-spacing: -0.025em; text-transform: uppercase; position: relative; z-index: 1; }
-.hero h1 span { display: block; }
-.hero-front { position: relative; z-index: 3; margin-top: clamp(28px, 4vw, 56px); max-width: 44ch; }
-.hero-front p { color: var(--white-2); margin-bottom: 28px; font-size: 1.125rem; }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
-.disc { position: absolute; z-index: 2; right: max(16px, 4vw); bottom: clamp(40px, 5vw, 88px); width: min(35.5vw, 560px); aspect-ratio: 1; border-radius: 50%; background: var(--paper); color: var(--ink); container-type: inline-size; box-shadow: 0 40px 80px -40px oklch(20% 0.1 268 / 0.7); }
-.disc > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.disc .ring-names text { font: 600 15px var(--ff); letter-spacing: 0.04em; fill: var(--ink-2); cursor: pointer; transition: fill 200ms var(--ease); }
-.disc .ring-names text:hover { fill: var(--ink); }
-.disc .ring-names text.is-on { fill: var(--ink); font-weight: 800; }
-.disc circle { fill: none; stroke: var(--line); }
-.disc .mark { fill: var(--signal); stroke: none; }
-.disc-core { position: absolute; inset: 21%; display: grid; place-content: center; justify-items: center; text-align: center; gap: 3cqi; }
-.disc-core h2 { font-size: clamp(1.5rem, 10cqi, 4rem); line-height: 0.9; text-transform: uppercase; }
-.disc-core p { font-size: clamp(11px, 2.6cqi, 15px); color: var(--ink-2); }
-.disc-core .btn { min-height: clamp(36px, 8cqi, 48px); padding-inline: clamp(14px, 4cqi, 24px); font-size: clamp(12px, 2.8cqi, 16px); }
-.ring-btns { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-@media (max-width: 860px) {
-  .hero h1 { font-size: 14.4vw; }
-  .disc { position: relative; right: auto; bottom: auto; width: min(100%, 440px); margin: 40px auto 0; }
-}
-
-/* Aussage */
-.claim { padding-block: var(--gap-section); }
-.claim .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 48px clamp(32px, 7vw, 120px); align-items: end; }
-.claim h2 { font-size: var(--t-big); text-transform: uppercase; }
-.claim-lead { margin-top: 28px; max-width: 54ch; color: var(--ink-2); }
-.loose li { display: grid; grid-template-columns: 9.5em 1fr; gap: 16px; padding-block: 12px; border-top: 1px solid var(--line); font-size: var(--t-small); }
-.loose li:last-child { border-bottom: 1px solid var(--line); }
-.loose b { font-weight: 600; }
-.loose span { color: var(--ink-2); }
-.claim-end { margin-top: 28px; font-weight: 800; font-stretch: 68%; font-size: var(--t-mid); line-height: 1; text-transform: uppercase; color: var(--blue); }
-@media (max-width: 860px) { .claim .wrap { grid-template-columns: 1fr; } }
-
-/* Leistungen: seitlich laufende Strecke */
-.run { background: var(--tint); }
-.run-pin { height: 100dvh; min-height: 620px; overflow: hidden; background: var(--tint); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: clamp(20px, 3vh, 40px); padding-block: clamp(84px, 11vh, 112px) clamp(24px, 4vh, 48px); }
-.run.is-native .run-pin { height: auto; min-height: 0; overflow: visible; padding-block: var(--gap-section); }
-.run-pin > .wrap { width: 100%; }
-.run-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 32px; }
-.run-head h2 { font-size: clamp(2.25rem, 4.6vw, 4.5rem); text-transform: uppercase; max-width: 22ch; }
-.run-track { display: flex; gap: 20px; padding-left: max(16px, 4vw); padding-right: max(16px, 4vw); align-items: stretch; will-change: transform; }
-.run.is-native .run-track { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px; }
-.run.is-native .run-track::-webkit-scrollbar { display: none; }
-.panel { flex: 0 0 clamp(300px, 34vw, 520px); scroll-snap-align: center; border-radius: var(--r-l); padding: clamp(20px, 2.2vw, 32px); display: grid; grid-template-rows: auto auto auto auto 1fr; gap: 12px; align-content: start; min-height: 0; overflow: hidden; }
-.run.is-native .panel { min-height: 460px; }
-.panel h3 { font-size: var(--t-mid); text-transform: uppercase; }
-.panel-tag { font-size: var(--t-small); font-weight: 600; opacity: 0.78; }
-.panel-text { font-size: 0.9375rem; line-height: 1.5; opacity: 0.86; max-width: 42ch; }
-.panel .more { justify-self: start; }
-.p-blue { background: var(--blue); color: var(--white); }
-.p-ink { background: var(--ink); color: var(--white); }
-.p-white { background: var(--paper); }
-.p-tint { background: var(--paper); box-shadow: inset 0 0 0 2px var(--blue); }
-.panel-vis { align-self: end; position: relative; margin-top: 12px; padding: 16px 16px 36px; border-radius: 16px; background: oklch(20% 0.045 268 / 0.08); color: var(--ink); display: grid; place-items: center; min-height: 190px; }
-.p-blue .panel-vis, .p-ink .panel-vis { background: oklch(99% 0.003 265 / 0.12); }
-.panel-vis .sample { position: absolute; left: 16px; bottom: 10px; color: inherit; }
-.p-blue .panel-vis .sample, .p-ink .panel-vis .sample { color: var(--white); }
-.sheet { width: 100%; border-radius: 12px; background: var(--paper); padding: 12px; display: grid; gap: 6px; font-size: 12.5px; line-height: 1.35; }
-.sheet .bar { min-height: 32px; border-radius: 999px; background: var(--tint); display: flex; align-items: center; padding: 6px 14px; color: var(--ink-2); }
-.sheet .row { padding: 8px 10px; border-radius: var(--r-s); display: grid; gap: 2px; }
-.sheet .row small { color: var(--ink-2); font-size: 11px; }
-.sheet .row.you { background: var(--tint); }
-.sheet .row.you b { font-weight: 700; }
-.sheet h3 { font-size: 1.5rem !important; }
-.sheet .btn { background: var(--signal); }
-.dim { height: 8px; border-radius: 4px; background: var(--tint); }
-.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: min(100%, 220px); }
-.tiles i { aspect-ratio: 1; border-radius: var(--r-s); background: var(--tint); }
-.tiles i:nth-child(2), .tiles i:nth-child(6), .tiles i:nth-child(7) { background: var(--blue); }
-.tiles i:nth-child(5) { background: var(--ink); }
-.flow { display: grid; gap: 8px; width: 100%; justify-items: start; }
-.flow div { padding: 10px 14px; border-radius: 12px; background: var(--paper); font-size: 12.5px; }
-.flow div:nth-child(2) { margin-left: 12%; }
-.flow div:nth-child(3) { margin-left: 24%; }
-.flow div small { display: block; color: var(--ink-2); font-size: 11px; }
-.run-bar { height: 3px; background: var(--line); border-radius: 2px; margin-top: 20px; overflow: hidden; }
-.run-bar i { display: block; height: 100%; width: 100%; background: var(--blue); transform-origin: left; transform: scaleX(0); }
-.run.is-native .run-bar { display: none; }
-
-/* Themes */
-.themes { padding-block: var(--gap-section); overflow: clip; }
-.themes-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 24px 64px; align-items: end; margin-bottom: 48px; }
-.themes-head h2 { font-size: var(--t-big); text-transform: uppercase; }
-.rail { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px max(16px, 4vw) 24px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
-.rail::-webkit-scrollbar { display: none; }
-.theme { flex: 0 0 min(78vw, 400px); scroll-snap-align: center; text-decoration: none; display: grid; gap: 16px; }
-.shot { aspect-ratio: 4 / 5; border-radius: var(--r-m); background: var(--tb); color: var(--tf); padding: 8% 8% 0; display: grid; grid-template-rows: auto auto 1fr; gap: 6%; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); transition: transform 320ms var(--ease); }
-.theme:hover .shot { transform: translateY(-8px) rotate(-1deg); }
-.shot .s-nav { display: flex; justify-content: space-between; font-weight: 700; font-size: 13px; }
-.shot .s-nav i { width: 28%; height: 8px; border-radius: 4px; background: currentColor; opacity: 0.18; align-self: center; }
-.shot .s-h { font-weight: 700; font-stretch: 80%; font-size: clamp(1.5rem, 4.2vw, 2rem); line-height: 1.02; letter-spacing: -0.02em; }
-.shot .s-h u { display: inline-block; margin-top: 12px; padding: 8px 14px; border-radius: 999px; background: var(--ta); color: var(--tb); font-weight: 600; font-stretch: 100%; font-size: 12px; text-decoration: none; letter-spacing: 0; }
-.shot .s-img { border-radius: 12px 12px 0 0; background: linear-gradient(in oklch 160deg, var(--ta), color-mix(in oklch, var(--ta) 55%, var(--tb))); }
-.theme-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-.theme-meta b { font-weight: 800; font-stretch: 68%; font-size: 1.75rem; text-transform: uppercase; }
-.theme-meta span { color: var(--ink-2); font-size: var(--t-small); }
-@media (max-width: 860px) { .themes-head { grid-template-columns: 1fr; } }
-
-/* Ablauf: die Linie von der Über-uns-Seite */
-.path { padding-block: 0 var(--gap-section); }
-.path-box { position: relative; }
-.path h2 { font-size: var(--t-big); text-transform: uppercase; text-align: center; max-width: 12ch; margin: 0 auto 72px; }
-.path svg { position: absolute; left: 50%; top: 0; width: 120px; height: 100%; transform: translateX(-50%); overflow: visible; }
-.path svg path { fill: none; stroke: var(--blue); stroke-width: 3; vector-effect: non-scaling-stroke; }
-.stops { display: grid; gap: 96px; position: relative; padding-block: 32px 96px; }
-.stops li { display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; }
-.stops i { grid-column: 2; grid-row: 1; justify-self: center; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 8px var(--paper); }
-.stops div { max-width: 32ch; }
-.stops li:nth-child(odd) div { grid-column: 1; justify-self: end; text-align: right; }
-.stops li:nth-child(even) div { grid-column: 3; }
-.stops h3 { font-size: var(--t-mid); text-transform: uppercase; margin-bottom: 10px; }
-.stops p { color: var(--ink-2); }
-@media (max-width: 760px) {
-  .path h2 { text-align: left; margin-left: 44px; }
-  .path svg { left: 3px; width: 12px; transform: none; }
-  .stops { gap: 48px; }
-  .stops li { grid-template-columns: 18px 1fr; gap: 26px; }
-  .stops i { grid-column: 1; }
-  .stops li:nth-child(odd) div, .stops li:nth-child(even) div { grid-column: 2; justify-self: start; text-align: left; }
-}
-
-/* Team */
-.team { background: var(--blue); color: var(--white); padding-block: var(--gap-section); }
-.team .wrap { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px clamp(32px, 6vw, 96px); align-items: center; }
-.team h2 { font-size: var(--t-big); text-transform: uppercase; margin-bottom: 24px; }
-.team-copy p { color: var(--white-2); max-width: 44ch; margin-bottom: 24px; }
-.faces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
-.faces li:nth-child(2) { margin-top: 48px; }
-.faces img, .faces .ph { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-m); }
-.faces .ph { background: var(--blue-deep); display: grid; place-content: center; justify-items: center; gap: 8px; font-weight: 900; font-stretch: 62%; font-size: 5rem; line-height: 1; }
-.faces .ph small { font-weight: 400; font-stretch: 100%; font-size: 12px; color: var(--white-2); }
-.faces b { display: block; margin-top: 12px; font-weight: 800; font-stretch: 68%; font-size: 1.5rem; text-transform: uppercase; }
-.faces span { font-size: var(--t-small); color: var(--white-2); }
-@media (max-width: 860px) { .team .wrap { grid-template-columns: 1fr; } .faces { gap: 8px; } .faces li:nth-child(2) { margin-top: 24px; } }
-
-/* Anfrage: Signalrot als ganze Fläche */
-.ask { background: var(--signal); color: var(--on-signal); padding-block: var(--gap-section); }
-.ask .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px clamp(32px, 6vw, 96px); align-items: end; }
-.ask h2 { font-size: clamp(3rem, 10vw, 10rem); font-weight: 900; font-stretch: 62%; line-height: 0.84; text-transform: uppercase; }
-.ask-copy p { margin-top: 24px; max-width: 46ch; }
-.ask fieldset { border: 0; margin: 0 0 24px; padding: 0; min-width: 0; }
-.ask legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chips label { position: relative; cursor: pointer; }
-.chips input { position: absolute; opacity: 0; inset: 0; }
-.chips span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px oklch(20% 0.045 268 / 0.5); font-weight: 500; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
-.chips input:checked + span { background: var(--ink); color: var(--white); box-shadow: none; }
-.chips input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
-.ask .small { color: inherit; margin-top: 16px; }
-.ask :focus-visible { outline-color: var(--ink); }
-@media (max-width: 860px) { .ask .wrap { grid-template-columns: 1fr; } }
-
-/* Fuß */
-.foot { background: var(--blue-deep); color: var(--white); padding-block: 64px 32px; }
-.foot .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
-.foot p, .foot h3 { color: var(--white-2); }
-.foot p { font-size: var(--t-small); margin-top: 12px; max-width: 30ch; }
-.foot h3 { font-weight: 400; font-stretch: 100%; font-size: var(--t-small); letter-spacing: 0; line-height: 1.5; margin-bottom: 12px; }
-.foot li a { display: inline-block; padding-block: 6px; text-decoration: none; font-size: 0.9375rem; }
-.foot li a:hover { box-shadow: inset 0 -2px 0 var(--signal); }
-.foot-base { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--white-line); font-size: var(--t-small); color: var(--white-2); }
-@media (max-width: 760px) { .foot .wrap { grid-template-columns: 1fr 1fr; } .foot .wrap > div:first-child { grid-column: 1 / -1; } }
-
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
-</style>
-
+<link rel="stylesheet" href="assets/site.css">
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top"><i></i>NetImpulse</a>
+    <a class="brand" href="index.html"><i></i>NetImpulse<span>marketing</span></a>
     <nav class="nav" aria-label="Hauptmenü">
-      <a href="#leistungen">Leistungen</a><a href="#themes">Theme Store</a><a href="#team">Über uns</a>
-      <a class="btn" href="#kontakt">Kontakt</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-controls="dd-panel">Leistungen <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-panel" id="dd-panel" hidden><a href="seo.html"><b>SEO</b><span>Gefunden werden</span></a><a href="sea.html"><b>Google Ads</b><span>Nachfrage aktivieren</span></a><a href="smm.html"><b>Social Media</b><span>Aufmerksamkeit formen</span></a><a href="geo.html"><b>GEO</b><span>In KI-Antworten auftauchen</span></a><a href="webdesign.html"><b>Webdesign</b><span>Website als Gespräch</span></a><a href="leistungen.html#l-shopify"><b>Shopify</b><span>Shops, die skalieren</span></a><a href="themes.html"><b>Themes</b><span>Schneller starten</span></a><a href="ki.html"><b>KI-Automation</b><span>Routine, die sich selbst erledigt</span></a><a class="all" href="leistungen.html"><span><b>Alle Leistungen und Preise</b></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <a href="themes.html">Theme Store</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a class="btn sm" href="kontakt.html">Kontakt</a>
     </nav>
-    <details class="menu">
-      <summary>Menü</summary>
-      <nav aria-label="Hauptmenü mobil"><a href="#leistungen">Leistungen</a><a href="#themes">Theme Store</a><a href="#team">Über uns</a><a href="#kontakt">Kontakt</a></nav>
-    </details>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="sheet-nav">Menü</button>
   </div>
 </header>
-
-<main id="top">
+<div class="sheet-nav" id="sheet-nav" hidden>
+  <div class="row"><a class="brand" href="index.html"><i></i>NetImpulse<span>marketing</span></a><button type="button">Schließen</button></div>
+  <nav class="big" aria-label="Hauptmenü mobil">
+    <a href="leistungen.html">Leistungen</a>
+    <div class="subs"><a href="seo.html">SEO</a><a href="sea.html">Google Ads</a><a href="smm.html">Social Media</a><a href="geo.html">GEO</a><a href="webdesign.html">Webdesign</a><a href="leistungen.html#l-shopify">Shopify</a><a href="themes.html">Themes</a><a href="ki.html">KI-Automation</a></div>
+    <a href="themes.html">Theme Store</a>
+    <a href="ueber-uns.html">Über uns</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+  <a class="btn" href="kontakt.html">Kostenloses Erstgespräch <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<main>
 <section class="hero" data-block="hero">
+  <svg class="hero-rings" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="199"/><circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="104" stroke-dasharray="1 5"/></svg>
   <div class="wrap">
-    <h1><span>Online-Präsenz</span><span>für dein</span><span>Unternehmen</span></h1>
-    <div class="hero-front">
-      <p>NetImpulse entwickelt Shopify-Websites, SEA-Kampagnen und Strategien, damit du online klarer auftrittst, besser gefunden wirst und professioneller verkaufst.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#kontakt">Kostenloses Erstgespräch <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="more" href="#leistungen"><span>Alle Leistungen ansehen</span></a>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="h-giant"><span class="ln"><span>Online-Präsenz</span></span><span class="ln"><span>für dein</span></span><span class="ln"><span>Unternehmen</span></span></h1>
+        <p>NetImpulse entwickelt Shopify-Websites, SEA-Kampagnen und Strategien, damit du online klarer auftrittst, besser gefunden wirst und professioneller verkaufst.</p>
+        <div class="hero-actions"><a class="btn" href="kontakt.html">Kostenloses Erstgespräch <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="more" href="leistungen.html"><span>Alle Leistungen ansehen</span></a></div>
       </div>
-    </div>
-  </div>
-  <div class="disc" id="disc" role="group" aria-label="Unsere Leistungen">
-    <svg viewBox="0 0 400 400" aria-hidden="true">
-      <defs><path id="ring-path" d="M200 34 a166 166 0 1 1 -0.01 0"/></defs>
-      <circle cx="200" cy="200" r="188" stroke-width="1"/>
-      <circle cx="200" cy="200" r="140" stroke-width="1" stroke-dasharray="2 6"/>
-      <circle class="mark" cx="200" cy="12" r="5"/>
-      <g class="ring-names" data-ring><text data-i="0"><textPath href="#ring-path" startOffset="6.25%" text-anchor="middle">SEO</textPath></text><text data-i="1"><textPath href="#ring-path" startOffset="18.75%" text-anchor="middle">Google Ads</textPath></text><text data-i="2"><textPath href="#ring-path" startOffset="31.25%" text-anchor="middle">Social Media</textPath></text><text data-i="3"><textPath href="#ring-path" startOffset="43.75%" text-anchor="middle">GEO</textPath></text><text data-i="4"><textPath href="#ring-path" startOffset="56.25%" text-anchor="middle">Webdesign</textPath></text><text data-i="5"><textPath href="#ring-path" startOffset="68.75%" text-anchor="middle">Shopify</textPath></text><text data-i="6"><textPath href="#ring-path" startOffset="81.25%" text-anchor="middle">Themes</textPath></text><text data-i="7"><textPath href="#ring-path" startOffset="93.75%" text-anchor="middle">KI-Automation</textPath></text></g>
-    </svg>
-    <div class="ring-btns"><button type="button" data-i="0">SEO</button><button type="button" data-i="1">Google Ads</button><button type="button" data-i="2">Social Media</button><button type="button" data-i="3">GEO</button><button type="button" data-i="4">Webdesign</button><button type="button" data-i="5">Shopify</button><button type="button" data-i="6">Themes</button><button type="button" data-i="7">KI-Automation</button></div>
-    <div class="disc-core" aria-live="polite">
-      <p data-core-sub></p>
-      <h2 data-core-title></h2>
-      <a class="btn" href="#leistungen">Zur Leistung <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="orbit" data-mode="auto" role="group" aria-label="Unsere Leistungen im Rad">
+  <svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="194"/><circle cx="200" cy="200" r="168"/><circle class="arc" cx="200" cy="200" r="168" transform="rotate(-90 200 200)"/><g class="links"></g></svg>
+  <div class="orbit-nodes"></div>
+  <div class="orbit-core" aria-live="polite"><p data-core-sub></p><h2 data-core-title></h2><a class="btn" data-core-link href="leistungen.html"><span>Zur Leistung</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <script type="application/json">[{"key": "seo", "name": "SEO", "promise": "Gefunden werden", "long": "Suchmaschinenoptimierung", "url": "seo.html", "label": "Mehr zu SEO", "pairs": ["geo", "webdesign"]}, {"key": "sea", "name": "Google Ads", "promise": "Nachfrage aktivieren", "long": "Google Ads", "url": "sea.html", "label": "Mehr zu SEA", "pairs": ["seo", "webdesign"]}, {"key": "smm", "name": "Social Media", "promise": "Aufmerksamkeit formen", "long": "Social Media Marketing", "url": "smm.html", "label": "Mehr zu SMM", "pairs": ["sea", "webdesign"]}, {"key": "geo", "name": "GEO", "promise": "In KI-Antworten auftauchen", "long": "Generative Engine Optimization", "url": "geo.html", "label": "Mehr zu GEO", "pairs": ["seo", "webdesign"]}, {"key": "webdesign", "name": "Webdesign", "promise": "Website als Gespräch", "long": "Webdesign und Shopify", "url": "webdesign.html", "label": "Mehr zu Webdesign", "pairs": ["seo", "shopify"]}, {"key": "shopify", "name": "Shopify", "promise": "Shops, die skalieren", "long": "Shopify-Entwicklung", "url": "leistungen.html#l-shopify", "label": "Mehr zu Shopify", "pairs": ["webdesign", "themes"]}, {"key": "themes", "name": "Themes", "promise": "Schneller starten", "long": "Theme Store", "url": "themes.html", "label": "Zum Theme Store", "pairs": ["shopify", "webdesign"]}, {"key": "ki", "name": "KI-Automation", "promise": "Routine, die sich selbst erledigt", "long": "KI und Automatisierung", "url": "ki.html", "label": "Mehr zu KI-Automation", "pairs": ["shopify", "webdesign"]}]</script>
+</div>
     </div>
   </div>
 </section>
 
-<section class="claim" data-block="aussage">
-  <div class="wrap">
-    <div>
-      <h2>Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen</h2>
-      <p class="claim-lead">Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht.</p>
-    </div>
-    <div>
-      <ul class="loose">
-        <li><b>Webdesigner</b><span>baut die Seite und ist weg</span></li>
-        <li><b>Ads-Agentur</b><span>meldet Klicks statt Anfragen</span></li>
-        <li><b>SEO</b><span>macht irgendwann mal jemand</span></li>
-        <li><b>Shop-Theme</b><span>von der Stange gekauft</span></li>
-        <li><b>Social Media</b><span>läuft nebenbei, wenn Zeit ist</span></li>
-        <li><b>Tracking</b><span>misst, aber keiner schaut hin</span></li>
-      </ul>
-      <p class="claim-end">Bei uns laufen die Fäden zusammen.</p>
-    </div>
+<section class="sec deep lap" data-block="aussage">
+  <div class="wrap claim-grid">
+    <div><h2 class="h-big">Deine Website sollte nicht neben dem Rest deines Geschäfts herlaufen</h2><p class="lead">Das plant niemand so, es passiert einfach. Die Website kommt vom einen, die Anzeigen vom nächsten, das Shop-Theme ist von der Stange und um SEO kümmert sich keiner richtig. Jede Lücke dazwischen kostet Anfragen, Zeit und Übersicht.</p></div>
+    <div><ul class="loose"><li><b>Webdesigner</b><span>baut die Seite und ist weg</span></li><li><b>Ads-Agentur</b><span>meldet Klicks statt Anfragen</span></li><li><b>SEO</b><span>macht irgendwann mal jemand</span></li><li><b>Shop-Theme</b><span>von der Stange gekauft</span></li><li><b>Social Media</b><span>läuft nebenbei, wenn Zeit ist</span></li><li><b>Tracking</b><span>misst, aber keiner schaut hin</span></li></ul><p class="claim-end h-mid">Bei uns laufen die Fäden zusammen.</p></div>
   </div>
 </section>
-
 
 <section class="run" id="leistungen" data-block="leistungen">
   <div class="run-pin">
     <div class="wrap">
-      <div class="run-head">
-        <h2>Von der ersten Idee bis zur laufenden Optimierung</h2>
-        <a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Alle Leistungen und Preise</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
+      <div class="run-head"><h2>Von der ersten Idee bis zur laufenden Optimierung</h2><a class="more" href="leistungen.html"><span>Alle Leistungen und Preise</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       <div class="run-bar" aria-hidden="true"><i></i></div>
     </div>
     <div class="run-track" tabindex="0" aria-label="Alle acht Leistungen">
-      <article class="panel p-blue" data-key="seo">
+      <article class="panel p-deep">
         <p class="panel-tag">SEO · Suchmaschinenoptimierung</p>
         <h3>Gefunden werden</h3>
         <p class="panel-text">Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.</p>
-        <a class="more" href="https://netimpulsemarketing.de/pages/seo"><span>Mehr zu SEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="more" href="seo.html"><span>Mehr zu SEO</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="bar">schreinerei gießen</div><div class="row you"><small>deine-domain.de · leistungen</small><b>Schreinerei in Gießen: Möbel nach Maß</b></div><div class="row"><small>branchenbuch-beispiel.de</small>Schreinereien in Gießen und Umgebung</div><div class="row"><small>ratgeber-beispiel.de</small>Möbel nach Maß: Worauf du achten solltest</div></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-tint" data-key="sea">
-        <p class="panel-tag">SEA · Google Ads</p>
+      <article class="panel ">
+        <p class="panel-tag">Google Ads · Google Ads</p>
         <h3>Nachfrage aktivieren</h3>
         <p class="panel-text">Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.</p>
-        <a class="more" href="https://netimpulsemarketing.de/pages/sea"><span>Mehr zu SEA</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="row you"><small>Anzeige · deine-domain.de</small><b>Einbauschränke nach Maß anfragen</b></div><svg viewBox="0 0 300 110" style="width:100%"><path d="M0 96 C60 90 90 70 140 62 S230 30 300 12" fill="none" stroke="oklch(51% 0.2 264)" stroke-width="2.5"/><path d="M0 100 C80 98 160 92 300 84" fill="none" stroke="oklch(19% 0.012 255 / 0.3)" stroke-width="1.5" stroke-dasharray="4 5"/></svg><div class="row"><small>Anfragen über Suche im Vergleich zu Klicks ohne Anfrage</small></div></div><span class="sample">Beispiel</span></div>
+        <a class="more" href="sea.html"><span>Mehr zu SEA</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="row you"><small>Anzeige · deine-domain.de</small><b>Einbauschränke nach Maß anfragen</b></div><svg viewBox="0 0 300 110" style="width:100%"><path d="M0 96 C60 90 90 70 140 62 S230 30 300 12" fill="none" stroke="oklch(33% 0.055 188)" stroke-width="2.5"/><path d="M0 100 C80 98 160 92 300 84" fill="none" stroke="oklch(20% 0.02 190 / 0.3)" stroke-width="1.5" stroke-dasharray="4 5"/></svg><div class="row"><small>Anfragen über die Suche im Vergleich zu Klicks ohne Anfrage</small></div></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-white" data-key="smm">
-        <p class="panel-tag">SMM · Social Media Marketing</p>
+      <article class="panel p-mist">
+        <p class="panel-tag">Social Media · Social Media Marketing</p>
         <h3>Aufmerksamkeit formen</h3>
         <p class="panel-text">Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.</p>
-        <a class="more" href="https://netimpulsemarketing.de/pages/smm"><span>Mehr zu SMM</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="more" href="smm.html"><span>Mehr zu SMM</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="panel-vis" aria-hidden="true"><div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-ink" data-key="geo">
+      <article class="panel p-soft">
         <p class="panel-tag">GEO · Generative Engine Optimization</p>
         <h3>In KI-Antworten auftauchen</h3>
         <p class="panel-text">Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.</p>
-        <a class="more" href="https://netimpulsemarketing.de/pages/geo"><span>Mehr zu GEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="more" href="geo.html"><span>Mehr zu GEO</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="bar">Welche Schreinerei in Gießen baut Einbauschränke?</div><div class="row"><div class="dim" style="width:92%"></div></div><div class="row"><div class="dim" style="width:74%"></div></div><div class="row you"><small>Quelle</small><b>deine-domain.de</b></div></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-blue" data-key="webdesign">
-        <p class="panel-tag">Webdesign</p>
+      <article class="panel p-deep">
+        <p class="panel-tag">Webdesign · Webdesign und Shopify</p>
         <h3>Website als Gespräch</h3>
         <p class="panel-text">Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.</p>
-        <a class="more" href="https://netimpulsemarketing.de/pages/web-design"><span>Mehr zu Webdesign</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <div class="panel-vis" aria-hidden="true"><div class="sheet" style="padding:24px;gap:16px"><h3 style="font-size:1.75rem">Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="btn" style="justify-self:start;min-height:36px;font-size:13px;padding-inline:16px">Anfrage senden</span></div><span class="sample">Beispiel</span></div>
+        <a class="more" href="webdesign.html"><span>Mehr zu Webdesign</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet" style="padding:20px;gap:14px"><h3>Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="fake-btn">Anfrage senden</span></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-tint" data-key="shopify">
-        <p class="panel-tag">Shopify-Entwicklung</p>
+      <article class="panel ">
+        <p class="panel-tag">Shopify · Shopify-Entwicklung</p>
         <h3>Shops, die skalieren</h3>
         <p class="panel-text">Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.</p>
-        <a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Mehr zu Shopify</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="more" href="leistungen.html#l-shopify"><span>Mehr zu Shopify</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="row"><small>Theme-Editor · Startseite</small></div><div class="row">Header</div><div class="row">Hero</div><div class="row you"><b>Produktraster</b></div><div class="row">Footer</div></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-white" data-key="themes">
-        <p class="panel-tag">Theme Store</p>
+      <article class="panel p-mist">
+        <p class="panel-tag">Themes · Theme Store</p>
         <h3>Schneller starten</h3>
         <p class="panel-text">Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.</p>
-        <a class="more" href="#themes"><span>Zum Theme Store</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <div class="panel-vis" aria-hidden="true"><div class="sheet" style="background:#F3F1EC;padding:24px;gap:16px"><small style="font:500 13px var(--display)">Holzwerk Ahorn</small><h3 style="font-size:1.75rem">Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:120px;border-radius:12px;background:#C2552A"></div></div><span class="sample">Beispiel</span></div>
+        <a class="more" href="themes.html"><span>Zum Theme Store</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet" style="background:#F3F1EC;padding:20px;gap:14px"><small style="font:600 13px var(--display)">Holzwerk Ahorn</small><h3>Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:96px;border-radius:12px;background:#C2552A"></div></div><span class="sample">Beispiel</span></div>
       </article>
-      <article class="panel p-ink" data-key="ki">
-        <p class="panel-tag">KI-Automation</p>
+      <article class="panel p-soft">
+        <p class="panel-tag">KI-Automation · KI und Automatisierung</p>
         <h3>Routine, die sich selbst erledigt</h3>
         <p class="panel-text">Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.</p>
-        <a class="more" href="#kontakt"><span>KI-Automation anfragen</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="more" href="ki.html"><span>Mehr zu KI-Automation</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="panel-vis" aria-hidden="true"><div class="flow"><div>Neue Anfrage<small>kommt über das Formular</small></div><div>Wird einsortiert<small>Thema, Dringlichkeit, Ansprechperson</small></div><div>Antwortentwurf liegt bereit<small>du prüfst und sendest</small></div></div><span class="sample">Beispiel</span></div>
       </article>
     </div>
   </div>
 </section>
 
-<section class="themes" id="themes" data-block="themes">
-  <div class="wrap themes-head">
-    <h2>Themes für Shopify, bereit zum Anpassen</h2>
-    <div><p class="small">Theme- und Section-Packs für verschiedene Branchen. Kaufen, installieren und im Theme-Editor anpassen oder von uns einrichten lassen. Namen und Preise sind Platzhalter, die Themes erscheinen bald.</p></div>
-  </div>
-  <div class="rail" tabindex="0" aria-label="Beispiel-Themes, seitlich scrollbar">
-    <a class="theme" href="#kontakt" style="--tb:#F3F1EC;--tf:#1b1a17;--ta:#C2552A"><div class="shot"><div class="s-nav">Holzwerk Ahorn<i></i></div><div class="s-h">Möbel nach Maß<br><u>Anfrage stellen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Werkbank</b><span>Handwerk und Betriebe · <span class="num">290 €</span></span></div></a>
-    <a class="theme" href="#kontakt" style="--tb:#FAF9F7;--tf:#151515;--ta:#151515"><div class="shot"><div class="s-nav">Atelier<i></i></div><div class="s-h">Neue Kollektion<br><u>Jetzt ansehen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Atelier</b><span>Mode und Accessoires · <span class="num">340 €</span></span></div></a>
-    <a class="theme" href="#kontakt" style="--tb:#EDF0E8;--tf:#1d2a20;--ta:#4F6D54"><div class="shot"><div class="s-nav">Kräuterhaus Wiese<i></i></div><div class="s-h">Naturkosmetik aus Kräutern<br><u>Zum Sortiment</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Salbei</b><span>Naturkosmetik · <span class="num">310 €</span></span></div></a>
-    <a class="theme" href="#kontakt" style="--tb:#F5EBDD;--tf:#33230f;--ta:#A9662A"><div class="shot"><div class="s-nav">Kornfeld<i></i></div><div class="s-h">Frisch aus dem Ofen<br><u>Vorbestellen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Kornfeld</b><span>Bäckerei und Café · <span class="num">260 €</span></span></div></a>
-    <a class="theme" href="#kontakt" style="--tb:#173A31;--tf:#F4EFE2;--ta:#F0B23E"><div class="shot"><div class="s-nav">Lahn<i></i></div><div class="s-h">Ausrüstung für draußen<br><u>Entdecken</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Lahn</b><span>Outdoor und Sport · <span class="num">320 €</span></span></div></a>
-    <a class="theme" href="#kontakt" style="--tb:#F4F5F7;--tf:#141a2b;--ta:#2C53C2"><div class="shot"><div class="s-nav">Lagerhaus Nord<i></i></div><div class="s-h">Großhandel mit Staffelpreisen<br><u>Schnellbestellung</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Kontor</b><span>B2B und Großhandel · <span class="num">380 €</span></span></div></a>
-  </div>
-</section>
-
-<section class="path" data-block="ablauf">
-  <div class="wrap">
-    <h2>So läuft die Zusammenarbeit</h2>
-    <div class="path-box">
-      <svg viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true"><path id="thread" d="M60 0 C60 110 22 150 22 250 S98 400 98 500 22 650 22 750 60 890 60 1000"/></svg>
-      <ol class="stops">
-        <li><i></i><div><h3>Kostenloses Erstgespräch</h3><p>Wir schauen gemeinsam, wo dein Auftritt steht und was er braucht.</p></div></li>
-        <li><i></i><div><h3>Angebot mit allen Posten</h3><p>Jede Leistung steht einzeln drin, mit Preis. Keine Pauschale, keine Überraschung.</p></div></li>
-        <li><i></i><div><h3>Start der Umsetzung</h3><p>Erst wenn du zustimmst, legen wir los. Du siehst früh, was entsteht.</p></div></li>
-      </ol>
+<section class="sec deep lap" data-block="entwurf">
+  <div class="wrap wipe-grid">
+    <div class="wipe-copy">
+      <h2 class="h-big">Vom Gerüst zur fertigen Seite</h2>
+      <p class="lead">Eine Website sollte sofort verständlich machen, wer du bist, was du anbietest und warum es relevant ist. Zieh den Regler oder scroll weiter und sieh, wie aus einem Entwurf eine Seite wird.</p>
+      <a class="more" href="webdesign.html"><span>Mehr zu Webdesign</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="wipe">
+      <div class="wipe-bar"><i></i><i></i><i></i><span>holzwerk-ahorn-beispiel.de</span></div>
+      <div class="wipe-stage"><div class="wipe-layer draft"><div class="w-nav">Holzwerk Ahorn<span><i>Leistungen</i><i>Projekte</i><i>Kontakt</i></span></div><div class="w-h"><b>Möbel nach Maß aus Mittelhessen</b><p>Esstische, Einbauschränke und Treppen aus Massivholz, geplant und gebaut in unserer Werkstatt.</p><u>Anfrage stellen</u></div><div class="w-img"></div><div class="w-row"><div>Esstische</div><div>Einbauschränke</div><div>Treppen</div></div></div><div class="wipe-layer done"><div class="w-nav">Holzwerk Ahorn<span><i>Leistungen</i><i>Projekte</i><i>Kontakt</i></span></div><div class="w-h"><b>Möbel nach Maß aus Mittelhessen</b><p>Esstische, Einbauschränke und Treppen aus Massivholz, geplant und gebaut in unserer Werkstatt.</p><u>Anfrage stellen</u></div><div class="w-img"></div><div class="w-row"><div>Esstische</div><div>Einbauschränke</div><div>Treppen</div></div></div><div class="wipe-line" aria-hidden="true"></div></div>
+      <div class="wipe-tags"><span>Fertige Seite</span><span>Entwurf</span></div>
+      <input type="range" id="wipe-range" min="0" max="100" value="55" aria-label="Zwischen Entwurf und fertiger Seite wechseln">
     </div>
   </div>
 </section>
 
-<section class="team" id="team" data-block="team">
-  <div class="wrap">
-    <div class="team-copy">
-      <h2>Direkt. Klar. Ohne Umwege.</h2>
-      <p>Bei NetImpulse arbeiten Strategie, Design, Marketing und Shopify-Umsetzung nah zusammen. So entstehen Websites, Kampagnen und Themes, die sich wie ein gemeinsames System anfühlen.</p>
-      <a class="more" href="https://netimpulsemarketing.de/pages/ueber-uns"><span>Team kennenlernen</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
+<section class="sec lap" id="themes" data-block="themes" style="overflow:clip">
+  <div class="wrap sec-head">
+    <div><h2 class="h-big">Themes für Shopify, bereit zum Anpassen</h2></div>
+    <div><p class="small">Theme- und Section-Packs für verschiedene Branchen. Namen und Preise sind Platzhalter, die Themes erscheinen bald.</p><p style="margin-top:16px"><a class="more" href="themes.html"><span>Zum Theme Store</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p></div>
+  </div>
+  <div class="rail" tabindex="0" aria-label="Beispiel-Themes, seitlich scrollbar"><a class="theme" href="theme-werkbank.html"><div class="shot" style="--tb:#F3F1EC;--tf:#1b1a17;--ta:#C2552A"><div class="s-nav">Holzwerk Ahorn<i></i></div><div class="s-h">Möbel nach Maß<br><u>Anfrage stellen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Werkbank</b><span>Handwerk und Betriebe · <span class="num">290 €</span></span></div></a><a class="theme" href="theme-werkbank.html"><div class="shot" style="--tb:#FAF9F7;--tf:#151515;--ta:#151515"><div class="s-nav">Atelier<i></i></div><div class="s-h">Neue Kollektion<br><u>Jetzt ansehen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Atelier</b><span>Mode und Accessoires · <span class="num">340 €</span></span></div></a><a class="theme" href="theme-werkbank.html"><div class="shot" style="--tb:#EDF0E8;--tf:#1d2a20;--ta:#4F6D54"><div class="s-nav">Kräuterhaus Wiese<i></i></div><div class="s-h">Naturkosmetik aus Kräutern<br><u>Zum Sortiment</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Salbei</b><span>Naturkosmetik · <span class="num">310 €</span></span></div></a><a class="theme" href="theme-werkbank.html"><div class="shot" style="--tb:#F5EBDD;--tf:#33230f;--ta:#A9662A"><div class="s-nav">Kornfeld<i></i></div><div class="s-h">Frisch aus dem Ofen<br><u>Vorbestellen</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Kornfeld</b><span>Bäckerei und Café · <span class="num">260 €</span></span></div></a><a class="theme" href="theme-werkbank.html"><div class="shot" style="--tb:#173A31;--tf:#F4EFE2;--ta:#F0B23E"><div class="s-nav">Lahn<i></i></div><div class="s-h">Ausrüstung für draußen<br><u>Entdecken</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Lahn</b><span>Outdoor und Sport · <span class="num">320 €</span></span></div></a><a class="theme" href="theme-werkbank.html"><div class="shot" style="--tb:#F4F5F7;--tf:#141a2b;--ta:#2C53C2"><div class="s-nav">Lagerhaus Nord<i></i></div><div class="s-h">Großhandel mit Staffelpreisen<br><u>Schnellbestellung</u></div><div class="s-img"></div></div><div class="theme-meta"><b>Kontor</b><span>B2B und Großhandel · <span class="num">380 €</span></span></div></a></div>
+</section>
+
+<section class="sec soft lap" data-block="team">
+  <div class="wrap team-grid">
+    <div><h2 class="h-big">Direkt. Klar. Ohne Umwege.</h2><p class="lead">Bei NetImpulse arbeiten Strategie, Design, Marketing und Shopify-Umsetzung nah zusammen. So entstehen Websites, Kampagnen und Themes, die sich wie ein gemeinsames System anfühlen.</p><a class="more" href="ueber-uns.html"><span>Team kennenlernen</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     <ul class="faces">
-      <li><img src="assets/img/niklas.jpg" alt="Niklas" width="700" height="875" loading="lazy"><b>Niklas</b><span>Online-Marketing und Shopify-Entwicklung</span></li>
-      <li><img src="assets/img/luca.jpg" alt="Luca" width="700" height="875" loading="lazy"><b>Luca</b><span>Design, Konzept und digitale Auftritte</span></li>
+      <li><img src="assets/img/niklas.jpg" alt="Niklas" width="700" height="875"><b>Niklas</b><span>Online-Marketing und Shopify-Entwicklung</span></li>
+      <li><img src="assets/img/luca.jpg" alt="Luca" width="700" height="875"><b>Luca</b><span>Design, Konzept und digitale Auftritte</span></li>
       <li><div class="ph" role="img" aria-label="Tom, Foto folgt">T<small>Foto folgt</small></div><b>Tom</b><span>Content, Organisation und Projektunterstützung</span></li>
     </ul>
   </div>
 </section>
-
-<section class="ask" id="kontakt" data-block="anfrage">
-  <div class="wrap">
-    <div class="ask-copy">
-      <h2>Bereit für planbares Wachstum?</h2>
-      <p>Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.</p>
+<section class="sec deep lap ask" id="anfrage" data-block="anfrage">
+  <div class="wrap ask-grid">
+    <div>
+      <h2 class="h-giant">Bereit für planbares Wachstum?</h2>
+      <p class="lead">Lass uns gemeinsam anschauen, wo dein digitaler Auftritt gerade steht. Such dir aus, worum es geht, den Rest klären wir im kostenlosen Erstgespräch.</p>
     </div>
-    <form id="ask-form">
-      <fieldset>
-        <legend>Worum geht es dir?</legend>
-        <div class="chips">
-          <label><input type="checkbox" id="t-shop" name="t" value="Shopify-Shop"><span>Shopify-Shop</span></label>
-          <label><input type="checkbox" id="t-web" name="t" value="Website"><span>Website</span></label>
-          <label><input type="checkbox" id="t-seo" name="t" value="SEO und GEO"><span>SEO und GEO</span></label>
-          <label><input type="checkbox" id="t-ads" name="t" value="Google Ads"><span>Google Ads</span></label>
-          <label><input type="checkbox" id="t-smm" name="t" value="Social Media"><span>Social Media</span></label>
-          <label><input type="checkbox" id="t-ki" name="t" value="KI-Automation"><span>KI-Automation</span></label>
-          <label><input type="checkbox" id="t-theme" name="t" value="Theme aus dem Store"><span>Theme aus dem Store</span></label>
-        </div>
-      </fieldset>
-      <button class="btn dark" type="submit">Kostenloses Erstgespräch anfragen <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <p class="small" id="ask-note" role="status">Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden</p>
+    <form data-ask>
+      <fieldset><legend>Worum geht es dir?</legend><div class="chips"><label><input type="checkbox" id="ask-0" name="t" value="Shopify-Shop"><span>Shopify-Shop</span></label><label><input type="checkbox" id="ask-1" name="t" value="Website"><span>Website</span></label><label><input type="checkbox" id="ask-2" name="t" value="SEO und GEO"><span>SEO und GEO</span></label><label><input type="checkbox" id="ask-3" name="t" value="Google Ads"><span>Google Ads</span></label><label><input type="checkbox" id="ask-4" name="t" value="Social Media"><span>Social Media</span></label><label><input type="checkbox" id="ask-5" name="t" value="KI-Automation"><span>KI-Automation</span></label><label><input type="checkbox" id="ask-6" name="t" value="Theme aus dem Store"><span>Theme aus dem Store</span></label></div></fieldset>
+      <button class="btn" type="submit">Kostenloses Erstgespräch anfragen <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="small note">Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden</p>
+      <p class="direct">Oder direkt: <b>+49 175 8950320</b><b>netimpulsemarketing@gmail.com</b></p>
     </form>
   </div>
 </section>
 </main>
-
 <footer class="foot">
   <div class="wrap">
-    <div><a class="brand" href="#top"><i></i>NetImpulse</a><p>Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads.</p></div>
-    <div><h3>Menü</h3><ul><li><a href="#leistungen">Leistungen</a></li><li><a href="#themes">Theme Store</a></li><li><a href="#team">Über uns</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
-    <div><h3>Leistungen</h3><ul><li><a href="https://netimpulsemarketing.de/pages/seo">SEO</a></li><li><a href="https://netimpulsemarketing.de/pages/sea">Google Ads</a></li><li><a href="https://netimpulsemarketing.de/pages/smm">Social Media</a></li><li><a href="https://netimpulsemarketing.de/pages/geo">GEO</a></li><li><a href="https://netimpulsemarketing.de/pages/web-design">Webdesign</a></li></ul></div>
+    <div><a class="brand" href="index.html"><i></i>NetImpulse<span>marketing</span></a><p>Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads.</p></div>
+    <div><h3>Menü</h3><ul><li><a href="leistungen.html">Leistungen</a></li><li><a href="themes.html">Theme Store</a></li><li><a href="ueber-uns.html">Über uns</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></div>
+    <div><h3>Leistungen</h3><ul><li><a href="seo.html">SEO</a></li><li><a href="sea.html">Google Ads</a></li><li><a href="smm.html">Social Media</a></li><li><a href="geo.html">GEO</a></li><li><a href="webdesign.html">Webdesign</a></li><li><a href="leistungen.html#l-shopify">Shopify</a></li><li><a href="themes.html">Themes</a></li><li><a href="ki.html">KI-Automation</a></li></ul></div>
     <div><h3>Rechtliches</h3><ul><li><a href="https://netimpulsemarketing.de/policies/legal-notice">Impressum</a></li><li><a href="https://netimpulsemarketing.de/policies/privacy-policy">Datenschutz</a></li><li><a href="https://netimpulsemarketing.de/policies/terms-of-service">AGB</a></li><li><a href="https://netimpulsemarketing.de/pages/widerruf">Widerruf</a></li></ul></div>
     <p class="foot-base">© 2026 NetImpulse GbR</p>
   </div>
+  <div class="foot-word" aria-hidden="true">NetImpulse</div>
 </footer>
-
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
-<script>
-(() => {
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hasGsap = typeof gsap !== 'undefined';
-  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
-
-  /* Scheibe: Namen laufen im Ring, die aktive Leistung steht oben */
-  const DATA = [
-    ['Gefunden werden', 'Suchmaschinenoptimierung'], ['Nachfrage aktivieren', 'Google Ads'], ['Aufmerksamkeit formen', 'Social Media Marketing'],
-    ['In KI-Antworten auftauchen', 'Generative Engine Optimization'], ['Website als Gespräch', 'Webdesign'], ['Shops, die skalieren', 'Shopify-Entwicklung'],
-    ['Schneller starten', 'Theme Store'], ['Routine, die sich selbst erledigt', 'KI und Automatisierung'],
-  ];
-  const disc = document.getElementById('disc');
-  const ring = disc.querySelector('[data-ring]');
-  const labels = [...ring.querySelectorAll('text')];
-  const title = disc.querySelector('[data-core-title]');
-  const sub = disc.querySelector('[data-core-sub]');
-  const step = 360 / DATA.length;
-  const state = { rot: -step / 2 };
-  let active = 0, timer = null;
-  const turn = () => ring.setAttribute('transform', `rotate(${state.rot} 200 200)`);
-  function select(i) {
-    active = (i + DATA.length) % DATA.length;
-    labels.forEach((l, k) => l.classList.toggle('is-on', k === active));
-    title.textContent = DATA[active][0]; sub.textContent = DATA[active][1];
-    let target = -step / 2 - active * step;
-    while (target - state.rot > 180) target -= 360;
-    while (target - state.rot < -180) target += 360;
-    if (hasGsap && !calm) gsap.to(state, { rot: target, duration: 0.9, ease: 'power3.inOut', onUpdate: turn });
-    else { state.rot = target; turn(); }
-  }
-  const start = () => { if (!calm && !timer) timer = setInterval(() => select(active + 1), 3200); };
-  const stop = () => { clearInterval(timer); timer = null; };
-  labels.forEach((l) => l.addEventListener('click', () => { select(+l.dataset.i); stop(); }));
-  disc.querySelectorAll('.ring-btns button').forEach((b) => b.addEventListener('click', () => { select(+b.dataset.i); stop(); }));
-  disc.addEventListener('pointerenter', stop);
-  disc.addEventListener('focusin', stop);
-  disc.addEventListener('pointerleave', start);
-  select(0); start();
-
-  /* Weiches Scrollen */
-  let lenis = null;
-  if (hasGsap && !calm && typeof Lenis !== 'undefined') {
-    lenis = new Lenis({ duration: 1.05 });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
-  document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (!t) return;
-    e.preventDefault();
-    const m = a.closest('details'); if (m) m.open = false;
-    if (lenis) lenis.scrollTo(t, { offset: -68 }); else t.scrollIntoView();
-  }));
-
-  /* Leistungsstrecke: senkrechtes Scrollen bewegt die Strecke seitlich */
-  const run = document.querySelector('.run');
-  const track = run.querySelector('.run-track');
-  const bar = run.querySelector('.run-bar i');
-  const wide = matchMedia('(min-width: 900px) and (min-height: 620px)');
-  if (hasGsap && !calm && wide.matches) {
-    const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
-    gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.run-pin', pin: true, start: 'top top', end: () => '+=' + dist(), scrub: 0.5, invalidateOnRefresh: true, onUpdate: (s) => { bar.style.transform = `scaleX(${s.progress})`; } } });
-  } else {
-    run.classList.add('is-native');
-  }
-
-  /* Linie zeichnet sich beim Scrollen */
-  if (hasGsap && !calm) {
-    const thread = document.getElementById('thread');
-    const len = thread.getTotalLength();
-    gsap.set(thread, { strokeDasharray: len, strokeDashoffset: len });
-    gsap.to(thread, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.path-box', start: 'top 75%', end: 'bottom 60%', scrub: 0.6 } });
-  }
-
-  /* Anfrage */
-  document.getElementById('ask-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const picked = [...e.target.querySelectorAll('input:checked')].map((i) => i.value);
-    document.getElementById('ask-note').textContent = picked.length
-      ? 'Im Prototyp wird nichts gesendet. Gewählt: ' + picked.join(', ')
-      : 'Im Prototyp wird nichts gesendet. Wähl oben aus, worum es geht.';
-  });
-})();
-</script>
+<script src="assets/site.js"></script>
