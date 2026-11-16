@@ -1,237 +1,240 @@
 <title>NetImpulse Prototyp</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
-/* Layout: Papierfläche, ein petrolfarbenes Rad als Motiv, Kobalt nur für Klickbares. Zwei Schriftgrößen-Welten: sehr groß oder klein. */
-@font-face { font-family: "Bricolage Grotesque"; font-weight: 400 600; font-display: swap; src: url(assets/fonts/bricolage-latin.woff2) format("woff2"); }
-@font-face { font-family: "Work Sans"; font-weight: 400 600; font-display: swap; src: url(assets/fonts/work-sans-latin.woff2) format("woff2"); }
+/* Layout: Ultramarin als große Fläche, Weiß als Papier, Signalrot nur für Klickbares. Schmale fette Schrift riesig, alles andere klein. */
+@font-face { font-family: "Archivo"; font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; src: url(assets/fonts/archivo-var.woff2) format("woff2"); }
 :root {
   color-scheme: light;
-  --paper: oklch(97.2% 0.008 85);
-  --paper-2: oklch(94.4% 0.012 85);
-  --tint: oklch(93.5% 0.022 235);
-  --ink: oklch(19% 0.012 255);
-  --ink-2: oklch(41% 0.014 255);
-  --line: oklch(19% 0.012 255 / 0.13);
-  --petrol: oklch(34% 0.055 228);
-  --petrol-2: oklch(40% 0.055 228);
-  --petrol-deep: oklch(25% 0.045 232);
-  --cream: oklch(96% 0.02 85);
-  --cream-2: oklch(96% 0.02 85 / 0.72);
-  --cream-line: oklch(96% 0.02 85 / 0.2);
-  --signal: oklch(51% 0.2 264);
-  --signal-press: oklch(44% 0.2 264);
-  --on-signal: oklch(98.5% 0.005 85);
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --ui: "Work Sans", system-ui, sans-serif;
-  --t-hero: clamp(2.75rem, 6.3vw, 6.5rem);
-  --t-big: clamp(2.25rem, 5.2vw, 4.75rem);
-  --t-mid: clamp(1.5rem, 2.4vw, 2.125rem);
+  --paper: oklch(98.6% 0.004 265);
+  --tint: oklch(93.5% 0.035 268);
+  --ink: oklch(20% 0.045 268);
+  --ink-2: oklch(42% 0.04 268);
+  --line: oklch(20% 0.045 268 / 0.14);
+  --blue: oklch(44% 0.23 266);
+  --blue-deep: oklch(30% 0.16 268);
+  --white: oklch(99% 0.003 265);
+  --white-2: oklch(99% 0.003 265 / 0.76);
+  --white-line: oklch(99% 0.003 265 / 0.24);
+  --signal: oklch(70% 0.19 33);
+  --signal-press: oklch(64% 0.2 33);
+  --on-signal: oklch(20% 0.045 268);
+  --ff: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --t-giant: clamp(3.25rem, 10.7vw, 11.25rem);
+  --t-big: clamp(2.5rem, 6.6vw, 6.25rem);
+  --t-mid: clamp(1.75rem, 2.9vw, 2.75rem);
   --t-body: 1.0625rem;
   --t-small: 0.875rem;
   --gap-section: clamp(80px, 11vw, 168px);
-  --r-l: 24px; --r-m: 16px; --r-s: 8px;
+  --r-l: 28px; --r-m: 16px; --r-s: 8px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 *, *::before, *::after { box-sizing: border-box; }
-body { background: var(--paper); color: var(--ink); font-family: var(--ui); font-size: var(--t-body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ff); font-size: var(--t-body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
-h1, h2, h3 { font-family: var(--display); font-weight: 500; text-wrap: balance; letter-spacing: -0.035em; line-height: 1; }
+h1, h2, h3 { font-weight: 800; font-stretch: 68%; text-wrap: balance; letter-spacing: -0.02em; line-height: 0.92; }
 p { text-wrap: pretty; }
 a { color: inherit; }
 img, svg { display: block; }
-:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 6px; }
-.on-dark :focus-visible { outline-color: var(--cream); }
-.wrap { max-width: 1520px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px), 4vw); padding-right: max(16px, env(safe-area-inset-right, 0px), 4vw); }
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1560px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px), 4vw); padding-right: max(16px, env(safe-area-inset-right, 0px), 4vw); }
 .small { font-size: var(--t-small); line-height: 1.5; color: var(--ink-2); }
-.sample { font-size: 12px; color: var(--ink-2); }
+.sample { font-size: 12px; opacity: 0.7; }
 .num { font-variant-numeric: tabular-nums; }
 
-/* Klickbares */
-.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--signal); color: var(--on-signal); font: 500 1rem var(--ui); text-decoration: none; cursor: pointer; transition: background-color 160ms var(--ease), transform 160ms var(--ease); }
+/* Klickbares: immer Signalrot */
+.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--signal); color: var(--on-signal); font: 600 1.0625rem var(--ff); text-decoration: none; cursor: pointer; transition: background-color 160ms var(--ease), transform 160ms var(--ease); }
 .btn:hover { background: var(--signal-press); }
 .btn:active { transform: scale(0.98); }
-.btn svg, .more svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-.btn.light { background: var(--cream); color: var(--ink); }
-.btn.light:hover { background: oklch(100% 0 0); }
-.more { display: inline-flex; align-items: center; gap: 6px; color: var(--signal); font-weight: 500; text-decoration: none; }
-.more:hover span { text-decoration: underline; text-underline-offset: 4px; }
+.btn svg, .more svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+.btn.dark { background: var(--ink); color: var(--white); }
+.btn.dark:hover { background: var(--blue-deep); }
+.more { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; box-shadow: inset 0 -2px 0 var(--signal); padding-bottom: 3px; transition: box-shadow 200ms var(--ease); }
+.more:hover { box-shadow: inset 0 -1.6em 0 var(--signal); color: var(--on-signal); }
 .more svg { transition: transform 200ms var(--ease); }
 .more:hover svg { transform: translateX(3px); }
-.on-dark .more { color: var(--cream); }
 
-/* Kopf */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: oklch(97.2% 0.008 85 / 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-.top .wrap { display: flex; align-items: center; gap: 32px; min-height: 64px; }
-.brand { display: inline-flex; align-items: center; gap: 8px; font: 600 1.125rem var(--display); letter-spacing: -0.015em; text-decoration: none; }
-.brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--signal); }
-.brand span { font-weight: 400; color: var(--ink-2); }
-.nav { display: flex; align-items: center; gap: 28px; margin-left: auto; font-size: 0.9375rem; }
+/* Kopf auf der blauen Fläche */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--blue); color: var(--white); }
+.top .wrap { display: flex; align-items: center; gap: 32px; min-height: 68px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-stretch: 80%; font-size: 1.375rem; letter-spacing: -0.01em; text-decoration: none; }
+.brand i { width: 10px; height: 10px; border-radius: 50%; background: var(--signal); }
+.nav { display: flex; align-items: center; gap: 28px; margin-left: auto; font-size: 0.9375rem; font-weight: 500; }
 .nav a:not(.btn) { text-decoration: none; padding-block: 8px; }
-.nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 6px; }
+.nav a:not(.btn):hover { box-shadow: inset 0 -2px 0 var(--signal); }
 .nav .btn { min-height: 40px; padding-inline: 20px; font-size: 0.9375rem; }
 .menu { display: none; margin-left: auto; position: relative; }
-.menu summary { list-style: none; cursor: pointer; min-height: 40px; display: flex; align-items: center; padding-inline: 16px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font-size: 0.9375rem; }
+.menu summary { list-style: none; cursor: pointer; min-height: 40px; display: flex; align-items: center; padding-inline: 16px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--white-line); font-weight: 500; }
 .menu summary::-webkit-details-marker { display: none; }
-.menu nav { position: absolute; right: 0; top: 48px; width: min(280px, 80vw); padding: 8px; border-radius: var(--r-m); background: var(--paper); box-shadow: 0 0 0 1px var(--line), 0 24px 48px -24px oklch(19% 0.012 255 / 0.4); display: grid; }
-.menu nav a { padding: 12px; border-radius: var(--r-s); text-decoration: none; font: 500 1.25rem var(--display); }
-.menu nav a:hover { background: var(--paper-2); }
+.menu nav { position: absolute; right: 0; top: 48px; width: min(300px, 82vw); padding: 8px; border-radius: var(--r-m); background: var(--paper); color: var(--ink); box-shadow: 0 24px 48px -20px oklch(20% 0.045 268 / 0.5); display: grid; }
+.menu nav a { padding: 12px; border-radius: var(--r-s); text-decoration: none; font-weight: 800; font-stretch: 68%; font-size: 1.75rem; }
+.menu nav a:hover { background: var(--tint); }
 @media (max-width: 860px) { .nav { display: none; } .menu { display: block; } }
 
-/* Hero: Schrift, Rad, Button */
-.hero { position: relative; overflow: clip; padding-block: clamp(40px, 6vw, 88px) clamp(56px, 7vw, 104px); }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center; gap: clamp(24px, 4vw, 72px); }
-.hero h1 { font-size: var(--t-hero); line-height: 0.94; letter-spacing: -0.045em; position: relative; z-index: 2; }
-.hero-copy > p { max-width: 42ch; margin-block: 28px 32px; color: var(--ink-2); }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
-.wheel { position: relative; z-index: 1; width: 100%; max-width: 680px; aspect-ratio: 1; justify-self: end; border-radius: 50%; background: var(--petrol); color: var(--cream); container-type: inline-size; }
-.wheel::before, .wheel::after { content: ""; position: absolute; border-radius: 50%; inset: 11.5%; border: 1px solid var(--cream-line); }
-.wheel::after { inset: 27%; border-style: dashed; }
-.wheel-nodes { position: absolute; inset: 0; }
-.wheel-node { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
-.wheel-node button { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 6px; min-width: 44px; min-height: 44px; padding: 4px; background: none; border: 0; color: var(--cream-2); font: 500 clamp(11px, 2.7cqi, 15px) var(--ui); cursor: pointer; white-space: nowrap; transition: color 200ms var(--ease); }
-.wheel-node button::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--petrol); box-shadow: inset 0 0 0 1.5px var(--cream-2); transition: box-shadow 200ms var(--ease), transform 200ms var(--ease); }
-.wheel-node button:hover { color: var(--cream); }
-.wheel-node.is-on button { color: var(--cream); }
-.wheel-node.is-on button::before { box-shadow: inset 0 0 0 6px var(--cream); transform: scale(1.35); }
-.wheel-core { position: absolute; inset: 27%; display: grid; place-content: center; justify-items: center; text-align: center; gap: 8px; padding: 6%; }
-.wheel-core h2 { font-size: clamp(1.125rem, 6.4cqi, 2.75rem); letter-spacing: -0.03em; line-height: 1.02; }
-.wheel-core p { font-size: clamp(11px, 2.4cqi, 14px); color: var(--cream-2); }
-.wheel-core .more { font-size: clamp(12px, 2.6cqi, 15px); margin-top: 4px; }
+/* Hero: Schrift hinten, Scheibe in der Mitte, Button vorne */
+.hero { position: relative; background: var(--blue); color: var(--white); overflow: clip; padding-block: clamp(24px, 3vw, 48px) clamp(56px, 7vw, 112px); }
+.hero h1 { font-size: var(--t-giant); font-weight: 900; font-stretch: 62%; line-height: 0.84; letter-spacing: -0.025em; text-transform: uppercase; position: relative; z-index: 1; }
+.hero h1 span { display: block; }
+.hero-front { position: relative; z-index: 3; margin-top: clamp(28px, 4vw, 56px); max-width: 44ch; }
+.hero-front p { color: var(--white-2); margin-bottom: 28px; font-size: 1.125rem; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+.disc { position: absolute; z-index: 2; right: max(16px, 4vw); bottom: clamp(40px, 5vw, 88px); width: min(39vw, 600px); aspect-ratio: 1; border-radius: 50%; background: var(--paper); color: var(--ink); container-type: inline-size; box-shadow: 0 40px 80px -40px oklch(20% 0.1 268 / 0.7); }
+.disc > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.disc .ring-names text { font: 600 15px var(--ff); letter-spacing: 0.04em; fill: var(--ink-2); cursor: pointer; transition: fill 200ms var(--ease); }
+.disc .ring-names text:hover { fill: var(--ink); }
+.disc .ring-names text.is-on { fill: var(--ink); font-weight: 800; }
+.disc circle { fill: none; stroke: var(--line); }
+.disc .mark { fill: var(--signal); stroke: none; }
+.disc-core { position: absolute; inset: 21%; display: grid; place-content: center; justify-items: center; text-align: center; gap: 3cqi; }
+.disc-core h2 { font-size: clamp(1.5rem, 10cqi, 4rem); line-height: 0.9; text-transform: uppercase; }
+.disc-core p { font-size: clamp(11px, 2.6cqi, 15px); color: var(--ink-2); }
+.disc-core .btn { min-height: clamp(36px, 8cqi, 48px); padding-inline: clamp(14px, 4cqi, 24px); font-size: clamp(12px, 2.8cqi, 16px); }
+.ring-btns { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 @media (max-width: 860px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .wheel { justify-self: center; margin-top: 16px; }
+  .hero h1 { font-size: 14.4vw; }
+  .disc { position: relative; right: auto; bottom: auto; width: min(100%, 440px); margin: 40px auto 0; }
 }
 
 /* Aussage */
 .claim { padding-block: var(--gap-section); }
-.claim .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px clamp(32px, 7vw, 120px); align-items: end; }
-.claim h2 { font-size: var(--t-big); }
-.claim-lead { margin-top: 24px; max-width: 52ch; color: var(--ink-2); }
+.claim .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 48px clamp(32px, 7vw, 120px); align-items: end; }
+.claim h2 { font-size: var(--t-big); text-transform: uppercase; }
+.claim-lead { margin-top: 28px; max-width: 54ch; color: var(--ink-2); }
 .loose li { display: grid; grid-template-columns: 9.5em 1fr; gap: 16px; padding-block: 12px; border-top: 1px solid var(--line); font-size: var(--t-small); }
 .loose li:last-child { border-bottom: 1px solid var(--line); }
-.loose b { font-weight: 500; }
+.loose b { font-weight: 600; }
 .loose span { color: var(--ink-2); }
-.claim-end { margin-top: 24px; font: 500 var(--t-mid) var(--display); letter-spacing: -0.02em; line-height: 1.15; }
+.claim-end { margin-top: 28px; font-weight: 800; font-stretch: 68%; font-size: var(--t-mid); line-height: 1; text-transform: uppercase; color: var(--blue); }
 @media (max-width: 860px) { .claim .wrap { grid-template-columns: 1fr; } }
 
-/* Leistungen: Liste links, Bühne rechts */
-.services { background: var(--tint); padding-block: var(--gap-section); }
-.services-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: clamp(40px, 6vw, 88px); }
-.services-head h2 { font-size: var(--t-big); max-width: 14ch; }
-.services-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: clamp(32px, 6vw, 104px); align-items: start; }
-.svc-group { font-size: var(--t-small); color: var(--ink-2); padding-bottom: 12px; }
-.svc-group:not(:first-child) { margin-top: 56px; }
-.svc { border-top: 1px solid var(--line); padding-block: 28px; opacity: 0.42; transition: opacity 300ms var(--ease); }
-.svc.is-on, .no-stage .svc { opacity: 1; }
-.svc h3 { font-size: clamp(1.875rem, 3.9vw, 3.5rem); margin-bottom: 12px; }
-.svc p { max-width: 44ch; color: var(--ink-2); margin-bottom: 12px; }
-.svc .tag { font-size: var(--t-small); color: var(--ink-2); margin-bottom: 8px; }
-.stage { position: sticky; top: 104px; aspect-ratio: 1 / 1.02; border-radius: var(--r-l); background: var(--petrol); overflow: hidden; }
-.vis { position: absolute; inset: 0; display: grid; place-items: center; padding: 9%; opacity: 0; visibility: hidden; transition: opacity 320ms var(--ease), visibility 0s 320ms; color: var(--ink); }
-.vis.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
-.vis .sample { position: absolute; left: 20px; bottom: 16px; color: var(--cream-2); }
-.sheet { width: 100%; border-radius: var(--r-m); background: var(--paper); padding: 16px; display: grid; gap: 8px; box-shadow: 0 32px 56px -32px oklch(15% 0.03 232 / 0.7); font-size: 13px; }
-.sheet .bar { height: 36px; border-radius: 999px; background: var(--paper-2); display: flex; align-items: center; padding-inline: 16px; color: var(--ink-2); }
-.sheet .row { padding: 10px 12px; border-radius: var(--r-s); display: grid; gap: 2px; }
+/* Leistungen: seitlich laufende Strecke */
+.run { background: var(--tint); }
+.run-pin { height: 100dvh; min-height: 620px; overflow: hidden; background: var(--tint); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: clamp(20px, 3vh, 40px); padding-block: clamp(84px, 11vh, 112px) clamp(24px, 4vh, 48px); }
+.run.is-native .run-pin { height: auto; min-height: 0; overflow: visible; padding-block: var(--gap-section); }
+.run-pin > .wrap { width: 100%; }
+.run-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 32px; }
+.run-head h2 { font-size: clamp(2.25rem, 4.6vw, 4.5rem); text-transform: uppercase; max-width: 22ch; }
+.run-track { display: flex; gap: 20px; padding-left: max(16px, 4vw); padding-right: max(16px, 4vw); align-items: stretch; will-change: transform; }
+.run.is-native .run-track { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px; }
+.run.is-native .run-track::-webkit-scrollbar { display: none; }
+.panel { flex: 0 0 clamp(300px, 34vw, 520px); scroll-snap-align: center; border-radius: var(--r-l); padding: clamp(20px, 2.2vw, 32px); display: grid; grid-template-rows: auto auto auto auto 1fr; gap: 12px; align-content: start; min-height: 0; overflow: hidden; }
+.run.is-native .panel { min-height: 460px; }
+.panel h3 { font-size: var(--t-mid); text-transform: uppercase; }
+.panel-tag { font-size: var(--t-small); font-weight: 600; opacity: 0.78; }
+.panel-text { font-size: 0.9375rem; line-height: 1.5; opacity: 0.86; max-width: 42ch; }
+.panel .more { justify-self: start; }
+.p-blue { background: var(--blue); color: var(--white); }
+.p-ink { background: var(--ink); color: var(--white); }
+.p-white { background: var(--paper); }
+.p-tint { background: var(--paper); box-shadow: inset 0 0 0 2px var(--blue); }
+.panel-vis { align-self: end; position: relative; margin-top: 12px; padding: 16px 16px 36px; border-radius: 16px; background: oklch(20% 0.045 268 / 0.08); color: var(--ink); display: grid; place-items: center; min-height: 190px; }
+.p-blue .panel-vis, .p-ink .panel-vis { background: oklch(99% 0.003 265 / 0.12); }
+.panel-vis .sample { position: absolute; left: 16px; bottom: 10px; color: inherit; }
+.p-blue .panel-vis .sample, .p-ink .panel-vis .sample { color: var(--white); }
+.sheet { width: 100%; border-radius: 12px; background: var(--paper); padding: 12px; display: grid; gap: 6px; font-size: 12.5px; line-height: 1.35; }
+.sheet .bar { min-height: 32px; border-radius: 999px; background: var(--tint); display: flex; align-items: center; padding: 6px 14px; color: var(--ink-2); }
+.sheet .row { padding: 8px 10px; border-radius: var(--r-s); display: grid; gap: 2px; }
 .sheet .row small { color: var(--ink-2); font-size: 11px; }
-.sheet .row.you { background: var(--tint); box-shadow: inset 0 0 0 1px oklch(51% 0.2 264 / 0.35); }
-.sheet .row.you b { font-weight: 500; }
-.dim { height: 8px; border-radius: 4px; background: var(--paper-2); }
-.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
-.tiles i { aspect-ratio: 1; border-radius: var(--r-s); background: var(--petrol-2); }
-.tiles i:nth-child(2), .tiles i:nth-child(6), .tiles i:nth-child(7) { background: var(--cream); }
-.tiles i:nth-child(5) { background: var(--tint); }
-.flow { display: grid; gap: 12px; width: 100%; justify-items: start; }
-.flow div { padding: 12px 16px; border-radius: var(--r-m); background: var(--paper); font-size: 13px; }
-.flow div:nth-child(2) { margin-left: 14%; }
-.flow div:nth-child(3) { margin-left: 28%; }
+.sheet .row.you { background: var(--tint); }
+.sheet .row.you b { font-weight: 700; }
+.sheet h3 { font-size: 1.5rem !important; }
+.sheet .btn { background: var(--signal); }
+.dim { height: 8px; border-radius: 4px; background: var(--tint); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: min(100%, 220px); }
+.tiles i { aspect-ratio: 1; border-radius: var(--r-s); background: var(--tint); }
+.tiles i:nth-child(2), .tiles i:nth-child(6), .tiles i:nth-child(7) { background: var(--blue); }
+.tiles i:nth-child(5) { background: var(--ink); }
+.flow { display: grid; gap: 8px; width: 100%; justify-items: start; }
+.flow div { padding: 10px 14px; border-radius: 12px; background: var(--paper); font-size: 12.5px; }
+.flow div:nth-child(2) { margin-left: 12%; }
+.flow div:nth-child(3) { margin-left: 24%; }
 .flow div small { display: block; color: var(--ink-2); font-size: 11px; }
-.stage-in .vis { position: relative; inset: auto; opacity: 1; visibility: visible; aspect-ratio: 4 / 3; border-radius: var(--r-m); background: var(--petrol); margin-top: 20px; }
-@media (max-width: 960px) { .services-grid { grid-template-columns: 1fr; } .stage { display: none; } .svc { opacity: 1; } }
+.run-bar { height: 3px; background: var(--line); border-radius: 2px; margin-top: 20px; overflow: hidden; }
+.run-bar i { display: block; height: 100%; width: 100%; background: var(--blue); transform-origin: left; transform: scaleX(0); }
+.run.is-native .run-bar { display: none; }
 
 /* Themes */
 .themes { padding-block: var(--gap-section); overflow: clip; }
-.themes-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr); gap: 24px 64px; align-items: end; margin-bottom: 48px; }
-.themes-head h2 { font-size: var(--t-big); }
-.rail { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(16px, 4vw) 24px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.themes-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 24px 64px; align-items: end; margin-bottom: 48px; }
+.themes-head h2 { font-size: var(--t-big); text-transform: uppercase; }
+.rail { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px max(16px, 4vw) 24px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
 .rail::-webkit-scrollbar { display: none; }
-.theme { flex: 0 0 min(78vw, 420px); scroll-snap-align: center; text-decoration: none; display: grid; gap: 16px; }
+.theme { flex: 0 0 min(78vw, 400px); scroll-snap-align: center; text-decoration: none; display: grid; gap: 16px; }
 .shot { aspect-ratio: 4 / 5; border-radius: var(--r-m); background: var(--tb); color: var(--tf); padding: 8% 8% 0; display: grid; grid-template-rows: auto auto 1fr; gap: 6%; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); transition: transform 320ms var(--ease); }
-.theme:hover .shot { transform: translateY(-6px); }
-.shot .s-nav { display: flex; justify-content: space-between; font: 500 13px var(--display); }
+.theme:hover .shot { transform: translateY(-8px) rotate(-1deg); }
+.shot .s-nav { display: flex; justify-content: space-between; font-weight: 700; font-size: 13px; }
 .shot .s-nav i { width: 28%; height: 8px; border-radius: 4px; background: currentColor; opacity: 0.18; align-self: center; }
-.shot .s-h { font: 500 clamp(1.5rem, 4.2vw, 2.125rem)/1.02 var(--display); letter-spacing: -0.03em; }
-.shot .s-h u { display: inline-block; margin-top: 12px; padding: 8px 14px; border-radius: 999px; background: var(--ta); color: var(--tb); font: 500 12px var(--ui); text-decoration: none; letter-spacing: 0; }
+.shot .s-h { font-weight: 700; font-stretch: 80%; font-size: clamp(1.5rem, 4.2vw, 2rem); line-height: 1.02; letter-spacing: -0.02em; }
+.shot .s-h u { display: inline-block; margin-top: 12px; padding: 8px 14px; border-radius: 999px; background: var(--ta); color: var(--tb); font-weight: 600; font-stretch: 100%; font-size: 12px; text-decoration: none; letter-spacing: 0; }
 .shot .s-img { border-radius: 12px 12px 0 0; background: linear-gradient(in oklch 160deg, var(--ta), color-mix(in oklch, var(--ta) 55%, var(--tb))); }
 .theme-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-.theme-meta b { font: 500 1.375rem var(--display); letter-spacing: -0.02em; }
+.theme-meta b { font-weight: 800; font-stretch: 68%; font-size: 1.75rem; text-transform: uppercase; }
 .theme-meta span { color: var(--ink-2); font-size: var(--t-small); }
 @media (max-width: 860px) { .themes-head { grid-template-columns: 1fr; } }
 
 /* Ablauf: die Linie von der Über-uns-Seite */
 .path { padding-block: 0 var(--gap-section); }
 .path-box { position: relative; }
-.path h2 { font-size: var(--t-big); text-align: center; max-width: 12ch; margin: 0 auto 72px; }
+.path h2 { font-size: var(--t-big); text-transform: uppercase; text-align: center; max-width: 12ch; margin: 0 auto 72px; }
 .path svg { position: absolute; left: 50%; top: 0; width: 120px; height: 100%; transform: translateX(-50%); overflow: visible; }
-.path svg path { fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.path svg path { fill: none; stroke: var(--blue); stroke-width: 3; vector-effect: non-scaling-stroke; }
 .stops { display: grid; gap: 96px; position: relative; padding-block: 32px 96px; }
 .stops li { display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; }
-.stops i { grid-column: 2; grid-row: 1; justify-self: center; width: 14px; height: 14px; border-radius: 50%; background: var(--petrol); box-shadow: 0 0 0 8px var(--paper); }
+.stops i { grid-column: 2; grid-row: 1; justify-self: center; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 8px var(--paper); }
 .stops div { max-width: 32ch; }
 .stops li:nth-child(odd) div { grid-column: 1; justify-self: end; text-align: right; }
 .stops li:nth-child(even) div { grid-column: 3; }
-.stops h3 { font-size: clamp(1.75rem, 3.2vw, 2.75rem); margin-bottom: 8px; }
+.stops h3 { font-size: var(--t-mid); text-transform: uppercase; margin-bottom: 10px; }
 .stops p { color: var(--ink-2); }
 @media (max-width: 760px) {
-  .path h2 { text-align: left; margin-left: 40px; }
-  .path svg { left: 1px; width: 12px; transform: none; }
+  .path h2 { text-align: left; margin-left: 44px; }
+  .path svg { left: 3px; width: 12px; transform: none; }
   .stops { gap: 48px; }
-  .stops li { grid-template-columns: 14px 1fr; gap: 26px; }
+  .stops li { grid-template-columns: 18px 1fr; gap: 26px; }
   .stops i { grid-column: 1; }
   .stops li:nth-child(odd) div, .stops li:nth-child(even) div { grid-column: 2; justify-self: start; text-align: left; }
 }
 
 /* Team */
-.team { background: var(--paper-2); padding-block: var(--gap-section); }
-.team .wrap { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 48px clamp(32px, 6vw, 96px); align-items: center; }
-.team h2 { font-size: var(--t-big); margin-bottom: 24px; }
-.team-copy p { color: var(--ink-2); max-width: 44ch; margin-bottom: 24px; }
+.team { background: var(--blue); color: var(--white); padding-block: var(--gap-section); }
+.team .wrap { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px clamp(32px, 6vw, 96px); align-items: center; }
+.team h2 { font-size: var(--t-big); text-transform: uppercase; margin-bottom: 24px; }
+.team-copy p { color: var(--white-2); max-width: 44ch; margin-bottom: 24px; }
 .faces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
 .faces li:nth-child(2) { margin-top: 48px; }
 .faces img, .faces .ph { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-m); }
-.faces .ph { background: var(--petrol); color: var(--cream); display: grid; place-content: center; justify-items: center; gap: 8px; font: 500 4rem var(--display); }
-.faces .ph small { font: 400 12px var(--ui); color: var(--cream-2); }
-.faces b { display: block; margin-top: 12px; font: 500 1.25rem var(--display); letter-spacing: -0.02em; }
-.faces span { font-size: var(--t-small); color: var(--ink-2); }
+.faces .ph { background: var(--blue-deep); display: grid; place-content: center; justify-items: center; gap: 8px; font-weight: 900; font-stretch: 62%; font-size: 5rem; line-height: 1; }
+.faces .ph small { font-weight: 400; font-stretch: 100%; font-size: 12px; color: var(--white-2); }
+.faces b { display: block; margin-top: 12px; font-weight: 800; font-stretch: 68%; font-size: 1.5rem; text-transform: uppercase; }
+.faces span { font-size: var(--t-small); color: var(--white-2); }
 @media (max-width: 860px) { .team .wrap { grid-template-columns: 1fr; } .faces { gap: 8px; } .faces li:nth-child(2) { margin-top: 24px; } }
 
-/* Anfrage: die Signalfarbe als ganze Fläche */
+/* Anfrage: Signalrot als ganze Fläche */
 .ask { background: var(--signal); color: var(--on-signal); padding-block: var(--gap-section); }
-.ask .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px clamp(32px, 6vw, 96px); align-items: end; }
-.ask h2 { font-size: clamp(2.75rem, 7vw, 6.5rem); line-height: 0.95; letter-spacing: -0.045em; }
-.ask-copy p { margin-top: 24px; max-width: 46ch; opacity: 0.86; }
+.ask .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px clamp(32px, 6vw, 96px); align-items: end; }
+.ask h2 { font-size: clamp(3rem, 10vw, 10rem); font-weight: 900; font-stretch: 62%; line-height: 0.84; text-transform: uppercase; }
+.ask-copy p { margin-top: 24px; max-width: 46ch; }
 .ask fieldset { border: 0; margin: 0 0 24px; padding: 0; min-width: 0; }
-.ask legend { padding: 0; margin-bottom: 12px; font-size: var(--t-small); opacity: 0.86; }
+.ask legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips label { position: relative; cursor: pointer; }
 .chips input { position: absolute; opacity: 0; inset: 0; }
-.chips span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; box-shadow: inset 0 0 0 1px oklch(98.5% 0.005 85 / 0.45); font-size: 0.9375rem; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
-.chips input:checked + span { background: var(--on-signal); color: var(--signal-press); box-shadow: none; }
-.chips input:focus-visible + span { outline: 2px solid var(--on-signal); outline-offset: 3px; }
-.ask .small { color: inherit; opacity: 0.86; margin-top: 16px; }
+.chips span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px oklch(20% 0.045 268 / 0.5); font-weight: 500; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
+.chips input:checked + span { background: var(--ink); color: var(--white); box-shadow: none; }
+.chips input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
+.ask .small { color: inherit; margin-top: 16px; }
+.ask :focus-visible { outline-color: var(--ink); }
 @media (max-width: 860px) { .ask .wrap { grid-template-columns: 1fr; } }
 
 /* Fuß */
-.foot { background: var(--petrol-deep); color: var(--cream); padding-block: 64px 32px; }
+.foot { background: var(--blue-deep); color: var(--white); padding-block: 64px 32px; }
 .foot .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
-.foot .brand i { background: var(--cream); }
-.foot .brand span, .foot p, .foot h3 { color: var(--cream-2); }
+.foot p, .foot h3 { color: var(--white-2); }
 .foot p { font-size: var(--t-small); margin-top: 12px; max-width: 30ch; }
-.foot h3 { font: 400 var(--t-small) var(--ui); letter-spacing: 0; margin-bottom: 12px; }
+.foot h3 { font-weight: 400; font-stretch: 100%; font-size: var(--t-small); letter-spacing: 0; line-height: 1.5; margin-bottom: 12px; }
 .foot li a { display: inline-block; padding-block: 6px; text-decoration: none; font-size: 0.9375rem; }
-.foot li a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.foot-base { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--cream-line); font-size: var(--t-small); color: var(--cream-2); }
+.foot li a:hover { box-shadow: inset 0 -2px 0 var(--signal); }
+.foot-base { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--white-line); font-size: var(--t-small); color: var(--white-2); }
 @media (max-width: 760px) { .foot .wrap { grid-template-columns: 1fr 1fr; } .foot .wrap > div:first-child { grid-column: 1 / -1; } }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
@@ -239,7 +242,7 @@ img, svg { display: block; }
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top"><i></i>NetImpulse<span>marketing</span></a>
+    <a class="brand" href="#top"><i></i>NetImpulse</a>
     <nav class="nav" aria-label="Hauptmenü">
       <a href="#leistungen">Leistungen</a><a href="#themes">Theme Store</a><a href="#team">Über uns</a>
       <a class="btn" href="#kontakt">Kontakt</a>
@@ -254,21 +257,28 @@ img, svg { display: block; }
 <main id="top">
 <section class="hero" data-block="hero">
   <div class="wrap">
-    <div class="hero-copy">
-      <h1>Online-Präsenz für dein Unternehmen</h1>
+    <h1><span>Online-Präsenz</span><span>für dein</span><span>Unternehmen</span></h1>
+    <div class="hero-front">
       <p>NetImpulse entwickelt Shopify-Websites, SEA-Kampagnen und Strategien, damit du online klarer auftrittst, besser gefunden wirst und professioneller verkaufst.</p>
       <div class="hero-actions">
         <a class="btn" href="#kontakt">Kostenloses Erstgespräch <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="more" href="#leistungen"><span>Alle Leistungen ansehen</span></a>
       </div>
     </div>
-    <div class="wheel on-dark" id="wheel" role="group" aria-label="Unsere Leistungen im Rad">
-      <div class="wheel-nodes"></div>
-      <div class="wheel-core" aria-live="polite">
-        <h2 data-core-title></h2>
-        <p data-core-sub></p>
-        <a class="more" data-core-link href="#leistungen"><span>Zur Leistung</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
+  </div>
+  <div class="disc" id="disc" role="group" aria-label="Unsere Leistungen">
+    <svg viewBox="0 0 400 400" aria-hidden="true">
+      <defs><path id="ring-path" d="M200 34 a166 166 0 1 1 -0.01 0"/></defs>
+      <circle cx="200" cy="200" r="188" stroke-width="1"/>
+      <circle cx="200" cy="200" r="140" stroke-width="1" stroke-dasharray="2 6"/>
+      <circle class="mark" cx="200" cy="12" r="5"/>
+      <g class="ring-names" data-ring><text data-i="0"><textPath href="#ring-path" startOffset="6.25%" text-anchor="middle">SEO</textPath></text><text data-i="1"><textPath href="#ring-path" startOffset="18.75%" text-anchor="middle">Google Ads</textPath></text><text data-i="2"><textPath href="#ring-path" startOffset="31.25%" text-anchor="middle">Social Media</textPath></text><text data-i="3"><textPath href="#ring-path" startOffset="43.75%" text-anchor="middle">GEO</textPath></text><text data-i="4"><textPath href="#ring-path" startOffset="56.25%" text-anchor="middle">Webdesign</textPath></text><text data-i="5"><textPath href="#ring-path" startOffset="68.75%" text-anchor="middle">Shopify</textPath></text><text data-i="6"><textPath href="#ring-path" startOffset="81.25%" text-anchor="middle">Themes</textPath></text><text data-i="7"><textPath href="#ring-path" startOffset="93.75%" text-anchor="middle">KI-Automation</textPath></text></g>
+    </svg>
+    <div class="ring-btns"><button type="button" data-i="0">SEO</button><button type="button" data-i="1">Google Ads</button><button type="button" data-i="2">Social Media</button><button type="button" data-i="3">GEO</button><button type="button" data-i="4">Webdesign</button><button type="button" data-i="5">Shopify</button><button type="button" data-i="6">Themes</button><button type="button" data-i="7">KI-Automation</button></div>
+    <div class="disc-core" aria-live="polite">
+      <p data-core-sub></p>
+      <h2 data-core-title></h2>
+      <a class="btn" href="#leistungen">Zur Leistung <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -293,36 +303,73 @@ img, svg { display: block; }
   </div>
 </section>
 
-<section class="services" id="leistungen" data-block="leistungen">
-  <div class="wrap">
-    <div class="services-head">
-      <h2>Von der ersten Idee bis zur laufenden Optimierung</h2>
-      <a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Alle Leistungen und Preise</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+
+<section class="run" id="leistungen" data-block="leistungen">
+  <div class="run-pin">
+    <div class="wrap">
+      <div class="run-head">
+        <h2>Von der ersten Idee bis zur laufenden Optimierung</h2>
+        <a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Alle Leistungen und Preise</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="run-bar" aria-hidden="true"><i></i></div>
     </div>
-    <div class="services-grid">
-      <div class="svc-list">
-        <p class="svc-group">Sichtbarkeit</p>
-        <article class="svc" data-key="seo"><p class="tag">SEO · Suchmaschinenoptimierung</p><h3>Gefunden werden</h3><p>Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.</p><a class="more" href="https://netimpulsemarketing.de/pages/seo"><span>Mehr zu SEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <article class="svc" data-key="sea"><p class="tag">SEA · Google Ads</p><h3>Nachfrage aktivieren</h3><p>Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.</p><a class="more" href="https://netimpulsemarketing.de/pages/sea"><span>Mehr zu SEA</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <article class="svc" data-key="smm"><p class="tag">SMM · Social Media Marketing</p><h3>Aufmerksamkeit formen</h3><p>Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.</p><a class="more" href="https://netimpulsemarketing.de/pages/smm"><span>Mehr zu SMM</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <article class="svc" data-key="geo"><p class="tag">GEO · Generative Engine Optimization</p><h3>In KI-Antworten auftauchen</h3><p>Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.</p><a class="more" href="https://netimpulsemarketing.de/pages/geo"><span>Mehr zu GEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <p class="svc-group">Websites und Shops</p>
-        <article class="svc" data-key="webdesign"><p class="tag">Webdesign</p><h3>Website als Gespräch</h3><p>Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.</p><a class="more" href="https://netimpulsemarketing.de/pages/web-design"><span>Mehr zu Webdesign</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <article class="svc" data-key="shopify"><p class="tag">Shopify-Entwicklung</p><h3>Shops, die skalieren</h3><p>Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.</p><a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Mehr zu Shopify</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <article class="svc" data-key="themes"><p class="tag">Theme Store</p><h3>Schneller starten</h3><p>Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.</p><a class="more" href="#themes"><span>Zum Theme Store</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-        <p class="svc-group">KI und Automatisierung</p>
-        <article class="svc" data-key="ki"><p class="tag">KI-Automation</p><h3>Routine, die sich selbst erledigt</h3><p>Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.</p><a class="more" href="#kontakt"><span>KI-Automation anfragen</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-      </div>
-      <div class="stage" aria-hidden="true">
-        <div class="vis" data-key="seo"><div class="sheet"><div class="bar">schreinerei gießen</div><div class="row you"><small>deine-domain.de · leistungen</small><b>Schreinerei in Gießen: Möbel nach Maß</b></div><div class="row"><small>branchenbuch-beispiel.de</small>Schreinereien in Gießen und Umgebung</div><div class="row"><small>ratgeber-beispiel.de</small>Möbel nach Maß: Worauf du achten solltest</div></div><span class="sample">Beispiel</span></div>
-        <div class="vis" data-key="sea"><div class="sheet"><div class="row you"><small>Anzeige · deine-domain.de</small><b>Einbauschränke nach Maß anfragen</b></div><svg viewBox="0 0 300 110" style="width:100%"><path d="M0 96 C60 90 90 70 140 62 S230 30 300 12" fill="none" stroke="oklch(51% 0.2 264)" stroke-width="2.5"/><path d="M0 100 C80 98 160 92 300 84" fill="none" stroke="oklch(19% 0.012 255 / 0.3)" stroke-width="1.5" stroke-dasharray="4 5"/></svg><div class="row"><small>Anfragen über Suche im Vergleich zu Klicks ohne Anfrage</small></div></div><span class="sample">Beispiel</span></div>
-        <div class="vis" data-key="smm"><div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="sample">Beispiel</span></div>
-        <div class="vis" data-key="geo"><div class="sheet"><div class="bar">Welche Schreinerei in Gießen baut Einbauschränke?</div><div class="row"><div class="dim" style="width:92%"></div></div><div class="row"><div class="dim" style="width:74%"></div></div><div class="row you"><small>Quelle</small><b>deine-domain.de</b></div></div><span class="sample">Beispiel</span></div>
-        <div class="vis" data-key="webdesign"><div class="sheet" style="padding:24px;gap:16px"><h3 style="font-size:1.75rem">Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="btn" style="justify-self:start;min-height:36px;font-size:13px;padding-inline:16px">Anfrage senden</span></div><span class="sample">Beispiel</span></div>
-        <div class="vis" data-key="shopify"><div class="sheet"><div class="row"><small>Theme-Editor · Startseite</small></div><div class="row">Header</div><div class="row">Hero</div><div class="row you"><b>Produktraster</b></div><div class="row">Footer</div></div><span class="sample">Beispiel</span></div>
-        <div class="vis" data-key="themes"><div class="sheet" style="background:#F3F1EC;padding:24px;gap:16px"><small style="font:500 13px var(--display)">Holzwerk Ahorn</small><h3 style="font-size:1.75rem">Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:120px;border-radius:12px;background:#C2552A"></div></div><span class="sample">Beispiel-Theme Werkbank</span></div>
-        <div class="vis" data-key="ki"><div class="flow"><div>Neue Anfrage<small>kommt über das Formular</small></div><div>Wird einsortiert<small>Thema, Dringlichkeit, Ansprechperson</small></div><div>Antwortentwurf liegt bereit<small>du prüfst und sendest</small></div></div><span class="sample">Beispiel</span></div>
-      </div>
+    <div class="run-track" tabindex="0" aria-label="Alle acht Leistungen">
+      <article class="panel p-blue" data-key="seo">
+        <p class="panel-tag">SEO · Suchmaschinenoptimierung</p>
+        <h3>Gefunden werden</h3>
+        <p class="panel-text">Technik, Inhalte und Suchanfragen sauber zusammenbringen, damit deine Website für Google und für Menschen verständlich wird.</p>
+        <a class="more" href="https://netimpulsemarketing.de/pages/seo"><span>Mehr zu SEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="bar">schreinerei gießen</div><div class="row you"><small>deine-domain.de · leistungen</small><b>Schreinerei in Gießen: Möbel nach Maß</b></div><div class="row"><small>branchenbuch-beispiel.de</small>Schreinereien in Gießen und Umgebung</div><div class="row"><small>ratgeber-beispiel.de</small>Möbel nach Maß: Worauf du achten solltest</div></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-tint" data-key="sea">
+        <p class="panel-tag">SEA · Google Ads</p>
+        <h3>Nachfrage aktivieren</h3>
+        <p class="panel-text">Kampagnen, die klar strukturiert, messbar und auf echte Anfragen ausgerichtet sind, statt möglichst viele Klicks zu kaufen.</p>
+        <a class="more" href="https://netimpulsemarketing.de/pages/sea"><span>Mehr zu SEA</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="row you"><small>Anzeige · deine-domain.de</small><b>Einbauschränke nach Maß anfragen</b></div><svg viewBox="0 0 300 110" style="width:100%"><path d="M0 96 C60 90 90 70 140 62 S230 30 300 12" fill="none" stroke="oklch(51% 0.2 264)" stroke-width="2.5"/><path d="M0 100 C80 98 160 92 300 84" fill="none" stroke="oklch(19% 0.012 255 / 0.3)" stroke-width="1.5" stroke-dasharray="4 5"/></svg><div class="row"><small>Anfragen über Suche im Vergleich zu Klicks ohne Anfrage</small></div></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-white" data-key="smm">
+        <p class="panel-tag">SMM · Social Media Marketing</p>
+        <h3>Aufmerksamkeit formen</h3>
+        <p class="panel-text">Eine klare Richtung, wiedererkennbare Formate und Beiträge, die zum Angebot passen und Vertrauen aufbauen.</p>
+        <a class="more" href="https://netimpulsemarketing.de/pages/smm"><span>Mehr zu SMM</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-ink" data-key="geo">
+        <p class="panel-tag">GEO · Generative Engine Optimization</p>
+        <h3>In KI-Antworten auftauchen</h3>
+        <p class="panel-text">Inhalte so aufbauen, dass Systeme wie ChatGPT, Perplexity oder Gemini verstehen, wofür du stehst.</p>
+        <a class="more" href="https://netimpulsemarketing.de/pages/geo"><span>Mehr zu GEO</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="bar">Welche Schreinerei in Gießen baut Einbauschränke?</div><div class="row"><div class="dim" style="width:92%"></div></div><div class="row"><div class="dim" style="width:74%"></div></div><div class="row you"><small>Quelle</small><b>deine-domain.de</b></div></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-blue" data-key="webdesign">
+        <p class="panel-tag">Webdesign</p>
+        <h3>Website als Gespräch</h3>
+        <p class="panel-text">Seiten, die erklären, Menschen abholen und Schritt für Schritt zur Anfrage führen, ohne nach Template auszusehen.</p>
+        <a class="more" href="https://netimpulsemarketing.de/pages/web-design"><span>Mehr zu Webdesign</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet" style="padding:24px;gap:16px"><h3 style="font-size:1.75rem">Klar erklärt. Gut geführt.</h3><div class="dim" style="width:80%"></div><div class="dim" style="width:56%"></div><span class="btn" style="justify-self:start;min-height:36px;font-size:13px;padding-inline:16px">Anfrage senden</span></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-tint" data-key="shopify">
+        <p class="panel-tag">Shopify-Entwicklung</p>
+        <h3>Shops, die skalieren</h3>
+        <p class="panel-text">Shops, die man später leicht anpassen, erweitern und pflegen kann, mit einer eigenen Richtung statt Baukasten-Look.</p>
+        <a class="more" href="https://netimpulsemarketing.de/pages/leistungen"><span>Mehr zu Shopify</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet"><div class="row"><small>Theme-Editor · Startseite</small></div><div class="row">Header</div><div class="row">Hero</div><div class="row you"><b>Produktraster</b></div><div class="row">Footer</div></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-white" data-key="themes">
+        <p class="panel-tag">Theme Store</p>
+        <h3>Schneller starten</h3>
+        <p class="panel-text">Theme- und Section-Packs für verschiedene Branchen. Ein schneller Start mit professioneller Grundstruktur, der später weiterentwickelt werden kann.</p>
+        <a class="more" href="#themes"><span>Zum Theme Store</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="sheet" style="background:#F3F1EC;padding:24px;gap:16px"><small style="font:500 13px var(--display)">Holzwerk Ahorn</small><h3 style="font-size:1.75rem">Massivholz, geplant und gebaut in Mittelhessen</h3><div style="height:120px;border-radius:12px;background:#C2552A"></div></div><span class="sample">Beispiel</span></div>
+      </article>
+      <article class="panel p-ink" data-key="ki">
+        <p class="panel-tag">KI-Automation</p>
+        <h3>Routine, die sich selbst erledigt</h3>
+        <p class="panel-text">Wiederkehrende Aufgaben automatisieren und KI dort einsetzen, wo sie im Alltag wirklich Zeit spart.</p>
+        <a class="more" href="#kontakt"><span>KI-Automation anfragen</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="panel-vis" aria-hidden="true"><div class="flow"><div>Neue Anfrage<small>kommt über das Formular</small></div><div>Wird einsortiert<small>Thema, Dringlichkeit, Ansprechperson</small></div><div>Antwortentwurf liegt bereit<small>du prüfst und sendest</small></div></div><span class="sample">Beispiel</span></div>
+      </article>
     </div>
   </div>
 </section>
@@ -390,16 +437,16 @@ img, svg { display: block; }
           <label><input type="checkbox" id="t-theme" name="t" value="Theme aus dem Store"><span>Theme aus dem Store</span></label>
         </div>
       </fieldset>
-      <button class="btn light" type="submit">Kostenloses Erstgespräch anfragen <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button class="btn dark" type="submit">Kostenloses Erstgespräch anfragen <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="small" id="ask-note" role="status">Kostenlos und unverbindlich, Antwort innerhalb von 48 Stunden</p>
     </form>
   </div>
 </section>
 </main>
 
-<footer class="foot on-dark">
+<footer class="foot">
   <div class="wrap">
-    <div><a class="brand" href="#top"><i></i>NetImpulse<span>marketing</span></a><p>Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads.</p></div>
+    <div><a class="brand" href="#top"><i></i>NetImpulse</a><p>Digitalagentur in Gießen für Shopify, Webdesign, SEO, GEO und Google Ads.</p></div>
     <div><h3>Menü</h3><ul><li><a href="#leistungen">Leistungen</a></li><li><a href="#themes">Theme Store</a></li><li><a href="#team">Über uns</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
     <div><h3>Leistungen</h3><ul><li><a href="https://netimpulsemarketing.de/pages/seo">SEO</a></li><li><a href="https://netimpulsemarketing.de/pages/sea">Google Ads</a></li><li><a href="https://netimpulsemarketing.de/pages/smm">Social Media</a></li><li><a href="https://netimpulsemarketing.de/pages/geo">GEO</a></li><li><a href="https://netimpulsemarketing.de/pages/web-design">Webdesign</a></li></ul></div>
     <div><h3>Rechtliches</h3><ul><li><a href="https://netimpulsemarketing.de/policies/legal-notice">Impressum</a></li><li><a href="https://netimpulsemarketing.de/policies/privacy-policy">Datenschutz</a></li><li><a href="https://netimpulsemarketing.de/policies/terms-of-service">AGB</a></li><li><a href="https://netimpulsemarketing.de/pages/widerruf">Widerruf</a></li></ul></div>
@@ -414,97 +461,72 @@ img, svg { display: block; }
 (() => {
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasGsap = typeof gsap !== 'undefined';
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
-  /* Rad */
-  const SERVICES = [
-    ['seo', 'SEO', 'Gefunden werden', 'Suchmaschinenoptimierung'],
-    ['sea', 'Google Ads', 'Nachfrage aktivieren', 'SEA'],
-    ['smm', 'Social Media', 'Aufmerksamkeit formen', 'Social Media Marketing'],
-    ['geo', 'GEO', 'In KI-Antworten auftauchen', 'Generative Engine Optimization'],
-    ['webdesign', 'Webdesign', 'Website als Gespräch', 'Webdesign'],
-    ['shopify', 'Shopify', 'Shops, die skalieren', 'Shopify-Entwicklung'],
-    ['themes', 'Themes', 'Schneller starten', 'Theme Store'],
-    ['ki', 'KI-Automation', 'Routine, die sich selbst erledigt', 'KI und Automatisierung'],
+  /* Scheibe: Namen laufen im Ring, die aktive Leistung steht oben */
+  const DATA = [
+    ['Gefunden werden', 'Suchmaschinenoptimierung'], ['Nachfrage aktivieren', 'Google Ads'], ['Aufmerksamkeit formen', 'Social Media Marketing'],
+    ['In KI-Antworten auftauchen', 'Generative Engine Optimization'], ['Website als Gespräch', 'Webdesign'], ['Shops, die skalieren', 'Shopify-Entwicklung'],
+    ['Schneller starten', 'Theme Store'], ['Routine, die sich selbst erledigt', 'KI und Automatisierung'],
   ];
-  const wheel = document.getElementById('wheel');
-  const holder = wheel.querySelector('.wheel-nodes');
-  const coreTitle = wheel.querySelector('[data-core-title]');
-  const coreSub = wheel.querySelector('[data-core-sub]');
-  const coreLink = wheel.querySelector('[data-core-link]');
-  const step = 360 / SERVICES.length;
-  const state = { rot: 0 };
+  const disc = document.getElementById('disc');
+  const ring = disc.querySelector('[data-ring]');
+  const labels = [...ring.querySelectorAll('text')];
+  const title = disc.querySelector('[data-core-title]');
+  const sub = disc.querySelector('[data-core-sub]');
+  const step = 360 / DATA.length;
+  const state = { rot: -step / 2 };
   let active = 0, timer = null;
-  const nodes = SERVICES.map(([key, name], i) => {
-    const n = document.createElement('div');
-    n.className = 'wheel-node';
-    const b = document.createElement('button');
-    b.type = 'button'; b.textContent = name; b.setAttribute('aria-pressed', 'false');
-    b.addEventListener('click', () => { select(i); stop(); });
-    n.appendChild(b); holder.appendChild(n);
-    return n;
-  });
-  const place = () => {
-    const r = wheel.clientWidth * 0.385;
-    nodes.forEach((n, i) => {
-      const a = (i * step + state.rot - 90) * Math.PI / 180;
-      n.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r}px)`;
-    });
-  };
+  const turn = () => ring.setAttribute('transform', `rotate(${state.rot} 200 200)`);
   function select(i) {
-    active = (i + SERVICES.length) % SERVICES.length;
-    const s = SERVICES[active];
-    nodes.forEach((n, k) => { n.classList.toggle('is-on', k === active); n.firstChild.setAttribute('aria-pressed', k === active); });
-    coreTitle.textContent = s[2]; coreSub.textContent = s[3];
-    coreLink.href = '#leistungen';
-    /* aktive Leistung nach oben drehen, auf dem kürzeren Weg */
-    let target = -active * step;
+    active = (i + DATA.length) % DATA.length;
+    labels.forEach((l, k) => l.classList.toggle('is-on', k === active));
+    title.textContent = DATA[active][0]; sub.textContent = DATA[active][1];
+    let target = -step / 2 - active * step;
     while (target - state.rot > 180) target -= 360;
     while (target - state.rot < -180) target += 360;
-    if (hasGsap && !calm) gsap.to(state, { rot: target, duration: 0.9, ease: 'power3.inOut', onUpdate: place });
-    else { state.rot = target; place(); }
+    if (hasGsap && !calm) gsap.to(state, { rot: target, duration: 0.9, ease: 'power3.inOut', onUpdate: turn });
+    else { state.rot = target; turn(); }
   }
-  const start = () => { if (!calm && !timer) timer = setInterval(() => select(active + 1), 3400); };
+  const start = () => { if (!calm && !timer) timer = setInterval(() => select(active + 1), 3200); };
   const stop = () => { clearInterval(timer); timer = null; };
-  wheel.addEventListener('pointerenter', stop);
-  wheel.addEventListener('focusin', stop);
-  wheel.addEventListener('pointerleave', start);
-  new ResizeObserver(place).observe(wheel);
+  labels.forEach((l) => l.addEventListener('click', () => { select(+l.dataset.i); stop(); }));
+  disc.querySelectorAll('.ring-btns button').forEach((b) => b.addEventListener('click', () => { select(+b.dataset.i); stop(); }));
+  disc.addEventListener('pointerenter', stop);
+  disc.addEventListener('focusin', stop);
+  disc.addEventListener('pointerleave', start);
   select(0); start();
 
-  /* Leistungen: Bühne folgt der Liste */
-  const rows = [...document.querySelectorAll('.svc')];
-  const visuals = [...document.querySelectorAll('.stage .vis')];
-  const show = (key) => {
-    rows.forEach((r) => r.classList.toggle('is-on', r.dataset.key === key));
-    visuals.forEach((v) => v.classList.toggle('is-on', v.dataset.key === key));
-  };
-  const wide = matchMedia('(min-width: 961px)');
-  const setupStage = () => {
-    if (wide.matches) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && show(e.target.dataset.key)), { rootMargin: '-45% 0px -45% 0px' });
-      rows.forEach((r) => io.observe(r));
-      show('seo');
-    } else {
-      /* schmal: jedes Bild wandert unter seine Leistung */
-      document.querySelector('.svc-list').classList.add('stage-in', 'no-stage');
-      visuals.forEach((v) => { const row = rows.find((r) => r.dataset.key === v.dataset.key); if (row) row.appendChild(v); });
-    }
-  };
-  setupStage();
+  /* Weiches Scrollen */
+  let lenis = null;
+  if (hasGsap && !calm && typeof Lenis !== 'undefined') {
+    lenis = new Lenis({ duration: 1.05 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (!t) return;
+    e.preventDefault();
+    const m = a.closest('details'); if (m) m.open = false;
+    if (lenis) lenis.scrollTo(t, { offset: -68 }); else t.scrollIntoView();
+  }));
 
-  /* Linie zeichnet sich beim Scrollen, weiches Scrollen */
+  /* Leistungsstrecke: senkrechtes Scrollen bewegt die Strecke seitlich */
+  const run = document.querySelector('.run');
+  const track = run.querySelector('.run-track');
+  const bar = run.querySelector('.run-bar i');
+  const wide = matchMedia('(min-width: 900px) and (min-height: 620px)');
+  if (hasGsap && !calm && wide.matches) {
+    const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
+    gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.run-pin', pin: true, start: 'top top', end: () => '+=' + dist(), scrub: 0.5, invalidateOnRefresh: true, onUpdate: (s) => { bar.style.transform = `scaleX(${s.progress})`; } } });
+  } else {
+    run.classList.add('is-native');
+  }
+
+  /* Linie zeichnet sich beim Scrollen */
   if (hasGsap && !calm) {
-    gsap.registerPlugin(ScrollTrigger);
-    if (typeof Lenis !== 'undefined') {
-      const lenis = new Lenis({ duration: 1.05 });
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((t) => lenis.raf(t * 1000));
-      gsap.ticker.lagSmoothing(0);
-      document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -64 }); const m = a.closest('details'); if (m) m.open = false; }
-      }));
-    }
     const thread = document.getElementById('thread');
     const len = thread.getTotalLength();
     gsap.set(thread, { strokeDasharray: len, strokeDashoffset: len });
