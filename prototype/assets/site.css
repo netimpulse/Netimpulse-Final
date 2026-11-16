@@ -440,3 +440,7 @@ button { font: inherit; color: inherit; }
 .toast.is-on { transform: translate(-50%, 0); opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+/* Vorschau bleibt neben der Liste sichtbar */
+.ex-stage .device:not(.is-phone) { max-height: calc(100dvh - 250px); }
+.ex-stage .device.is-phone { max-height: calc(100dvh - 250px); overflow-y: auto; scrollbar-width: none; }
